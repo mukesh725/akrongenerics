@@ -1,0 +1,19 @@
+{
+  "name": "akron-airo-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Akron Generics B2B Customer Onboarding & AIRO Group Portal",
+  "scripts": {
+    "dev": "python3 ../backend/server.py",
+    "start": "python3 ../backend/server.py"
+  },
+  "keywords": [
+    "pharmaceutical",
+    "onboarding",
+    "portal",
+    "akron-generics",
+    "airo-group"
+  ],
+  "author": "AIRO Group & Akron Generics",
+  "license": "UNLICENSED"
+}

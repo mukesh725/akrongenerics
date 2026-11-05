@@ -1,0 +1,23 @@
+[
+  {
+    "id": "rep_main",
+    "name": "Direct / Main Account",
+    "email": "orders@akrongenerics.com",
+    "phone": "(631) 215-3009",
+    "territory": "Corporate / Headquarters"
+  },
+  {
+    "id": "rep_1",
+    "name": "Northeast Regional Manager",
+    "email": "ne-sales@akrongenerics.com",
+    "phone": "(631) 215-3010",
+    "territory": "Northeast (NY, NJ, PA, CT, MA)"
+  },
+  {
+    "id": "rep_2",
+    "name": "Southeast Regional Manager",
+    "email": "se-sales@akrongenerics.com",
+    "phone": "(631) 215-3011",
+    "territory": "Southeast (FL, GA, NC, SC)"
+  }
+]

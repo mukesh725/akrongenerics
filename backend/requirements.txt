@@ -1,0 +1,4 @@
+# Backend dependencies for Akron Generics Onboarding & PDF Generation Engine
+pypdf>=5.0.0
+reportlab>=4.0.0
+Pillow>=10.0.0
