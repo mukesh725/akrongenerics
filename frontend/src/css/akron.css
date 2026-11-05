@@ -530,7 +530,7 @@ button {
   text-align: center;
   padding: 140px 24px 80px;
   background-color: var(--bg-dark-navy);
-  background-image: linear-gradient(180deg, rgba(16, 30, 54, 0.72) 0%, rgba(16, 30, 54, 0.88) 100%), url('../assets/images/hero-bg.jpg');
+  background-image: linear-gradient(180deg, rgba(16, 30, 54, 0.72) 0%, rgba(16, 30, 54, 0.88) 100%), url('../assets/hero-bg.jpg');
   background-size: cover;
   background-position: center top;
   border-bottom-left-radius: 40px;
