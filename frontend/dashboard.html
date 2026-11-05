@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akron Generics — Representative &amp; Account Application Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --color-navy: #0D498F;
+  --color-navy-dark: #0B2240;
+  --color-crimson: #9E2235;
+  --color-bg-page: #F8FAFC;
+  --color-bg-card: #FFFFFF;
+  --color-bg-subtle: #F1F5F9;
+  
+  --color-border: #E2E8F0;
+  --color-border-input: #CBD5E1;
+  --color-text-main: #0F172A;
+  --color-text-body: #334155;
+  --color-text-muted: #64748B;
+  
+  --color-success: #16A34A;
+  --color-warning: #D97706;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-page);
+  color: var(--color-text-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.dash-header {
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+.dash-header-inner {
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand-zone {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+.logo-img { height: 26px; width: auto; }
+.portal-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  background: #EFF6FF;
+  border: 1px solid #DBEAFE;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-body);
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-input);
+  background: #FFFFFF;
+  transition: all 0.15s ease;
+}
+.btn-nav-link:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-main);
+}
+.btn-new-app {
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: var(--color-crimson);
+  text-decoration: none;
+  padding: 7px 16px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+.btn-new-app:hover { background: #831A29; }
+
+/* Main Container */
+.dash-wrapper {
+  max-width: 1300px;
+  margin: 28px auto 80px;
+  padding: 0 24px;
+}
+
+/* Page Intro */
+.dash-intro-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.dash-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-text-main);
+  letter-spacing: -0.02em;
+}
+.dash-desc {
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* Metric Cards */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+@media (max-width: 900px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .metrics-grid { grid-template-columns: 1fr; }
+}
+.metric-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+.metric-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.metric-value {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-text-main);
+}
+.metric-sub {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* Filter Bar */
+.filter-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.filter-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.filter-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+.select-filter {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--color-text-main);
+  outline: none;
+  cursor: pointer;
+}
+.search-input {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--color-text-main);
+  outline: none;
+  min-width: 260px;
+}
+.search-input:focus, .select-filter:focus {
+  border-color: var(--color-navy);
+}
+
+/* Applications Table */
+.table-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.dash-table th {
+  background: #F8FAFC;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.dash-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+.dash-table tr:last-child td { border-bottom: none; }
+.dash-table tr:hover td { background: #FAFAFA; }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.status-pending { background: #FEF3C7; color: #92400E; }
+.status-approved { background: #DCFCE7; color: #166534; }
+
+.btn-print-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: var(--color-navy);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.btn-print-row:hover { background: var(--color-navy-dark); }
+
+.btn-view-row {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-body);
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-input);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 6px;
+}
+.btn-view-row:hover { background: var(--color-bg-subtle); color: var(--color-text-main); }
+
+/* Details Drawer Modal */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.drawer-overlay.active { display: flex; }
+.drawer-card {
+  background: #FFFFFF;
+  border-radius: 10px;
+  max-width: 740px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  position: relative;
+}
+.drawer-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+}
+.drawer-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 4px;
+}
+.drawer-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 20px 0 8px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 4px;
+}
+.drawer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  font-size: 13px;
+}
+.drawer-field strong { color: #475569; font-size: 11.5px; text-transform: uppercase; display: block; margin-bottom: 2px; }
+.drawer-field span { color: #0F172A; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="dash-header">
+  <div class="dash-header-inner">
+    <a href="index.html" class="brand-zone">
+      <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="logo-img">
+      <span class="portal-badge">Partner &amp; Representative Portal</span>
+    </a>
+    <div class="header-actions">
+      <a href="index.html" class="btn-nav-link">← Back to Website</a>
+      <a href="become-a-customer.html" class="btn-new-app">+ New Application</a>
+    </div>
+  </div>
+</header>
+
+<div class="dash-wrapper">
+
+  <div class="dash-intro-row">
+    <div>
+      <h1 class="dash-title">Wholesale Account Submissions</h1>
+      <p class="dash-desc">Manage verified onboarding applications filed under the Main Account and individual Sales Representatives.</p>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button type="button" class="btn-nav-link" onclick="loadApplications()" style="color:var(--color-navy);font-weight:600;">
+        🔄 Refresh Data
+      </button>
+      <button type="button" class="btn-nav-link" onclick="quickAddSample()" style="color:var(--color-crimson);font-weight:600;border-color:#FCA5A5;">
+        + Create Instant Test Application
+      </button>
+      <button type="button" class="btn-nav-link" onclick="exportAllJson()">
+        Export Backend JSON
+      </button>
+    </div>
+  </div>
+
+  <!-- Metric Overview -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Total Applications</div>
+      <div class="metric-value" id="statTotalApps">0</div>
+      <div class="metric-sub">Stored locally &amp; in submissions/</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Pending Compliance</div>
+      <div class="metric-value" id="statPendingApps" style="color:var(--color-warning);">0</div>
+      <div class="metric-sub">Awaiting license &amp; DEA check</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Active Representatives</div>
+      <div class="metric-value" id="statTotalReps">0</div>
+      <div class="metric-sub">Sales manager routing folders</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Storage Partitioning</div>
+      <div class="metric-value" style="font-size:16px;margin-top:6px;color:var(--color-navy);">Main + By Rep</div>
+      <div class="metric-sub">Saved in submissions/ folder</div>
+    </div>
+  </div>
+
+  <!-- Filter & Search Bar -->
+  <div class="filter-card">
+    <div class="filter-left">
+      <label class="filter-label" for="repFilterSelect">Filter by Account / Representative:</label>
+      <select id="repFilterSelect" class="select-filter" onchange="filterApplications()">
+        <option value="ALL">All Accounts (Master Admin View)</option>
+        <option value="MAIN">Direct / Main Account</option>
+      </select>
+
+      <input type="text" id="searchQuery" class="search-input" placeholder="Search by Pharmacy, Ref Code, Tax ID..." oninput="filterApplications()">
+    </div>
+    <div>
+      <select id="statusFilterSelect" class="select-filter" onchange="filterApplications()">
+        <option value="ALL">All Statuses</option>
+        <option value="PENDING">Pending Compliance</option>
+        <option value="APPROVED">Approved</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Applications Table -->
+  <div class="table-card">
+    <table class="dash-table">
+      <thead>
+        <tr>
+          <th>Ref ID</th>
+          <th>Submitted</th>
+          <th>Pharmacy / Business Name</th>
+          <th>Sales Representative</th>
+          <th>Contact &amp; Phone</th>
+          <th>Payment Mode</th>
+          <th>Attachments</th>
+          <th>Status</th>
+          <th style="text-align:right;">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="appsTableBody">
+        <!-- Populated via JS -->
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- Application Details Modal Drawer -->
+<div id="detailsModal" class="drawer-overlay" onclick="closeDetailsIfClickOutside(event)">
+  <div class="drawer-card">
+    <button type="button" class="drawer-close" onclick="closeDetails()">&times;</button>
+    <div class="drawer-title" id="drawerPharmacyName">Pharmacy Name</div>
+    <div style="font-size:12.5px;color:var(--color-text-muted);" id="drawerRefMeta">Ref ID &bull; Submitted Date</div>
+
+    <div class="drawer-section-title">Representative Routing</div>
+    <div class="drawer-grid">
+      <div class="drawer-field"><strong>Sales Manager:</strong><span id="dRepName">--</span></div>
+      <div class="drawer-field"><strong>Representative Email:</strong><span id="dRepEmail">--</span></div>
+    </div>
+
+    <div class="drawer-section-title">Business &amp; Licensure</div>
+    <div class="drawer-grid">
+      <div class="drawer-field"><strong>Legal Entity Name:</strong><span id="dBizName">--</span></div>
+      <div class="drawer-field"><strong>Tax ID (EIN):</strong><span id="dTaxId">--</span></div>
+      <div class="drawer-field"><strong>Billing Address:</strong><span id="dBizAddress">--</span></div>
+      <div class="drawer-field"><strong>Shipping Address:</strong><span id="dShipAddress">--</span></div>
+      <div class="drawer-field"><strong>Pharmacy Phone:</strong><span id="dBizPhone">--</span></div>
+      <div class="drawer-field"><strong>Pharmacy Email:</strong><span id="dBizEmail">--</span></div>
+    </div>
+
+    <div class="drawer-section-title">Authorized Purchasers</div>
+    <div class="drawer-grid">
+      <div class="drawer-field"><strong>Primary Purchaser:</strong><span id="dBuyer1">--</span></div>
+      <div class="drawer-field"><strong>Purchaser Email:</strong><span id="dBuyer1Email">--</span></div>
+    </div>
+
+    <div class="drawer-section-title">Payment Method &amp; Trade</div>
+    <div class="drawer-grid">
+      <div class="drawer-field"><strong>Payment Method:</strong><span id="dPaymentMode">--</span></div>
+      <div class="drawer-field"><strong>Bank Reference:</strong><span id="dBankRef">--</span></div>
+      <div class="drawer-field"><strong>Primary Trade Ref:</strong><span id="dTrade1">--</span></div>
+    </div>
+
+    <div class="drawer-section-title">Attached Verification Files</div>
+    <div id="dAttachmentsList" style="font-size:13px;display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">
+      <!-- File links -->
+    </div>
+
+    <div style="margin-top:28px;padding-top:18px;border-top:1px solid var(--color-border);display:flex;justify-content:flex-end;gap:12px;">
+      <button type="button" class="btn-nav-link" onclick="closeDetails()">Close</button>
+      <a id="drawerDownloadPdfBtn" href="#" target="_blank" class="btn-print-row" style="padding:8px 16px;background:#0D498F;">
+        📥 Download Original Filled PDF
+      </a>
+      <a id="drawerPrintBtn" href="#" target="_blank" class="btn-print-row" style="padding:8px 16px;">
+        🖨️ View & Print Original PDF
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+var allApplications = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadApplications();
+});
+
+function loadApplications() {
+  var localList = [];
+  try {
+    localList = JSON.parse(localStorage.getItem('akron_submitted_applications') || '[]');
+  } catch(e) {}
+
+  // Check if draft exists and not yet in list
+  try {
+    var draft = JSON.parse(localStorage.getItem('akron_app_draft') || '{}');
+    if (draft.businessName && !localList.some(function(x) { return x.businessName === draft.businessName; })) {
+      draft.ref_id = draft.ref_id || ('AKR-' + new Date().getFullYear() + '-DRAFT');
+      draft.submitted_at = draft.submitted_at || (new Date().toLocaleString() + ' (Draft)');
+      draft.status = 'DRAFT';
+      localList.unshift(draft);
+    }
+  } catch(e) {}
+
+  // Try fetching backend applications from both relative and absolute localhost URL
+  var apiUrls = ['/api/applications', 'http://localhost:3000/api/applications', 'http://127.0.0.1:3000/api/applications'];
+
+  function tryFetch(index) {
+    if (index >= apiUrls.length) {
+      // Backend not reached or done, use merged localList
+      finishLoad(localList);
+      return;
+    }
+
+    fetch(apiUrls[index], { cache: 'no-store' })
+      .then(function(res) {
+        if (res.ok) return res.json();
+        throw new Error('Not ok');
+      })
+      .then(function(serverData) {
+        if (Array.isArray(serverData)) {
+          // Merge serverData with localList (dedup by ref_id or businessName)
+          var merged = serverData.slice();
+          localList.forEach(function(localItem) {
+            var exists = merged.some(function(srv) {
+              return (srv.ref_id && srv.ref_id === localItem.ref_id) ||
+                     (srv.businessName && srv.businessName === localItem.businessName);
+            });
+            if (!exists) {
+              merged.push(localItem);
+            }
+          });
+          finishLoad(merged);
+        } else {
+          tryFetch(index + 1);
+        }
+      })
+      .catch(function() {
+        tryFetch(index + 1);
+      });
+  }
+
+  tryFetch(0);
+}
+
+function finishLoad(list) {
+  if (list.length === 0) {
+    list = [
+      {
+        ref_id: 'AKR-2026-8492',
+        submitted_at: '2026-11-05 14:15:00',
+        businessName: 'Metro Community Pharmacy LLC',
+        salesManager: 'John Davis',
+        repEmail: 'john@akrongenerics.com',
+        bizStreet: '1240 Broadway Ave',
+        bizCity: 'Commack',
+        bizState: 'NY',
+        bizZip: '11725',
+        bizPhone: '(631) 555-0192',
+        bizEmail: 'admin@metropharmacy.com',
+        taxIdNum: '11-3948291',
+        respPharmacyName: 'Metro Community Pharmacy',
+        buyer1Name: 'Dr. Michael Hayes, PharmD',
+        buyer1Title: 'Supervising Pharmacist',
+        buyer1Phone: '(631) 555-0192',
+        buyer1Email: 'mhayes@metropharmacy.com',
+        refBankName: 'Chase Commercial Banking',
+        refBankAcctNum: '9482710492',
+        paymentMode: 'ach',
+        status: 'PENDING',
+        attachments: {
+          licenses: [{ name: 'NYS_Pharmacy_Board_License.pdf' }],
+          checks: [{ name: 'Voided_Check.pdf' }]
+        }
+      }
+    ];
+  }
+
+  allApplications = list;
+  try {
+    localStorage.setItem('akron_submitted_applications', JSON.stringify(list));
+  } catch(e) {}
+  renderDashboard();
+}
+
+function quickAddSample() {
+  var reps = ['Sarah Miller', 'John Davis', 'Robert Taylor', 'Main Account'];
+  var pickedRep = reps[Math.floor(Math.random() * reps.length)];
+  var randId = 'AKR-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+  
+  var sample = {
+    ref_id: randId,
+    submitted_at: new Date().toLocaleString(),
+    businessName: 'Live Test Pharmacy (' + randId + ')',
+    salesManager: pickedRep,
+    repEmail: (pickedRep === 'Main Account') ? 'sales@akrongenerics.com' : (pickedRep.toLowerCase().replace(' ', '.') + '@akrongenerics.com'),
+    bizStreet: '782 Sunken Meadow Rd',
+    bizCity: 'Commack',
+    bizState: 'NY',
+    bizZip: '11725',
+    bizPhone: '(631) 215-3009',
+    bizEmail: 'test@pharmacy.com',
+    taxIdNum: '12-9482910',
+    respPharmacyName: 'Live Test Pharmacy',
+    buyer1Name: 'Jane Smith, RPh',
+    buyer1Title: 'Lead Pharmacist',
+    buyer1Phone: '(631) 215-3009',
+    buyer1Email: 'buyer@pharmacy.com',
+    refBankName: 'TD Commercial Bank',
+    refBankAcctNum: '4829104928',
+    paymentMode: 'ach',
+    status: 'PENDING',
+    attachments: { licenses: [{ name: 'Test_State_License.pdf' }] }
+  };
+
+  allApplications.unshift(sample);
+  try {
+    localStorage.setItem('akron_submitted_applications', JSON.stringify(allApplications));
+  } catch(e) {}
+
+  // Post to backend
+  fetch('/api/submit-application', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(sample)
+  }).catch(function() {});
+
+  renderDashboard();
+  alert('Added test application for ' + pickedRep + '! It is now displayed in the dashboard.');
+}
+
+function loadFromLocalStorage() {
+  var localData = [];
+  try {
+    localData = JSON.parse(localStorage.getItem('akron_submitted_applications') || '[]');
+  } catch(e) {}
+
+  if (localData.length === 0) {
+    // Add default sample application so the user can immediately test
+    localData = [
+      {
+        ref_id: 'AKR-2026-8492',
+        submitted_at: '2026-11-05 14:15:00',
+        businessName: 'Metro Community Pharmacy LLC',
+        salesManager: 'John Davis',
+        repEmail: 'john@akrongenerics.com',
+        bizStreet: '1240 Broadway Ave',
+        bizCity: 'Commack',
+        bizState: 'NY',
+        bizZip: '11725',
+        bizPhone: '(631) 555-0192',
+        bizEmail: 'admin@metropharmacy.com',
+        taxIdNum: '11-3948291',
+        respPharmacyName: 'Metro Community Pharmacy',
+        buyer1Name: 'Dr. Michael Hayes, PharmD',
+        buyer1Title: 'Supervising Pharmacist',
+        buyer1Phone: '(631) 555-0192',
+        buyer1Email: 'mhayes@metropharmacy.com',
+        refBankName: 'Chase Commercial Banking',
+        refBankAcctNum: '9482710492',
+        paymentMode: 'ach',
+        achAcctType: 'Checking',
+        status: 'PENDING',
+        attachments: {
+          licenses: [{ name: 'NYS_Pharmacy_Board_License.pdf' }, { name: 'DEA_Registration_Cert.pdf' }],
+          checks: [{ name: 'Voided_Check.pdf' }]
+        }
+      }
+    ];
+    localStorage.setItem('akron_submitted_applications', JSON.stringify(localData));
+  }
+
+  allApplications = localData;
+  renderDashboard();
+}
+
+function renderDashboard() {
+  // Populate Rep Filter Options
+  var repSet = new Set();
+  allApplications.forEach(function(app) {
+    if (app.salesManager && app.salesManager.trim() !== '' && app.salesManager !== 'Main Account') {
+      repSet.add(app.salesManager.trim());
+    } else if (app.repEmail) {
+      repSet.add(app.repEmail.trim());
+    }
+  });
+
+  var repSelect = document.getElementById('repFilterSelect');
+  // keep first 2
+  repSelect.innerHTML = '<option value="ALL">All Accounts (Master Admin View)</option><option value="MAIN">Direct / Main Account</option>';
+  repSet.forEach(function(rep) {
+    var opt = document.createElement('option');
+    opt.value = rep;
+    opt.textContent = 'Rep: ' + rep;
+    repSelect.appendChild(opt);
+  });
+
+  // Calculate Metrics
+  document.getElementById('statTotalApps').textContent = allApplications.length;
+  var pendingCount = allApplications.filter(function(a) { return (a.status || 'PENDING') === 'PENDING'; }).length;
+  document.getElementById('statPendingApps').textContent = pendingCount;
+  document.getElementById('statTotalReps').textContent = repSet.size;
+
+  filterApplications();
+}
+
+function filterApplications() {
+  var repFilter = document.getElementById('repFilterSelect').value;
+  var query = document.getElementById('searchQuery').value.toLowerCase().trim();
+  var statusFilter = document.getElementById('statusFilterSelect').value;
+
+  var filtered = allApplications.filter(function(app) {
+    // Rep filter
+    if (repFilter === 'MAIN') {
+      var isMain = !app.salesManager || app.salesManager === 'Main Account' || app.salesManager.trim() === '';
+      if (!isMain) return false;
+    } else if (repFilter !== 'ALL') {
+      var matchRep = (app.salesManager === repFilter) || (app.repEmail === repFilter);
+      if (!matchRep) return false;
+    }
+
+    // Status filter
+    var appStatus = app.status || 'PENDING';
+    if (statusFilter !== 'ALL' && appStatus !== statusFilter) {
+      return false;
+    }
+
+    // Query filter
+    if (query !== '') {
+      var fullStr = (app.businessName || '') + ' ' + (app.ref_id || '') + ' ' + (app.taxIdNum || app.taxId || '') + ' ' + (app.mainContactName || app.buyer1Name || '');
+      if (fullStr.toLowerCase().indexOf(query) === -1) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+
+  renderTable(filtered);
+}
+
+function renderTable(list) {
+  var tbody = document.getElementById('appsTableBody');
+  tbody.innerHTML = '';
+
+  if (list.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:36px;color:#64748B;">No applications found matching the selected filter criteria.</td></tr>';
+    return;
+  }
+
+  list.forEach(function(app) {
+    var tr = document.createElement('tr');
+
+    var attCount = 0;
+    if (app.attachments) {
+      if (app.attachments.licenses) attCount += app.attachments.licenses.length;
+      if (app.attachments.checks) attCount += app.attachments.checks.length;
+    }
+
+    var repDisplay = app.salesManager || 'Direct / Main';
+    if (app.repEmail) repDisplay += '<br><span style="font-size:11px;color:#64748B;">' + app.repEmail + '</span>';
+
+    var statusHtml = (app.status === 'APPROVED') 
+      ? '<span class="status-badge status-approved">✓ Approved</span>'
+      : '<span class="status-badge status-pending">● Pending Review</span>';
+
+    tr.innerHTML = 
+      '<td><strong>' + (app.ref_id || 'AKR-2026') + '</strong></td>' +
+      '<td>' + (app.submitted_at || '--') + '</td>' +
+      '<td><strong>' + (app.businessName || '--') + '</strong><br><span style="font-size:11.5px;color:#64748B;">' + (app.bizCity || '') + ', ' + (app.bizState || '') + '</span></td>' +
+      '<td>' + repDisplay + '</td>' +
+      '<td>' + (app.mainContactName || app.buyer1Name || '--') + '<br><span style="font-size:11.5px;color:#64748B;">' + (app.bizPhone || app.buyer1Phone || '--') + '</span></td>' +
+      '<td><span style="text-transform:uppercase;font-weight:600;font-size:11.5px;">' + (app.paymentMode || 'ACH') + '</span></td>' +
+      '<td>' + (attCount > 0 ? ('<span style="color:#0D498F;font-weight:600;">' + attCount + ' files</span>') : 'None') + '</td>' +
+      '<td>' + statusHtml + '</td>' +
+      '<td style="text-align:right;white-space:nowrap;">' +
+        '<a href="/api/download-official-pdf?id=' + app.ref_id + '" target="_blank" class="btn-print-row" style="background:#0D498F;margin-right:6px;" title="Download Original Akron Generics PDF">' +
+          '📥 Original PDF' +
+        '</a>' +
+        '<a href="print-dossier.html?id=' + app.ref_id + '" target="_blank" class="btn-print-row" title="View & Print Original PDF">' +
+          '🖨️ View & Print' +
+        '</a>' +
+        '<button type="button" class="btn-view-row" onclick="openDetails('' + app.ref_id + '')">Details</button>' +
+      '</td>';
+
+    tbody.appendChild(tr);
+  });
+}
+
+function openDetails(refId) {
+  var app = allApplications.find(function(a) { return a.ref_id === refId; });
+  if (!app) return;
+
+  document.getElementById('drawerPharmacyName').textContent = app.businessName || 'Pharmacy Details';
+  document.getElementById('drawerRefMeta').textContent = 'Ref ID: ' + app.ref_id + ' • Submitted: ' + (app.submitted_at || '--');
+
+  document.getElementById('dRepName').textContent = app.salesManager || 'Direct / Main Account';
+  document.getElementById('dRepEmail').textContent = app.repEmail || '--';
+
+  document.getElementById('dBizName').textContent = app.businessName || '--';
+  document.getElementById('dTaxId').textContent = app.taxIdNum || app.taxId || '--';
+  document.getElementById('dBizAddress').textContent = (app.bizStreet || '') + ', ' + (app.bizCity || '') + ', ' + (app.bizState || '') + ' ' + (app.bizZip || '');
+  document.getElementById('dShipAddress').textContent = (app.shipStreet || app.bizStreet || '') + ', ' + (app.shipCity || app.bizCity || '') + ', ' + (app.shipState || app.bizState || '') + ' ' + (app.shipZip || app.bizZip || '');
+  document.getElementById('dBizPhone').textContent = app.bizPhone || '--';
+  document.getElementById('dBizEmail').textContent = app.bizEmail || '--';
+
+  document.getElementById('dBuyer1').textContent = (app.buyer1Name || '--') + ' (' + (app.buyer1Title || '--') + ')';
+  document.getElementById('dBuyer1Email').textContent = (app.buyer1Email || '--') + ' | ' + (app.buyer1Phone || '--');
+
+  document.getElementById('dPaymentMode').textContent = (app.paymentMode || 'ACH').toUpperCase();
+  document.getElementById('dBankRef').textContent = (app.refBankName || app.achBankName || '--') + ' (Acct: ' + (app.refBankAcctNum || app.achAcctNumber || '--') + ')';
+  document.getElementById('dTrade1').textContent = app.trade1Name || '--';
+
+  var attList = document.getElementById('dAttachmentsList');
+  attList.innerHTML = '';
+  var atts = app.attachments || {};
+  if (atts.licenses && atts.licenses.length > 0) {
+    atts.licenses.forEach(function(l) {
+      var badge = document.createElement('span');
+      badge.style.cssText = 'background:#EFF6FF;border:1px solid #BFDBFE;color:#0D498F;padding:4px 10px;border-radius:4px;font-size:12px;font-weight:600;';
+      badge.textContent = '📄 ' + l.name;
+      attList.appendChild(badge);
+    });
+  }
+  if (atts.checks && atts.checks.length > 0) {
+    atts.checks.forEach(function(c) {
+      var badge = document.createElement('span');
+      badge.style.cssText = 'background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46;padding:4px 10px;border-radius:4px;font-size:12px;font-weight:600;';
+      badge.textContent = '🏦 ' + c.name;
+      attList.appendChild(badge);
+    });
+  }
+  if (attList.innerHTML === '') {
+    attList.innerHTML = '<span style="color:#94A3B8;">No attachments uploaded</span>';
+  }
+
+  document.getElementById('drawerDownloadPdfBtn').href = '/api/download-official-pdf?id=' + app.ref_id;
+  document.getElementById('drawerPrintBtn').href = 'print-dossier.html?id=' + app.ref_id;
+  document.getElementById('detailsModal').classList.add('active');
+}
+
+function closeDetails() {
+  document.getElementById('detailsModal').classList.remove('active');
+}
+
+function closeDetailsIfClickOutside(e) {
+  if (e.target.id === 'detailsModal') closeDetails();
+}
+
+function exportAllJson() {
+  var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(allApplications, null, 2));
+  var downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute('href', dataStr);
+  downloadAnchor.setAttribute('download', 'akron_generics_onboarding_database_export.json');
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+}
+</script>
+
+</body>
+</html>
