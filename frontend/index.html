@@ -1688,13 +1688,20 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
           }
         });
       }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.05,
+        rootMargin: '0px 0px 120px 0px'
       });
 
       sections.forEach(function(sec) {
         observer.observe(sec);
       });
+
+      // Safety timeout: Ensure all sections are revealed so no card stays blank
+      setTimeout(function() {
+        sections.forEach(function(sec) {
+          sec.classList.add('is-revealed');
+        });
+      }, 1000);
     } else {
       sections.forEach(function(sec) {
         sec.classList.add('is-revealed');
@@ -1742,18 +1749,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
     initAnimations();
   }
 })();
-
-  setTimeout(function() {
-    if (btn) {
-      btn.textContent = 'Message Sent';
-      btn.style.background = '#166534';
-    }
-    if (alertEl) {
-      alertEl.style.display = 'block';
-    }
-    document.getElementById('contactForm').reset();
-  }, 600);
-}
 </script>
 </body>
 </html>
+
