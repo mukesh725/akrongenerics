@@ -1034,212 +1034,6 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 .mobile-nav .mark{margin:0;font-size:15px}
 .mobile-nav a{background:var(--ink);color:#fff;text-decoration:none;font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--r-pill)}
 
-/* ---------- Contact Us Section (Clean Aeron Architecture) ---------- */
-.contact-sec {
-  padding: 90px var(--pad);
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: clamp(40px, 6vw, 84px);
-  align-items: start;
-}
-.contact-left {
-  padding-top: 10px;
-}
-.contact-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #E8E7E2;
-  color: #16180F;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  font-size: 13.5px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-.contact-title {
-  font-size: clamp(38px, 4.5vw, 54px);
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  color: #16180F;
-  margin: 22px 0 12px;
-  line-height: 1.1;
-}
-.contact-subtitle {
-  font-size: 17px;
-  line-height: 1.55;
-  color: #5F6359;
-  font-weight: 300;
-  margin-bottom: 56px;
-  max-width: 38ch;
-}
-.contact-info-list {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-.contact-info-item {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-.contact-info-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #E8E7E2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #16180F;
-  flex-shrink: 0;
-}
-.contact-info-lbl {
-  font-size: 14px;
-  font-weight: 500;
-  color: #16180F;
-  margin-bottom: 3px;
-}
-.contact-info-val {
-  font-size: 14.5px;
-  color: #5F6359;
-  line-height: 1.4;
-  text-decoration: none;
-}
-.contact-info-link:hover {
-  color: #0D498F;
-  text-decoration: underline;
-}
-
-/* Contact Form Card */
-.contact-form-card {
-  background: #FFFFFF;
-  border-radius: 28px;
-  padding: clamp(30px, 4.5vw, 48px);
-  box-shadow: 0 4px 24px rgba(22, 24, 15, 0.04);
-}
-.c-field-group {
-  margin-bottom: 22px;
-}
-.c-field-group label {
-  display: block;
-  font-size: 13.5px;
-  font-weight: 500;
-  color: #16180F;
-  margin-bottom: 8px;
-}
-.c-field-group input,
-.c-field-group select,
-.c-field-group textarea {
-  width: 100%;
-  box-sizing: border-box;
-  background: #F0EFEA;
-  border: 1px solid transparent;
-  border-radius: 12px;
-  padding: 15px 18px;
-  font-size: 14.5px;
-  color: #16180F;
-  font-family: inherit;
-  transition: all 0.2s ease;
-}
-.c-field-group input::placeholder,
-.c-field-group textarea::placeholder {
-  color: #9A9D93;
-}
-.c-field-group input:focus,
-.c-field-group select:focus,
-.c-field-group textarea:focus {
-  outline: none;
-  background: #FFFFFF;
-  border-color: #16180F;
-  box-shadow: 0 0 0 2px rgba(22, 24, 15, 0.06);
-}
-.c-field-group textarea {
-  resize: vertical;
-  min-height: 110px;
-  line-height: 1.5;
-}
-.c-select-wrap {
-  position: relative;
-}
-.c-select-wrap select {
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-  padding-right: 44px;
-}
-.c-select-arrow {
-  position: absolute;
-  right: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #16180F;
-}
-.btn-c-submit {
-  width: 100%;
-  background: #16180F;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 9999px;
-  padding: 16px 24px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 8px;
-  transition: all 0.2s ease;
-}
-.btn-c-submit:hover {
-  background: #0D498F;
-  transform: translateY(-1px);
-}
-.c-consent {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-  font-size: 12.5px;
-  color: #5F6359;
-  cursor: pointer;
-}
-.c-consent input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: #16180F;
-  cursor: pointer;
-}
-.c-consent a {
-  color: #16180F;
-  text-decoration: underline;
-}
-.c-success-alert {
-  display: none;
-  margin-top: 18px;
-  background: #DCFCE7;
-  color: #166534;
-  padding: 14px 18px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-}
-
-@media(max-width: 900px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .contact-subtitle {
-    margin-bottom: 36px;
-  }
-  .contact-sec {
-    padding: 60px 20px;
-  }
-}
 </style>
 </head>
 <body>
@@ -1267,7 +1061,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
       <a href="#forms">Forms &amp; Licensing</a>
     </div>
   </div>
-  <a href="#contact" class="nav-link">CONTACT US</a>
+  <a href="contact.html" class="nav-link">CONTACT US</a>
   <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="nav-link" target="_blank" rel="noopener noreferrer">MY T3</a>
   <a href="https://server.akrongenerics.com/login.php" class="nav-link" target="_blank" rel="noopener noreferrer">LOGIN</a>
   <a href="become-a-customer.html" class="cta-red">Become a Customer</a>
@@ -1793,104 +1587,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
     <p class="apple-reveal" data-delay="2">A dependable source for generic medications, with the support your pharmacy needs.</p>
     <div class="closing-actions apple-reveal" data-delay="3">
       <a href="become-a-customer.html" class="btn-red">Create a Pharmacy Account</a>
-      <a href="#contact" class="btn-outline-white">Talk to Our Team</a>
-    </div>
-  </section>
-
-  <!-- CONTACT US SECTION (AERON MINIMAL LUXURY DESIGN) -->
-  <section class="contact-sec" id="contact">
-    <div class="contact-grid">
-      <!-- Left Column: Details -->
-      <div class="contact-left">
-        <div class="contact-badge">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          <span>Get in Touch</span>
-        </div>
-        <h2 class="contact-title">Contact Us</h2>
-        <p class="contact-subtitle">We're here to help support your pharmacy purchasing and supply needs.</p>
-
-        <div class="contact-info-list">
-          <!-- Office Location -->
-          <div class="contact-info-item">
-            <div class="contact-info-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            </div>
-            <div>
-              <div class="contact-info-lbl">Office Location</div>
-              <div class="contact-info-val">47 Mall Drive, Unit 1 &amp; 2, Commack, NY 11725</div>
-            </div>
-          </div>
-
-          <!-- Phone -->
-          <div class="contact-info-item">
-            <div class="contact-info-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            </div>
-            <div>
-              <div class="contact-info-lbl">Phone</div>
-              <a href="tel:6312153009" class="contact-info-val contact-info-link">(631) 215-3009</a>
-            </div>
-          </div>
-
-          <!-- Email -->
-          <div class="contact-info-item">
-            <div class="contact-info-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            </div>
-            <div>
-              <div class="contact-info-lbl">Email</div>
-              <a href="mailto:orders@akrongenerics.com" class="contact-info-val contact-info-link">orders@akrongenerics.com</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Column: Card Form -->
-      <div class="contact-form-card">
-        <form id="contactForm" onsubmit="submitContactForm(event)">
-          <div class="c-field-group">
-            <label for="cFullName">Full Name</label>
-            <input type="text" id="cFullName" name="fullName" placeholder="Your name" required>
-          </div>
-
-          <div class="c-field-group">
-            <label for="cPhone">Phone Number</label>
-            <input type="tel" id="cPhone" name="phone" placeholder="Your phone number" required>
-          </div>
-
-          <div class="c-field-group">
-            <label for="cInquiryType">Inquiry Type</label>
-            <div class="c-select-wrap">
-              <select id="cInquiryType" name="inquiryType" required>
-                <option value="purchasing">Wholesale Pharmacy Purchasing</option>
-                <option value="onboarding">New Customer Account Onboarding</option>
-                <option value="sourcing">Product Sourcing &amp; Shortage Inquiries</option>
-                <option value="orders">Order Tracking &amp; Delivery Logistics</option>
-                <option value="general">General Inquiries</option>
-              </select>
-              <div class="c-select-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </div>
-            </div>
-          </div>
-
-          <div class="c-field-group">
-            <label for="cMessage">Message (Optional)</label>
-            <textarea id="cMessage" name="message" rows="4" placeholder="Tell us more about your request..."></textarea>
-          </div>
-
-          <button type="submit" class="btn-c-submit" id="cSubmitBtn">Submit</button>
-
-          <label class="c-consent">
-            <input type="checkbox" required checked>
-            <span>By submitting this form, I agree to the <a href="#privacy">Privacy Policy</a>.</span>
-          </label>
-
-          <div id="cSuccessAlert" class="c-success-alert">
-            ✓ Thank you! Your message has been sent. Our team will contact you shortly.
-          </div>
-        </form>
-      </div>
+      <a href="contact.html" class="btn-outline-white">Talk to Our Team</a>
     </div>
   </section>
 
@@ -1919,9 +1616,9 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
         <div class="foot-col">
           <h6>SUPPORT</h6>
           <ul>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="contact.html">Contact</a></li>
             <li><a href="#faq">FAQs</a></li>
-            <li><a href="#contact">Product Inquiries</a></li>
+            <li><a href="contact.html">Product Inquiries</a></li>
           </ul>
         </div>
 
@@ -1930,7 +1627,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
           <h6>GET STARTED</h6>
           <ul>
             <li><a href="become-a-customer.html">Create an Account</a></li>
-            <li><a href="#contact">Talk to Our Team</a></li>
+            <li><a href="contact.html">Talk to Our Team</a></li>
             <li><a href="dashboard.html">Representative Portal</a></li>
           </ul>
         </div>
@@ -2046,14 +1743,6 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   }
 })();
 
-function submitContactForm(e) {
-  e.preventDefault();
-  var btn = document.getElementById('cSubmitBtn');
-  var alertEl = document.getElementById('cSuccessAlert');
-  if (btn) {
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-  }
   setTimeout(function() {
     if (btn) {
       btn.textContent = 'Message Sent';
