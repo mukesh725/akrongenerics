@@ -398,23 +398,196 @@ body {
   gap: 20px;
 }
 
+/* Mobile Nav Bar & Drawer */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 10px;
+  right: 10px;
+  z-index: 90;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(18px) saturate(1.6);
+  border-radius: var(--r-pill);
+  padding: 8px 10px 8px 18px;
+  box-shadow: 0 8px 30px rgba(22, 24, 15, 0.12);
+  border: 1px solid rgba(22, 24, 15, 0.08);
+}
+.mobile-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mobile-hamburger-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(22, 24, 15, 0.12);
+  background: #fff;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4.5px;
+  cursor: pointer;
+  padding: 0;
+}
+.mobile-hamburger-btn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(22, 24, 15, 0.55);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  display: flex;
+  justify-content: flex-end;
+}
+.mobile-nav-drawer.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mobile-drawer-sheet {
+  width: 85%;
+  max-width: 320px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.2);
+  padding: 24px 20px 32px;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+.mobile-nav-drawer.active .mobile-drawer-sheet {
+  transform: translateX(0);
+}
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+  margin-bottom: 16px;
+}
+.mobile-drawer-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(22, 24, 15, 0.06);
+  font-size: 22px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mobile-drawer-link {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mobile-drawer-link:hover {
+  background: rgba(22, 24, 15, 0.05);
+}
+.mobile-drawer-divider {
+  height: 1px;
+  background: rgba(22, 24, 15, 0.08);
+  margin: 12px 0;
+}
+.mobile-drawer-cta {
+  background: #A02630;
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  padding: 13px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  display: block;
+  margin-top: 8px;
+  box-shadow: 0 4px 14px rgba(160,38,48,0.35);
+}
+
 @media(max-width: 900px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .contact-subtitle {
-    margin-bottom: 36px;
-  }
-  .nav-links {
+  .nav {
     display: none;
   }
+  .mobile-nav {
+    display: flex !important;
+  }
   body {
-    padding: 10px;
+    padding: 8px;
+  }
+  .wrap {
+    margin-top: 56px;
+  }
+  .contact-container {
+    margin-top: 72px;
+    margin-bottom: 40px;
+    padding: 0 10px;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .contact-title {
+    font-size: clamp(32px, 8vw, 42px);
+    margin: 16px 0 10px;
+  }
+  .contact-subtitle {
+    margin-bottom: 32px;
+    font-size: 15.5px;
+  }
+  .contact-form-card {
+    padding: 26px 18px;
+    border-radius: 20px;
+  }
+  .contact-info-list {
+    gap: 20px;
+  }
+  .contact-info-icon {
+    width: 42px;
+    height: 42px;
+  }
+  .c-field-group {
+    margin-bottom: 18px;
+  }
+  .c-field-group input, .c-field-group select, .c-field-group textarea {
+    padding: 13px 16px;
+    font-size: 14px;
   }
   .c-footer-main {
     flex-direction: column;
-    gap: 32px;
+    gap: 28px;
   }
   .c-footer-bot {
     flex-direction: column;
@@ -426,22 +599,61 @@ body {
 </head>
 <body>
 
-<div class="wrap">
+<!-- Desktop Navigation -->
+<nav class="nav">
+  <a href="index.html" class="brand-link" aria-label="Akron Generics">
+    <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img">
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">HOME</a>
+    <a href="index.html#why-akron" class="nav-link">ABOUT</a>
+    <a href="index.html#categories" class="nav-link">PRODUCTS</a>
+    <a href="contact.html" class="nav-link active">CONTACT US</a>
+    <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="nav-link" target="_blank" rel="noopener noreferrer">MY T3</a>
+    <a href="https://server.akrongenerics.com/login.php" class="nav-link" target="_blank" rel="noopener noreferrer">LOGIN</a>
+    <a href="become-a-customer.html" class="cta-red">Become a Customer</a>
+  </div>
+</nav>
 
-  <!-- Navigation -->
-  <nav class="nav">
-    <a href="index.html" class="brand-link" aria-label="Akron Generics">
-      <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img">
-    </a>
-    <div class="nav-links">
-      <a href="index.html#about" class="nav-link">ABOUT</a>
-      <a href="index.html#resources" class="nav-link">RESOURCES</a>
-      <a href="contact.html" class="nav-link active">CONTACT US</a>
-      <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="nav-link" target="_blank" rel="noopener noreferrer">MY T3</a>
-      <a href="https://server.akrongenerics.com/login.php" class="nav-link" target="_blank" rel="noopener noreferrer">LOGIN</a>
-      <a href="become-a-customer.html" class="cta-red">Become a Customer</a>
+<!-- Mobile Navigation Bar -->
+<div class="mobile-nav">
+  <a href="index.html" class="brand-link" aria-label="Akron Generics">
+    <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img" style="height:22px;">
+  </a>
+  <div class="mobile-nav-actions">
+    <a href="become-a-customer.html" class="cta-red" style="font-size:12px;padding:7px 14px;">Apply</a>
+    <button type="button" class="mobile-hamburger-btn" onclick="toggleMobileNav(true)" aria-label="Open Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</div>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav-drawer" id="mobileNavDrawer" onclick="handleDrawerClick(event)">
+  <div class="mobile-drawer-sheet">
+    <div class="mobile-drawer-header">
+      <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" style="height:22px;">
+      <button type="button" class="mobile-drawer-close" onclick="toggleMobileNav(false)" aria-label="Close Menu">&times;</button>
     </div>
-  </nav>
+    <div class="mobile-drawer-links">
+      <a href="index.html" class="mobile-drawer-link">Home</a>
+      <a href="index.html#why-akron" class="mobile-drawer-link">Why Akron</a>
+      <a href="index.html#categories" class="mobile-drawer-link">Product Catalog</a>
+      <a href="index.html#built-for-pharmacy" class="mobile-drawer-link">Solutions</a>
+      <a href="index.html#compliance" class="mobile-drawer-link">Compliance &amp; Quality</a>
+      <a href="index.html#ordering" class="mobile-drawer-link">Ordering FAQs</a>
+      <a href="contact.html" class="mobile-drawer-link" style="color:#A02630;">Contact Us ✓</a>
+      <div class="mobile-drawer-divider"></div>
+      <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a>
+      <a href="https://server.akrongenerics.com/login.php" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">Customer Login ↗</a>
+      <a href="become-a-customer.html" class="mobile-drawer-cta">Become a Customer</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
 
   <!-- Contact Us Section -->
   <main class="contact-container">
@@ -631,6 +843,24 @@ function handleContactPageSubmit(e) {
     }
     document.getElementById('contactPageForm').reset();
   }, 600);
+}
+
+function toggleMobileNav(open) {
+  var drawer = document.getElementById('mobileNavDrawer');
+  if (!drawer) return;
+  if (open) {
+    drawer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  } else {
+    drawer.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function handleDrawerClick(e) {
+  if (e.target === document.getElementById('mobileNavDrawer')) {
+    toggleMobileNav(false);
+  }
 }
 </script>
 

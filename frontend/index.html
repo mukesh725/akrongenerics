@@ -977,7 +977,11 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 }
 
 /* ---------- responsive ---------- */
+/* ---------- responsive ---------- */
 @media(max-width:1080px){
+  .nav{display:none}
+  .mobile-nav{display:flex!important}
+  .wrap{margin-top:64px}
   .why-split{grid-template-columns:1fr;gap:36px}
   .benefits-head{flex-direction:column;align-items:flex-start;gap:16px}
   .benefits-intro{border-left:none;padding-left:0}
@@ -995,45 +999,108 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   .foot-brand-divider{display:none}
   .foot-nav-cols{max-width:100%;width:100%;justify-content:space-around;gap:28px}
 }
-@media(max-width:720px){
-  .next-step-strip{grid-template-columns:1fr;gap:20px}
+@media(max-width:768px){
+  body{padding:8px}
+  .wrap{margin-top:60px;gap:10px}
+  .hero{min-height:500px;padding:64px 20px 44px;border-radius:20px}
+  .hero h1{font-size:clamp(28px,7.5vw,40px);line-height:1.14;max-width:100%;margin-bottom:16px}
+  .hero p{font-size:15.5px;line-height:1.5;margin-bottom:26px}
+  .hero .chips .chip{font-size:10.5px;padding:7px 18px}
+  .hero .btns{width:100%;flex-direction:column;gap:10px}
+  .hero .btns .btn{width:100%;justify-content:center;padding:13px 20px}
+  .ticker{grid-template-columns:1fr;gap:14px;padding:20px 18px;border-radius:16px}
+  .ticker .sep{display:none}
+  .ticker .item{justify-content:center}
+  .sec,.why-akron-sec,.benefits-sec,.pharmacy-sec,.compliance-sec,.faq-sec{padding:34px 18px;border-radius:20px}
+  .sec-head h2,.why-split h2,.benefits-head h2,.pharmacy-head h2,.compliance-content h2,.faq-intro h2{font-size:clamp(25px,6.8vw,32px);line-height:1.2}
+  .sec-head p,.why-akron-sec p,.benefits-intro p,.compliance-content p,.faq-intro p{font-size:14.5px;padding-left:0;border-left:none}
+  .stat-row{grid-template-columns:1fr;gap:12px}
+  .stat-card{padding:22px 20px;border-radius:16px}
+  .benefits-grid{grid-template-columns:1fr;gap:14px}
+  .benefit-card{padding:22px 20px;border-radius:16px}
+  .statement{padding:44px 20px;border-radius:20px}
+  .statement h2{font-size:clamp(25px,6.8vw,34px)}
+  .pgrid{grid-template-columns:1fr;gap:14px}
+  .pcard.photo-card{height:200px}
+  .cat-grid{grid-template-columns:1fr;gap:14px}
+  .cat-card{border-radius:16px}
+  .next-step-strip{grid-template-columns:1fr;gap:18px}
   .next-step-col{border-left:none!important;padding-left:0!important;border-top:1px solid var(--line);padding-top:18px}
   .next-step-col:nth-child(2){border-top:none;padding-top:0}
-  body{padding:10px}
-  .nav{display:none}
-  .mobile-nav{display:flex!important}
-  .why-akron-sec,.benefits-sec,.sec,.statement,.closing,.foot,.pharmacy-sec,.compliance-sec,.faq-sec{padding:38px 22px}
-  .stat-row{grid-template-columns:1fr}
-  .benefits-grid{grid-template-columns:1fr}
-  .pgrid,.cat-grid{grid-template-columns:1fr}
+  .comp-card-top{grid-template-columns:1fr;gap:16px;padding:22px 18px}
+  .comp-card-top .comp-info-area{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:16px}
+  .comp-card-row{grid-template-columns:1fr;gap:14px}
+  .comp-card-sm{padding:22px 18px;border-radius:16px}
+  .faq-accordion-trigger{font-size:15px;padding:16px 0;text-align:left}
+  .closing{padding:50px 20px;min-height:auto;border-radius:20px}
+  .closing h2{font-size:clamp(25px,6.8vw,34px);line-height:1.2}
+  .closing p{font-size:15px}
+  .closing-actions{flex-direction:column;width:100%;gap:10px}
+  .closing-actions a{width:100%;text-align:center;justify-content:center}
+  .foot{padding:34px 20px 24px;border-radius:20px}
+  .foot-main{flex-direction:column;align-items:center;text-align:center;gap:24px}
+  .foot-brand{gap:0}
+  .foot-brand-divider{display:none}
   .foot-nav-cols{flex-direction:column;align-items:center;gap:22px}
   .foot-col{text-align:center}
   .foot-bot{flex-direction:column;align-items:center;text-align:center;gap:14px}
   .foot-bot .foot-legal{gap:18px;justify-content:center}
-  .comp-card-top{grid-template-columns:1fr;gap:18px}
-  .comp-card-top .comp-info-area{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:16px}
-  .comp-card-row{grid-template-columns:1fr}
-  .closing{padding:56px 24px;min-height:380px}
-  .closing-actions{flex-direction:column;width:100%}
-  .closing-actions a{width:100%;text-align:center}
-  .pcard{min-height:auto}
-  .pcard.photo-card{height:210px}
-  .hero{min-height:600px;padding:40px 22px 36px}
-  .fcard.solid,.fcard.eval-card{padding:32px 24px}
-  .fcard.solid h3,.fcard.eval-card h3{font-size:28px}
-  .fcard.solid .spec .sep{margin:0 16px}
-  .fcard.solid .spec .col{font-size:13.5px}
-  .mail input{width:100%}
 }
-.mobile-nav{
-  display:none;position:fixed;top:12px;left:10px;right:10px;z-index:60;
-  align-items:center;justify-content:space-between;
-  background:rgba(255,255,255,.86);backdrop-filter:blur(18px);
-  border-radius:var(--r-pill);padding:10px 10px 10px 20px;box-shadow:0 8px 30px rgba(22,24,15,.12);
-}
-.mobile-nav .mark{margin:0;font-size:15px}
-.mobile-nav a{background:var(--ink);color:#fff;text-decoration:none;font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--r-pill)}
 
+/* Mobile Nav Bar & Drawer */
+.mobile-nav{
+  display:none;position:fixed;top:12px;left:10px;right:10px;z-index:90;
+  align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(18px) saturate(1.6);
+  border-radius:var(--r-pill);padding:8px 10px 8px 18px;box-shadow:0 8px 30px rgba(22,24,15,.12);
+  border:1px solid rgba(22,24,15,.08);
+}
+.mobile-nav-actions{
+  display:flex;align-items:center;gap:8px;
+}
+.mobile-hamburger-btn{
+  width:38px;height:38px;border-radius:50%;border:1px solid rgba(22,24,15,.12);
+  background:#fff;color:var(--ink);display:flex;flex-direction:column;justify-content:center;
+  align-items:center;gap:4.5px;cursor:pointer;padding:0;
+}
+.mobile-hamburger-btn span{
+  display:block;width:18px;height:2px;background:currentColor;border-radius:2px;
+}
+.mobile-nav-drawer{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(22,24,15,.55);backdrop-filter:blur(6px);z-index:100;
+  opacity:0;pointer-events:none;transition:opacity .25s ease;
+  display:flex;justify-content:flex-end;
+}
+.mobile-nav-drawer.active{opacity:1;pointer-events:auto}
+.mobile-drawer-sheet{
+  width:85%;max-width:320px;height:100%;background:#fff;
+  box-shadow:-8px 0 32px rgba(0,0,0,.2);padding:24px 20px 32px;
+  display:flex;flex-direction:column;transform:translateX(100%);
+  transition:transform .28s cubic-bezier(.16,1,.3,1);overflow-y:auto;
+}
+.mobile-nav-drawer.active .mobile-drawer-sheet{transform:translateX(0)}
+.mobile-drawer-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:16px;border-bottom:1px solid rgba(22,24,15,.08);margin-bottom:16px;
+}
+.mobile-drawer-close{
+  width:36px;height:36px;border-radius:50%;border:none;
+  background:rgba(22,24,15,.06);font-size:22px;color:var(--ink);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.mobile-drawer-links{display:flex;flex-direction:column;gap:2px}
+.mobile-drawer-link{
+  font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink);
+  text-decoration:none;padding:12px 14px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;
+}
+.mobile-drawer-link:hover{background:rgba(22,24,15,.05)}
+.mobile-drawer-divider{height:1px;background:rgba(22,24,15,.08);margin:12px 0}
+.mobile-drawer-cta{
+  background:#A02630;color:#fff!important;font-size:14px;font-weight:700;
+  text-align:center;padding:13px;border-radius:var(--r-pill);text-decoration:none;display:block;margin-top:8px;
+  box-shadow:0 4px 14px rgba(160,38,48,.35);
+}
 </style>
 </head>
 <body>
@@ -1067,13 +1134,41 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   <a href="become-a-customer.html" class="cta-red">Become a Customer</a>
 </nav>
 
+<!-- Mobile Navigation Bar -->
 <div class="mobile-nav">
   <a href="#" class="brand-link" aria-label="Akron Generics">
     <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img" style="height:22px;">
   </a>
-  <div style="display:flex;align-items:center;gap:12px;">
-    <a href="https://server.akrongenerics.com/login.php" class="nav-link" target="_blank" rel="noopener noreferrer" style="font-size:12px;font-weight:600;color:var(--ink);">LOGIN</a>
-    <a href="become-a-customer.html" class="cta-red" style="font-size:12px;padding:8px 16px;">Become a Customer</a>
+  <div class="mobile-nav-actions">
+    <a href="become-a-customer.html" class="cta-red" style="font-size:12px;padding:7px 14px;">Apply</a>
+    <button type="button" class="mobile-hamburger-btn" id="mobileMenuBtn" onclick="toggleMobileNav(true)" aria-label="Open Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</div>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav-drawer" id="mobileNavDrawer" onclick="handleDrawerClick(event)">
+  <div class="mobile-drawer-sheet">
+    <div class="mobile-drawer-header">
+      <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" style="height:22px;">
+      <button type="button" class="mobile-drawer-close" onclick="toggleMobileNav(false)" aria-label="Close Menu">&times;</button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="#" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Home</a>
+      <a href="#why-akron" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Why Akron</a>
+      <a href="#categories" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Product Catalog</a>
+      <a href="#built-for-pharmacy" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Solutions</a>
+      <a href="#compliance" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Compliance &amp; Quality</a>
+      <a href="#ordering" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Ordering FAQs</a>
+      <a href="contact.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Contact Us</a>
+      <div class="mobile-drawer-divider"></div>
+      <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a>
+      <a href="https://server.akrongenerics.com/login.php" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">Customer Login ↗</a>
+      <a href="become-a-customer.html" class="mobile-drawer-cta">Become a Customer</a>
+    </div>
   </div>
 </div>
 
@@ -1751,6 +1846,24 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
     initAnimations();
   }
 })();
+
+function toggleMobileNav(open) {
+  var drawer = document.getElementById('mobileNavDrawer');
+  if (!drawer) return;
+  if (open) {
+    drawer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  } else {
+    drawer.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function handleDrawerClick(e) {
+  if (e.target === document.getElementById('mobileNavDrawer')) {
+    toggleMobileNav(false);
+  }
+}
 </script>
 </body>
 </html>
