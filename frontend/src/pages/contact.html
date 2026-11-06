@@ -96,8 +96,14 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  appearance: none;
+  -webkit-appearance: none;
 }
-.nav-link:hover, .nav-link.active {
+.nav-link:hover, .nav-link.active, .nav-dropdown.open > .nav-link {
   background: rgba(22, 24, 15, 0.05);
   color: var(--ink);
 }
@@ -113,8 +119,10 @@ body {
   transition: 0.2s;
   display: inline-block;
   margin-left: 3px;
+  pointer-events: none;
 }
-.nav-dropdown:hover .chevron {
+.nav-dropdown:hover .chevron,
+.nav-dropdown.open .chevron {
   transform: rotate(225deg) translateY(-1px);
 }
 .dropdown-menu {
@@ -136,7 +144,8 @@ body {
   gap: 2px;
   z-index: 70;
 }
-.nav-dropdown:hover .dropdown-menu {
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown.open .dropdown-menu {
   opacity: 1;
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
@@ -723,7 +732,9 @@ body {
   </a>
   <a href="index.html" class="nav-link">HOME</a>
   <div class="nav-dropdown">
-    <a href="index.html#why-akron" class="nav-link">ABOUT <span class="chevron"></span></a>
+    <button type="button" class="nav-link nav-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
+      ABOUT <span class="chevron"></span>
+    </button>
     <div class="dropdown-menu">
       <a href="index.html#why-akron">Why Akron Generics</a>
       <a href="index.html#compliance">Quality &amp; Compliance</a>
@@ -732,7 +743,9 @@ body {
     </div>
   </div>
   <div class="nav-dropdown">
-    <a href="products.html" class="nav-link">RESOURCES <span class="chevron"></span></a>
+    <button type="button" class="nav-link nav-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
+      RESOURCES <span class="chevron"></span>
+    </button>
     <div class="dropdown-menu">
       <a href="products.html">Product Catalog</a>
       <a href="index.html#ordering">Ordering &amp; Shipping FAQ</a>
@@ -993,6 +1006,36 @@ function handleDrawerClick(e) {
     toggleMobileNav(false);
   }
 }
+
+function toggleNavDropdown(btn) {
+  var parent = btn.closest('.nav-dropdown');
+  if (!parent) return;
+  var isOpen = parent.classList.contains('open');
+  document.querySelectorAll('.nav-dropdown.open').forEach(function(d) {
+    if (d !== parent) {
+      d.classList.remove('open');
+      var b = d.querySelector('.nav-dropdown-btn');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    }
+  });
+  if (isOpen) {
+    parent.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    parent.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-dropdown')) {
+    document.querySelectorAll('.nav-dropdown.open').forEach(function(d) {
+      d.classList.remove('open');
+      var b = d.querySelector('.nav-dropdown-btn');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  }
+});
 </script>
 
 </body>
