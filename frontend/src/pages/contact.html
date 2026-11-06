@@ -46,149 +46,201 @@ body {
 
 .wrap {
   width: 100%;
-  max-width: 100%;
-  margin: 114px auto 0;
+  max-width: none;
+  margin: 88px auto 0;
 }
 
-/* Navbar */
-.nav {
+/* ---------- SITE HEADER (3-Column Balanced Full Width) ---------- */
+.site-header {
   position: fixed;
-  top: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 60;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 16px 56px;
+  background: rgba(255, 255, 255, 0.96);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+.site-header-inner {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+.site-header-left {
   display: flex;
   align-items: center;
-  gap: 2px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(18px) saturate(1.6);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 9999px;
-  padding: 6px 7px 6px 20px;
-  box-shadow: 0 10px 40px rgba(22, 24, 15, 0.10);
-  width: max-content;
-  max-width: calc(100vw - 32px);
+  justify-content: flex-start;
 }
-.brand-link {
+.site-brand {
   display: inline-flex;
   align-items: center;
-  margin-right: 16px;
   text-decoration: none;
 }
-.brand-logo-img {
-  height: 28px;
+.site-brand .brand-logo-img {
+  height: 32px;
   width: auto;
-  display: block;
   object-fit: contain;
+  display: block;
 }
-.nav-link {
+
+.site-nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.site-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.header-nav-link {
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-2);
+  color: #374151;
   text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 9999px;
-  transition: 0.2s;
-  white-space: nowrap;
+  padding: 6px 2px;
+  transition: color 0.2s ease, opacity 0.2s ease;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   background: transparent;
   border: none;
   cursor: pointer;
-  line-height: 1;
-  appearance: none;
-  -webkit-appearance: none;
+  line-height: 1.2;
+  white-space: nowrap;
 }
-.nav-link:hover, .nav-link.active, .nav-dropdown.open > .nav-link {
-  background: rgba(22, 24, 15, 0.05);
-  color: var(--ink);
+.header-nav-link:hover,
+.header-dropdown.open > .header-nav-link {
+  color: #111827;
 }
-.nav-dropdown {
+.header-nav-link.active {
+  color: #111827;
+  font-weight: 600;
+}
+
+.header-dropdown {
   position: relative;
 }
-.nav-dropdown .chevron {
+.header-dropdown .chevron {
   width: 4.5px;
   height: 4.5px;
-  border-right: 1.3px solid currentColor;
-  border-bottom: 1.3px solid currentColor;
-  transform: rotate(45deg) translateY(-2px);
-  transition: 0.2s;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
   display: inline-block;
-  margin-left: 3px;
+  margin-left: 4px;
+  margin-top: -3px;
   pointer-events: none;
 }
-.nav-dropdown:hover .chevron,
-.nav-dropdown.open .chevron {
-  transform: rotate(225deg) translateY(-1px);
+.header-dropdown:hover .chevron,
+.header-dropdown.open .chevron {
+  transform: rotate(225deg) translateY(-2px);
 }
-.dropdown-menu {
+
+.header-nav-divider {
+  display: inline-block;
+  width: 1px;
+  height: 15px;
+  background: rgba(22, 24, 15, 0.20);
+  margin: 0 4px;
+}
+
+.header-dropdown .dropdown-menu {
   position: absolute;
   top: calc(100% + 12px);
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
-  background: #fff;
+  background: #ffffff;
   border-radius: 14px;
   box-shadow: 0 18px 45px rgba(22, 24, 15, 0.14);
   border: 1px solid rgba(22, 24, 15, 0.08);
   padding: 8px;
-  min-width: 210px;
+  min-width: 230px;
   opacity: 0;
   pointer-events: none;
   transition: 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
   display: flex;
   flex-direction: column;
   gap: 2px;
-  z-index: 70;
+  z-index: 120;
 }
-.nav-dropdown:hover .dropdown-menu,
-.nav-dropdown.open .dropdown-menu {
+.header-dropdown:hover .dropdown-menu,
+.header-dropdown.open .dropdown-menu {
   opacity: 1;
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
 }
-.dropdown-menu a {
+.header-dropdown .dropdown-menu a {
   padding: 9px 14px;
-  font-size: 12.5px;
-  letter-spacing: 0.02em;
+  font-size: 13px;
+  letter-spacing: 0.01em;
   text-transform: none;
-  font-weight: 400;
+  font-weight: 500;
   border-radius: 8px;
-  color: var(--ink-2);
+  color: #4b5563;
   text-decoration: none;
   display: block;
   white-space: nowrap;
   transition: 0.15s;
 }
-.dropdown-menu a:hover {
+.header-dropdown .dropdown-menu a:hover {
   background: rgba(22, 24, 15, 0.05);
-  color: var(--ink);
+  color: #111827;
 }
-.cta-red, .nav .cta-red {
-  background: #A02630 !important;
-  color: #fff !important;
-  padding: 9px 18px;
+.header-dropdown .dropdown-menu a.special-offer,
+.dropdown-menu a.special-offer {
+  color: #942031 !important;
+  font-weight: 600 !important;
+}
+.header-dropdown .dropdown-menu a.special-offer:hover,
+.dropdown-menu a.special-offer:hover {
+  background: rgba(148, 32, 49, 0.08) !important;
+  color: #7d1a29 !important;
+}
+
+.header-cta-red, .cta-red, .nav .cta-red {
+  background: #942031 !important;
+  color: #ffffff !important;
   font-family: var(--sans);
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
+  padding: 10px 22px;
   border-radius: 9999px;
-  box-shadow: 0 4px 14px rgba(160, 38, 48, 0.35);
-  transition: 0.22s;
-  text-decoration: none !important;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: none !important;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: none;
+  margin-left: 6px;
 }
-.cta-red:hover, .nav .cta-red:hover {
-  background: #B72C38 !important;
+.header-cta-red:hover, .cta-red:hover, .nav .cta-red:hover {
+  background: #7d1a29 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(160, 38, 48, 0.45);
+  box-shadow: none !important;
+}
+
+/* Legacy .nav support */
+.nav { display: none !important; }
+
+@media (max-width: 1080px) {
+  .site-header { display: none !important; }
 }
 
 /* Contact Container */
@@ -725,48 +777,71 @@ body {
 </head>
 <body>
 
-<!-- Desktop Navigation -->
-<nav class="nav">
-  <a href="index.html" class="brand-link" aria-label="Akron Generics">
-    <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img">
-  </a>
-  <a href="index.html" class="nav-link">HOME</a>
-  <div class="nav-dropdown">
-    <button type="button" class="nav-link nav-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
-      ABOUT <span class="chevron"></span>
-    </button>
-    <div class="dropdown-menu">
-      <a href="index.html#why-akron">Why Akron Generics</a>
-      <a href="index.html#compliance">Quality &amp; Compliance</a>
-      <a href="index.html#thread">Company Overview</a>
-      <a href="index.html#leadership">Leadership Team</a>
+<!-- DESKTOP HEADER (3-Column Layout: Logo Left | Centered Menu | Actions Right) -->
+<header class="site-header" id="siteHeader">
+  <div class="site-header-inner">
+    <div class="site-header-left">
+      <a href="index.html" class="site-brand" aria-label="Akron Generics">
+        <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img">
+      </a>
+    </div>
+
+    <nav class="site-nav-menu" aria-label="Primary Navigation">
+      <div class="header-dropdown">
+        <button type="button" class="header-nav-link header-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
+          About <span class="chevron"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="index.html#why-akron">Why Akron Generics</a>
+          <a href="index.html#compliance">Quality &amp; Compliance</a>
+          <a href="index.html#thread">Company Overview</a>
+          <a href="index.html#leadership">Leadership Team</a>
+        </div>
+      </div>
+
+      <div class="header-dropdown">
+        <button type="button" class="header-nav-link header-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
+          Products <span class="chevron"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="products.html">Product Catalog</a>
+          <a href="src/november-specials.pdf" target="_blank" class="special-offer">Special Offers 📄</a>
+        </div>
+      </div>
+
+      <div class="header-dropdown">
+        <button type="button" class="header-nav-link header-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
+          Resources <span class="chevron"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="index.html#compliance">Quality &amp; Compliance</a>
+          <a href="index.html#ordering">Ordering &amp; Shipping FAQ</a>
+          <a href="index.html#forms">Forms &amp; Licensing</a>
+          <a href="index.html#thread">Company Overview</a>
+          <a href="index.html#leadership">Leadership Team</a>
+        </div>
+      </div>
+
+      <a href="contact.html" class="header-nav-link active">Contact</a>
+    </nav>
+
+        <div class="site-header-actions">
+      <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="header-nav-link" target="_blank" rel="noopener noreferrer">My T3</a>
+      <span class="header-nav-divider" aria-hidden="true"></span>
+      <a href="https://server.akrongenerics.com/login.php" class="header-nav-link" target="_blank" rel="noopener noreferrer">Login</a>
+      <a href="become-a-customer.html" class="header-cta-red">Become a Customer</a>
     </div>
   </div>
-  <div class="nav-dropdown">
-    <button type="button" class="nav-link nav-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
-      RESOURCES <span class="chevron"></span>
-    </button>
-    <div class="dropdown-menu">
-      <a href="products.html">Product Catalog</a>
-      <a href="index.html#ordering">Ordering &amp; Shipping FAQ</a>
-      <a href="index.html#compliance">DSCSA &amp; Compliance</a>
-      <a href="index.html#forms">Forms &amp; Licensing</a>
-    </div>
-  </div>
-  <a href="contact.html" class="nav-link active">CONTACT US</a>
-  <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="nav-link" target="_blank" rel="noopener noreferrer">MY T3</a>
-  <a href="https://server.akrongenerics.com/login.php" class="nav-link" target="_blank" rel="noopener noreferrer">LOGIN</a>
-  <a href="become-a-customer.html" class="cta-red">Become a Customer</a>
-</nav>
+</header>
 
 <!-- Mobile Navigation Bar -->
-<div class="mobile-nav">
+<div class="mobile-nav" id="mobileNav">
   <a href="index.html" class="brand-link" aria-label="Akron Generics">
     <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img" style="height:22px;">
   </a>
   <div class="mobile-nav-actions">
-    <a href="become-a-customer.html" class="cta-red" style="font-size:12px;padding:7px 14px;">Apply</a>
-    <button type="button" class="mobile-hamburger-btn" onclick="toggleMobileNav(true)" aria-label="Open Navigation Menu">
+    <a href="become-a-customer.html" class="header-cta-red" style="font-size:12px;padding:6px 14px;">Become a Customer</a>
+    <button type="button" class="mobile-hamburger-btn" id="mobileMenuBtn" onclick="toggleMobileNav(true)" aria-label="Open Navigation Menu">
       <span></span>
       <span></span>
       <span></span>
@@ -785,10 +860,11 @@ body {
       <a href="index.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Home</a>
       <a href="index.html#why-akron" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Why Akron Generics</a>
       <a href="products.html" class="mobile-drawer-link">Product Catalog</a>
+      <a href="src/november-specials.pdf" target="_blank" class="mobile-drawer-link" style="color:#942031!important;font-weight:600;">Special Offers 📄</a>
       <a href="index.html#built-for-pharmacy" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Solutions</a>
       <a href="index.html#compliance" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Compliance &amp; Quality</a>
       <a href="index.html#ordering" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Ordering &amp; Shipping FAQ</a>
-      <a href="contact.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)" style="color:#A02630;font-weight:700;">Contact Us ✓</a>
+      <a href="contact.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)" style="color:#942031!important;font-weight:700;">Contact Us ✓</a>
       <div class="mobile-drawer-divider"></div>
       <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a>
       <a href="https://server.akrongenerics.com/login.php" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">Customer Login ↗</a>
@@ -1008,13 +1084,13 @@ function handleDrawerClick(e) {
 }
 
 function toggleNavDropdown(btn) {
-  var parent = btn.closest('.nav-dropdown');
+  var parent = btn.closest('.header-dropdown') || btn.closest('.nav-dropdown');
   if (!parent) return;
   var isOpen = parent.classList.contains('open');
-  document.querySelectorAll('.nav-dropdown.open').forEach(function(d) {
+  document.querySelectorAll('.header-dropdown.open, .nav-dropdown.open').forEach(function(d) {
     if (d !== parent) {
       d.classList.remove('open');
-      var b = d.querySelector('.nav-dropdown-btn');
+      var b = d.querySelector('.header-dropdown-btn, .nav-dropdown-btn');
       if (b) b.setAttribute('aria-expanded', 'false');
     }
   });
@@ -1028,10 +1104,10 @@ function toggleNavDropdown(btn) {
 }
 
 document.addEventListener('click', function(e) {
-  if (!e.target.closest('.nav-dropdown')) {
-    document.querySelectorAll('.nav-dropdown.open').forEach(function(d) {
+  if (!e.target.closest('.header-dropdown') && !e.target.closest('.nav-dropdown')) {
+    document.querySelectorAll('.header-dropdown.open, .nav-dropdown.open').forEach(function(d) {
       d.classList.remove('open');
-      var b = d.querySelector('.nav-dropdown-btn');
+      var b = d.querySelector('.header-dropdown-btn, .nav-dropdown-btn');
       if (b) b.setAttribute('aria-expanded', 'false');
     });
   }
