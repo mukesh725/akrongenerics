@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Products — Akron Generics</title>
+<meta name="description" content="Explore supplies, devices, and purchasing essentials from Akron Generics. Competitive wholesale generic medications, specials, and diagnostic supplies built around your pharmacy's bottom line.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ground: #F4F6F8;
+  --card: #FFFFFF;
+  --ink: #111827;
+  --ink-2: #4B5563;
+  --ink-3: #9CA3AF;
+  --color-navy: #0E335E;
+  --color-crimson: #9E2235;
+  --color-crimson-hover: #831A29;
+  --border-light: #E5E9F0;
+  --r-pill: 9999px;
+  --r-card: 20px;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --display: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--sans);
+  background-color: var(--ground);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding: 16px;
+  overflow-x: hidden;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* ---------- FLOATING NAVBAR ---------- */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(20px);
+  border-radius: var(--r-pill);
+  padding: 8px 12px 8px 24px;
+  box-shadow: 0 4px 24px rgba(22, 24, 15, 0.06);
+  border: 1px solid rgba(22, 24, 15, 0.08);
+  margin-bottom: 28px;
+}
+.brand-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.brand-logo-img {
+  height: 26px;
+  width: auto;
+  display: block;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+.nav-link {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--ink);
+  transition: color 0.15s;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--color-navy);
+  font-weight: 600;
+}
+.cta-red {
+  background: var(--color-crimson);
+  color: #FFFFFF !important;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: var(--r-pill);
+  transition: background 0.15s, transform 0.15s;
+  box-shadow: 0 4px 14px rgba(158, 34, 53, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.cta-red:hover {
+  background: var(--color-crimson-hover);
+  transform: translateY(-1px);
+}
+
+/* Mobile Nav Bar & Drawer */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 10px;
+  right: 10px;
+  z-index: 90;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(18px) saturate(1.6);
+  border-radius: var(--r-pill);
+  padding: 8px 10px 8px 18px;
+  box-shadow: 0 8px 30px rgba(22, 24, 15, 0.12);
+  border: 1px solid rgba(22, 24, 15, 0.08);
+}
+.mobile-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.mobile-nav-actions .cta-red {
+  background: #A02630 !important;
+  color: #ffffff !important;
+  padding: 7px 16px !important;
+  font-family: var(--sans);
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+  border-radius: var(--r-pill) !important;
+  box-shadow: 0 3px 10px rgba(160, 38, 48, 0.35) !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  border: none !important;
+}
+.mobile-hamburger-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(22, 24, 15, 0.12);
+  background: #fff;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4.5px;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.mobile-hamburger-btn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(22, 24, 15, 0.55);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  display: none;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+.mobile-nav-drawer.active {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+.mobile-drawer-sheet {
+  width: 85%;
+  max-width: 320px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.2);
+  padding: 24px 20px 32px;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+.mobile-nav-drawer.active .mobile-drawer-sheet {
+  transform: translateX(0);
+}
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+  margin-bottom: 16px;
+}
+.mobile-drawer-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(22, 24, 15, 0.06);
+  font-size: 22px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mobile-drawer-link {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mobile-drawer-link:hover {
+  background: rgba(22, 24, 15, 0.05);
+}
+.mobile-drawer-divider {
+  height: 1px;
+  background: rgba(22, 24, 15, 0.08);
+  margin: 12px 0;
+}
+.mobile-drawer-cta {
+  background: #A02630;
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  padding: 13px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  display: block;
+  margin-top: 8px;
+  box-shadow: 0 4px 14px rgba(160, 38, 48, 0.35);
+}
+
+/* ==========================================================================
+   PRODUCTS PAGE LAYOUT & SECTIONS
+   ========================================================================== */
+
+/* Buttons */
+.btn-red-pill {
+  background: var(--color-crimson);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 9px 20px;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 4px 14px rgba(158, 34, 53, 0.28);
+  white-space: nowrap;
+}
+.btn-red-pill:hover {
+  background: var(--color-crimson-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(158, 34, 53, 0.36);
+}
+
+/* ---------- SECTION 1: CATEGORY SHOWCASE ---------- */
+.products-section-card {
+  background: #FFFFFF;
+  border-radius: var(--r-card);
+  padding: 34px 34px 30px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  margin-bottom: 22px;
+}
+.section-head-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.section-eyebrow {
+  font-family: var(--display);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #173860;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 3.2vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #111827;
+  line-height: 1.15;
+}
+.section-subtitle {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+
+/* 6-Category Grid */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 26px;
+}
+.cat-card-item {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-light);
+  border-radius: 16px;
+  padding: 18px 20px 14px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+.cat-card-item:hover {
+  transform: translateY(-2px);
+  border-color: #CBD5E1;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+.cat-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cat-card-icon {
+  width: 22px;
+  height: 22px;
+  color: #0E335E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cat-card-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.cat-card-title {
+  font-family: var(--display);
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #111827;
+}
+.cat-card-visual {
+  height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+.cat-card-visual img {
+  max-width: 100%;
+  max-height: 115px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.25s ease;
+}
+.cat-card-item:hover .cat-card-visual img {
+  transform: scale(1.03);
+}
+
+/* ---------- SECTION 2: NOVEMBER SPECIALS ---------- */
+.specials-card-wrapper {
+  background: #FFFFFF;
+  border-radius: var(--r-card);
+  padding: 34px 34px 28px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  margin-bottom: 22px;
+}
+.specials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+.special-item-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-light);
+  border-radius: 16px;
+  padding: 22px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.special-item-card:hover {
+  transform: translateY(-2px);
+  border-color: #CBD5E1;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+.special-visual {
+  height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.special-visual img {
+  max-width: 100%;
+  max-height: 115px;
+  object-fit: contain;
+  display: block;
+}
+.special-title {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #111827;
+  margin-bottom: 3px;
+}
+.special-specs {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #64748B;
+  margin-bottom: 2px;
+}
+.special-ndc {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #64748B;
+  margin-bottom: 12px;
+}
+.special-price {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-crimson);
+  margin-top: auto;
+}
+
+.specials-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.specials-notice {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: #64748B;
+}
+
+/* ---------- SECTION 3: CONTOUR NEXT SPECIAL OFFER ---------- */
+.contour-banner-card {
+  background: #0E335E;
+  border-radius: var(--r-card);
+  padding: 42px 42px 38px;
+  color: #FFFFFF;
+  box-shadow: 0 12px 36px rgba(14, 51, 94, 0.22);
+  margin-bottom: 18px;
+}
+.contour-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 40px;
+  align-items: center;
+}
+.contour-eyebrow {
+  font-family: var(--display);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 12px;
+}
+.contour-title {
+  font-family: var(--display);
+  font-size: clamp(34px, 3.8vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #FFFFFF;
+  margin-bottom: 16px;
+}
+.contour-desc {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 10px;
+}
+.contour-disclaimer {
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.68);
+  margin-bottom: 26px;
+  max-width: 44ch;
+}
+.btn-white-pill {
+  background: #FFFFFF;
+  color: var(--color-crimson);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.18s, background 0.18s;
+  white-space: nowrap;
+}
+.btn-white-pill:hover {
+  background: #F8FAFC;
+  transform: translateY(-1px);
+}
+
+/* Contour Right Column Cards */
+.contour-right-col {
+  display: flex;
+  flex-direction: column;
+}
+.contour-cards-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.contour-subcard {
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 18px 20px;
+  backdrop-filter: blur(4px);
+}
+.contour-subcard-title {
+  font-family: var(--display);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.contour-subcard-price {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin: 3px 0;
+}
+.contour-subcard-case {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.72);
+}
+.contour-wide-subcard {
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  backdrop-filter: blur(4px);
+}
+.contour-meter-info {
+  display: flex;
+  flex-direction: column;
+}
+.contour-meter-title {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.contour-meter-price {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin-top: 3px;
+}
+.contour-meter-visual {
+  height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.contour-meter-visual img {
+  max-height: 90px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+.contour-bottom-note {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 12px;
+}
+
+/* Bottom footnote */
+.products-footnote {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  color: #6B7280;
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 28px;
+}
+
+/* ---------- GLOBAL FOOTER ---------- */
+.c-footer {
+  background: #FFFFFF;
+  border-radius: var(--r-card);
+  padding: 44px 36px 28px;
+  box-shadow: 0 4px 24px rgba(22, 24, 15, 0.04);
+  border: 1px solid rgba(22, 24, 15, 0.06);
+}
+.c-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+  gap: 36px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+}
+.c-footer-brand-img {
+  height: 28px;
+  width: auto;
+  margin-bottom: 14px;
+  display: block;
+}
+.c-footer-desc {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  max-width: 34ch;
+}
+.c-footer-contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.c-footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.c-footer-contact-item svg {
+  color: var(--color-navy);
+  flex-shrink: 0;
+}
+.c-footer-contact-item a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.c-footer-contact-item a:hover {
+  color: var(--color-navy);
+}
+.c-footer-links-col h6 {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.c-footer-links-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.c-footer-links-col a {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.c-footer-links-col a:hover {
+  color: var(--color-navy);
+}
+.c-footer-bot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.c-footer-legal {
+  display: flex;
+  gap: 20px;
+}
+.c-footer-legal a {
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.c-footer-legal a:hover {
+  color: var(--ink-2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1080px) {
+  .nav { display: none; }
+  .mobile-nav { display: flex !important; }
+  .wrap { margin-top: 64px; }
+  .c-footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+}
+
+@media (max-width: 820px) {
+  .categories-grid { grid-template-columns: 1fr 1fr; }
+  .specials-grid { grid-template-columns: 1fr; }
+  .contour-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .wrap { margin-top: 60px; }
+  .products-section-card, .specials-card-wrapper, .contour-banner-card { padding: 26px 20px; }
+  .section-head-row { flex-direction: column; align-items: flex-start; }
+  .categories-grid { grid-template-columns: 1fr; }
+  .contour-cards-top { grid-template-columns: 1fr; }
+  .c-footer { padding: 30px 20px 22px; }
+  .c-footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .c-footer-bot { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- DESKTOP NAVBAR -->
+  <nav class="nav">
+    <a href="index.html" class="brand-link" aria-label="Akron Generics Home">
+      <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img">
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">HOME</a>
+      <a href="index.html#why-akron" class="nav-link">ABOUT</a>
+      <a href="products.html" class="nav-link active">PRODUCTS</a>
+      <a href="contact.html" class="nav-link">CONTACT US</a>
+      <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="nav-link" target="_blank" rel="noopener noreferrer">MY T3</a>
+      <a href="https://server.akrongenerics.com/login.php" class="nav-link" target="_blank" rel="noopener noreferrer">LOGIN</a>
+      <a href="become-a-customer.html" class="cta-red">Become a Customer</a>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAVBAR -->
+  <div class="mobile-nav">
+    <a href="index.html" class="brand-link" aria-label="Akron Generics">
+      <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img" style="height:22px;">
+    </a>
+    <div class="mobile-nav-actions">
+      <a href="become-a-customer.html" class="cta-red">Apply</a>
+      <button type="button" class="mobile-hamburger-btn" onclick="toggleMobileNav(true)" aria-label="Open Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer" onclick="handleDrawerClick(event)">
+    <div class="mobile-drawer-sheet">
+      <div class="mobile-drawer-header">
+        <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" style="height:22px;">
+        <button type="button" class="mobile-drawer-close" onclick="toggleMobileNav(false)" aria-label="Close Menu">&times;</button>
+      </div>
+      <div class="mobile-drawer-links">
+        <a href="index.html" class="mobile-drawer-link">Home</a>
+        <a href="index.html#why-akron" class="mobile-drawer-link">About Us</a>
+        <a href="products.html" class="mobile-drawer-link" style="color:var(--color-navy);font-weight:700;">Products</a>
+        <a href="contact.html" class="mobile-drawer-link">Contact Us</a>
+        <div class="mobile-drawer-divider"></div>
+        <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a>
+        <a href="https://server.akrongenerics.com/login.php" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">Customer Login ↗</a>
+        <a href="become-a-customer.html" class="mobile-drawer-cta">Become a Customer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 1: OUR PRODUCTS ================= -->
+  <section class="products-section-card">
+    <div class="section-head-row">
+      <div>
+        <div class="section-eyebrow">AKRON GENERICS · OUR PRODUCTS</div>
+        <h1 class="section-title">Products your pharmacy needs.</h1>
+        <p class="section-subtitle">Explore supplies, devices, and purchasing essentials.</p>
+      </div>
+      <a href="become-a-customer.html" class="btn-red-pill">Explore the Catalog ↗</a>
+    </div>
+
+    <div class="categories-grid">
+      <!-- 1. Pen Needles -->
+      <a href="become-a-customer.html" class="cat-card-item">
+        <div class="cat-card-header">
+          <div class="cat-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m18 2 4 4"></path>
+              <path d="m17 7 3-3"></path>
+              <path d="M19 9 8.7 19.3c-.4.4-1 .6-1.6.6H3v-4.1c0-.6.2-1.2.6-1.6L13.9 3.9"></path>
+              <path d="m18 10-4-4"></path>
+              <path d="m5 19-3 3"></path>
+            </svg>
+          </div>
+          <span class="cat-card-title">Pen Needles</span>
+        </div>
+        <div class="cat-card-visual">
+          <img src="src/assets/products/cat-pen-needles.png" alt="Pen Needles">
+        </div>
+      </a>
+
+      <!-- 2. Lancets & Alcohol Pads -->
+      <a href="become-a-customer.html" class="cat-card-item">
+        <div class="cat-card-header">
+          <div class="cat-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+            </svg>
+          </div>
+          <span class="cat-card-title">Lancets &amp; Alcohol Pads</span>
+        </div>
+        <div class="cat-card-visual">
+          <img src="src/assets/products/cat-lancets.png" alt="Lancets and Alcohol Pads">
+        </div>
+      </a>
+
+      <!-- 3. Blood Pressure -->
+      <a href="become-a-customer.html" class="cat-card-item">
+        <div class="cat-card-header">
+          <div class="cat-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+          </div>
+          <span class="cat-card-title">Blood Pressure</span>
+        </div>
+        <div class="cat-card-visual">
+          <img src="src/assets/products/cat-blood-pressure.png" alt="Blood Pressure Monitor and Cuff">
+        </div>
+      </a>
+
+      <!-- 4. Nebulizers & Chambers -->
+      <a href="become-a-customer.html" class="cat-card-item">
+        <div class="cat-card-header">
+          <div class="cat-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 16a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v3H7v-3z"></path>
+              <path d="M12 11V3"></path>
+              <path d="M9 3h6"></path>
+              <circle cx="12" cy="16" r="1"></circle>
+            </svg>
+          </div>
+          <span class="cat-card-title">Nebulizers &amp; Chambers</span>
+        </div>
+        <div class="cat-card-visual">
+          <img src="src/assets/products/cat-nebulizers.png" alt="Nebulizers and Inhalation Chambers">
+        </div>
+      </a>
+
+      <!-- 5. Topical Pain Relief -->
+      <a href="become-a-customer.html" class="cat-card-item">
+        <div class="cat-card-header">
+          <div class="cat-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14V6c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v8"></path>
+              <path d="M3 14h18v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6z"></path>
+              <path d="M10 2h4"></path>
+            </svg>
+          </div>
+          <span class="cat-card-title">Topical Pain Relief</span>
+        </div>
+        <div class="cat-card-visual">
+          <img src="src/assets/products/cat-topical-relief.png" alt="Topical Pain Relief Ointments and Creams">
+        </div>
+      </a>
+
+      <!-- 6. Pharmacy Vials -->
+      <a href="become-a-customer.html" class="cat-card-item">
+        <div class="cat-card-header">
+          <div class="cat-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3h12"></path>
+              <path d="M7 3v3a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3"></path>
+              <rect x="6" y="7" width="12" height="14" rx="2"></rect>
+              <line x1="10" y1="12" x2="14" y2="12"></line>
+              <line x1="10" y1="16" x2="14" y2="16"></line>
+            </svg>
+          </div>
+          <span class="cat-card-title">Pharmacy Vials</span>
+        </div>
+        <div class="cat-card-visual">
+          <img src="src/assets/products/cat-pharmacy-vials.png" alt="Amber Prescription Pharmacy Vials">
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2: NOVEMBER SPECIALS ================= -->
+  <section class="specials-card-wrapper">
+    <div class="section-eyebrow">NOVEMBER SPECIALS</div>
+    <h2 class="section-title">A new month. More opportunity.</h2>
+    <p class="section-subtitle">Featured prices from our November specials.</p>
+
+    <div class="specials-grid">
+      <!-- Special 1 -->
+      <div class="special-item-card">
+        <div class="special-visual">
+          <img src="src/assets/products/special-pen-needles.png" alt="Safety Pen Needles">
+        </div>
+        <h3 class="special-title">Safety Pen Needles</h3>
+        <div class="special-specs">31G × 4MM · 100 CT</div>
+        <div class="special-ndc">NDC 73317-6816-04</div>
+        <div class="special-price">$36.99</div>
+      </div>
+
+      <!-- Special 2 -->
+      <div class="special-item-card">
+        <div class="special-visual">
+          <img src="src/assets/products/special-lancets.png" alt="Safety Lancets 28G">
+        </div>
+        <h3 class="special-title">Safety Lancets 28G</h3>
+        <div class="special-specs">100 CT</div>
+        <div class="special-ndc">NDC 73317-4683-01</div>
+        <div class="special-price">$13.99</div>
+      </div>
+
+      <!-- Special 3 -->
+      <div class="special-item-card">
+        <div class="special-visual">
+          <img src="src/assets/products/special-lidocaine.png" alt="Lidocaine 4% Patches">
+        </div>
+        <h3 class="special-title">Lidocaine 4% Patches</h3>
+        <div class="special-specs">15 CT</div>
+        <div class="special-ndc">NDC 73317-6866-05</div>
+        <div class="special-price">$32.99</div>
+      </div>
+    </div>
+
+    <div class="specials-bottom-row">
+      <span class="specials-notice">November pricing. Confirm availability before ordering.</span>
+      <a href="become-a-customer.html" class="btn-red-pill">Explore the Catalog ↗</a>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3: CONTOUR NEXT SPECIAL OFFER ================= -->
+  <section class="contour-banner-card">
+    <div class="contour-grid">
+      <!-- Left Column -->
+      <div>
+        <div class="contour-eyebrow">CONTOUR NEXT · SPECIAL OFFER</div>
+        <h2 class="contour-title">Order more.<br>Get more.</h2>
+        <p class="contour-desc">Receive 6–12 free products with qualifying case-quantity orders.</p>
+        <p class="contour-disclaimer">Product selection and free quantities depend on the qualifying order. While supplies last.</p>
+        <a href="become-a-customer.html" class="btn-white-pill">Explore the Catalog ↗</a>
+      </div>
+
+      <!-- Right Column -->
+      <div class="contour-right-col">
+        <div class="contour-cards-top">
+          <!-- 50 CT -->
+          <div class="contour-subcard">
+            <div class="contour-subcard-title">50 CT Test Strips</div>
+            <div class="contour-subcard-price">$49.99</div>
+            <div class="contour-subcard-case">24 units / case</div>
+          </div>
+          <!-- 100 CT -->
+          <div class="contour-subcard">
+            <div class="contour-subcard-title">100 CT Test Strips</div>
+            <div class="contour-subcard-price">$99.99</div>
+            <div class="contour-subcard-case">12 units / case</div>
+          </div>
+        </div>
+
+        <!-- Wide Meter Card -->
+        <div class="contour-wide-subcard">
+          <div class="contour-meter-info">
+            <div class="contour-meter-title">Next Generation Meter</div>
+            <div class="contour-meter-price">$15.75</div>
+          </div>
+          <div class="contour-meter-visual">
+            <img src="src/assets/products/contour-meter.png" alt="Contour Next Blood Glucose Meter and Test Strips">
+          </div>
+        </div>
+
+        <div class="contour-bottom-note">
+          Confirm offer eligibility and availability with Akron.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Footnote -->
+  <p class="products-footnote">Product visuals are illustrative. AWP is not reimbursement, coverage is plan-specific.</p>
+
+  <!-- ================= GLOBAL FOOTER ================= -->
+  <footer class="c-footer">
+    <div class="c-footer-grid">
+      <div class="c-footer-brand-col">
+        <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="c-footer-brand-img">
+        <p class="c-footer-desc">
+          Wholesale generic medications built around your pharmacy's bottom line.
+        </p>
+        <div class="c-footer-contact-items">
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>47 Mall Drive, Unit 1 &amp; 2, Commack, NY 11725</span>
+          </div>
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <a href="tel:6312153009">(631) 215-3009</a>
+          </div>
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <a href="mailto:orders@akrongenerics.com">orders@akrongenerics.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-footer-links-col">
+        <h6>QUICK LINKS</h6>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#why-akron">Why Akron</a></li>
+          <li><a href="products.html">Our Products</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="c-footer-links-col">
+        <h6>CUSTOMER ACCESS</h6>
+        <ul>
+          <li><a href="become-a-customer.html">Become a Customer</a></li>
+          <li><a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" target="_blank" rel="noopener noreferrer">MY T3 Portal</a></li>
+          <li><a href="https://server.akrongenerics.com/login.php" target="_blank" rel="noopener noreferrer">Customer Login</a></li>
+        </ul>
+      </div>
+
+      <div class="c-footer-links-col">
+        <h6>OFFICE HOURS</h6>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.6;margin-bottom:8px;">
+          Monday – Friday<br>
+          <strong style="color:var(--ink);">9:00 AM – 6:00 PM EST</strong>
+        </p>
+        <p style="font-size:12px;color:var(--ink-3);">
+          Next-Day Cutoff: 5:00 PM EST
+        </p>
+      </div>
+    </div>
+
+    <div class="c-footer-bot">
+      <span>© Akron Generics. All rights reserved.</span>
+      <div class="c-footer-legal">
+        <a href="index.html#privacy">Privacy Policy</a>
+        <a href="index.html#terms">Terms of Sale</a>
+        <a href="index.html#licensing">Licensing</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+function toggleMobileNav(open) {
+  var drawer = document.getElementById('mobileNavDrawer');
+  if (!drawer) return;
+  if (open) {
+    drawer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  } else {
+    drawer.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function handleDrawerClick(e) {
+  if (e.target === document.getElementById('mobileNavDrawer')) {
+    toggleMobileNav(false);
+  }
+}
+</script>
+
+</body>
+</html>
