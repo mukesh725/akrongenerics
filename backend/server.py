@@ -33,7 +33,7 @@ def sanitize_name(name):
 class AkronHandler(http.server.SimpleHTTPRequestHandler):
     def translate_path(self, path):
         # Resolve path safely inside frontend or project directories
-        clean_path = path.split('?', 1)[0].split('#', 1)[0].lstrip('/')
+        clean_path = urllib.parse.unquote(path.split('?', 1)[0].split('#', 1)[0].lstrip('/'))
         if not clean_path or clean_path == 'index.html':
             for target in [
                 os.path.join(FRONTEND_DIR, 'index.html'),
