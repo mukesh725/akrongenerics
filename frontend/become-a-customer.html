@@ -1215,12 +1215,18 @@ canvas.sig-pad {
             <input type="text" id="licenseExpDate" class="input-ctrl" placeholder="MM/YYYY" maxlength="7" required>
           </div>
         </div>
-        <div class="grid-2">
+        <div class="grid-3">
           <div class="field-box">
             <label class="field-label" for="npiCode">
               <span>NPI Code</span><span class="req-star">*</span>
             </label>
             <input type="text" id="npiCode" class="input-ctrl" placeholder="10-digit NPI" maxlength="10" required>
+          </div>
+          <div class="field-box">
+            <label class="field-label" for="glnNumber">
+              <span>GLN Number</span>
+            </label>
+            <input type="text" id="glnNumber" class="input-ctrl" placeholder="13-digit GLN" maxlength="13">
           </div>
           <div class="field-box">
             <label class="field-label" for="creditLimitRequested">
@@ -1247,58 +1253,18 @@ canvas.sig-pad {
         </div>
       </section>
 
-      <!-- ================= 3. BANK & TRADE REFERENCES ================= -->
+      <!-- ================= 3. TRADE REFERENCE ================= -->
       <section class="form-section">
         <div class="section-header">
           <div class="section-heading">
-            <span>3. Bank Reference &amp; Trade References</span>
+            <span>3. Trade Reference</span>
           </div>
-          <div class="section-desc">Financial institution and commercial vendor trade references for credit line authorization</div>
+          <div class="section-desc">Commercial vendor trade reference for credit line authorization</div>
         </div>
 
-        <!-- Bank Reference -->
+        <!-- Trade Reference -->
         <div class="sub-card">
-          <div class="sub-card-title">Bank Reference</div>
-          <div class="grid-2">
-            <div class="field-box">
-              <label class="field-label" for="refBankName">
-                <span>Bank Name</span><span class="req-star">*</span>
-              </label>
-              <input type="text" id="refBankName" class="input-ctrl" placeholder="Financial Institution" required>
-            </div>
-            <div class="field-box">
-              <label class="field-label" for="refBankAcctNum">
-                <span>Account #</span><span class="req-star">*</span>
-              </label>
-              <input type="text" id="refBankAcctNum" class="input-ctrl" placeholder="Account Number" required>
-            </div>
-          </div>
-          <div class="grid-full">
-            <div class="field-box">
-              <label class="field-label" for="refBankStreet">Address</label>
-              <input type="text" id="refBankStreet" class="input-ctrl" placeholder="Branch Address">
-              <div class="grid-4">
-                <input type="text" id="refBankCity" class="input-ctrl" placeholder="City">
-                <input type="text" id="refBankState" class="input-ctrl" placeholder="State">
-                <input type="text" id="refBankZip" class="input-ctrl" placeholder="Zip Code">
-              </div>
-            </div>
-          </div>
-          <div class="grid-2">
-            <div class="field-box">
-              <label class="field-label" for="refBankContact">Contact Name</label>
-              <input type="text" id="refBankContact" class="input-ctrl" placeholder="Bank Representative / Manager">
-            </div>
-            <div class="field-box">
-              <label class="field-label" for="refBankPhone">Phone Number</label>
-              <input type="tel" id="refBankPhone" class="input-ctrl" placeholder="(555) 000-0000">
-            </div>
-          </div>
-        </div>
-
-        <!-- Trade Reference 1 -->
-        <div class="sub-card">
-          <div class="sub-card-title">Trade Reference 1</div>
+          <div class="sub-card-title">Trade Reference</div>
           <div class="grid-3">
             <div class="field-box">
               <label class="field-label" for="trade1Name">
@@ -1336,44 +1302,8 @@ canvas.sig-pad {
           </div>
         </div>
 
-        <!-- Trade Reference 2 -->
-        <div class="sub-card">
-          <div class="sub-card-title">Trade Reference 2</div>
-          <div class="grid-3">
-            <div class="field-box">
-              <label class="field-label" for="trade2Name">Company Name</label>
-              <input type="text" id="trade2Name" class="input-ctrl" placeholder="e.g. Cardinal Health, Morris & Dickson">
-            </div>
-            <div class="field-box">
-              <label class="field-label" for="trade2Phone">Phone</label>
-              <input type="tel" id="trade2Phone" class="input-ctrl" placeholder="(555) 000-0000">
-            </div>
-            <div class="field-box">
-              <label class="field-label" for="trade2Fax">Fax</label>
-              <input type="tel" id="trade2Fax" class="input-ctrl" placeholder="(555) 000-0000">
-            </div>
-          </div>
-          <div class="grid-full">
-            <div class="field-box">
-              <label class="field-label" for="trade2Address">Address</label>
-              <input type="text" id="trade2Address" class="input-ctrl" placeholder="Address">
-              <div class="grid-4">
-                <input type="text" id="trade2City" class="input-ctrl" placeholder="City">
-                <input type="text" id="trade2State" class="input-ctrl" placeholder="State">
-                <input type="text" id="trade2Zip" class="input-ctrl" placeholder="Zip Code">
-              </div>
-            </div>
-          </div>
-          <div class="grid-full">
-            <div class="field-box">
-              <label class="field-label" for="trade2Email">Email</label>
-              <input type="email" id="trade2Email" class="input-ctrl" placeholder="ar@vendor.com">
-            </div>
-          </div>
-        </div>
-
         <div style="font-size:12px;color:var(--color-text-muted);margin-top:10px;">
-          <em>"By submitting this application, you authorize Akron Generics to make inquiries into the banking and business/trade references that you have supplied."</em>
+          <em>"By submitting this application, you authorize Akron Generics to make inquiries into the business/trade reference that you have supplied."</em>
         </div>
       </section>
 
@@ -1709,61 +1639,6 @@ canvas.sig-pad {
 
     </form>
   </main>
-
-  <!-- GLOBAL FOOTER (AKRON GENERICS) -->
-  <footer class="foot">
-    <div class="foot-main">
-      <div class="foot-brand">
-        <a href="index.html" class="foot-logo-link" aria-label="Akron Generics Home">
-          <img src="src/assets/akron-generics-logo-white.png" alt="Akron Generics" class="foot-logo-img">
-        </a>
-        <div class="foot-brand-divider" aria-hidden="true"></div>
-      </div>
-
-      <div class="foot-nav-cols">
-        <!-- EXPLORE -->
-        <div class="foot-col">
-          <h6>EXPLORE</h6>
-          <ul>
-            <li><a href="index.html#why-akron">Why Akron</a></li>
-            <li><a href="index.html#categories">Products</a></li>
-            <li><a href="index.html#built-for-pharmacy">Solutions</a></li>
-          </ul>
-        </div>
-
-        <!-- SUPPORT -->
-        <div class="foot-col">
-          <h6>SUPPORT</h6>
-          <ul>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="index.html#ordering">FAQs</a></li>
-            <li><a href="contact.html">Product Inquiries</a></li>
-          </ul>
-        </div>
-
-        <!-- GET STARTED -->
-        <div class="foot-col">
-          <h6>GET STARTED</h6>
-          <ul>
-            <li><a href="become-a-customer.html">Create an Account</a></li>
-            <li><a href="contact.html">Talk to Our Team</a></li>
-            <li><a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" target="_blank" rel="noopener noreferrer">MY T3 Portal</a></li>
-            <li><a href="https://server.akrongenerics.com/login.php" target="_blank" rel="noopener noreferrer">Customer Login</a></li>
-            <li><a href="dashboard.html">Representative Portal</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="foot-bot">
-      <span>© Akron Generics. All rights reserved.</span>
-      <div class="foot-legal">
-        <a href="index.html#privacy">Privacy</a>
-        <a href="index.html#terms">Terms</a>
-        <a href="index.html#licensing">Licensing</a>
-      </div>
-    </div>
-  </footer>
 </div>
 
 <!-- Toast Notice -->
@@ -1780,7 +1655,7 @@ canvas.sig-pad {
     </div>
     <h3 style="font-size:22px;font-weight:700;color:var(--color-navy);margin-bottom:12px;">Application Submitted Successfully</h3>
     <p style="font-size:14px;color:var(--color-text-body);line-height:1.6;margin-bottom:24px;">
-      Your wholesale pharmacy onboarding packet has been submitted. Our credentialing team in Commack, NY will verify your licensure, banking, and trade references within <strong>24–48 business hours</strong>.
+      Your wholesale pharmacy onboarding packet has been submitted. Our credentialing team in Commack, NY will verify your licensure and trade reference within <strong>24–48 business hours</strong>.
     </p>
 
     <div style="display:flex;justify-content:center;margin-top:10px;">
