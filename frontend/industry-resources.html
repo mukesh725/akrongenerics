@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Industry Resources & Regulatory Directory — Akron Generics</title>
+<meta name="description" content="Comprehensive directory of pharmaceutical industry resources, federal regulatory agencies, healthcare associations, and clinical news publications for independent pharmacies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ground: #F4F6F8;
+  --card: #FFFFFF;
+  --ink: #111827;
+  --ink-2: #4B5563;
+  --ink-3: #9CA3AF;
+  --color-navy: #0E335E;
+  --color-navy-dark: #09213D;
+  --color-navy-light: #EBF1F8;
+  --color-crimson: #9E2235;
+  --color-crimson-hover: #831A29;
+  --border-light: #E5E9F0;
+  --r-pill: 9999px;
+  --r-card: 20px;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --display: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--sans);
+  background-color: var(--ground);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding: 16px;
+  overflow-x: hidden;
+}
+
+.wrap {
+  width: 100%;
+  max-width: none;
+  margin: 88px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ---------- SITE HEADER ---------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 16px 56px;
+  background: rgba(255, 255, 255, 0.96);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+.site-header-inner {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+.site-header-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.site-brand .brand-logo-img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.site-nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.site-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.header-nav-link {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+  padding: 6px 2px;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.header-nav-link:hover,
+.header-dropdown.open > .header-nav-link {
+  color: #111827;
+}
+.header-nav-link.active {
+  color: #111827;
+  font-weight: 600;
+}
+
+.header-dropdown {
+  position: relative;
+}
+.header-dropdown .chevron {
+  width: 4.5px;
+  height: 4.5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  display: inline-block;
+  margin-left: 4px;
+  margin-top: -3px;
+  pointer-events: none;
+}
+.header-dropdown:hover .chevron,
+.header-dropdown.open .chevron {
+  transform: rotate(225deg) translateY(-2px);
+}
+
+.header-nav-divider {
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  background: rgba(22, 24, 15, 0.18);
+  margin: 0 4px;
+}
+
+.header-dropdown .dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  background: #ffffff;
+  border: 1px solid rgba(22, 24, 15, 0.10);
+  border-radius: 12px;
+  padding: 6px;
+  min-width: 210px;
+  box-shadow: 0 14px 34px rgba(22, 24, 15, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 120;
+}
+.header-dropdown:hover .dropdown-menu,
+.header-dropdown.open .dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.header-dropdown .dropdown-menu a {
+  padding: 9px 14px;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
+  display: block;
+  white-space: nowrap;
+}
+.header-dropdown .dropdown-menu a:hover {
+  background: rgba(22, 24, 15, 0.05);
+  color: #111827;
+}
+.header-dropdown .dropdown-menu a.special-offer,
+.dropdown-menu a.special-offer {
+  color: #942031 !important;
+  font-weight: 600 !important;
+}
+.header-dropdown .dropdown-menu a.special-offer:hover,
+.dropdown-menu a.special-offer:hover {
+  background: rgba(148, 32, 49, 0.08) !important;
+  color: #7d1a29 !important;
+}
+
+.header-cta-red {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-crimson);
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: var(--r-pill);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+.header-cta-red:hover {
+  background: var(--color-crimson-hover);
+  transform: translateY(-1px);
+}
+
+/* Mobile Nav Bar */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+  padding: 0 16px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+}
+.mobile-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mobile-hamburger-btn {
+  background: transparent;
+  border: 1px solid rgba(22, 24, 15, 0.15);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mobile-hamburger-btn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #16180f;
+  border-radius: 2px;
+}
+
+/* Mobile Nav Drawer */
+.mobile-nav-drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 150;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.mobile-nav-drawer.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.mobile-drawer-sheet {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 82%;
+  max-width: 320px;
+  height: 100%;
+  background: #ffffff;
+  padding: 24px 20px;
+  box-shadow: -8px 0 24px rgba(0,0,0,0.15);
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.mobile-nav-drawer.active .mobile-drawer-sheet {
+  transform: translateX(0);
+}
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+}
+.mobile-drawer-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #16180f;
+}
+.mobile-drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 16px;
+}
+.mobile-drawer-link {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+.mobile-drawer-link:hover {
+  background: #F3F4F6;
+  color: #111827;
+}
+.mobile-drawer-divider {
+  height: 1px;
+  background: rgba(22, 24, 15, 0.08);
+  margin: 12px 0;
+}
+.mobile-drawer-cta {
+  margin-top: 12px;
+  background: var(--color-crimson);
+  color: #ffffff;
+  padding: 12px;
+  border-radius: var(--r-pill);
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+}
+
+/* ================= PAGE HERO CARD ================= */
+.hero-resources-card {
+  background: #FFFFFF;
+  border-radius: var(--r-card);
+  padding: 44px 44px 36px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+.section-eyebrow {
+  font-family: var(--display);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #173860;
+  margin-bottom: 10px;
+}
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(32px, 3.6vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #111827;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.hero-subtitle {
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--ink-2);
+  line-height: 1.6;
+  max-width: 920px;
+  margin-bottom: 28px;
+}
+
+/* Stats Badges Row */
+.stats-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+}
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1E293B;
+}
+.stat-pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0E335E;
+}
+.stat-pill-dot.red { background: #9E2235; }
+.stat-pill-dot.green { background: #10B981; }
+.stat-pill-dot.blue { background: #3B82F6; }
+
+/* ================= INTERACTIVE FILTER / SEARCH BAR ================= */
+.filter-bar-card {
+  background: #FFFFFF;
+  border-radius: var(--r-card);
+  padding: 22px 28px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.search-input-wrap {
+  flex: 1;
+  min-width: 280px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-icon-svg {
+  position: absolute;
+  left: 16px;
+  width: 18px;
+  height: 18px;
+  color: #94A3B8;
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  border-radius: var(--r-pill);
+  padding: 12px 18px 12px 46px;
+  font-family: var(--sans);
+  font-size: 14.5px;
+  color: #0F172A;
+  outline: none;
+  transition: all 0.2s ease;
+}
+.search-input:focus {
+  background: #FFFFFF;
+  border-color: #0E335E;
+  box-shadow: 0 0 0 3px rgba(14, 51, 94, 0.08);
+}
+.search-input::placeholder {
+  color: #94A3B8;
+}
+
+.results-count-badge {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+/* Category Filter Tabs */
+.category-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.cat-filter-btn {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--r-pill);
+  padding: 7px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+.cat-filter-btn:hover {
+  background: #F1F5F9;
+  color: #0F172A;
+  border-color: #CBD5E1;
+}
+.cat-filter-btn.active {
+  background: #0E335E;
+  color: #FFFFFF;
+  border-color: #0E335E;
+  box-shadow: 0 4px 12px rgba(14, 51, 94, 0.20);
+}
+
+/* ================= CRITICAL REGULATORY SHOWCASE ================= */
+.featured-section-card {
+  background: #FFFFFF;
+  border-radius: var(--r-card);
+  padding: 34px 34px 28px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+.featured-header {
+  margin-bottom: 22px;
+}
+.featured-header h2 {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111827;
+}
+.featured-header p {
+  font-size: 14.5px;
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+
+.critical-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.critical-card {
+  background: #FAFBFD;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+.critical-card:hover {
+  transform: translateY(-2px);
+  border-color: #94A3B8;
+  background: #FFFFFF;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.07);
+}
+.critical-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.critical-badge {
+  background: #0E335E;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+}
+.critical-badge.red {
+  background: #9E2235;
+}
+.critical-card-title {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+.critical-card-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #475569;
+  margin-bottom: 18px;
+  flex: 1;
+}
+.critical-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #0E335E;
+  font-weight: 700;
+  font-size: 13px;
+  margin-top: auto;
+  transition: color 0.18s ease;
+}
+.critical-card:hover .critical-card-btn {
+  color: #9E2235;
+}
+
+/* ================= DIRECTORY GRID SECTION ================= */
+.directory-section-card {
+  background: #FFFFFF;
+  border-radius: var(--r-card);
+  padding: 34px 34px 32px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.resource-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-light);
+  border-radius: 16px;
+  padding: 20px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+.resource-card:hover {
+  transform: translateY(-2px);
+  border-color: #CBD5E1;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.resource-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.resource-cat-tag {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #64748B;
+  background: #F1F5F9;
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+.resource-acronym-badge {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 800;
+  color: #0E335E;
+  background: #EBF1F8;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+}
+
+.resource-name {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #111827;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.resource-desc {
+  font-size: 13.5px;
+  color: #4B5563;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.resource-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid #F1F5F9;
+  margin-top: auto;
+}
+.resource-url-label {
+  font-size: 12px;
+  color: #94A3B8;
+  font-weight: 500;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.resource-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #0E335E;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  transition: all 0.18s ease;
+}
+.resource-card:hover .resource-link-btn {
+  background: #9E2235;
+  border-color: #9E2235;
+  color: #FFFFFF;
+}
+
+/* Empty State */
+.empty-state {
+  display: none;
+  text-align: center;
+  padding: 50px 20px;
+}
+.empty-state.active {
+  display: block;
+}
+.empty-state h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1E293B;
+  margin-bottom: 8px;
+}
+.empty-state p {
+  color: #64748B;
+  font-size: 14.5px;
+  margin-bottom: 18px;
+}
+.btn-reset-filter {
+  background: #0E335E;
+  color: #FFFFFF;
+  border: none;
+  padding: 9px 20px;
+  border-radius: var(--r-pill);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ================= COMPLIANCE BANNER CARD ================= */
+.compliance-cta-card {
+  background: linear-gradient(135deg, #0E335E 0%, #153D6D 100%);
+  border-radius: var(--r-card);
+  padding: 40px 44px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  box-shadow: 0 8px 30px rgba(14, 51, 94, 0.15);
+}
+.compliance-cta-info h3 {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.compliance-cta-info p {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 680px;
+  line-height: 1.55;
+}
+.compliance-cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.btn-cta-white {
+  background: #FFFFFF;
+  color: #0E335E;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 11px 22px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  transition: transform 0.18s ease, background 0.18s ease;
+  white-space: nowrap;
+}
+.btn-cta-white:hover {
+  background: #F8FAFC;
+  transform: translateY(-2px);
+}
+.btn-cta-trans {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 11px 22px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  transition: border-color 0.18s ease, background 0.18s ease;
+  white-space: nowrap;
+}
+.btn-cta-trans:hover {
+  border-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ================= GLOBAL FOOTER ================= */
+.c-footer {
+  background: #FFFFFF;
+  border-radius: var(--r-card);
+  padding: 44px 50px 32px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+.c-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 36px;
+  padding-bottom: 34px;
+  border-bottom: 1px solid var(--border-light);
+}
+.c-footer-brand-img {
+  height: 28px;
+  width: auto;
+  margin-bottom: 14px;
+  display: block;
+}
+.c-footer-desc {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  max-width: 320px;
+}
+.c-footer-contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.c-footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.c-footer-contact-item svg {
+  color: #0E335E;
+  flex-shrink: 0;
+}
+.c-footer-contact-item a {
+  color: inherit;
+  text-decoration: none;
+}
+.c-footer-contact-item a:hover {
+  color: #111827;
+}
+
+.c-footer-links-col h6 {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #111827;
+  margin-bottom: 14px;
+}
+.c-footer-links-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.c-footer-links-col a {
+  font-size: 13px;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.c-footer-links-col a:hover {
+  color: var(--color-crimson);
+}
+
+.c-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.c-footer-legal-links {
+  display: flex;
+  gap: 16px;
+}
+.c-footer-legal-links a {
+  color: inherit;
+  text-decoration: none;
+}
+.c-footer-legal-links a:hover {
+  color: #111827;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1080px) {
+  .site-header { padding: 14px 24px; }
+  .critical-grid,
+  .directory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .c-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-header { display: none; }
+  .mobile-nav { display: flex; }
+  .wrap { margin-top: 72px; padding: 0 4px; }
+  .hero-resources-card { padding: 32px 24px; }
+  .compliance-cta-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px 26px;
+  }
+  .compliance-cta-actions { width: 100%; flex-wrap: wrap; }
+  .c-footer { padding: 34px 24px; }
+}
+
+@media (max-width: 640px) {
+  .critical-grid,
+  .directory-grid {
+    grid-template-columns: 1fr;
+  }
+  .c-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .category-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 6px;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= DESKTOP HEADER ================= -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-header-left">
+      <a href="index.html" class="site-brand" aria-label="Akron Generics">
+        <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img">
+      </a>
+    </div>
+
+    <nav class="site-nav-menu" aria-label="Primary Navigation">
+      <div class="header-dropdown">
+        <button type="button" class="header-nav-link header-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
+          About <span class="chevron"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="index.html#why-akron">Why Akron Generics</a>
+          <a href="index.html#compliance">Quality &amp; Compliance</a>
+          <a href="index.html#thread">Company Overview</a>
+          <a href="index.html#leadership">Leadership Team</a>
+        </div>
+      </div>
+
+      <div class="header-dropdown">
+        <button type="button" class="header-nav-link header-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
+          Products <span class="chevron"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="catalog.html">Product Catalog</a>
+          <a href="products.html" class="special-offer">Special Offers 📄</a>
+        </div>
+      </div>
+
+      <div class="header-dropdown">
+        <button type="button" class="header-nav-link header-dropdown-btn active" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
+          Resources <span class="chevron"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="industry-resources.html" style="font-weight:600;color:var(--ink);">Industry Resources</a>
+          <a href="index.html#compliance">Quality &amp; Compliance</a>
+          <a href="index.html#ordering">Ordering &amp; Shipping FAQ</a>
+          <a href="index.html#forms">Forms &amp; Licensing</a>
+          <a href="index.html#thread">Company Overview</a>
+          <a href="index.html#leadership">Leadership Team</a>
+        </div>
+      </div>
+
+      <a href="contact.html" class="header-nav-link">Contact</a>
+    </nav>
+
+    <div class="site-header-actions">
+      <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="header-nav-link" target="_blank" rel="noopener noreferrer">My T3</a>
+      <span class="header-nav-divider" aria-hidden="true"></span>
+      <a href="https://server.akrongenerics.com/login.php" class="header-nav-link" target="_blank" rel="noopener noreferrer">Login</a>
+      <a href="become-a-customer.html" class="header-cta-red">Become a Customer</a>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Bar -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" class="brand-link" aria-label="Akron Generics">
+    <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" style="height:22px;">
+  </a>
+  <div class="mobile-nav-actions">
+    <a href="become-a-customer.html" class="header-cta-red" style="font-size:12px;padding:6px 14px;">Become a Customer</a>
+    <button type="button" class="mobile-hamburger-btn" id="mobileMenuBtn" onclick="toggleMobileNav(true)" aria-label="Open Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</div>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav-drawer" id="mobileNavDrawer" onclick="handleDrawerClick(event)">
+  <div class="mobile-drawer-sheet">
+    <div class="mobile-drawer-header">
+      <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" style="height:22px;">
+      <button type="button" class="mobile-drawer-close" onclick="toggleMobileNav(false)" aria-label="Close Menu">&times;</button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="index.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Home</a>
+      <a href="index.html#why-akron" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Why Akron Generics</a>
+      <a href="catalog.html" class="mobile-drawer-link">Product Catalog</a>
+      <a href="products.html" class="mobile-drawer-link" style="color:#942031!important;font-weight:600;">Special Offers 📄</a>
+      <a href="industry-resources.html" class="mobile-drawer-link" style="color:#0E335E!important;font-weight:700;">Industry Resources ✓</a>
+      <a href="index.html#built-for-pharmacy" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Solutions</a>
+      <a href="index.html#compliance" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Compliance &amp; Quality</a>
+      <a href="index.html#ordering" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Ordering &amp; Shipping FAQ</a>
+      <a href="contact.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Contact Us</a>
+      <div class="mobile-drawer-divider"></div>
+      <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a>
+      <a href="https://server.akrongenerics.com/login.php" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">Customer Login ↗</a>
+      <a href="become-a-customer.html" class="mobile-drawer-cta">Become a Customer</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ================= HERO INTRO CARD ================= -->
+  <section class="hero-resources-card">
+    <div class="section-eyebrow">AKRON GENERICS · PHARMACY KNOWLEDGE &amp; COMPLIANCE</div>
+    <h1 class="hero-title">Industry Resources &amp; Regulatory Hub</h1>
+    <p class="hero-subtitle">
+      Stay informed about the healthcare and pharmaceutical landscape. This curated directory provides quick access to state and federal regulatory agencies, essential drug information databases, industry associations, and clinical media outlets to keep your pharmacy business compliant, informed, and secure.
+    </p>
+
+    <!-- Stats strip -->
+    <div class="stats-strip">
+      <div class="stat-pill">
+        <span class="stat-pill-dot red"></span>
+        <span>6 Core Regulatory Portals</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill-dot blue"></span>
+        <span>8 Drug Info &amp; Gov Databases</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill-dot green"></span>
+        <span>16 National Pharmacy Associations</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill-dot"></span>
+        <span>10 Trade Publications &amp; Media</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SEARCH & CATEGORY FILTER ================= -->
+  <section class="filter-bar-card">
+    <div class="search-row">
+      <div class="search-input-wrap">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="resourceSearch" class="search-input" placeholder="Search by name, acronym (e.g. FDA, DSCSA, ASHP, NCPA), or keyword..." oninput="handleSearch(this.value)">
+      </div>
+      <div class="results-count-badge" id="resultsCount">Showing 40 of 40 resources</div>
+    </div>
+
+    <div class="category-tabs" id="categoryTabs">
+      <button type="button" class="cat-filter-btn active" data-cat="all" onclick="filterCategory('all')">All Resources (40)</button>
+      <button type="button" class="cat-filter-btn" data-cat="regulatory" onclick="filterCategory('regulatory')">Core Regulatory (6)</button>
+      <button type="button" class="cat-filter-btn" data-cat="drug-info" onclick="filterCategory('drug-info')">Drug Info &amp; Gov (8)</button>
+      <button type="button" class="cat-filter-btn" data-cat="340b" onclick="filterCategory('340b')">340B Program (2)</button>
+      <button type="button" class="cat-filter-btn" data-cat="associations" onclick="filterCategory('associations')">Associations (16)</button>
+      <button type="button" class="cat-filter-btn" data-cat="news" onclick="filterCategory('news')">Industry News (10)</button>
+    </div>
+  </section>
+
+  <!-- ================= HIGHLIGHT: CORE REGULATORY PORTALS ================= -->
+  <section class="featured-section-card" id="criticalSection">
+    <div class="featured-header">
+      <div class="section-eyebrow">HIGH-PRIORITY DAILY REFERENCE</div>
+      <h2>Critical Regulatory &amp; Compliance Portals</h2>
+      <p>Direct access to key federal compliance benchmarks, track-and-trace mandates, and national safety alerts.</p>
+    </div>
+
+    <div class="critical-grid">
+      <!-- 1. DSCSA -->
+      <a href="https://www.fda.gov/drugs/drug-supply-chain-integrity/drug-supply-chain-security-act-dscsa" target="_blank" rel="noopener noreferrer" class="critical-card">
+        <div class="critical-card-top">
+          <span class="critical-badge red">FDA Mandate</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </div>
+        <h3 class="critical-card-title">DSCSA (Drug Supply Chain Security Act)</h3>
+        <p class="critical-card-desc">Federal requirements for interoperable, electronic tracing of prescription drugs to identify and eliminate illegitimate products from the U.S. pharmaceutical supply chain.</p>
+        <span class="critical-card-btn">fda.gov/dscsa ↗</span>
+      </a>
+
+      <!-- 2. FDA Recalls -->
+      <a href="https://www.fda.gov/Safety/Recalls/" target="_blank" rel="noopener noreferrer" class="critical-card">
+        <div class="critical-card-top">
+          <span class="critical-badge red">Safety Alerts</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </div>
+        <h3 class="critical-card-title">FDA Drug Recalls &amp; Safety Alerts</h3>
+        <p class="critical-card-desc">Official real-time repository of drug recalls, market withdrawals, MedWatch safety bulletins, and manufacturer alerts affecting prescription medications and devices.</p>
+        <span class="critical-card-btn">fda.gov/safety/recalls ↗</span>
+      </a>
+
+      <!-- 3. ASHP Shortages -->
+      <a href="https://www.ashp.org/drug-shortages" target="_blank" rel="noopener noreferrer" class="critical-card">
+        <div class="critical-card-top">
+          <span class="critical-badge">Clinical Database</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </div>
+        <h3 class="critical-card-title">ASHP Drug Shortages Resource Center</h3>
+        <p class="critical-card-desc">Authoritative national database tracking active and resolved drug shortages, manufacturing constraints, affected NDC packages, and clinical therapeutic alternatives.</p>
+        <span class="critical-card-btn">ashp.org/drugshortages ↗</span>
+      </a>
+
+      <!-- 4. NCPDP -->
+      <a href="https://www.ncpdp.org/" target="_blank" rel="noopener noreferrer" class="critical-card">
+        <div class="critical-card-top">
+          <span class="critical-badge">Industry Standards</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </div>
+        <h3 class="critical-card-title">NCPDP (National Council for Prescription Drug Programs)</h3>
+        <p class="critical-card-desc">ANSI-accredited standards development organization defining electronic healthcare transactions, Telecommunication Standards, e-prescribing, and pharmacy claims processing.</p>
+        <span class="critical-card-btn">ncpdp.org ↗</span>
+      </a>
+
+      <!-- 5. PDMP Assist -->
+      <a href="https://www.pdmpassist.org/" target="_blank" rel="noopener noreferrer" class="critical-card">
+        <div class="critical-card-top">
+          <span class="critical-badge">State Reporting</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </div>
+        <h3 class="critical-card-title">PDMP Assist (Prescription Drug Monitoring)</h3>
+        <p class="critical-card-desc">Training and Technical Assistance Center supporting electronic state prescription drug monitoring databases to track controlled substance dispensing and prevent misuse.</p>
+        <span class="critical-card-btn">pdmpassist.org ↗</span>
+      </a>
+
+      <!-- 6. MSDS Online -->
+      <a href="https://www.msdsonline.com/msds-search/" target="_blank" rel="noopener noreferrer" class="critical-card">
+        <div class="critical-card-top">
+          <span class="critical-badge">Safety Sheets</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </div>
+        <h3 class="critical-card-title">MSDS / SDS Chemical Safety Data Sheets</h3>
+        <p class="critical-card-desc">Universal search directory for Material Safety Data Sheets (MSDS) and OSHA Hazard Communication Safety Data Sheets for compounding ingredients and hazardous chemicals.</p>
+        <span class="critical-card-btn">msdsonline.com ↗</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= COMPREHENSIVE DIRECTORY ================= -->
+  <section class="directory-section-card">
+    <div class="featured-header">
+      <div class="section-eyebrow">COMPLETE DIRECTORY</div>
+      <h2>Associations, Government Portals &amp; Media Publications</h2>
+      <p>Browse or search all 40 professional bodies, healthcare agencies, and pharmacy industry trade journals.</p>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState">
+      <h3>No resources matched your search</h3>
+      <p>Try searching with a different keyword or acronym, or reset all active filters.</p>
+      <button type="button" class="btn-reset-filter" onclick="resetFilters()">Reset All Filters</button>
+    </div>
+
+    <!-- Resource Cards Grid -->
+    <div class="directory-grid" id="resourcesGrid">
+      <!-- 1. HIBCC -->
+      <article class="resource-card" data-cat="340b" data-keywords="hibcc health industry business communications council hin upn bar code identifier standards 340b">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">340B Program</span>
+          <span class="resource-acronym-badge">HIBCC</span>
+        </div>
+        <h3 class="resource-name">Health Industry Business Communications Council</h3>
+        <p class="resource-desc">International standards organization defining healthcare electronic communication protocols, Health Industry Numbers (HIN), and bar-code standard labeling.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">hibcc.org</span>
+          <a href="https://www.hibcc.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 2. HRSA -->
+      <article class="resource-card" data-cat="340b" data-keywords="hrsa health resources services administration 340b drug pricing program community health grants compliance">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">340B Program</span>
+          <span class="resource-acronym-badge">HRSA</span>
+        </div>
+        <h3 class="resource-name">Health Resources &amp; Services Administration</h3>
+        <p class="resource-desc">Federal agency overseeing the 340B Drug Pricing Program, community health center grants, and programs expanding medication access to vulnerable populations.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">hrsa.gov</span>
+          <a href="https://www.hrsa.gov/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 3. CDC -->
+      <article class="resource-card" data-cat="drug-info" data-keywords="cdc centers for disease control prevention immunization vaccine storage public health guidelines advisory">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Drug Info &amp; Gov</span>
+          <span class="resource-acronym-badge">CDC</span>
+        </div>
+        <h3 class="resource-name">Centers for Disease Control and Prevention</h3>
+        <p class="resource-desc">National public health institute offering ACIP immunization schedules, vaccine handling and storage guidelines, infection control, and epidemiological bulletins.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">cdc.gov</span>
+          <a href="https://www.cdc.gov/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 4. CMS -->
+      <article class="resource-card" data-cat="drug-info" data-keywords="cms centers for medicare medicaid services part d reimbursement pricing federal health policy">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Drug Info &amp; Gov</span>
+          <span class="resource-acronym-badge">CMS</span>
+        </div>
+        <h3 class="resource-name">Centers for Medicare &amp; Medicaid Services</h3>
+        <p class="resource-desc">Federal agency administering Medicare Part D, Medicaid fee-for-service drug coverage, federal MAC guidelines, and healthcare reimbursement regulations.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">cms.gov</span>
+          <a href="https://www.cms.gov/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 5. DailyMed -->
+      <article class="resource-card" data-cat="drug-info" data-keywords="dailymed nlm national library of medicine package insert spl ndc labeling drug facts monograph">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Drug Info &amp; Gov</span>
+          <span class="resource-acronym-badge">DailyMed</span>
+        </div>
+        <h3 class="resource-name">DailyMed (National Library of Medicine)</h3>
+        <p class="resource-desc">The official provider of FDA Structured Product Labeling (SPL), package inserts, NDC search, manufacturer warnings, and clinical drug monographs.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">dailymed.nlm.nih.gov</span>
+          <a href="https://dailymed.nlm.nih.gov/dailymed/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 6. FDA Drugs Portal -->
+      <article class="resource-card" data-cat="drug-info" data-keywords="fda food drug administration orange book generic therapeutic equivalence approved drug products cda">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Drug Info &amp; Gov</span>
+          <span class="resource-acronym-badge">FDA</span>
+        </div>
+        <h3 class="resource-name">U.S. Food and Drug Administration (FDA)</h3>
+        <p class="resource-desc">Primary federal regulatory authority for pharmaceutical approvals, the Orange Book (therapeutic equivalence ratings), cGMP standards, and bioequivalence.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">fda.gov</span>
+          <a href="https://www.fda.gov/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 7. MedlinePlus -->
+      <article class="resource-card" data-cat="drug-info" data-keywords="medlineplus nih national institutes of health patient counseling consumer drug encyclopedia wellness">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Drug Info &amp; Gov</span>
+          <span class="resource-acronym-badge">MedlinePlus</span>
+        </div>
+        <h3 class="resource-name">MedlinePlus (National Institutes of Health)</h3>
+        <p class="resource-desc">Peer-reviewed patient counseling directory, consumer health tutorials, prescription monograph overviews, and dietary supplement interactions.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">medlineplus.gov</span>
+          <a href="https://medlineplus.gov/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 8. RxWiki -->
+      <article class="resource-card" data-cat="drug-info" data-keywords="rxwiki digital pharmacist medication encyclopedia patient education clinical library">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Drug Info &amp; Gov</span>
+          <span class="resource-acronym-badge">RxWiki</span>
+        </div>
+        <h3 class="resource-name">RxWiki &amp; Digital Pharmacist Clinical Library</h3>
+        <p class="resource-desc">Community pharmacy patient communication network featuring simplified medication safety encyclopedias, side-effect guides, and counseling content.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">digitalpharmacist.com</span>
+          <a href="https://www.digitalpharmacist.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 9. NCPA -->
+      <article class="resource-card" data-cat="associations" data-keywords="ncpa national community pharmacists association independent pharmacy owners pbm reform retail pharmacy advocacy">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">NCPA</span>
+        </div>
+        <h3 class="resource-name">National Community Pharmacists Association</h3>
+        <p class="resource-desc">The premier national voice representing more than 19,400 independent community pharmacies, driving PBM legislative reform, fair reimbursement, and retail innovation.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">ncpa.org</span>
+          <a href="https://ncpa.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 10. APhA -->
+      <article class="resource-card" data-cat="associations" data-keywords="apha american pharmacists association board certification continuing education ce clinical advocacy">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">APhA</span>
+        </div>
+        <h3 class="resource-name">American Pharmacists Association</h3>
+        <p class="resource-desc">The oldest and largest national association of pharmacists in the United States, advancing pharmacist scope of practice, board certification, and clinical education.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">pharmacist.com</span>
+          <a href="https://www.pharmacist.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 11. ASHP -->
+      <article class="resource-card" data-cat="associations" data-keywords="ashp american society of health system pharmacists hospital clinic residency accreditation clinical guidelines">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">ASHP</span>
+        </div>
+        <h3 class="resource-name">American Society of Health-System Pharmacists</h3>
+        <p class="resource-desc">National professional association for pharmacists serving in acute care hospitals, ambulatory clinics, and health systems; accreditor of pharmacy residency programs.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">ashp.org</span>
+          <a href="https://www.ashp.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 12. NASPA -->
+      <article class="resource-card" data-cat="associations" data-keywords="naspa national alliance state pharmacy associations legislation state board licensing policy">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">NASPA</span>
+        </div>
+        <h3 class="resource-name">National Alliance of State Pharmacy Associations</h3>
+        <p class="resource-desc">Coalition connecting state pharmacy associations across all 50 states to collaborate on state board licensing rules, collaborative practice agreements, and scope of practice.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">naspa.us</span>
+          <a href="https://naspa.us/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 13. NASP -->
+      <article class="resource-card" data-cat="associations" data-keywords="nasp national association specialty pharmacy biologics high cost therapies accreditation distribution">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">NASP</span>
+        </div>
+        <h3 class="resource-name">National Association of Specialty Pharmacy</h3>
+        <p class="resource-desc">The unified national trade organization dedicated solely to specialty pharmacy practice, rare disease treatments, patient adherence programs, and clinical outcomes.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">naspnet.org</span>
+          <a href="https://naspnet.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 14. NACDS -->
+      <article class="resource-card" data-cat="associations" data-keywords="nacds national association chain drug stores retail pharmacy grocery chain store policy">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">NACDS</span>
+        </div>
+        <h3 class="resource-name">National Association of Chain Drug Stores</h3>
+        <p class="resource-desc">Federation representing traditional drug store chains, grocery supermarket pharmacies, and mass merchant pharmacies operating thousands of retail locations.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">nacds.org</span>
+          <a href="https://www.nacds.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 15. ASCP -->
+      <article class="resource-card" data-cat="associations" data-keywords="ascp american society consultant pharmacists geriatric long term care nursing home senior care mtm">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">ASCP</span>
+        </div>
+        <h3 class="resource-name">American Society of Consultant Pharmacists</h3>
+        <p class="resource-desc">Leading professional society for consultant and senior care pharmacists specializing in geriatric pharmacotherapy, nursing home care, and long-term care management.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">ascp.com</span>
+          <a href="https://www.ascp.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 16. HDA -->
+      <article class="resource-card" data-cat="associations" data-keywords="hda healthcare distribution alliance wholesale distributors supply chain dscsa logistics safety">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">HDA</span>
+        </div>
+        <h3 class="resource-name">Healthcare Distribution Alliance</h3>
+        <p class="resource-desc">National association representing primary pharmaceutical distributors, establishing supply chain track-and-trace guidelines, warehousing protocols, and distribution standards.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">hda.org</span>
+          <a href="https://www.hda.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 17. HIDA -->
+      <article class="resource-card" data-cat="associations" data-keywords="hida health industry distributors association medical devices surgical supplies distribution logistics">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">HIDA</span>
+        </div>
+        <h3 class="resource-name">Health Industry Distributors Association</h3>
+        <p class="resource-desc">Trade association representing medical products distributors across the continuum of care, including hospital suppliers, long-term care, and physician practice distributors.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">hida.org</span>
+          <a href="https://www.hida.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 18. AAM / GPhA -->
+      <article class="resource-card" data-cat="associations" data-keywords="aam gpha association for accessible medicines generic pharmaceutical association biosimilars pricing">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">AAM</span>
+        </div>
+        <h3 class="resource-name">Association for Accessible Medicines (formerly GPhA)</h3>
+        <p class="resource-desc">National trade alliance for manufacturers and distributors of generic medications and biosimilars, championing affordable prescription access and patent equity.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">accessiblemeds.org</span>
+          <a href="https://accessiblemeds.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 19. CPF -->
+      <article class="resource-card" data-cat="associations" data-keywords="cpf community pharmacy foundation research grants practice innovation retail pharmacy">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">CPF</span>
+        </div>
+        <h3 class="resource-name">Community Pharmacy Foundation</h3>
+        <p class="resource-desc">Non-profit grant-making organization funding clinical outcome studies, practice innovation grants, and service delivery research in community pharmacy settings.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">communitypharmacyfoundation.org</span>
+          <a href="https://www.communitypharmacyfoundation.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 20. AMA -->
+      <article class="resource-card" data-cat="associations" data-keywords="ama american medical association physician guidelines prescribing ethics medical education">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">AMA</span>
+        </div>
+        <h3 class="resource-name">American Medical Association</h3>
+        <p class="resource-desc">The nation's largest physician association, formulating medical practice standards, clinical practice guidelines, CPT code sets, and healthcare advocacy.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">ama-assn.org</span>
+          <a href="https://www.ama-assn.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 21. AAFP -->
+      <article class="resource-card" data-cat="associations" data-keywords="aafp american academy family physicians primary care clinical guidelines chronic care">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">AAFP</span>
+        </div>
+        <h3 class="resource-name">American Academy of Family Physicians</h3>
+        <p class="resource-desc">Medical society representing over 130,000 family doctors, offering primary care treatment protocols, chronic disease management, and collaborative care tools.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">aafp.org</span>
+          <a href="https://www.aafp.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 22. AAP -->
+      <article class="resource-card" data-cat="associations" data-keywords="aap american academy pediatrics child healthcare pediatric dosing immunizations red book">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">AAP</span>
+        </div>
+        <h3 class="resource-name">American Academy of Pediatrics</h3>
+        <p class="resource-desc">Pediatric clinical guidelines, childhood immunization recommendations, weight-based pediatric dosing guides, and the authoritative Red Book infectious disease manual.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">aap.org</span>
+          <a href="https://www.aap.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 23. FMI -->
+      <article class="resource-card" data-cat="associations" data-keywords="fmi food marketing institute supermarket grocery retail pharmacy food safety trade">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">FMI</span>
+        </div>
+        <h3 class="resource-name">Food Marketing Institute</h3>
+        <p class="resource-desc">National trade association championing the grocery industry and supermarket retail pharmacies, providing consumer insights, food safety, and retail trends.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">fmi.org</span>
+          <a href="https://www.fmi.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 24. HCP -->
+      <article class="resource-card" data-cat="associations" data-keywords="hcp health connect partners hospital pharmacy leadership networking reverse expo conferences">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Associations</span>
+          <span class="resource-acronym-badge">HCP</span>
+        </div>
+        <h3 class="resource-name">Health Connect Partners</h3>
+        <p class="resource-desc">Educational conferences and executive networking platforms connecting hospital pharmacy directors with healthcare supply chain and pharmaceutical leaders.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">hlthcp.com</span>
+          <a href="https://www.hlthcp.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 25. Drug Channels -->
+      <article class="resource-card" data-cat="news" data-keywords="drug channels adam fein pbm economics pricing wholesale supply chain pharmacy economics reimbursement">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Industry News</span>
+          <span class="resource-acronym-badge">Analysis</span>
+        </div>
+        <h3 class="resource-name">Drug Channels</h3>
+        <p class="resource-desc">Acclaimed industry economic analysis by Dr. Adam J. Fein, detailing PBM dynamics, pharmaceutical wholesale economics, gross-to-net bubble, and reimbursement trends.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">drugchannels.net</span>
+          <a href="https://www.drugchannels.net/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 26. Pharmacy Times -->
+      <article class="resource-card" data-cat="news" data-keywords="pharmacy times clinical news otc guide continuing education ce community pharmacy practice">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Industry News</span>
+          <span class="resource-acronym-badge">Media</span>
+        </div>
+        <h3 class="resource-name">Pharmacy Times</h3>
+        <p class="resource-desc">Leading multimedia clinical pharmacy resource providing daily clinical news, OTC counseling guides, accredited continuing education, and practice insights.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">pharmacytimes.com</span>
+          <a href="https://www.pharmacytimes.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 27. Drug Store News -->
+      <article class="resource-card" data-cat="news" data-keywords="drug store news retail pharmacy market front end retail merchandising pharmacy supply chain">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Industry News</span>
+          <span class="resource-acronym-badge">Media</span>
+        </div>
+        <h3 class="resource-name">Drug Store News</h3>
+        <p class="resource-desc">Comprehensive reporting on the retail drug store marketplace, chain and independent store merchandising, health and beauty care, and operational business news.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">drugstorenews.com</span>
+          <a href="https://drugstorenews.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 28. Drug Topics -->
+      <article class="resource-card" data-cat="news" data-keywords="drug topics voice of the pharmacist retail clinical business law legal regulations">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Industry News</span>
+          <span class="resource-acronym-badge">Media</span>
+        </div>
+        <h3 class="resource-name">Drug Topics (Voice of the Pharmacist)</h3>
+        <p class="resource-desc">Trusted publication covering legal and regulatory updates, clinical reviews, practice management columns, and technology in retail and hospital pharmacy.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">drugtopics.com</span>
+          <a href="https://www.drugtopics.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 29. Chain Drug Review -->
+      <article class="resource-card" data-cat="news" data-keywords="chain drug review executive news mass retail suppliers pharmacy chains health business">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Industry News</span>
+          <span class="resource-acronym-badge">Media</span>
+        </div>
+        <h3 class="resource-name">Chain Drug Review</h3>
+        <p class="resource-desc">Bi-weekly newsmagazine dedicated to senior executives in the chain drug store industry, reporting on corporate financial results, healthcare partnerships, and strategy.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">chaindrugreview.com</span>
+          <a href="https://www.chaindrugreview.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 30. Pharmacy Practice News -->
+      <article class="resource-card" data-cat="news" data-keywords="pharmacy practice news health system hospital clinical specialist sterile compounding oncology">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Industry News</span>
+          <span class="resource-acronym-badge">Clinical</span>
+        </div>
+        <h3 class="resource-name">Pharmacy Practice News</h3>
+        <p class="resource-desc">In-depth reporting for clinical pharmacy directors and health-system pharmacy managers covering sterile compounding, oncology pharmacotherapy, and clinical IT.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">pharmacypracticenews.com</span>
+          <a href="https://www.pharmacypracticenews.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 31. Pharmacy Today -->
+      <article class="resource-card" data-cat="news" data-keywords="pharmacy today apha clinical magazine monthly drug approvals practice innovation">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Industry News</span>
+          <span class="resource-acronym-badge">APhA</span>
+        </div>
+        <h3 class="resource-name">Pharmacy Today</h3>
+        <p class="resource-desc">The official monthly clinical newsmagazine of the American Pharmacists Association, highlighting new FDA approvals, MTM case studies, and counseling strategies.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">pharmacytoday.org</span>
+          <a href="https://www.pharmacytoday.org/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 32. Specialty Pharmacy Continuum -->
+      <article class="resource-card" data-cat="news" data-keywords="specialty pharmacy continuum biologics rare diseases rems high cost therapies specialty network">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Industry News</span>
+          <span class="resource-acronym-badge">Specialty</span>
+        </div>
+        <h3 class="resource-name">Specialty Pharmacy Continuum</h3>
+        <p class="resource-desc">Clinical and operational guide covering the specialty medication landscape, limited distribution drugs, REMS compliance, and cold chain distribution strategies.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">specialtypharmacycontinuum.com</span>
+          <a href="https://www.specialtypharmacycontinuum.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 33. U.S. Pharmacist -->
+      <article class="resource-card" data-cat="news" data-keywords="us pharmacist peer reviewed clinical journal continuing education ce disease state management">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Industry News</span>
+          <span class="resource-acronym-badge">Journal</span>
+        </div>
+        <h3 class="resource-name">U.S. Pharmacist</h3>
+        <p class="resource-desc">Monthly peer-reviewed clinical journal delivering evidence-based disease state management articles, clinical reviews, and accredited continuing pharmacy education.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">uspharmacist.com</span>
+          <a href="https://www.uspharmacist.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+
+      <!-- 34. RxInsider -->
+      <article class="resource-card" data-cat="news" data-keywords="rxinsider technology products packaging pharmacy automation buyer guide showcase">
+        <div class="resource-card-header">
+          <span class="resource-cat-tag">Industry News</span>
+          <span class="resource-acronym-badge">Technology</span>
+        </div>
+        <h3 class="resource-name">RxInsider</h3>
+        <p class="resource-desc">B2B pharmacy publishing and product technology network providing buyer guides for automated counting devices, vial packaging, and retail pharmacy software.</p>
+        <div class="resource-card-footer">
+          <span class="resource-url-label">rxinsider.com</span>
+          <a href="https://www.rxinsider.com/" target="_blank" rel="noopener noreferrer" class="resource-link-btn">Visit Site ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= COMPLIANCE & SUPPORT BANNER ================= -->
+  <section class="compliance-cta-card">
+    <div class="compliance-cta-info">
+      <div style="font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:6px;">
+        AKRON GENERICS QUALITY ASSURANCE
+      </div>
+      <h3>Need Specific Regulatory Or Pedigree Documentation?</h3>
+      <p>
+        Akron Generics operates as an accredited wholesale distributor adhering strictly to DSCSA track-and-trace requirements and state licensing standards. Our compliance department is readily available to assist your pharmacy team with verification and pedigrees.
+      </p>
+    </div>
+    <div class="compliance-cta-actions">
+      <a href="index.html#compliance" class="btn-cta-white">View Quality Standards</a>
+      <a href="contact.html" class="btn-cta-trans">Contact Compliance</a>
+    </div>
+  </section>
+
+  <!-- ================= GLOBAL FOOTER ================= -->
+  <footer class="c-footer">
+    <div class="c-footer-grid">
+      <div class="c-footer-brand-col">
+        <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="c-footer-brand-img">
+        <p class="c-footer-desc">
+          Wholesale generic medications built around your pharmacy's bottom line.
+        </p>
+        <div class="c-footer-contact-items">
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>47 Mall Drive, Unit 1 &amp; 2, Commack, NY 11725</span>
+          </div>
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <a href="tel:6312153009">(631) 215-3009</a>
+          </div>
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <a href="mailto:orders@akrongenerics.com">orders@akrongenerics.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-footer-links-col">
+        <h6>QUICK LINKS</h6>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#why-akron">Why Akron Generics</a></li>
+          <li><a href="catalog.html">Product Catalog</a></li>
+          <li><a href="products.html">Special Offers</a></li>
+          <li><a href="industry-resources.html">Industry Resources</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="c-footer-links-col">
+        <h6>CUSTOMER ACCESS</h6>
+        <ul>
+          <li><a href="become-a-customer.html">Become a Customer</a></li>
+          <li><a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" target="_blank" rel="noopener noreferrer">MY T3 Portal</a></li>
+          <li><a href="https://server.akrongenerics.com/login.php" target="_blank" rel="noopener noreferrer">Customer Login</a></li>
+        </ul>
+      </div>
+
+      <div class="c-footer-links-col">
+        <h6>LEGAL &amp; COMPLIANCE</h6>
+        <ul>
+          <li><a href="index.html#compliance">Quality &amp; Standards</a></li>
+          <li><a href="index.html#ordering">Ordering &amp; Shipping FAQ</a></li>
+          <li><a href="index.html#forms">Forms &amp; Licensing</a></li>
+          <li><a href="index.html#terms">Terms of Service</a></li>
+          <li><a href="index.html#privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="c-footer-bottom">
+      <span>&copy; <script>document.write(new Date().getFullYear())</script> Akron Generics. All rights reserved.</span>
+      <div class="c-footer-legal-links">
+        <a href="index.html#privacy">Privacy Policy</a>
+        <a href="index.html#terms">Terms &amp; Conditions</a>
+        <a href="index.html#licensing">State Licenses</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+let currentCategory = 'all';
+let currentSearch = '';
+
+function filterCategory(cat) {
+  currentCategory = cat;
+  
+  // Update tab buttons
+  document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+    if (btn.getAttribute('data-cat') === cat) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  applyFilters();
+}
+
+function handleSearch(query) {
+  currentSearch = query.trim().toLowerCase();
+  applyFilters();
+}
+
+function applyFilters() {
+  const cards = document.querySelectorAll('.resource-card');
+  const criticalSection = document.getElementById('criticalSection');
+  const emptyState = document.getElementById('emptyState');
+  const resultsCount = document.getElementById('resultsCount');
+
+  let visibleCount = 0;
+
+  // Toggle Critical Section visibility if user is explicitly filtering away from regulatory or typing a search
+  if (currentCategory === 'all' && currentSearch === '') {
+    criticalSection.style.display = 'block';
+  } else if (currentCategory === 'regulatory') {
+    criticalSection.style.display = 'block';
+  } else {
+    criticalSection.style.display = 'none';
+  }
+
+  cards.forEach(card => {
+    const cardCat = card.getAttribute('data-cat') || '';
+    const cardKeywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+    const cardText = card.textContent.toLowerCase();
+
+    const matchesCat = (currentCategory === 'all') || (cardCat === currentCategory);
+    const matchesSearch = (currentSearch === '') || cardKeywords.includes(currentSearch) || cardText.includes(currentSearch);
+
+    if (matchesCat && matchesSearch) {
+      card.style.display = 'flex';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  // Calculate total visible including the 6 featured ones if visible
+  let totalReported = visibleCount;
+  if (criticalSection.style.display !== 'none') {
+    totalReported += 6;
+  }
+
+  resultsCount.textContent = `Showing ${totalReported} resources`;
+
+  if (visibleCount === 0 && criticalSection.style.display === 'none') {
+    emptyState.classList.add('active');
+  } else {
+    emptyState.classList.remove('active');
+  }
+}
+
+function resetFilters() {
+  currentCategory = 'all';
+  currentSearch = '';
+  document.getElementById('resourceSearch').value = '';
+  
+  document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+    if (btn.getAttribute('data-cat') === 'all') {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  applyFilters();
+}
+
+// Navigation Dropdown
+function toggleNavDropdown(btn) {
+  var parent = btn.closest('.header-dropdown');
+  if (!parent) return;
+  var isOpen = parent.classList.contains('open');
+  document.querySelectorAll('.header-dropdown.open').forEach(function(d) {
+    if (d !== parent) {
+      d.classList.remove('open');
+      var b = d.querySelector('.header-dropdown-btn');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    }
+  });
+  if (isOpen) {
+    parent.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    parent.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.header-dropdown')) {
+    document.querySelectorAll('.header-dropdown.open').forEach(function(d) {
+      d.classList.remove('open');
+      var b = d.querySelector('.header-dropdown-btn');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  }
+});
+
+// Mobile Navigation
+function toggleMobileNav(open) {
+  const drawer = document.getElementById('mobileNavDrawer');
+  if (open) {
+    drawer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  } else {
+    drawer.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+function handleDrawerClick(e) {
+  if (e.target.id === 'mobileNavDrawer') {
+    toggleMobileNav(false);
+  }
+}
+</script>
+
+</body>
+</html>
