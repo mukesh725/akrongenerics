@@ -607,6 +607,213 @@ body {
   text-decoration: underline;
 }
 
+/* ================= ORDERING, HOURS & SHIPPING ================= */
+.order-shipping-section {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.order-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+.order-method-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 32px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.order-method-card:hover {
+  transform: translateY(-2px);
+  border-color: #CBD5E1;
+  box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.06);
+}
+.order-method-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.order-method-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #EBF1F8;
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.order-method-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.order-method-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+}
+.order-method-title {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.order-method-desc {
+  font-size: 14px;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+.order-contact-highlight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #F8FAFC;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.order-contact-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+}
+.order-contact-val {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-navy);
+  text-decoration: none;
+}
+.order-contact-val:hover {
+  color: var(--color-crimson);
+}
+.order-hours-badge {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Shipping Card */
+.shipping-delivery-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 34px 36px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+.shipping-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 22px;
+}
+.shipping-title-group h3 {
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin-bottom: 4px;
+}
+.shipping-title-group p {
+  font-size: 14.5px;
+  color: var(--ink-secondary);
+}
+.free-shipping-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #065F46;
+  padding: 8px 18px;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: -0.01em;
+}
+
+.hours-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  background: #F8FAFC;
+  padding: 18px 22px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 24px;
+}
+.hours-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-navy);
+  margin-bottom: 4px;
+}
+.hours-val {
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.shipping-exceptions-block h4 {
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  margin-bottom: 12px;
+}
+.shipping-exceptions-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.shipping-exception-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--ink);
+  line-height: 1.5;
+  background: #F8FAFC;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+}
+.shipping-bullet-icon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-crimson);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
 /* ================= GLOBAL FOOTER ================= */
 .site-footer {
   background: #FFFFFF;
@@ -701,6 +908,8 @@ body {
 @media (max-width: 1040px) {
   .site-header { padding: 14px 24px; }
   .applications-grid { grid-template-columns: 1fr; }
+  .order-methods-grid { grid-template-columns: 1fr; }
+  .shipping-exceptions-list { grid-template-columns: 1fr; }
   .guide-steps-grid { grid-template-columns: 1fr; gap: 20px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
@@ -713,6 +922,9 @@ body {
   .app-card { padding: 26px 20px; }
   .app-card-actions { flex-wrap: wrap; }
   .btn-app-crimson, .btn-app-outline, .btn-app-navy { width: 100%; }
+  .order-method-card { padding: 26px 20px; }
+  .shipping-delivery-card { padding: 26px 20px; }
+  .hours-grid { grid-template-columns: 1fr; gap: 14px; padding: 16px; }
   .guide-strip { padding: 26px 20px; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
 }
@@ -935,6 +1147,111 @@ body {
 
   </div>
 
+  <!-- ORDERING METHODS, HOURS & SHIPPING POLICIES -->
+  <section class="order-shipping-section">
+    
+    <!-- Phone & Fax Ordering Methods (2 Columns) -->
+    <div class="order-methods-grid">
+      
+      <!-- PHONE -->
+      <div class="order-method-card">
+        <div class="order-method-header">
+          <div class="order-method-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </div>
+          <span class="order-method-tag">Direct Line</span>
+        </div>
+        <h3 class="order-method-title">Phone Ordering</h3>
+        <p class="order-method-desc">
+          One of our specially trained, dedicated support team members will be available to provide you with a personalized approach to managing all of your needs.
+        </p>
+        <div class="order-contact-highlight">
+          <span class="order-contact-label">Call Support</span>
+          <a href="tel:16312153009" class="order-contact-val">1-631-215-3009</a>
+        </div>
+        <div class="order-hours-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Mon – Fri: 10:00 am to 6:30 pm EST for next-day delivery</span>
+        </div>
+      </div>
+
+      <!-- FAX -->
+      <div class="order-method-card">
+        <div class="order-method-header">
+          <div class="order-method-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+          </div>
+          <span class="order-method-tag">Purchase Orders</span>
+        </div>
+        <h3 class="order-method-title">Fax Ordering</h3>
+        <p class="order-method-desc">
+          If you prefer to create a purchase order and fax it to us, we will process it. Be sure to include your contact information in case we have any questions:
+        </p>
+        <div class="order-contact-highlight">
+          <span class="order-contact-label">Fax Orders To</span>
+          <span class="order-contact-val">1-631-215-3099</span>
+        </div>
+        <div class="order-hours-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Mon – Fri: 10:00 am to 6:30 pm EST for next-day delivery</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Ordering Hours & Shipping & Delivery Card -->
+    <div class="shipping-delivery-card">
+      <div class="shipping-card-header">
+        <div class="shipping-title-group">
+          <h3>Ordering Hours &amp; Delivery Policies</h3>
+          <p>Akron Generics offers next day overnight shipping on all qualifying pharmacy orders.</p>
+        </div>
+        <div class="free-shipping-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          <span>FREE SHIPPING: Orders $250 or above</span>
+        </div>
+      </div>
+
+      <!-- Schedule Breakdown -->
+      <div class="hours-grid">
+        <div class="hours-col">
+          <div class="hours-label">Phone &amp; Fax Hours</div>
+          <div class="hours-val"><strong>Monday – Friday:</strong> 10:00 am to 6:30 pm EST <em>(for next-day delivery)</em></div>
+        </div>
+        <div class="hours-col">
+          <div class="hours-label">Online Ordering Hours</div>
+          <div class="hours-val"><strong>Monday – Friday:</strong> 10:00 am to 6:30 pm EST <em>(for next-day delivery)</em></div>
+        </div>
+      </div>
+
+      <!-- Exceptions -->
+      <div class="shipping-exceptions-block">
+        <h4>Shipping Exceptions &amp; Conditions</h4>
+        <ul class="shipping-exceptions-list">
+          <li class="shipping-exception-item">
+            <span class="shipping-bullet-icon"></span>
+            <span>Orders below $250 are subject to a $10.00 shipping and processing fee</span>
+          </li>
+          <li class="shipping-exception-item">
+            <span class="shipping-bullet-icon"></span>
+            <span>Remote delivery areas may take up to 2-day delivery</span>
+          </li>
+          <li class="shipping-exception-item">
+            <span class="shipping-bullet-icon"></span>
+            <span>Hazardous Materials: Only ground delivery available</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
   <!-- HOW TO SUBMIT / INSTRUCTIONS -->
   <div class="guide-strip">
     <h3 class="guide-title">
@@ -960,7 +1277,7 @@ body {
         <div class="step-number">3</div>
         <div class="step-heading">Send to Orders Desk</div>
         <p class="step-desc">
-          Email completed documents to <a href="mailto:orders@akrongenerics.com">orders@akrongenerics.com</a> or fax to <strong>(631) 215-3009</strong> for same-day review.
+          Email completed documents to <a href="mailto:orders@akrongenerics.com">orders@akrongenerics.com</a>, call <strong>(631) 215-3009</strong>, or fax to <strong>1-631-215-3099</strong> for same-day review.
         </p>
       </div>
     </div>
