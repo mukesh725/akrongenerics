@@ -212,10 +212,10 @@ body {
 }
 .header-dropdown .dropdown-menu a.dropdown-special-offers-link,
 .dropdown-menu a.dropdown-special-offers-link {
-  padding: 6px 8px !important;
+  padding: 6px 14px !important;
   display: flex !important;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start !important;
   border-radius: 8px;
   background: transparent;
   transition: transform 0.18s ease, background 0.18s ease;
@@ -224,13 +224,14 @@ body {
 .header-dropdown .dropdown-menu a.dropdown-special-offers-link:hover,
 .dropdown-menu a.dropdown-special-offers-link:hover {
   background: rgba(148, 32, 49, 0.05) !important;
-  transform: scale(1.02);
+  transform: translateY(-1px);
 }
 .dropdown-special-offers-img {
   width: 100%;
-  max-width: 175px;
+  max-width: 186px;
   height: auto;
   display: block;
+  margin: 0 !important;
 }
 .mobile-drawer-special-link {
   padding: 6px 12px !important;
