@@ -207,6 +207,39 @@ body {
   background: rgba(22, 24, 15, 0.05);
   color: #111827;
 }
+.header-dropdown .dropdown-menu a.dropdown-special-offers-link,
+.dropdown-menu a.dropdown-special-offers-link {
+  padding: 6px 8px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: transparent;
+  transition: transform 0.18s ease, background 0.18s ease;
+  margin-top: 2px;
+}
+.header-dropdown .dropdown-menu a.dropdown-special-offers-link:hover,
+.dropdown-menu a.dropdown-special-offers-link:hover {
+  background: rgba(148, 32, 49, 0.05) !important;
+  transform: scale(1.02);
+}
+.dropdown-special-offers-img {
+  width: 100%;
+  max-width: 175px;
+  height: auto;
+  display: block;
+}
+.mobile-drawer-special-link {
+  padding: 6px 12px !important;
+  display: flex !important;
+  align-items: center;
+}
+.mobile-special-offers-img {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  display: block;
+}
 
 .header-cta-red {
   display: inline-flex;
@@ -839,8 +872,10 @@ body {
           Products <span class="chevron"></span>
         </button>
         <div class="dropdown-menu">
-          <a href="catalog.html">Product Catalog</a>
-          <a href="products.html" style="color:var(--color-crimson);font-weight:600;">Special Offers 📄</a>
+          <a href="catalog.html">All Products</a>
+          <a href="products.html" class="dropdown-special-offers-link" aria-label="Special Offers">
+            <img src="src/assets/special-offers-badge.png" alt="Special Offers" class="dropdown-special-offers-img">
+          </a>
         </div>
       </div>
 
@@ -891,8 +926,10 @@ body {
     <div class="mobile-drawer-links">
       <a href="index.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Home</a>
       <a href="index.html#why-akron" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Why Akron Generics</a>
-      <a href="catalog.html" class="mobile-drawer-link">Product Catalog</a>
-      <a href="products.html" class="mobile-drawer-link" style="color:var(--color-crimson)!important;font-weight:600;">Special Offers 📄</a>
+      <a href="catalog.html" class="mobile-drawer-link">All Products</a>
+      <a href="products.html" class="mobile-drawer-link mobile-drawer-special-link" aria-label="Special Offers">
+        <img src="src/assets/special-offers-badge.png" alt="Special Offers" class="mobile-special-offers-img">
+      </a>
       <a href="industry-resources.html" class="mobile-drawer-link">Industry Resources</a>
       <a href="applications.html" class="mobile-drawer-link" style="font-weight:700;color:var(--color-navy);">Applications ✓</a>
       <a href="contact.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Contact Us</a>
@@ -1101,7 +1138,7 @@ body {
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#why-akron">Why Akron Generics</a></li>
-          <li><a href="catalog.html">Product Catalog</a></li>
+          <li><a href="catalog.html">All Products</a></li>
           <li><a href="products.html">Special Offers</a></li>
         </ul>
       </div>

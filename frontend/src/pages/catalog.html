@@ -215,6 +215,39 @@ body {
   background: rgba(148, 32, 49, 0.08) !important;
   color: #7d1a29 !important;
 }
+.header-dropdown .dropdown-menu a.dropdown-special-offers-link,
+.dropdown-menu a.dropdown-special-offers-link {
+  padding: 6px 8px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: transparent;
+  transition: transform 0.18s ease, background 0.18s ease;
+  margin-top: 2px;
+}
+.header-dropdown .dropdown-menu a.dropdown-special-offers-link:hover,
+.dropdown-menu a.dropdown-special-offers-link:hover {
+  background: rgba(148, 32, 49, 0.05) !important;
+  transform: scale(1.02);
+}
+.dropdown-special-offers-img {
+  width: 100%;
+  max-width: 175px;
+  height: auto;
+  display: block;
+}
+.mobile-drawer-special-link {
+  padding: 6px 12px !important;
+  display: flex !important;
+  align-items: center;
+}
+.mobile-special-offers-img {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  display: block;
+}
 
 .header-cta-red, .cta-red, .nav .cta-red {
   background: #942031 !important;
@@ -1065,8 +1098,10 @@ body {
           Products <span class="chevron"></span>
         </button>
         <div class="dropdown-menu">
-          <a href="catalog.html" style="font-weight:600;color:var(--ink);">Product Catalog</a>
-          <a href="products.html" class="special-offer">Special Offers 📄</a>
+          <a href="catalog.html" style="font-weight:600;color:var(--ink);">All Products</a>
+          <a href="products.html" class="dropdown-special-offers-link" aria-label="Special Offers">
+            <img src="src/assets/special-offers-badge.png" alt="Special Offers" class="dropdown-special-offers-img">
+          </a>
         </div>
       </div>
 
@@ -1117,8 +1152,10 @@ body {
     <div class="mobile-drawer-links">
       <a href="index.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Home</a>
       <a href="index.html#why-akron" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Why Akron Generics</a>
-      <a href="catalog.html" class="mobile-drawer-link" style="color:#942031!important;font-weight:700;">Product Catalog ✓</a>
-      <a href="products.html" class="mobile-drawer-link" style="color:#942031!important;font-weight:600;">Special Offers 📄</a>
+      <a href="catalog.html" class="mobile-drawer-link" style="color:#942031!important;font-weight:700;">All Products ✓</a>
+      <a href="products.html" class="mobile-drawer-link mobile-drawer-special-link" aria-label="Special Offers">
+        <img src="src/assets/special-offers-badge.png" alt="Special Offers" class="mobile-special-offers-img">
+      </a>
       <a href="industry-resources.html" class="mobile-drawer-link">Industry Resources</a>
       <a href="applications.html" class="mobile-drawer-link">Applications</a>
       <a href="index.html#built-for-pharmacy" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Solutions</a>
@@ -1141,14 +1178,14 @@ body {
     <nav class="catalog-breadcrumbs" aria-label="Breadcrumb">
       <a href="index.html">Home</a>
       <span class="sep">/</span>
-      <a href="catalog.html">Product Catalog</a>
+      <a href="catalog.html">All Products</a>
       <span class="sep">/</span>
       <span class="current-cat" id="breadcrumbCategory">Pen Needles</span>
     </nav>
 
     <!-- Header (Screenshot 2) -->
     <header class="catalog-header">
-      <div class="catalog-eyebrow" id="catalogEyebrow">PRODUCT CATALOG</div>
+      <div class="catalog-eyebrow" id="catalogEyebrow">ALL PRODUCTS</div>
       <h1 class="catalog-title" id="catalogTitle">Pen Needles</h1>
       <p class="catalog-subtitle" id="catalogSubtitle">Explore safety and regular pen needles with high AWP and Medicare reimbursement.</p>
     </header>
@@ -1232,7 +1269,7 @@ body {
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="index.html#why-akron">Why Akron Generics</a></li>
-            <li><a href="catalog.html">Product Catalog</a></li>
+            <li><a href="catalog.html">All Products</a></li>
             <li><a href="products.html">Special Offers</a></li>
             <li><a href="industry-resources.html">Industry Resources</a></li>
             <li><a href="applications.html">Applications</a></li>
