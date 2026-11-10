@@ -593,98 +593,121 @@ body {
   margin-top: 24px;
 }
 
-/* Product Card - EXACT MATCH to catalog.html */
+/* Product Card (Modern Minimalist Pill/Floating Style) */
 .p-card {
   min-width: 0;
-  background: #FFFFFF;
-  border: 1px solid rgba(22, 24, 15, 0.08);
-  border-radius: 16px;
-  padding: 14px;
+  background: #F4F4F2;
+  border: 1px solid rgba(22, 24, 15, 0.03);
+  border-radius: 22px;
   display: flex;
   flex-direction: column;
-  transition: all 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
   position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .p-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 14px 34px rgba(22, 24, 15, 0.08);
-  border-color: rgba(22, 24, 15, 0.15);
+  box-shadow: 0 14px 32px rgba(22, 24, 15, 0.06);
 }
+
+/* Badges Pinned Top-Left */
+.p-card-badges-top {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  z-index: 2;
+  pointer-events: none;
+}
+.p-badge {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3.5px 9.5px;
+  border-radius: 9999px;
+  background: #4D6D50;
+  color: #FFFFFF;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.p-badge.medicare {
+  background: #1B4965;
+  color: #FFFFFF;
+}
+.p-badge.high-awp {
+  background: #3B6B42;
+  color: #FFFFFF;
+}
+.p-badge.sale {
+  background: #C7382B;
+  color: #FFFFFF;
+}
+
+/* Visual Canvas */
 .p-card-visual {
   width: 100%;
-  height: 160px;
-  background: #FFFFFF;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 12px;
+  height: 190px;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 10px;
+  padding: 24px 16px 8px;
+  box-sizing: border-box;
 }
 .p-card-visual img {
-  max-width: 88%;
-  max-height: 88%;
+  max-width: 82%;
+  max-height: 82%;
   width: auto;
   height: auto;
   object-fit: contain;
   display: block;
   margin: 0 auto;
   mix-blend-mode: multiply;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .p-card:hover .p-card-visual img {
   transform: scale(1.05);
 }
+
+/* Card Details */
 .p-card-body {
+  padding: 0 18px 20px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  margin-top: auto;
+}
+.p-card-eyebrow {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #7A7B75;
+  margin-bottom: 3px;
+  letter-spacing: 0.01em;
 }
 .p-card-title {
   font-family: var(--sans);
   font-size: 14.5px;
   font-weight: 700;
   line-height: 1.3;
-  color: var(--ink);
-  margin-bottom: 4px;
+  color: #16180F;
+  margin-bottom: 3px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .p-card-specs {
-  font-size: 12.5px;
-  color: var(--ink-2);
-  line-height: 1.4;
-  margin-bottom: 4px;
+  font-size: 12px;
+  color: #72746C;
+  line-height: 1.35;
+  margin-bottom: 2px;
 }
 .p-card-ndc {
-  font-size: 11.5px;
-  font-weight: 500;
-  color: var(--ink-3);
-  letter-spacing: 0.02em;
-  margin-bottom: 12px;
-}
-.p-card-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: auto;
-  margin-bottom: 0;
-}
-.p-badge {
   font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 9999px;
-  background: #F1F0EC;
-  color: var(--ink-2);
-}
-.p-badge.medicare {
-  background: #EBF3FC;
-  color: var(--color-navy);
-}
-.p-badge.high-awp {
-  background: #E8F5E9;
-  color: #1E6B24;
+  font-weight: 500;
+  color: #92948C;
+  letter-spacing: 0.02em;
 }
 .p-pricing-box {
   display: none !important;
@@ -1013,18 +1036,38 @@ body {
     margin-top: 14px;
   }
   .p-card {
-    padding: 8px !important;
-    border-radius: 12px !important;
+    border-radius: 14px !important;
+    background: #F4F4F2 !important;
+    border: 1px solid rgba(22, 24, 15, 0.03) !important;
+    padding: 0 !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
     min-width: 0 !important;
+    width: 100% !important;
+  }
+  .p-card-badges-top {
+    position: absolute !important;
+    top: 8px !important;
+    left: 8px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 3px !important;
+    z-index: 2 !important;
+  }
+  .p-badge {
+    font-size: 8px !important;
+    padding: 2px 6px !important;
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
   }
   .p-card-visual {
     width: 100% !important;
-    height: 110px !important;
-    max-height: 110px !important;
-    padding: 6px !important;
-    margin-bottom: 6px !important;
-    border-radius: 8px !important;
-    background: #FFFFFF !important;
+    height: 125px !important;
+    max-height: 125px !important;
+    padding: 16px 8px 4px !important;
+    background: transparent !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1032,7 +1075,7 @@ body {
     overflow: hidden !important;
   }
   .p-card-visual img {
-    max-height: 95px !important;
+    max-height: 90% !important;
     max-width: 90% !important;
     width: auto !important;
     height: auto !important;
@@ -1041,8 +1084,25 @@ body {
     margin: 0 auto !important;
     mix-blend-mode: multiply !important;
   }
+  .p-card-body {
+    padding: 0 10px 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    margin-top: auto !important;
+  }
+  .p-card-eyebrow {
+    font-size: 9.5px !important;
+    font-weight: 500 !important;
+    color: #7A7B75 !important;
+    margin-bottom: 2px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
   .p-card-title {
-    font-size: 11.5px !important;
+    font-size: 12px !important;
     line-height: 1.25 !important;
     font-weight: 700 !important;
     margin-bottom: 2px !important;
@@ -1050,37 +1110,24 @@ body {
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
-    height: 28px !important;
+    height: 30px !important;
+    word-break: break-word !important;
   }
   .p-card-specs {
-    font-size: 10px !important;
+    font-size: 9.5px !important;
     line-height: 1.2 !important;
-    color: var(--ink-2) !important;
+    color: #72746C !important;
     margin-bottom: 2px !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
   }
   .p-card-ndc {
-    font-size: 9px !important;
-    color: var(--ink-3) !important;
-    margin-bottom: 4px !important;
+    font-size: 8.5px !important;
+    color: #92948C !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-  }
-  .p-card-badges {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 3px !important;
-    margin-top: auto !important;
-    margin-bottom: 0 !important;
-  }
-  .p-badge {
-    font-size: 8px !important;
-    padding: 1.5px 4px !important;
-    border-radius: 3px !important;
-    font-weight: 600 !important;
   }
   .p-pricing-box { display: none !important; }
   .specials-bottom-row { flex-direction: column; align-items: stretch; gap: 12px; }
@@ -1309,67 +1356,71 @@ body {
     <h1 class="section-title">A new month. More opportunity.</h1>
     <p class="section-subtitle">Featured prices from our November specials.</p>
 
-    <div class="specials-grid">
+        <div class="specials-grid">
       <!-- Special 1: Safety Pen Needles -->
       <article class="p-card">
+        <div class="p-card-badges-top">
+          <span class="p-badge sale">Special Price</span>
+          <span class="p-badge medicare">Medicare Covered</span>
+        </div>
         <div class="p-card-visual">
           <img src="src/assets/products/quick-touch-safety-packaging.png" alt="Quick Touch Safety Pen Needles" loading="lazy">
         </div>
         <div class="p-card-body">
+          <div class="p-card-eyebrow">Pen Needles</div>
           <h3 class="p-card-title">Quick Touch Safety Pen Needles</h3>
           <div class="p-card-specs">31G × 4MM · 100 CT</div>
           <div class="p-card-ndc">NDC: 73317-6816-04</div>
-          <div class="p-card-badges">
-            <span class="p-badge high-awp">Special Price</span>
-            <span class="p-badge medicare">Medicare Covered</span>
-          </div>
         </div>
       </article>
 
       <!-- Special 2: Safety Lancets -->
       <article class="p-card">
+        <div class="p-card-badges-top">
+          <span class="p-badge sale">Special Price</span>
+          <span class="p-badge medicare">Medicare Covered</span>
+        </div>
         <div class="p-card-visual">
           <img src="src/assets/products/special-lancets.png" alt="Safety Lancets 28G" loading="lazy">
         </div>
         <div class="p-card-body">
+          <div class="p-card-eyebrow">Lancets & Alcohol Pads</div>
           <h3 class="p-card-title">Safety Lancets 28G</h3>
           <div class="p-card-specs">Pressure Activated · 100 CT</div>
           <div class="p-card-ndc">NDC: 73317-4683-01</div>
-          <div class="p-card-badges">
-            <span class="p-badge high-awp">Special Price</span>
-            <span class="p-badge medicare">Medicare Covered</span>
-          </div>
         </div>
       </article>
 
       <!-- Special 3: Lidocaine Patches -->
       <article class="p-card">
+        <div class="p-card-badges-top">
+          <span class="p-badge sale">Special Price</span>
+        </div>
         <div class="p-card-visual">
           <img src="src/assets/products/lidocaine-patch-box.png" alt="Lidocaine 4% Patches" loading="lazy">
         </div>
         <div class="p-card-body">
+          <div class="p-card-eyebrow">Topical Pain Relief</div>
           <h3 class="p-card-title">Lidocaine 4% Topical Patches</h3>
           <div class="p-card-specs">15 Patches · Topical Relief</div>
           <div class="p-card-ndc">NDC: 73317-6866-05</div>
-          <div class="p-card-badges">
-            <span class="p-badge high-awp">Special Price</span>
-          </div>
         </div>
       </article>
 
       <!-- Special 4: Contour Next 100 CT -->
       <article class="p-card">
+        <div class="p-card-badges-top">
+          <span class="p-badge high-awp">Authorized Dealer</span>
+          <span class="p-badge medicare">Free Case Promo</span>
+        </div>
         <div class="p-card-visual">
           <img src="src/assets/products/contour-next-meter.png" alt="Contour Next Test Strips 100 CT" loading="lazy">
         </div>
         <div class="p-card-body">
+          <div class="p-card-eyebrow">Contour Next</div>
           <h3 class="p-card-title">Contour Next Retail Test Strips</h3>
           <div class="p-card-specs">100 CT · 12 Units / Case</div>
           <div class="p-card-ndc">NDC: 00193-7312-21</div>
-          <div class="p-card-badges">
-            <span class="p-badge high-awp">Authorized Dealer</span>
-            <span class="p-badge medicare">Free Case Promo</span>
-          </div>
         </div>
       </article>
     </div>
