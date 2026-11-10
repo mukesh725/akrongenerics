@@ -721,27 +721,37 @@ body {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1040px) {
-  .site-header { padding: 14px 24px; }
-  .about-hero-card { grid-template-columns: 1fr; }
-  .about-image-wrap { min-height: 380px; }
-
+  .site-header { display: none !important; }
+  .mobile-nav { display: flex !important; }
+  .wrap { margin-top: 72px; }
+  .about-hero-card { grid-template-columns: 1fr; gap: 32px; }
+  .about-image-wrap { min-height: 360px; }
   .about-cta-card { flex-direction: column; align-items: flex-start; }
   .about-cta-actions { width: 100%; flex-wrap: wrap; }
   .c-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
 }
 
-@media (max-width: 768px) {
-  body { padding: 8px; }
-  .site-header { display: none; }
-  .mobile-nav { display: flex; }
-  .wrap { margin-top: 72px; gap: 12px; }
-  .about-hero-card { padding: 30px 22px; }
-  .about-stats-row { flex-direction: column; gap: 14px; }
+@media (max-width: 640px) {
+  body { padding: 8px 6px; }
+  .wrap { margin-top: 68px; gap: 12px; }
+  .about-hero-card { padding: 22px 14px; border-radius: 18px; }
+  .about-pill { font-size: 10.5px; padding: 4px 12px; margin-bottom: 12px; }
+  .about-title { font-size: clamp(24px, 6.5vw, 32px); line-height: 1.2; margin-bottom: 14px; }
+  .about-p { font-size: 14px; line-height: 1.55; }
+  .about-divider { margin: 18px 0 16px; }
+  .about-stats-row { flex-direction: column; gap: 12px; }
   .about-stat-sep { display: none; }
-  .about-image-wrap { min-height: 280px; }
-
-  .about-cta-card { padding: 32px 22px; }
-  .c-footer { padding: 30px 20px; }
+  .about-stat-num { font-size: 26px; margin-bottom: 2px; }
+  .about-stat-lbl { font-size: 12px; }
+  .about-footnote { font-size: 12.5px; margin-top: 18px; }
+  .about-image-wrap { min-height: 240px; border-radius: 16px; }
+  .about-image-badge { bottom: 10px; left: 10px; font-size: 11px; padding: 6px 12px; }
+  .about-cta-card { padding: 24px 16px; border-radius: 18px; }
+  .about-cta-info h3 { font-size: clamp(20px, 5.5vw, 24px); }
+  .about-cta-info p { font-size: 13.5px; }
+  .about-cta-actions { flex-direction: column; width: 100%; gap: 10px; }
+  .btn-cta-white, .btn-cta-outline-white { width: 100%; text-align: center; justify-content: center; }
+  .c-footer { padding: 28px 16px 20px; }
   .c-footer-grid { grid-template-columns: 1fr; gap: 24px; }
   .c-footer-bottom { flex-direction: column; align-items: flex-start; }
 }

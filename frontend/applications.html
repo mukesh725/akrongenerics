@@ -822,7 +822,9 @@ body {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1040px) {
-  .site-header { padding: 14px 24px; }
+  .site-header { display: none !important; }
+  .mobile-nav { display: flex !important; }
+  .wrap { margin-top: 72px; }
   .applications-grid { grid-template-columns: 1fr; }
   .order-methods-grid { grid-template-columns: 1fr; }
   .shipping-specs-grid { grid-template-columns: 1fr; }
@@ -830,20 +832,23 @@ body {
   .c-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
 }
 
-@media (max-width: 768px) {
-  body { padding: 8px; }
-  .site-header { display: none; }
-  .mobile-nav { display: flex; }
-  .wrap { margin-top: 72px; gap: 12px; }
-  .app-hero-card { padding: 30px 22px; }
-  .bento-app-card { padding: 30px 22px; }
-  .order-method-card { padding: 30px 22px; }
-  .shipping-card { padding: 30px 22px; }
-  .guide-card { padding: 30px 22px; }
-  .card-action-row { flex-direction: column; width: 100%; }
+@media (max-width: 640px) {
+  body { padding: 8px 6px; }
+  .wrap { margin-top: 68px; gap: 12px; }
+  .app-hero-card { padding: 22px 14px; border-radius: 18px; }
+  .app-eyebrow { font-size: 11px; margin-bottom: 4px; }
+  .app-title { font-size: clamp(24px, 6.5vw, 32px); }
+  .app-subtitle { font-size: 13.5px; }
+  .bento-app-card { padding: 20px 14px; border-radius: 18px; }
+  .card-doc-title { font-size: 20px; }
+  .order-method-card { padding: 20px 14px; border-radius: 18px; }
+  .shipping-card { padding: 20px 14px; border-radius: 18px; }
+  .guide-card { padding: 20px 14px; border-radius: 18px; }
+  .card-action-row { flex-direction: column; width: 100%; gap: 10px; }
   .btn-apple-crimson, .btn-apple-navy, .btn-apple-outline { width: 100%; justify-content: center; }
-  .c-footer { padding: 30px 20px; }
+  .c-footer { padding: 28px 16px 20px; }
   .c-footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .c-footer-bottom { flex-direction: column; align-items: flex-start; }
 }
 </style>
 </head>
