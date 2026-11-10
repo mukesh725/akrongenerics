@@ -613,29 +613,26 @@ body {
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.07);
 }
 
-/* Dedicated Image Box with 25px Corner Radius */
+/* Dedicated Image Box with 25px Corner Radius (Full Edge-to-Edge Cover) */
 .p-card-image-box {
   width: 100%;
   height: 240px;
   border-radius: 25px;
-  background: #F7F7F6;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: #ECEEF1;
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   box-sizing: border-box;
 }
 .p-card-image-box img {
   width: 100%;
   height: 100%;
-  max-width: 82%;
-  max-height: 82%;
-  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
   margin: 0 auto;
-  mix-blend-mode: multiply;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .p-card:hover .p-card-image-box img {
@@ -1050,25 +1047,22 @@ body {
   }
   .p-card-image-box {
     width: 100% !important;
-    height: 145px !important;
-    border-radius: 16px !important;
-    background: #F7F7F6 !important;
-    border: 1px solid rgba(0, 0, 0, 0.04) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    height: 155px !important;
+    border-radius: 18px !important;
+    background: #ECEEF1 !important;
+    display: block !important;
     position: relative !important;
     overflow: hidden !important;
   }
   .p-card-image-box img {
-    max-height: 84% !important;
-    max-width: 84% !important;
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    max-width: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
     display: block !important;
     margin: 0 auto !important;
-    mix-blend-mode: multiply !important;
   }
   .p-card-pill {
     top: 7px !important;
