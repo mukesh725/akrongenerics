@@ -545,47 +545,7 @@ body {
   color: #38BDF8;
 }
 
-/* ================= THREE PILLARS BENTO CARDS ================= */
-.about-pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  width: 100%;
-}
-.pillar-card {
-  background: var(--card);
-  border-radius: var(--r-card);
-  padding: 36px 32px;
-  border: 1px solid rgba(22, 24, 15, 0.06);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.pillar-icon-box {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: #EFF6FF;
-  color: var(--color-navy);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-.pillar-title {
-  font-family: var(--display);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--ink);
-  letter-spacing: -0.015em;
-  margin-bottom: 10px;
-}
-.pillar-desc {
-  font-size: 14px;
-  color: var(--ink-2);
-  line-height: 1.6;
-}
+
 
 /* ================= PARTNER CTA CARD ================= */
 .about-cta-card {
@@ -764,7 +724,7 @@ body {
   .site-header { padding: 14px 24px; }
   .about-hero-card { grid-template-columns: 1fr; }
   .about-image-wrap { min-height: 380px; }
-  .about-pillars-grid { grid-template-columns: 1fr; }
+
   .about-cta-card { flex-direction: column; align-items: flex-start; }
   .about-cta-actions { width: 100%; flex-wrap: wrap; }
   .c-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -779,7 +739,7 @@ body {
   .about-stats-row { flex-direction: column; gap: 14px; }
   .about-stat-sep { display: none; }
   .about-image-wrap { min-height: 280px; }
-  .pillar-card { padding: 28px 20px; }
+
   .about-cta-card { padding: 32px 22px; }
   .c-footer { padding: 30px 20px; }
   .c-footer-grid { grid-template-columns: 1fr; gap: 24px; }
@@ -943,47 +903,8 @@ body {
     </div>
   </section>
 
-  <!-- THREE PILLARS BENTO CARDS (SLOW APPLE FADE-IN DELAY 1) -->
-  <section class="about-pillars-grid apple-fade-in delay-1">
-    <div class="pillar-card">
-      <div class="pillar-icon-box">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-      </div>
-      <div>
-        <h3 class="pillar-title">Family-Operated Values</h3>
-        <p class="pillar-desc">
-          Built around direct pharmacist relationships, transparent pricing, and responsive account executives dedicated to your pharmacy bottom line.
-        </p>
-      </div>
-    </div>
-
-    <div class="pillar-card">
-      <div class="pillar-icon-box">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
-      </div>
-      <div>
-        <h3 class="pillar-title">15,000 Sq. Ft. Secure Hub</h3>
-        <p class="pillar-desc">
-          Climate-controlled pharmaceutical facility with 24/7 CCTV surveillance, biometric access, and complete DSCSA track-and-trace chain of custody.
-        </p>
-      </div>
-    </div>
-
-    <div class="pillar-card">
-      <div class="pillar-icon-box">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-      </div>
-      <div>
-        <h3 class="pillar-title">NABP-Accredited Supply Chain</h3>
-        <p class="pillar-desc">
-          Licensed across 20 states and accredited by the National Association of Boards of Pharmacy, ensuring certified authenticity on every shipment.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA STRIP (SLOW APPLE FADE-IN DELAY 2) -->
-  <section class="about-cta-card apple-fade-in delay-2">
+  <!-- CTA STRIP (SLOW APPLE FADE-IN DELAY 1) -->
+  <section class="about-cta-card apple-fade-in delay-1">
     <div class="about-cta-info">
       <h3>Partner With Akron Generics Today</h3>
       <p>
@@ -996,8 +917,8 @@ body {
     </div>
   </section>
 
-  <!-- GLOBAL FOOTER (SLOW APPLE FADE-IN DELAY 3) -->
-  <footer class="c-footer apple-fade-in delay-3">
+  <!-- GLOBAL FOOTER (SLOW APPLE FADE-IN DELAY 2) -->
+  <footer class="c-footer apple-fade-in delay-2">
     <div class="c-footer-grid c-footer-main">
       <div class="c-footer-brand-col c-footer-brand-block">
         <a href="index.html" aria-label="Akron Generics Home">
