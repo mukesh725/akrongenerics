@@ -1637,6 +1637,16 @@ function renderProducts() {
           <div class="p-card-badges">
             ${badgesHtml}
           </div>
+          <div class="p-pricing-box">
+            <div class="p-awp-col">
+              <span class="p-awp-label">AWP</span>
+              <span class="p-awp-val">${p.awp || '—'}</span>
+            </div>
+            <div class="p-price-col">
+              <span class="p-price-label">Wholesale</span>
+              <span class="p-price-val">${p.price || 'Inquire'}</span>
+            </div>
+          </div>
         </div>
       </article>
     `;

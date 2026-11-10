@@ -1529,9 +1529,13 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   .benefit-card{padding:22px 20px;border-radius:16px}
   .statement{padding:44px 20px;border-radius:20px}
   .statement h2{font-size:clamp(25px,6.8vw,34px)}
-  .pgrid{grid-template-columns:1fr;gap:14px}
-  .pcard.photo-card{height:200px}
-  .cat-grid, .categories-grid{grid-template-columns:1fr;gap:14px}
+  .pgrid{grid-template-columns:repeat(2, minmax(0, 1fr)) !important;gap:10px}
+  .pcard.photo-card{height:140px}
+  .cat-grid, .categories-grid{grid-template-columns:repeat(2, minmax(0, 1fr)) !important;gap:8px}
+  .cat-card-item{padding:12px 10px;border-radius:12px;min-width:0}
+  .cat-card-title{font-size:12.5px}
+  .cat-card-visual{height:80px;margin-top:6px}
+  .cat-card-visual img{max-height:72px}
   .section-head-row{flex-direction:column;align-items:flex-start}
   .cat-card{border-radius:16px}
   .next-step-strip{grid-template-columns:1fr;gap:18px}

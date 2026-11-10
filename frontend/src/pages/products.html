@@ -585,68 +585,139 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   margin-bottom: 22px;
 }
+/* Specials Grid (4 columns desktop, 2 columns mobile) */
 .specials-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
   margin-top: 24px;
 }
-.special-item-card {
+
+/* Product Card - EXACT MATCH to catalog.html */
+.p-card {
+  min-width: 0;
   background: #FFFFFF;
-  border: 1.5px solid var(--border-light);
+  border: 1px solid rgba(22, 24, 15, 0.08);
   border-radius: 16px;
-  padding: 22px 22px 18px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+  position: relative;
 }
-.special-item-card:hover {
-  transform: translateY(-2px);
-  border-color: #CBD5E1;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+.p-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(22, 24, 15, 0.08);
+  border-color: rgba(22, 24, 15, 0.15);
 }
-.special-visual {
-  height: 125px;
+.p-card-visual {
+  width: 100%;
+  height: 190px;
+  background: #F8FAFC;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  position: relative;
+  padding: 12px;
 }
-.special-visual img {
+.p-card-visual img {
   max-width: 100%;
-  max-height: 115px;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  display: block;
+  transition: transform 0.3s ease;
 }
-.special-title {
-  font-family: var(--display);
-  font-size: 17px;
+.p-card:hover .p-card-visual img {
+  transform: scale(1.05);
+}
+.p-card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.p-card-title {
+  font-family: var(--sans);
+  font-size: 14.5px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #111827;
-  margin-bottom: 3px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 4px;
 }
-.special-specs {
-  font-family: var(--sans);
-  font-size: 13.5px;
-  font-weight: 500;
-  color: #64748B;
-  margin-bottom: 2px;
-}
-.special-ndc {
-  font-family: var(--sans);
+.p-card-specs {
   font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.p-card-ndc {
+  font-size: 11.5px;
   font-weight: 500;
-  color: #64748B;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
   margin-bottom: 12px;
 }
-.special-price {
-  font-family: var(--display);
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--color-crimson);
+.p-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+.p-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: #F1F0EC;
+  color: var(--ink-2);
+}
+.p-badge.medicare {
+  background: #EBF3FC;
+  color: var(--color-navy);
+}
+.p-badge.high-awp {
+  background: #E8F5E9;
+  color: #1E6B24;
+}
+.p-pricing-box {
   margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(22, 24, 15, 0.06);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.p-awp-col {
+  display: flex;
+  flex-direction: column;
+}
+.p-awp-label {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+.p-awp-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.p-price-col {
+  text-align: right;
+}
+.p-price-label {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+.p-price-val {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-crimson);
 }
 
 .specials-bottom-row {
@@ -936,18 +1007,26 @@ body {
   .c-footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1200px) {
+  .specials-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 900px) {
   .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  .specials-grid { grid-template-columns: 1fr; }
+  .specials-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px; }
   .contour-grid { grid-template-columns: 1fr; gap: 24px; }
+  .p-card-visual { height: 150px; }
 }
 
 @media (max-width: 640px) {
-  body { padding: 8px 6px; }
-  .wrap { margin-top: 68px; }
-  .products-section-card, .specials-card-wrapper, .contour-banner-card { padding: 20px 14px; border-radius: 18px; }
-  .section-title { font-size: clamp(24px, 6.5vw, 32px); }
-  .section-subtitle { font-size: 13.5px; }
+  body { padding: 6px 4px; }
+  .wrap { margin-top: 64px; }
+  .products-section-card, .specials-card-wrapper, .contour-banner-card { padding: 16px 12px; border-radius: 16px; }
+  .section-title { font-size: clamp(20px, 5.5vw, 24px); }
+  .section-subtitle { font-size: 12.5px; }
   .section-head-row { flex-direction: column; align-items: flex-start; gap: 8px; }
   .categories-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px; margin-top: 18px; }
   .cat-card-item { padding: 12px 10px; border-radius: 12px; min-width: 0; }
@@ -956,20 +1035,94 @@ body {
   .cat-card-title { font-size: 13px; }
   .cat-card-visual { height: 80px; margin-top: 6px; }
   .cat-card-visual img { max-height: 72px; }
-  .special-item-card { padding: 16px 14px; border-radius: 14px; }
-  .special-title { font-size: 15px; }
-  .special-specs { font-size: 12.5px; }
-  .special-ndc { font-size: 11.5px; }
-  .special-price { font-size: 24px; }
+  .specials-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-top: 14px;
+  }
+  .p-card {
+    padding: 8px !important;
+    border-radius: 12px !important;
+    min-width: 0 !important;
+  }
+  .p-card-visual {
+    height: 115px !important;
+    max-height: 115px !important;
+    padding: 6px !important;
+    margin-bottom: 6px !important;
+    border-radius: 8px !important;
+    background: #F8FAFC !important;
+  }
+  .p-card-visual img {
+    max-height: 105px !important;
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+  .p-card-title {
+    font-size: 11.5px !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+    margin-bottom: 2px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    height: 28px !important;
+  }
+  .p-card-specs {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    color: var(--ink-2) !important;
+    margin-bottom: 2px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .p-card-ndc {
+    font-size: 9px !important;
+    color: var(--ink-3) !important;
+    margin-bottom: 4px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .p-card-badges {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 3px !important;
+    margin-bottom: 4px !important;
+  }
+  .p-badge {
+    font-size: 8px !important;
+    padding: 1.5px 4px !important;
+    border-radius: 3px !important;
+    font-weight: 600 !important;
+  }
+  .p-pricing-box {
+    margin-top: auto !important;
+    padding-top: 4px !important;
+    border-top: 1px solid rgba(22, 24, 15, 0.06) !important;
+  }
+  .p-awp-label { font-size: 8px !important; }
+  .p-awp-val { font-size: 10px !important; }
+  .p-price-val { font-size: 12.5px !important; }
   .specials-bottom-row { flex-direction: column; align-items: stretch; gap: 12px; }
   .specials-bottom-row .btn-white-pill { width: 100%; justify-content: center; }
-  .contour-cards-top { grid-template-columns: 1fr; gap: 10px; }
-  .contour-subcard { padding: 14px 16px; }
-  .contour-subcard-price { font-size: 24px; }
-  .contour-wide-subcard { padding: 14px 16px; }
-  .contour-meter-price { font-size: 24px; }
-  .c-footer { padding: 28px 16px 20px; }
-  .c-footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .contour-cards-top {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+  .contour-subcard { padding: 12px 10px; border-radius: 12px; }
+  .contour-subcard-title { font-size: 12px; }
+  .contour-subcard-price { font-size: 18px; }
+  .contour-subcard-case { font-size: 10px; }
+  .contour-wide-subcard { padding: 12px 10px; border-radius: 12px; }
+  .contour-meter-title { font-size: 12px; }
+  .contour-meter-price { font-size: 18px; }
+  .c-footer { padding: 24px 14px 18px; }
+  .c-footer-grid { grid-template-columns: 1fr; gap: 20px; }
   .c-footer-bot { flex-direction: column; align-items: flex-start; }
 }
 
@@ -1182,38 +1335,108 @@ body {
     <p class="section-subtitle">Featured prices from our November specials.</p>
 
     <div class="specials-grid">
-      <!-- Special 1 -->
-      <div class="special-item-card">
-        <div class="special-visual">
-          <img src="src/assets/products/special-pen-needles.png" alt="Safety Pen Needles">
+      <!-- Special 1: Safety Pen Needles -->
+      <article class="p-card">
+        <div class="p-card-visual">
+          <img src="src/assets/products/special-pen-needles.png" alt="Quick Touch Safety Pen Needles" loading="lazy">
         </div>
-        <h3 class="special-title">Safety Pen Needles</h3>
-        <div class="special-specs">31G × 4MM · 100 CT</div>
-        <div class="special-ndc">NDC 73317-6816-04</div>
-        <div class="special-price">$36.99</div>
-      </div>
+        <div class="p-card-body">
+          <h3 class="p-card-title">Quick Touch Safety Pen Needles</h3>
+          <div class="p-card-specs">31G × 4MM · 100 CT</div>
+          <div class="p-card-ndc">NDC: 73317-6816-04</div>
+          <div class="p-card-badges">
+            <span class="p-badge high-awp">Special Price</span>
+            <span class="p-badge medicare">Medicare Covered</span>
+          </div>
+          <div class="p-pricing-box">
+            <div class="p-awp-col">
+              <span class="p-awp-label">AWP</span>
+              <span class="p-awp-val">$148.66</span>
+            </div>
+            <div class="p-price-col">
+              <span class="p-price-label">Wholesale</span>
+              <span class="p-price-val">$36.99</span>
+            </div>
+          </div>
+        </div>
+      </article>
 
-      <!-- Special 2 -->
-      <div class="special-item-card">
-        <div class="special-visual">
-          <img src="src/assets/products/special-lancets.png" alt="Safety Lancets 28G">
+      <!-- Special 2: Safety Lancets -->
+      <article class="p-card">
+        <div class="p-card-visual">
+          <img src="src/assets/products/special-lancets.png" alt="Safety Lancets 28G" loading="lazy">
         </div>
-        <h3 class="special-title">Safety Lancets 28G</h3>
-        <div class="special-specs">100 CT</div>
-        <div class="special-ndc">NDC 73317-4683-01</div>
-        <div class="special-price">$13.99</div>
-      </div>
+        <div class="p-card-body">
+          <h3 class="p-card-title">Safety Lancets 28G</h3>
+          <div class="p-card-specs">Pressure Activated · 100 CT</div>
+          <div class="p-card-ndc">NDC: 73317-4683-01</div>
+          <div class="p-card-badges">
+            <span class="p-badge high-awp">Special Price</span>
+            <span class="p-badge medicare">Medicare Covered</span>
+          </div>
+          <div class="p-pricing-box">
+            <div class="p-awp-col">
+              <span class="p-awp-label">AWP</span>
+              <span class="p-awp-val">$42.50</span>
+            </div>
+            <div class="p-price-col">
+              <span class="p-price-label">Wholesale</span>
+              <span class="p-price-val">$13.99</span>
+            </div>
+          </div>
+        </div>
+      </article>
 
-      <!-- Special 3 -->
-      <div class="special-item-card">
-        <div class="special-visual">
-          <img src="src/assets/products/special-lidocaine.png" alt="Lidocaine 4% Patches">
+      <!-- Special 3: Lidocaine Patches -->
+      <article class="p-card">
+        <div class="p-card-visual">
+          <img src="src/assets/products/special-lidocaine.png" alt="Lidocaine 4% Patches" loading="lazy">
         </div>
-        <h3 class="special-title">Lidocaine 4% Patches</h3>
-        <div class="special-specs">15 CT</div>
-        <div class="special-ndc">NDC 73317-6866-05</div>
-        <div class="special-price">$32.99</div>
-      </div>
+        <div class="p-card-body">
+          <h3 class="p-card-title">Lidocaine 4% Topical Patches</h3>
+          <div class="p-card-specs">15 Patches · Topical Relief</div>
+          <div class="p-card-ndc">NDC: 73317-6866-05</div>
+          <div class="p-card-badges">
+            <span class="p-badge high-awp">Special Price</span>
+          </div>
+          <div class="p-pricing-box">
+            <div class="p-awp-col">
+              <span class="p-awp-label">AWP</span>
+              <span class="p-awp-val">$128.00</span>
+            </div>
+            <div class="p-price-col">
+              <span class="p-price-label">Wholesale</span>
+              <span class="p-price-val">$32.99</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Special 4: Contour Next 100 CT -->
+      <article class="p-card">
+        <div class="p-card-visual">
+          <img src="src/assets/products/contour-next-meter.png" alt="Contour Next Test Strips 100 CT" loading="lazy">
+        </div>
+        <div class="p-card-body">
+          <h3 class="p-card-title">Contour Next Retail Test Strips</h3>
+          <div class="p-card-specs">100 CT · 12 Units / Case</div>
+          <div class="p-card-ndc">NDC: 00193-7312-21</div>
+          <div class="p-card-badges">
+            <span class="p-badge high-awp">Authorized Dealer</span>
+            <span class="p-badge medicare">Free Case Promo</span>
+          </div>
+          <div class="p-pricing-box">
+            <div class="p-awp-col">
+              <span class="p-awp-label">AWP</span>
+              <span class="p-awp-val">$168.00</span>
+            </div>
+            <div class="p-price-col">
+              <span class="p-price-label">Wholesale</span>
+              <span class="p-price-val">$99.99</span>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
 
     <div class="specials-bottom-row">
