@@ -627,121 +627,117 @@ body {
   gap: 20px;
 }
 
-/* Product Card (Modern Minimalist Pill/Floating Style) */
+/* ================= PRODUCT CARD (LUXURY PORSCHE-INSPIRED FULL HERO STYLE) ================= */
 .p-card {
   min-width: 0;
-  background: #F4F4F2;
-  border: 1px solid rgba(22, 24, 15, 0.03);
-  border-radius: 22px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 50%, #ECEEF2 100%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 26px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.02);
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .p-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 32px rgba(22, 24, 15, 0.06);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 42px rgba(15, 23, 42, 0.11), 0 4px 12px rgba(15, 23, 42, 0.04);
 }
 
-/* Badges Pinned Top-Left */
-.p-card-badges-top {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  z-index: 2;
-  pointer-events: none;
-}
-.p-badge {
-  font-size: 10.5px;
-  font-weight: 600;
-  padding: 3.5px 9.5px;
-  border-radius: 9999px;
-  background: #4D6D50;
-  color: #FFFFFF;
-  letter-spacing: 0.01em;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-.p-badge.medicare {
-  background: #1B4965;
-  color: #FFFFFF;
-}
-.p-badge.high-awp {
-  background: #3B6B42;
-  color: #FFFFFF;
-}
-.p-badge.sale {
-  background: #C7382B;
-  color: #FFFFFF;
-}
-
-/* Visual Canvas */
+/* Full Hero Product Visual */
 .p-card-visual {
   width: 100%;
-  height: 190px;
+  height: 230px;
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 24px 16px 8px;
+  padding: 20px 16px 6px;
   box-sizing: border-box;
 }
 .p-card-visual img {
-  max-width: 82%;
-  max-height: 82%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   display: block;
   margin: 0 auto;
   mix-blend-mode: multiply;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .p-card:hover .p-card-visual img {
   transform: scale(1.05);
 }
 
-/* Card Details */
+/* Three Spec/Feature Capsule Pills Row (under image) */
+.p-card-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 18px 0;
+  margin-bottom: 12px;
+}
+.p-pill {
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(22, 24, 15, 0.08);
+  border-radius: 9999px;
+  padding: 4px 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.p-pill.highlight {
+  background: #E8F5E9;
+  color: #1E6B24;
+  border-color: rgba(30, 107, 36, 0.18);
+}
+
+/* Card Typography */
 .p-card-body {
-  padding: 0 18px 20px;
+  padding: 0 18px 22px;
   display: flex;
   flex-direction: column;
-  margin-top: auto;
+  flex-grow: 1;
 }
-.p-card-eyebrow {
-  font-size: 11.5px;
-  font-weight: 500;
-  color: #7A7B75;
-  margin-bottom: 3px;
-  letter-spacing: 0.01em;
+.p-card-header-block {
+  margin-bottom: 8px;
 }
 .p-card-title {
-  font-family: var(--sans);
-  font-size: 14.5px;
-  font-weight: 700;
-  line-height: 1.3;
-  color: #16180F;
+  font-family: var(--display, 'Manrope', sans-serif);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.22;
+  color: #0F172A;
   margin-bottom: 3px;
+  letter-spacing: -0.02em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.p-card-specs {
-  font-size: 12px;
-  color: #72746C;
-  line-height: 1.35;
-  margin-bottom: 2px;
+.p-card-subhead {
+  font-family: var(--sans, 'Inter', sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #64748B;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
 }
-.p-card-ndc {
-  font-size: 11px;
-  font-weight: 500;
-  color: #92948C;
-  letter-spacing: 0.02em;
+.p-card-desc {
+  font-size: 11.5px;
+  color: #64748B;
+  line-height: 1.45;
+  margin-top: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .p-pricing-box {
@@ -1082,37 +1078,21 @@ body {
     box-sizing: border-box !important;
   }
   .p-card {
-    border-radius: 14px !important;
-    background: #F4F4F2 !important;
-    border: 1px solid rgba(22, 24, 15, 0.03) !important;
+    border-radius: 18px !important;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 50%, #ECEEF2 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
     padding: 0 !important;
-    position: relative !important;
     display: flex !important;
     flex-direction: column !important;
     min-width: 0 !important;
     width: 100% !important;
-  }
-  .p-card-badges-top {
-    position: absolute !important;
-    top: 8px !important;
-    left: 8px !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 3px !important;
-    z-index: 2 !important;
-  }
-  .p-badge {
-    font-size: 8px !important;
-    padding: 2px 6px !important;
-    border-radius: 9999px !important;
-    font-weight: 600 !important;
-    white-space: nowrap !important;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
   }
   .p-card-visual {
     width: 100% !important;
-    height: 125px !important;
-    max-height: 125px !important;
-    padding: 16px 8px 4px !important;
+    height: 150px !important;
+    max-height: 150px !important;
+    padding: 12px 8px 4px !important;
     background: transparent !important;
     display: flex !important;
     align-items: center !important;
@@ -1121,8 +1101,8 @@ body {
     overflow: hidden !important;
   }
   .p-card-visual img {
-    max-height: 90% !important;
-    max-width: 90% !important;
+    max-height: 95% !important;
+    max-width: 95% !important;
     width: auto !important;
     height: auto !important;
     object-fit: contain !important;
@@ -1130,50 +1110,60 @@ body {
     margin: 0 auto !important;
     mix-blend-mode: multiply !important;
   }
+  .p-card-pills {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 3px !important;
+    padding: 4px 10px 0 !important;
+    margin-bottom: 6px !important;
+  }
+  .p-pill {
+    font-size: 8px !important;
+    padding: 2.5px 6px !important;
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+  }
   .p-card-body {
-    padding: 0 10px 12px !important;
+    padding: 0 10px 14px !important;
     display: flex !important;
     flex-direction: column !important;
     min-width: 0 !important;
     width: 100% !important;
     margin-top: auto !important;
   }
-  .p-card-eyebrow {
-    font-size: 9.5px !important;
-    font-weight: 500 !important;
-    color: #7A7B75 !important;
-    margin-bottom: 2px !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+  .p-card-header-block {
+    margin-bottom: 4px !important;
   }
   .p-card-title {
-    font-size: 12px !important;
-    line-height: 1.25 !important;
-    font-weight: 700 !important;
+    font-size: 13px !important;
+    line-height: 1.22 !important;
+    font-weight: 800 !important;
     margin-bottom: 2px !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
-    height: 30px !important;
+    height: 32px !important;
     word-break: break-word !important;
   }
-  .p-card-specs {
-    font-size: 9.5px !important;
+  .p-card-subhead {
+    font-size: 10px !important;
     line-height: 1.2 !important;
-    color: #72746C !important;
-    margin-bottom: 2px !important;
+    color: #64748B !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
   }
-  .p-card-ndc {
-    font-size: 8.5px !important;
-    color: #92948C !important;
-    white-space: nowrap !important;
+  .p-card-desc {
+    font-size: 9.5px !important;
+    line-height: 1.35 !important;
+    color: #64748B !important;
+    margin-top: 4px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
     overflow: hidden !important;
-    text-overflow: ellipsis !important;
   }
   .c-footer {
     padding: 24px 14px 18px !important;
@@ -1657,24 +1647,34 @@ function renderProducts() {
 
   let html = '';
   filtered.forEach(p => {
-    const badgesHtml = (p.badges || []).map(b => {
-      const isMedicare = b.toLowerCase().includes('medicare');
-      const isAwp = b.toLowerCase().includes('awp');
-      const cls = isMedicare ? 'medicare' : (isAwp ? 'high-awp' : '');
-      return `<span class="p-badge ${cls}">${b}</span>`;
+    let pills = [];
+    if (p.ndc) pills.push(`NDC ${p.ndc}`);
+    if (p.specs) {
+      const specPart = p.specs.split('·')[0].trim();
+      pills.push(specPart);
+    }
+    if (p.badges && p.badges.length) {
+      pills.push(p.badges[0]);
+    }
+    const pillsHtml = pills.slice(0, 3).map(pill => {
+      const isBadge = p.badges && p.badges.includes(pill);
+      return `<span class="p-pill ${isBadge ? 'highlight' : ''}">${pill}</span>`;
     }).join('');
 
     html += `
-            <article class="p-card">
-        ${badgesHtml ? `<div class="p-card-badges-top">${badgesHtml}</div>` : ''}
+      <article class="p-card">
         <div class="p-card-visual">
           <img src="${p.image}" alt="${p.name}" loading="lazy">
         </div>
+        <div class="p-card-pills">
+          ${pillsHtml}
+        </div>
         <div class="p-card-body">
-          <div class="p-card-eyebrow">${p.categoryName || 'Akron Generics'}</div>
-          <h3 class="p-card-title">${p.name}</h3>
-          <div class="p-card-specs">${p.specs}</div>
-          ${p.ndc ? `<div class="p-card-ndc">NDC: ${p.ndc}</div>` : ''}
+          <div class="p-card-header-block">
+            <h3 class="p-card-title">${p.name}</h3>
+            <div class="p-card-subhead">${p.specs}</div>
+          </div>
+          <p class="p-card-desc">${p.description || 'NABP-accredited pharmaceutical supply with verified pedigree and DSCSA compliance.'}</p>
         </div>
       </article>
     `;
