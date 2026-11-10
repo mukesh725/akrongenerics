@@ -481,7 +481,7 @@ window.AKRON_CATALOG = {
       ndc: "00193-7312-21",
       brand: "Bayer / Ascensia",
       badges: ["Authorized Dealer", "NABP Accredited"],
-      image: "src/assets/products/contour-next-meter.png",
+      image: "src/assets/products/contour-next-100ct.jpg",
       description: "NABP-accredited wholesale supply of authentic Bayer Contour Next test strips with Free Product promo eligibility."
     },
     {
@@ -494,7 +494,7 @@ window.AKRON_CATALOG = {
       ndc: "00193-7311-50",
       brand: "Bayer / Ascensia",
       badges: ["Authorized Dealer", "NABP Accredited"],
-      image: "src/assets/products/contour-next-meter.png",
+      image: "src/assets/products/contour-next-50ct.jpg",
       description: "High-accuracy blood glucose test strips with Second-Chance sampling technology."
     },
     {
@@ -507,7 +507,7 @@ window.AKRON_CATALOG = {
       ndc: "00193-7301-01",
       brand: "Bayer / Ascensia",
       badges: ["Special Pricing", "NABP Accredited"],
-      image: "src/assets/products/contour-meter.png",
+      image: "src/assets/products/contour-next-gen-meter.jpg",
       description: "Smartlight target range indicator and Bluetooth wireless sync to the Contour Diabetes app."
     }
   ]
