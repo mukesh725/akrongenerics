@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Akron Generics — Independent Pharmacy Wholesale Partner</title>
+<meta name="description" content="Akron Generics is a family-operated pharmaceutical wholesale distributor supplying prescription drugs, diabetic supplies, and OTC products from our 15,000 sq. ft. Commack, NY facility.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ground: #F4F6F8;
+  --card: #FFFFFF;
+  --surface: #F8FAFC;
+  --surface-hover: #F1F5F9;
+  --ink: #111827;
+  --ink-2: #4B5563;
+  --ink-3: #9CA3AF;
+  
+  --color-navy: #0E335E;
+  --color-navy-hover: #09213D;
+  --color-crimson: #9E2235;
+  --color-crimson-hover: #831A29;
+  --border-light: #E5E9F0;
+  
+  --r-pill: 9999px;
+  --r-card: 20px;
+  
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --display: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--sans);
+  background-color: var(--ground);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding: 16px;
+  overflow-x: hidden;
+}
+
+/* ================= WRAPPER (NO MAX WIDTH RESTRICTIONS) ================= */
+.wrap {
+  width: 100%;
+  max-width: none;
+  margin: 88px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ================= APPLE SLOW FADE-IN ANIMATION ================= */
+@keyframes appleSlowFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.apple-fade-in {
+  opacity: 0;
+  animation: appleSlowFadeIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.12s; }
+.delay-2 { animation-delay: 0.24s; }
+.delay-3 { animation-delay: 0.36s; }
+.delay-4 { animation-delay: 0.48s; }
+
+/* ================= SITE HEADER (3-Column Balanced Full Width) ================= */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 16px 56px;
+  background: rgba(255, 255, 255, 0.96);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+.site-header-inner {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+.site-header-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.brand-logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+.site-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.header-nav-link {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.15s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.header-nav-link:hover,
+.header-nav-link.active {
+  color: var(--color-navy);
+  font-weight: 700;
+}
+
+/* Dropdown */
+.header-dropdown {
+  position: relative;
+}
+.header-dropdown-btn .chevron {
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s ease;
+  display: inline-block;
+  margin-left: 2px;
+}
+.header-dropdown.open .header-dropdown-btn .chevron {
+  transform: rotate(-135deg) translateY(-2px);
+}
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 8px;
+  min-width: 220px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(22, 24, 15, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.header-dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.dropdown-menu a {
+  display: block;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+.dropdown-menu a:hover {
+  background: var(--surface-hover);
+  color: var(--color-navy);
+}
+
+.header-dropdown .dropdown-menu a.dropdown-special-offers-link,
+.dropdown-menu a.dropdown-special-offers-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 6px 14px !important;
+  background: transparent !important;
+  border: none !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
+  border-radius: 8px !important;
+  transition: background 0.15s ease, transform 0.15s ease !important;
+}
+.header-dropdown .dropdown-menu a.dropdown-special-offers-link:hover,
+.dropdown-menu a.dropdown-special-offers-link:hover {
+  background: rgba(148, 32, 49, 0.05) !important;
+  transform: translateY(-1px);
+}
+.dropdown-special-offers-img {
+  height: 28px;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  margin: 0 !important;
+  filter: drop-shadow(0 2px 5px rgba(160, 38, 48, 0.28));
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.site-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+.header-nav-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(22, 24, 15, 0.14);
+}
+.header-cta-red {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-crimson);
+  color: #FFFFFF;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  transition: background 0.18s ease, transform 0.18s ease;
+  box-shadow: 0 2px 8px rgba(158, 34, 53, 0.25);
+}
+.header-cta-red:hover {
+  background: var(--color-crimson-hover);
+  transform: translateY(-1px);
+}
+
+/* Mobile Nav Bar */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.98);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+  padding: 0 16px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 120;
+}
+.mobile-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mobile-hamburger-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mobile-hamburger-btn span {
+  width: 20px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+/* Mobile Drawer */
+.mobile-nav-drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.mobile-nav-drawer.open {
+  opacity: 1;
+  visibility: visible;
+}
+.mobile-drawer-sheet {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 82%;
+  max-width: 320px;
+  background: #FFFFFF;
+  padding: 24px 20px;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.mobile-nav-drawer.open .mobile-drawer-sheet {
+  transform: translateX(0);
+}
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+  margin-bottom: 14px;
+}
+.mobile-drawer-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+}
+.mobile-drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mobile-drawer-link {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+.mobile-drawer-link:hover {
+  background: var(--surface-hover);
+  color: var(--color-navy);
+}
+.mobile-drawer-divider {
+  height: 1px;
+  background: rgba(22, 24, 15, 0.08);
+  margin: 12px 0;
+}
+.mobile-drawer-cta {
+  background: var(--color-crimson);
+  color: #FFFFFF !important;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 8px;
+  padding: 11px;
+  margin-top: 8px;
+}
+
+/* ================= ABOUT US HERO CARD (APPLE STYLE) ================= */
+.about-hero-card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: clamp(36px, 4vw, 56px);
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  max-width: none;
+  display: grid;
+  grid-template-columns: 1.18fr 0.82fr;
+  gap: clamp(32px, 4vw, 54px);
+  align-items: stretch;
+}
+
+.about-content-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.about-pill {
+  display: inline-block;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--r-pill);
+  padding: 5px 14px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #475569;
+  margin-bottom: 18px;
+  align-self: flex-start;
+}
+
+.about-title {
+  font-family: var(--display);
+  font-size: clamp(32px, 3.6vw, 46px);
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 22px;
+}
+
+.about-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.about-p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #475569;
+  font-weight: 400;
+}
+
+.about-divider {
+  height: 1px;
+  background: #E2E8F0;
+  margin: 30px 0 24px;
+}
+
+/* Stats Row */
+.about-stats-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+.about-stat-item {
+  flex: 1;
+}
+.about-stat-sep {
+  width: 1px;
+  align-self: stretch;
+  background: #E2E8F0;
+  flex-shrink: 0;
+}
+.about-stat-num {
+  font-family: var(--display);
+  font-size: clamp(26px, 2.3vw, 34px);
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.about-stat-lbl {
+  font-size: 12.5px;
+  color: #64748B;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.about-footnote {
+  margin-top: 24px;
+  font-size: 13.5px;
+  color: #64748B;
+}
+.about-footnote-link {
+  color: #2563EB;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+.about-footnote-link:hover {
+  color: #1D4ED8;
+}
+
+/* Right Column Image Wrap */
+.about-image-wrap {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #E2E8F0;
+  border: 1px solid rgba(22, 24, 15, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  height: 100%;
+  min-height: 520px;
+  display: flex;
+}
+.about-facility-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.about-image-wrap:hover .about-facility-img {
+  transform: scale(1.02);
+}
+.about-image-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(15, 23, 42, 0.88);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  font-size: 12.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.about-image-badge svg {
+  color: #38BDF8;
+}
+
+/* ================= THREE PILLARS BENTO CARDS ================= */
+.about-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+.pillar-card {
+  background: var(--card);
+  border-radius: var(--r-card);
+  padding: 36px 32px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pillar-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #EFF6FF;
+  color: var(--color-navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.pillar-title {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin-bottom: 10px;
+}
+.pillar-desc {
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+/* ================= PARTNER CTA CARD ================= */
+.about-cta-card {
+  background: linear-gradient(135deg, #0E335E 0%, #15457C 100%);
+  border-radius: var(--r-card);
+  padding: 48px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  box-shadow: 0 10px 30px rgba(14, 51, 94, 0.18);
+}
+.about-cta-info h3 {
+  font-family: var(--display);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.about-cta-info p {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 600px;
+  line-height: 1.55;
+}
+.about-cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.btn-cta-white {
+  background: #FFFFFF;
+  color: var(--color-navy);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+}
+.btn-cta-white:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+.btn-cta-outline-white {
+  background: transparent;
+  color: #FFFFFF;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: background 0.18s ease, border-color 0.18s ease;
+  white-space: nowrap;
+}
+.btn-cta-outline-white:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #FFFFFF;
+}
+
+/* ================= GLOBAL FOOTER ================= */
+.c-footer {
+  background: var(--card);
+  border-radius: var(--r-card);
+  padding: 44px 50px 32px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  margin-top: 0;
+  width: 100%;
+}
+.c-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 40px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+}
+.c-footer-brand-img {
+  height: 28px;
+  width: auto;
+  margin-bottom: 12px;
+  display: block;
+}
+.c-footer-desc {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  max-width: 320px;
+}
+.c-footer-contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.c-footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.c-footer-contact-item svg {
+  color: var(--color-navy);
+  flex-shrink: 0;
+}
+.c-footer-contact-item a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.c-footer-contact-item a:hover {
+  color: var(--color-navy);
+}
+
+.c-footer-links-col h6 {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.c-footer-links-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 0;
+  margin: 0;
+}
+.c-footer-links-col a {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.c-footer-links-col a:hover {
+  color: var(--color-navy);
+}
+
+.c-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.c-footer-legal-links {
+  display: flex;
+  gap: 20px;
+}
+.c-footer-legal-links a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 12.5px;
+  transition: color 0.15s ease;
+}
+.c-footer-legal-links a:hover {
+  color: var(--color-navy);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1040px) {
+  .site-header { padding: 14px 24px; }
+  .about-hero-card { grid-template-columns: 1fr; }
+  .about-image-wrap { min-height: 380px; }
+  .about-pillars-grid { grid-template-columns: 1fr; }
+  .about-cta-card { flex-direction: column; align-items: flex-start; }
+  .about-cta-actions { width: 100%; flex-wrap: wrap; }
+  .c-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+}
+
+@media (max-width: 768px) {
+  body { padding: 8px; }
+  .site-header { display: none; }
+  .mobile-nav { display: flex; }
+  .wrap { margin-top: 72px; gap: 12px; }
+  .about-hero-card { padding: 30px 22px; }
+  .about-stats-row { flex-direction: column; gap: 14px; }
+  .about-stat-sep { display: none; }
+  .about-image-wrap { min-height: 280px; }
+  .pillar-card { padding: 28px 20px; }
+  .about-cta-card { padding: 32px 22px; }
+  .c-footer { padding: 30px 20px; }
+  .c-footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .c-footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= DESKTOP HEADER ================= -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-header-left">
+      <a href="index.html" class="site-brand" aria-label="Akron Generics">
+        <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="brand-logo-img">
+      </a>
+    </div>
+
+    <nav class="site-nav-menu" aria-label="Primary Navigation">
+      <a href="about-us.html" class="header-nav-link active">About Us</a>
+
+      <div class="header-dropdown">
+        <button type="button" class="header-nav-link header-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
+          Products <span class="chevron"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="catalog.html">All Products</a>
+          <a href="products.html" class="dropdown-special-offers-link" aria-label="Special Offers">
+            <img src="src/assets/special-offers-badge.png" alt="Special Offers" class="dropdown-special-offers-img">
+          </a>
+        </div>
+      </div>
+
+      <div class="header-dropdown">
+        <button type="button" class="header-nav-link header-dropdown-btn" onclick="toggleNavDropdown(this)" aria-haspopup="true" aria-expanded="false">
+          Resources <span class="chevron"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="industry-resources.html">Industry Resources</a>
+          <a href="applications.html">Applications</a>
+        </div>
+      </div>
+
+      <a href="contact.html" class="header-nav-link">Contact</a>
+    </nav>
+
+    <div class="site-header-actions">
+      <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="header-nav-link" target="_blank" rel="noopener noreferrer">My T3</a>
+      <span class="header-nav-divider" aria-hidden="true"></span>
+      <a href="https://server.akrongenerics.com/login.php" class="header-nav-link" target="_blank" rel="noopener noreferrer">Login</a>
+      <a href="become-a-customer.html" class="header-cta-red">Become a Customer</a>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Bar -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" class="brand-link" aria-label="Akron Generics">
+    <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" style="height:22px;">
+  </a>
+  <div class="mobile-nav-actions">
+    <a href="become-a-customer.html" class="header-cta-red" style="font-size:12px;padding:6px 14px;">Become a Customer</a>
+    <button type="button" class="mobile-hamburger-btn" id="mobileMenuBtn" onclick="toggleMobileNav(true)" aria-label="Open Navigation Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</div>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav-drawer" id="mobileNavDrawer" onclick="handleDrawerClick(event)">
+  <div class="mobile-drawer-sheet">
+    <div class="mobile-drawer-header">
+      <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" style="height:22px;">
+      <button type="button" class="mobile-drawer-close" onclick="toggleMobileNav(false)" aria-label="Close Menu">&times;</button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="index.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Home</a>
+      <a href="about-us.html" class="mobile-drawer-link" style="font-weight:700;color:var(--color-navy);">About Us ✓</a>
+      <a href="catalog.html" class="mobile-drawer-link">All Products</a>
+      <a href="products.html" class="mobile-drawer-link mobile-drawer-special-link" aria-label="Special Offers">
+        <img src="src/assets/special-offers-badge.png" alt="Special Offers" class="mobile-special-offers-img">
+      </a>
+      <a href="industry-resources.html" class="mobile-drawer-link">Industry Resources</a>
+      <a href="applications.html" class="mobile-drawer-link">Applications</a>
+      <a href="contact.html" class="mobile-drawer-link" onclick="toggleMobileNav(false)">Contact Us</a>
+      <div class="mobile-drawer-divider"></div>
+      <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a>
+      <a href="https://server.akrongenerics.com/login.php" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">Customer Login ↗</a>
+      <a href="become-a-customer.html" class="mobile-drawer-cta">Become a Customer</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FULL WIDTH WRAPPER (NO MAX WIDTH RESTRICTIONS) ================= -->
+<div class="wrap">
+
+  <!-- HERO ABOUT US CARD (SLOW APPLE FADE-IN) -->
+  <section class="about-hero-card apple-fade-in">
+    <!-- Left Column: Content & Stats -->
+    <div class="about-content-left">
+      <div>
+        <div class="about-pill">ABOUT US</div>
+        <h1 class="about-title">About Akron Generics</h1>
+        <div class="about-paragraphs">
+          <p class="about-p">
+            Akron Generics is a family operated wholesale distributor which supplies prescription drugs, devices and over the counter products to hundreds of customers such as independent retail pharmacies, clinics, long term care pharmacies, chain stores, hospital and institutional pharmacies.
+          </p>
+          <p class="about-p">
+            Akron Generics has a singular idea which is to concentrate on supporting our customers by providing a quality service and lowering pharmaceutical out-of-pocket costs for patients.
+          </p>
+          <p class="about-p">
+            Our Board of members have over 50 years of collective experience in the pharmaceutical/health care industry. They have guided us to improve our quality of service and create a professional relationship with all of our customers &amp; vendors.
+          </p>
+          <p class="about-p">
+            Our 15,000 sq. ft. facility is located in the pharmaceutical hub of Commack, NY and is fully secured by 24/7 CCTV monitoring, keypad lock entrances and exits. This provides a safe work environment, secure and efficient pharmaceutical services to all our authenticated customers and vendors.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div class="about-divider"></div>
+
+        <!-- 4 Stats Row -->
+        <div class="about-stats-row">
+          <div class="about-stat-item">
+            <div class="about-stat-num">50+</div>
+            <div class="about-stat-lbl">Years of collective industry experience</div>
+          </div>
+          <div class="about-stat-sep" aria-hidden="true"></div>
+          <div class="about-stat-item">
+            <div class="about-stat-num">20</div>
+            <div class="about-stat-lbl">States licensed in</div>
+          </div>
+          <div class="about-stat-sep" aria-hidden="true"></div>
+          <div class="about-stat-item">
+            <div class="about-stat-num">15,000 sq. ft.</div>
+            <div class="about-stat-lbl">Fully secured facility in Commack, NY</div>
+          </div>
+          <div class="about-stat-sep" aria-hidden="true"></div>
+          <div class="about-stat-item">
+            <div class="about-stat-num">24/7</div>
+            <div class="about-stat-lbl">CCTV monitoring &amp; secured access</div>
+          </div>
+        </div>
+
+        <div class="about-footnote">
+          Explore our full range of products on our <a href="catalog.html" class="about-footnote-link">Products</a> page.
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Commack Facility Image (Replaces Stock Lady Image) -->
+    <div class="about-image-wrap">
+      <img src="src/assets/akron-facility.jpg" alt="Akron Generics 15,000 Sq. Ft. Facility in Commack, NY" class="about-facility-img">
+      <div class="about-image-badge">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span>47 Mall Drive, Commack, NY 11725</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE PILLARS BENTO CARDS (SLOW APPLE FADE-IN DELAY 1) -->
+  <section class="about-pillars-grid apple-fade-in delay-1">
+    <div class="pillar-card">
+      <div class="pillar-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+      </div>
+      <div>
+        <h3 class="pillar-title">Family-Operated Values</h3>
+        <p class="pillar-desc">
+          Built around direct pharmacist relationships, transparent pricing, and responsive account executives dedicated to your pharmacy bottom line.
+        </p>
+      </div>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+      </div>
+      <div>
+        <h3 class="pillar-title">15,000 Sq. Ft. Secure Hub</h3>
+        <p class="pillar-desc">
+          Climate-controlled pharmaceutical facility with 24/7 CCTV surveillance, biometric access, and complete DSCSA track-and-trace chain of custody.
+        </p>
+      </div>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
+      <div>
+        <h3 class="pillar-title">NABP-Accredited Supply Chain</h3>
+        <p class="pillar-desc">
+          Licensed across 20 states and accredited by the National Association of Boards of Pharmacy, ensuring certified authenticity on every shipment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP (SLOW APPLE FADE-IN DELAY 2) -->
+  <section class="about-cta-card apple-fade-in delay-2">
+    <div class="about-cta-info">
+      <h3>Partner With Akron Generics Today</h3>
+      <p>
+        Join hundreds of community pharmacies and healthcare providers benefiting from competitive wholesale generics, diabetic care essentials, and overnight delivery.
+      </p>
+    </div>
+    <div class="about-cta-actions">
+      <a href="become-a-customer.html" class="btn-cta-white">Become a Customer</a>
+      <a href="contact.html" class="btn-cta-outline-white">Contact Our Team</a>
+    </div>
+  </section>
+
+  <!-- GLOBAL FOOTER (SLOW APPLE FADE-IN DELAY 3) -->
+  <footer class="c-footer apple-fade-in delay-3">
+    <div class="c-footer-grid c-footer-main">
+      <div class="c-footer-brand-col c-footer-brand-block">
+        <a href="index.html" aria-label="Akron Generics Home">
+          <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="c-footer-brand-img c-footer-logo">
+        </a>
+        <p class="c-footer-desc c-footer-tagline">
+          NABP-accredited wholesale partner delivering premium high-AWP generics, diabetic supplies, and diagnostic essentials with maximized Medicare reimbursement.
+        </p>
+        <div class="c-footer-contact-items">
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>47 Mall Drive, Unit 1 &amp; 2, Commack, NY 11725</span>
+          </div>
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <a href="tel:6312153009">(631) 215-3009</a>
+          </div>
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <a href="mailto:orders@akrongenerics.com">orders@akrongenerics.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-footer-links-col">
+        <h6>EXPLORE</h6>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="catalog.html">All Products</a></li>
+          <li><a href="products.html">Special Offers</a></li>
+          <li><a href="industry-resources.html">Industry Resources</a></li>
+          <li><a href="applications.html">Applications</a></li>
+        </ul>
+      </div>
+
+      <div class="c-footer-links-col">
+        <h6>SUPPORT</h6>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="index.html#ordering">Ordering &amp; Shipping FAQ</a></li>
+          <li><a href="index.html#compliance">Quality &amp; Compliance</a></li>
+          <li><a href="contact.html">Product Inquiries</a></li>
+        </ul>
+      </div>
+
+      <div class="c-footer-links-col">
+        <h6>CUSTOMER PORTAL</h6>
+        <ul>
+          <li><a href="become-a-customer.html">Become a Customer</a></li>
+          <li><a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a></li>
+          <li><a href="https://server.akrongenerics.com/login.php" target="_blank" rel="noopener noreferrer">Customer Login ↗</a></li>
+        </ul>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(22, 24, 15, 0.08);">
+          <p style="font-size:11px;font-weight:700;color:var(--ink);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;">Ordering Hours</p>
+          <p style="font-size:12.5px;color:var(--ink-2);line-height:1.5;margin:0;">
+            Mon – Fri: 10:00 am – 6:30 pm EST<br>
+            <span style="font-size:11.5px;color:var(--ink-3);">Next-day delivery available</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-footer-bottom c-footer-bot">
+      <span>&copy; Akron Generics. All rights reserved.</span>
+      <div class="c-footer-legal-links c-footer-legal">
+        <a href="index.html#privacy">Privacy Policy</a>
+        <a href="index.html#terms">Terms of Sale</a>
+        <a href="index.html#licensing">Licensing</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+// Dropdown Navigation
+function toggleNavDropdown(btn) {
+  var parent = btn.closest('.header-dropdown');
+  if (!parent) return;
+  var isOpen = parent.classList.contains('open');
+  document.querySelectorAll('.header-dropdown.open').forEach(function(d) {
+    if (d !== parent) {
+      d.classList.remove('open');
+      var b = d.querySelector('.header-dropdown-btn');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    }
+  });
+  if (isOpen) {
+    parent.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    parent.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+// Close Dropdowns on Click Outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.header-dropdown')) {
+    document.querySelectorAll('.header-dropdown.open').forEach(function(d) {
+      d.classList.remove('open');
+      var b = d.querySelector('.header-dropdown-btn');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  }
+});
+
+// Mobile Nav Toggle
+function toggleMobileNav(open) {
+  var drawer = document.getElementById('mobileNavDrawer');
+  if (!drawer) return;
+  if (open) {
+    drawer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  } else {
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function handleDrawerClick(e) {
+  if (e.target.id === 'mobileNavDrawer') {
+    toggleMobileNav(false);
+  }
+}
+</script>
+
+</body>
+</html>
