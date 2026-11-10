@@ -47,11 +47,11 @@ body {
   color: var(--ink);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  padding: 0;
+  padding: 16px;
   overflow-x: hidden;
 }
 
-/* ================= SITE HEADER ================= */
+/* ================= SITE HEADER (3-Column Balanced Full Width) ================= */
 .site-header {
   position: fixed;
   top: 0;
@@ -59,16 +59,17 @@ body {
   right: 0;
   width: 100%;
   z-index: 100;
-  padding: 16px 48px;
+  padding: 16px 56px;
   background: rgba(255, 255, 255, 0.96);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(22, 24, 15, 0.08);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 .site-header-inner {
-  max-width: 1320px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -357,18 +358,33 @@ body {
   text-decoration: none;
 }
 
-/* ================= PAGE CONTAINER ================= */
-.main-wrap {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 110px 24px 80px;
+/* ================= PAGE CONTAINER (NO MAX WIDTH RESTRICTIONS) ================= */
+.main-wrap,
+.wrap {
+  width: 100%;
+  max-width: none;
+  margin: 88px auto 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* ================= HERO SECTION (CLEAN & SPACIOUS) ================= */
+/* ================= HERO SECTION (CLEAN & SPACIOUS APPLE CARD) ================= */
 .dir-hero {
+  background: var(--card, #FFFFFF);
+  border-radius: var(--r-card, 20px);
+  padding: 56px 48px 48px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  max-width: none;
   text-align: center;
-  padding: 36px 16px 44px;
-  max-width: 860px;
+  margin: 0;
+}
+.dir-hero-content {
+  width: 100%;
+  max-width: 960px;
   margin: 0 auto;
 }
 .dir-eyebrow {
@@ -410,8 +426,9 @@ body {
 
 /* ================= SEARCH & FILTER CONTROL ================= */
 .filter-bar-wrap {
-  max-width: 820px;
-  margin: 0 auto 52px;
+  width: 100%;
+  max-width: 900px;
+  margin: 28px auto 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -508,7 +525,14 @@ body {
 
 /* ================= SECTION STRUCTURE ================= */
 .resource-section {
-  margin-bottom: 56px;
+  background: var(--card, #FFFFFF);
+  border-radius: var(--r-card, 20px);
+  padding: 40px 48px 44px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 .resource-section.hidden {
   display: none;
@@ -550,8 +574,20 @@ body {
 /* ================= CLEAN RESOURCE CARDS ================= */
 .resource-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 18px;
+  width: 100%;
+  max-width: none;
+}
+@media (min-width: 1600px) {
+  .resource-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 2200px) {
+  .resource-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 .res-card {
@@ -887,16 +923,18 @@ body {
 
 /* ================= BOTTOM SUPPORT BANNER (CLEAN & SUBTLE) ================= */
 .support-strip {
-  background: #FFFFFF;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 32px 36px;
+  background: var(--card, #FFFFFF);
+  border-radius: var(--r-card, 20px);
+  padding: 40px 48px;
+  border: 1px solid rgba(22, 24, 15, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  max-width: none;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  margin-top: 60px;
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+  gap: 32px;
 }
 .support-strip-info h3 {
   font-family: var(--display);
@@ -951,11 +989,12 @@ body {
 .site-footer {
   background: var(--card, #FFFFFF);
   border-radius: var(--r-card, 20px);
-  padding: 44px 44px 28px;
+  padding: 44px 50px 32px;
   border: 1px solid rgba(22, 24, 15, 0.06);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  margin-top: 32px;
   width: 100%;
+  max-width: none;
+  margin-top: 0;
 }
 .c-footer-grid,
 .footer-grid {
@@ -1069,22 +1108,31 @@ body {
 @media (max-width: 1040px) {
   .site-header { padding: 14px 24px; }
   .resource-grid { grid-template-columns: repeat(2, 1fr); }
+  .c-footer-grid,
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
 
 @media (max-width: 768px) {
+  body { padding: 8px; }
   .site-header { display: none; }
   .mobile-nav { display: flex; }
-  .main-wrap { padding: 84px 16px 50px; }
-  .dir-hero { padding: 24px 0 32px; }
+  .main-wrap,
+  .wrap { margin-top: 72px; gap: 12px; }
+  .dir-hero { padding: 32px 20px; }
+  .resource-section { padding: 28px 20px; }
   .resource-grid { grid-template-columns: 1fr; gap: 14px; }
   .support-strip {
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px;
+    padding: 28px 20px;
   }
   .support-strip-actions { width: 100%; flex-wrap: wrap; }
+  .c-footer,
+  .site-footer { padding: 32px 20px 24px; }
+  .c-footer-grid,
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .c-footer-bottom,
+  .footer-bottom-row { flex-direction: column; align-items: flex-start; }
   .section-header-clean { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
 </style>
@@ -1195,14 +1243,16 @@ body {
 
   <!-- HERO -->
   <section class="dir-hero">
-    <div class="dir-eyebrow">
-      <span class="dir-eyebrow-dot"></span>
-      Pharmacy Intelligence &amp; Directory
+    <div class="dir-hero-content">
+      <div class="dir-eyebrow">
+        <span class="dir-eyebrow-dot"></span>
+        Pharmacy Intelligence &amp; Directory
+      </div>
+      <h1 class="dir-title">Industry Resources</h1>
+      <p class="dir-subtitle">
+        Essential federal regulatory portals, national pharmacy associations, supply chain compliance tools, and clinical publications curated for independent pharmacies.
+      </p>
     </div>
-    <h1 class="dir-title">Industry Resources</h1>
-    <p class="dir-subtitle">
-      Essential federal regulatory portals, national pharmacy associations, supply chain compliance tools, and clinical publications curated for independent pharmacies.
-    </p>
 
     <!-- SEARCH & CATEGORY FILTER -->
     <div class="filter-bar-wrap">

@@ -71,10 +71,10 @@ body {
   align-items: center;
 }
 .nav-container {
-  max-width: 1040px;
   width: 100%;
-  margin: 0 auto;
-  padding: 0 24px;
+  max-width: none;
+  margin: 0;
+  padding: 0 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -133,9 +133,10 @@ body {
 
 /* Page Canvas */
 .canvas-wrapper {
-  max-width: 960px;
-  margin: 32px auto 80px;
-  padding: 0 20px;
+  width: 100%;
+  max-width: none;
+  margin: 24px auto 80px;
+  padding: 0 24px;
 }
 
 .application-sheet {
@@ -740,10 +741,15 @@ canvas.sig-pad {
 .foot-main {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 40px;
-  max-width: 1060px;
+  width: 100%;
+  max-width: none;
   margin: 0 auto 34px;
+}
+.app-footer {
+  width: 100%;
+  max-width: none;
 }
 .foot-brand {
   display: flex;
