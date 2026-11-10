@@ -706,7 +706,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin-bottom: 14px;
+  margin-top: auto;
+  margin-bottom: 0;
 }
 .p-badge {
   font-size: 11px;
@@ -725,44 +726,8 @@ body {
   color: #1E6B24;
 }
 
-/* Pricing Row */
 .p-pricing-box {
-  margin-top: auto;
-  padding-top: 10px;
-  border-top: 1px solid rgba(22, 24, 15, 0.06);
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-.p-awp-col {
-  display: flex;
-  flex-direction: column;
-}
-.p-awp-label {
-  font-size: 10.5px;
-  font-weight: 500;
-  color: var(--ink-3);
-  text-transform: uppercase;
-}
-.p-awp-val {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink-2);
-}
-.p-price-col {
-  text-align: right;
-}
-.p-price-label {
-  font-size: 10.5px;
-  font-weight: 500;
-  color: var(--ink-3);
-  text-transform: uppercase;
-}
-.p-price-val {
-  font-size: 16px;
-  font-weight: 800;
-  color: #A02630;
+  display: none !important;
 }
 
 /* Action Button */
@@ -1173,7 +1138,8 @@ body {
     display: flex !important;
     flex-wrap: wrap !important;
     gap: 3px !important;
-    margin-bottom: 4px !important;
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
   }
   .p-badge {
     font-size: 8px !important;
@@ -1181,44 +1147,6 @@ body {
     border-radius: 3px !important;
     font-weight: 600 !important;
     white-space: nowrap !important;
-  }
-  .p-pricing-box {
-    margin-top: auto !important;
-    padding-top: 4px !important;
-    border-top: 1px solid rgba(22, 24, 15, 0.06) !important;
-    display: flex !important;
-    align-items: baseline !important;
-    justify-content: space-between !important;
-    width: 100% !important;
-  }
-  .p-awp-col {
-    display: flex !important;
-    flex-direction: column !important;
-    min-width: 0 !important;
-  }
-  .p-awp-label {
-    font-size: 8px !important;
-    color: var(--ink-3) !important;
-    text-transform: uppercase !important;
-  }
-  .p-awp-val {
-    font-size: 10px !important;
-    font-weight: 600 !important;
-    color: var(--ink-2) !important;
-  }
-  .p-price-col {
-    text-align: right !important;
-    min-width: 0 !important;
-  }
-  .p-price-label {
-    font-size: 8px !important;
-    color: var(--ink-3) !important;
-    text-transform: uppercase !important;
-  }
-  .p-price-val {
-    font-size: 12.5px !important;
-    font-weight: 800 !important;
-    color: var(--color-crimson) !important;
   }
   .c-footer {
     padding: 24px 14px 18px !important;
@@ -1721,16 +1649,6 @@ function renderProducts() {
           
           <div class="p-card-badges">
             ${badgesHtml}
-          </div>
-          <div class="p-pricing-box">
-            <div class="p-awp-col">
-              <span class="p-awp-label">AWP</span>
-              <span class="p-awp-val">${p.awp || '—'}</span>
-            </div>
-            <div class="p-price-col">
-              <span class="p-price-label">Wholesale</span>
-              <span class="p-price-val">${p.price || 'Inquire'}</span>
-            </div>
           </div>
         </div>
       </article>

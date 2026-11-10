@@ -666,7 +666,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin-bottom: 14px;
+  margin-top: auto;
+  margin-bottom: 0;
 }
 .p-badge {
   font-size: 11px;
@@ -685,41 +686,7 @@ body {
   color: #1E6B24;
 }
 .p-pricing-box {
-  margin-top: auto;
-  padding-top: 10px;
-  border-top: 1px solid rgba(22, 24, 15, 0.06);
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-}
-.p-awp-col {
-  display: flex;
-  flex-direction: column;
-}
-.p-awp-label {
-  font-size: 10.5px;
-  font-weight: 500;
-  color: var(--ink-3);
-  text-transform: uppercase;
-}
-.p-awp-val {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink-2);
-}
-.p-price-col {
-  text-align: right;
-}
-.p-price-label {
-  font-size: 10.5px;
-  font-weight: 500;
-  color: var(--ink-3);
-  text-transform: uppercase;
-}
-.p-price-val {
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--color-crimson);
+  display: none !important;
 }
 
 .specials-bottom-row {
@@ -829,6 +796,7 @@ body {
   font-size: 14.5px;
   font-weight: 700;
   color: #FFFFFF;
+  margin-bottom: 4px;
 }
 .contour-subcard-price {
   font-family: var(--display);
@@ -863,6 +831,7 @@ body {
   font-size: 15px;
   font-weight: 700;
   color: #FFFFFF;
+  margin-bottom: 4px;
 }
 .contour-meter-price {
   font-family: var(--display);
@@ -1102,7 +1071,8 @@ body {
     display: flex !important;
     flex-wrap: wrap !important;
     gap: 3px !important;
-    margin-bottom: 4px !important;
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
   }
   .p-badge {
     font-size: 8px !important;
@@ -1110,14 +1080,7 @@ body {
     border-radius: 3px !important;
     font-weight: 600 !important;
   }
-  .p-pricing-box {
-    margin-top: auto !important;
-    padding-top: 4px !important;
-    border-top: 1px solid rgba(22, 24, 15, 0.06) !important;
-  }
-  .p-awp-label { font-size: 8px !important; }
-  .p-awp-val { font-size: 10px !important; }
-  .p-price-val { font-size: 12.5px !important; }
+  .p-pricing-box { display: none !important; }
   .specials-bottom-row { flex-direction: column; align-items: stretch; gap: 12px; }
   .specials-bottom-row .btn-white-pill { width: 100%; justify-content: center; }
   .contour-cards-top {
@@ -1358,16 +1321,6 @@ body {
             <span class="p-badge high-awp">Special Price</span>
             <span class="p-badge medicare">Medicare Covered</span>
           </div>
-          <div class="p-pricing-box">
-            <div class="p-awp-col">
-              <span class="p-awp-label">AWP</span>
-              <span class="p-awp-val">$148.66</span>
-            </div>
-            <div class="p-price-col">
-              <span class="p-price-label">Wholesale</span>
-              <span class="p-price-val">$36.99</span>
-            </div>
-          </div>
         </div>
       </article>
 
@@ -1384,16 +1337,6 @@ body {
             <span class="p-badge high-awp">Special Price</span>
             <span class="p-badge medicare">Medicare Covered</span>
           </div>
-          <div class="p-pricing-box">
-            <div class="p-awp-col">
-              <span class="p-awp-label">AWP</span>
-              <span class="p-awp-val">$42.50</span>
-            </div>
-            <div class="p-price-col">
-              <span class="p-price-label">Wholesale</span>
-              <span class="p-price-val">$13.99</span>
-            </div>
-          </div>
         </div>
       </article>
 
@@ -1408,16 +1351,6 @@ body {
           <div class="p-card-ndc">NDC: 73317-6866-05</div>
           <div class="p-card-badges">
             <span class="p-badge high-awp">Special Price</span>
-          </div>
-          <div class="p-pricing-box">
-            <div class="p-awp-col">
-              <span class="p-awp-label">AWP</span>
-              <span class="p-awp-val">$128.00</span>
-            </div>
-            <div class="p-price-col">
-              <span class="p-price-label">Wholesale</span>
-              <span class="p-price-val">$32.99</span>
-            </div>
           </div>
         </div>
       </article>
@@ -1435,22 +1368,12 @@ body {
             <span class="p-badge high-awp">Authorized Dealer</span>
             <span class="p-badge medicare">Free Case Promo</span>
           </div>
-          <div class="p-pricing-box">
-            <div class="p-awp-col">
-              <span class="p-awp-label">AWP</span>
-              <span class="p-awp-val">$168.00</span>
-            </div>
-            <div class="p-price-col">
-              <span class="p-price-label">Wholesale</span>
-              <span class="p-price-val">$99.99</span>
-            </div>
-          </div>
         </div>
       </article>
     </div>
 
     <div class="specials-bottom-row">
-      <span class="specials-notice">November pricing. Confirm availability before ordering.</span>
+      <span class="specials-notice">Promotional allocation. Confirm availability before ordering.</span>
       <a href="src/november-specials.pdf" target="_blank" onclick="openPdfModal('src/november-specials.pdf', 'November Specials Catalog'); return false;" class="btn-red-pill">Explore the Catalog ↗</a>
     </div>
   </section>
@@ -1473,14 +1396,12 @@ body {
           <!-- 50 CT -->
           <div class="contour-subcard">
             <div class="contour-subcard-title">50 CT Test Strips</div>
-            <div class="contour-subcard-price">$49.99</div>
-            <div class="contour-subcard-case">24 units / case</div>
+            <div class="contour-subcard-case">24 units / case · Free Promo Eligible</div>
           </div>
           <!-- 100 CT -->
           <div class="contour-subcard">
             <div class="contour-subcard-title">100 CT Test Strips</div>
-            <div class="contour-subcard-price">$99.99</div>
-            <div class="contour-subcard-case">12 units / case</div>
+            <div class="contour-subcard-case">12 units / case · Free Promo Eligible</div>
           </div>
         </div>
 
@@ -1488,7 +1409,7 @@ body {
         <div class="contour-wide-subcard">
           <div class="contour-meter-info">
             <div class="contour-meter-title">Next Generation Meter</div>
-            <div class="contour-meter-price">$15.75</div>
+            <div class="contour-subcard-case">Blood Glucose System Kit · Promo Eligible</div>
           </div>
           <div class="contour-meter-visual">
             <img src="src/assets/products/contour-meter.png" alt="Contour Next Blood Glucose Meter and Test Strips">
@@ -1503,7 +1424,7 @@ body {
   </section>
 
   <!-- Bottom Footnote -->
-  <p class="products-footnote">Product visuals are illustrative. AWP is not reimbursement, coverage is plan-specific.</p>
+  <p class="products-footnote">Product visuals are illustrative. Coverage and terms are plan-specific.</p>
 
     <!-- ================= GLOBAL FOOTER ================= -->
   <footer class="c-footer">
