@@ -81,7 +81,7 @@ window.AKRON_CATALOG = {
       price: "$36.99",
       brand: "Quick Touch Safety",
       badges: ["High AWP", "Medicare Covered"],
-      image: "src/assets/products/needle-safety-purple.jpg",
+      image: "src/assets/products/special-pen-needles.png",
       description: "Automated shielding safety pen needles with 31G x 4MM needle for maximum comfort and needle-stick injury prevention."
     },
     {
@@ -96,7 +96,7 @@ window.AKRON_CATALOG = {
       price: "$36.99",
       brand: "Quick Touch Safety",
       badges: ["High AWP", "Medicare Covered"],
-      image: "src/assets/products/needle-safety-blue.jpg",
+      image: "src/assets/products/special-pen-needles.png",
       description: "Dual-shield safety mechanism, 31G x 5MM gauge needle designed for smooth, reliable insulin delivery with premium Medicare reimbursement."
     },
     {
@@ -111,7 +111,7 @@ window.AKRON_CATALOG = {
       price: "$18.99",
       brand: "Easy Comfort",
       badges: ["High AWP", "Low Acquisition"],
-      image: "src/assets/products/needle-clean.jpg",
+      image: "src/assets/products/cat-pen-needles.png",
       description: "Ultra-thin wall technology, siliconized stainless steel needle for gentle, pain-free injection."
     },
     {
@@ -126,7 +126,7 @@ window.AKRON_CATALOG = {
       price: "$18.99",
       brand: "Easy Comfort",
       badges: ["High AWP", "Low Acquisition"],
-      image: "src/assets/products/needle-lavender.jpg",
+      image: "src/assets/products/cat-pen-needles.png",
       description: "Universal fit design compatible with all major diabetes insulin delivery pens."
     },
     {
@@ -141,7 +141,7 @@ window.AKRON_CATALOG = {
       price: "$18.99",
       brand: "Easy Comfort",
       badges: ["High AWP", "Low Acquisition"],
-      image: "src/assets/products/needle-green.jpg",
+      image: "src/assets/products/cat-pen-needles.png",
       description: "Tri-bevel cut tip engineered for effortless skin penetration and optimal patient comfort."
     },
     {
@@ -156,7 +156,7 @@ window.AKRON_CATALOG = {
       price: "$18.99",
       brand: "Easy Comfort",
       badges: ["Ultra-Fine 33G", "High AWP"],
-      image: "src/assets/products/needle-clean.jpg",
+      image: "src/assets/products/cat-pen-needles.png",
       description: "Ultra-fine 33-gauge needle profile designed specifically for sensitive injection sites."
     },
     {
@@ -171,7 +171,7 @@ window.AKRON_CATALOG = {
       price: "$18.99",
       brand: "Easy Comfort",
       badges: ["Ultra-Fine 33G", "High AWP"],
-      image: "src/assets/products/needle-lavender.jpg",
+      image: "src/assets/products/cat-pen-needles.png",
       description: "Precision engineered micro-cannula providing superior flow rate with minimum penetration force."
     },
     {
@@ -186,7 +186,7 @@ window.AKRON_CATALOG = {
       price: "$18.99",
       brand: "Easy Comfort",
       badges: ["Compact 4MM", "High AWP"],
-      image: "src/assets/products/needle-clean.jpg",
+      image: "src/assets/products/cat-pen-needles.png",
       description: "Comfortable 4mm length suitable for pediatric and adult patients without skin pinch."
     },
     {
@@ -201,7 +201,7 @@ window.AKRON_CATALOG = {
       price: "$18.99",
       brand: "Easy Comfort",
       badges: ["High AWP", "Low Acquisition"],
-      image: "src/assets/products/needle-green.jpg",
+      image: "src/assets/products/cat-pen-needles.png",
       description: "Sterile non-toxic medical grade pen needle with easy-peel protective seal."
     },
     {
@@ -216,7 +216,7 @@ window.AKRON_CATALOG = {
       price: "$18.99",
       brand: "Easy Comfort",
       badges: ["High AWP", "Low Acquisition"],
-      image: "src/assets/products/needle-clean.jpg",
+      image: "src/assets/products/cat-pen-needles.png",
       description: "Consistent medication dosage flow with reliable fit across all major pen injectors."
     },
 
@@ -233,7 +233,7 @@ window.AKRON_CATALOG = {
       price: "$11.99",
       brand: "Quick Touch",
       badges: ["Single-Use Safety", "Medicare Covered"],
-      image: "src/assets/products/lancet-clean.jpg",
+      image: "src/assets/products/special-lancets.png",
       description: "Automatic retractable lancet to eliminate accidental needle sticks and cross-contamination."
     },
     {
@@ -248,7 +248,7 @@ window.AKRON_CATALOG = {
       price: "$15.99",
       brand: "Comfort Touch",
       badges: ["High AWP", "Medicare Covered"],
-      image: "src/assets/products/lancet-clean.jpg",
+      image: "src/assets/products/special-lancets.png",
       description: "Pre-cocked design with push-button activation for painless fingerstick blood sampling."
     },
     {
@@ -278,7 +278,7 @@ window.AKRON_CATALOG = {
       price: "$1.29",
       brand: "Pro Comfort",
       badges: ["Antiseptic", "Best Seller"],
-      image: "src/assets/products/alcohol-pads-clean.jpg",
+      image: "src/assets/products/cat-lancets.png",
       description: "Thick 2-ply non-woven sterile pads saturated with 70% isopropyl alcohol for rapid skin antisepsis."
     },
     {
@@ -293,7 +293,7 @@ window.AKRON_CATALOG = {
       price: "$2.99",
       brand: "Quick Touch",
       badges: ["High AWP", "Sterile"],
-      image: "src/assets/products/alcohol-pads-clean.jpg",
+      image: "src/assets/products/cat-lancets.png",
       description: "Individually sealed airtight foil packets maintaining optimal saturation and sterility."
     },
     {
@@ -308,7 +308,7 @@ window.AKRON_CATALOG = {
       price: "$1.49",
       brand: "Aum",
       badges: ["Value Pack", "Low Acquisition"],
-      image: "src/assets/products/alcohol-pads-clean.jpg",
+      image: "src/assets/products/cat-lancets.png",
       description: "Everyday clinical antiseptic wipes for pre-injection cleansing and sanitization."
     },
 
@@ -325,7 +325,7 @@ window.AKRON_CATALOG = {
       price: "$19.99",
       brand: "Akron Diagnostic",
       badges: ["High AWP $196.09", "Medicare Covered"],
-      image: "src/assets/products/bp-monitor-clean.jpg",
+      image: "src/assets/products/cat-blood-pressure.png",
       description: "Large backlit LCD digital monitor with irregular heartbeat detection and multi-user memory."
     },
     {
@@ -451,7 +451,7 @@ window.AKRON_CATALOG = {
       price: "$34.99",
       brand: "Akron Rx Packaging",
       badges: ["$34.99 / Case", "USP Compliant"],
-      image: "src/assets/products/amber-vials-clean.jpg",
+      image: "src/assets/products/cat-pharmacy-vials.png",
       description: "Light-resistant amber polypropylene bottles with dual-action push-and-turn child-resistant closure."
     },
     {
@@ -466,7 +466,7 @@ window.AKRON_CATALOG = {
       price: "$34.99",
       brand: "Akron Rx Packaging",
       badges: ["$34.99 / Case", "Popular Size"],
-      image: "src/assets/products/amber-vials-clean.jpg",
+      image: "src/assets/products/cat-pharmacy-vials.png",
       description: "Durable medical pharmacy vials tested to exceed CPSC child-resistant protocols."
     },
     {
@@ -481,7 +481,7 @@ window.AKRON_CATALOG = {
       price: "$34.99",
       brand: "Akron Rx Packaging",
       badges: ["$34.99 / Case", "USP Compliant"],
-      image: "src/assets/products/amber-vials-clean.jpg",
+      image: "src/assets/products/cat-pharmacy-vials.png",
       description: "Shatter-proof amber plastic shielding sensitive pharmaceuticals from UV degradation."
     },
     {
@@ -496,7 +496,7 @@ window.AKRON_CATALOG = {
       price: "$34.99",
       brand: "Akron Rx Packaging",
       badges: ["$34.99 / Case", "USP Compliant"],
-      image: "src/assets/products/amber-vials-clean.jpg",
+      image: "src/assets/products/cat-pharmacy-vials.png",
       description: "Spacious capacity prescription containers with precision molded child-safety caps."
     },
     {
@@ -511,7 +511,7 @@ window.AKRON_CATALOG = {
       price: "$34.99",
       brand: "Akron Rx Packaging",
       badges: ["$34.99 / Case", "High Capacity"],
-      image: "src/assets/products/amber-vials-clean.jpg",
+      image: "src/assets/products/cat-pharmacy-vials.png",
       description: "Large volume prescription vials engineered for bulk tablet or capsule dispense."
     },
     {
@@ -526,7 +526,7 @@ window.AKRON_CATALOG = {
       price: "$34.99",
       brand: "Akron Rx Packaging",
       badges: ["$34.99 / Case", "Max Size"],
-      image: "src/assets/products/amber-vials-clean.jpg",
+      image: "src/assets/products/cat-pharmacy-vials.png",
       description: "Maximum size prescription bottle for high count maintenance prescriptions."
     },
 
