@@ -593,193 +593,123 @@ body {
   margin-top: 24px;
 }
 
-/* ================= PRODUCT CARD (AIRBNB-STYLE MODERN ELEGANT CARD) ================= */
+/* ================= PRODUCT CARD (MINIMALIST ROUNDED 25PX HERO STYLE) ================= */
 .p-card {
   min-width: 0;
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 22px;
-  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+  border: 1px solid #ECEEF0;
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  padding: 10px 10px 14px;
+  padding: 12px 12px 18px;
   box-sizing: border-box;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .p-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.07);
 }
 
-/* Inset Media Container with Rounded Corners */
-.p-card-media {
+/* Dedicated Image Box with 25px Corner Radius */
+.p-card-image-box {
   width: 100%;
-  height: 220px;
-  border-radius: 16px;
-  overflow: hidden;
+  height: 240px;
+  border-radius: 25px;
+  background: #F7F7F6;
+  border: 1px solid rgba(0, 0, 0, 0.04);
   position: relative;
-  background: #F4F5F7;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
 }
-.p-card-media img {
+.p-card-image-box img {
   width: 100%;
   height: 100%;
-  max-width: 86%;
-  max-height: 86%;
+  max-width: 82%;
+  max-height: 82%;
   object-fit: contain;
   display: block;
   margin: 0 auto;
   mix-blend-mode: multiply;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.p-card:hover .p-card-media img {
+.p-card:hover .p-card-image-box img {
   transform: scale(1.05);
 }
 
-/* Floating Top-Left Pill Badge ("Guest Favourite" style) */
-.p-card-badge-pill {
+/* Floating Top-Left Pill Badge */
+.p-card-pill {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 14px;
+  left: 14px;
   z-index: 2;
   background: #FFFFFF;
   border-radius: 9999px;
-  padding: 4px 12px;
-  font-size: 11px;
+  padding: 5px 13px;
+  font-size: 10px;
   font-weight: 700;
-  color: #111827;
-  letter-spacing: -0.01em;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1F2937;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   white-space: nowrap;
 }
 
-/* Floating Top-Right Heart Button */
-.p-card-heart-pill {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 2;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  color: #4B5563;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: all 0.2s ease;
-  padding: 0;
-}
-.p-card-heart-pill:hover,
-.p-card-heart-pill.active {
-  transform: scale(1.1);
-  color: #EF4444;
-}
-.p-card-heart-pill.active svg {
-  fill: #EF4444;
-}
-
-/* Card Content Area */
-.p-card-content {
-  padding: 12px 4px 0 4px;
+/* Centered Content Info Area */
+.p-card-info {
+  padding: 16px 8px 2px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   flex-grow: 1;
 }
 
-/* Header Row: Title on Left, Pack/Qty on Right */
-.p-card-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 2px;
-}
+/* Centered Title with Pipe Spec */
 .p-card-title {
   font-family: var(--display, 'Manrope', sans-serif);
-  font-size: 15.5px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.3;
   color: #111827;
-  margin: 0;
+  margin: 0 0 6px 0;
   letter-spacing: -0.015em;
+  text-align: center;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  flex: 1;
-}
-.p-card-header-tag {
-  font-family: var(--display, 'Manrope', sans-serif);
-  font-size: 14px;
-  font-weight: 800;
-  color: #111827;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.p-card-header-tag .tag-sub {
-  font-size: 10.5px;
-  font-weight: 500;
-  color: #6B7280;
-  margin-left: 2px;
 }
 
-/* Description (clean 2-line text) */
+/* Centered Description */
 .p-card-desc {
   font-family: var(--sans, 'Inter', sans-serif);
-  font-size: 12px;
+  font-size: 12.5px;
   color: #6B7280;
-  line-height: 1.4;
-  margin: 4px 0 0 0;
+  line-height: 1.45;
+  margin: 0 0 10px 0;
+  text-align: center;
+  max-width: 95%;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Bottom Specs Strip with Divider and Pipe Delimiters */
-.p-card-specs-strip {
-  border-top: 1px solid #ECEEF1;
-  margin-top: 12px;
-  padding-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4px;
-}
-.p-spec-col {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  min-width: 0;
-  font-size: 11px;
-  color: #4B5563;
-  font-weight: 500;
-  overflow: hidden;
-}
-.p-spec-col svg {
-  flex-shrink: 0;
-  color: #6B7280;
-}
-.p-spec-col span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.p-spec-pipe {
-  color: #D1D5DB;
-  font-weight: 300;
-  font-size: 12px;
-  flex-shrink: 0;
+/* Bottom Value (NDC in place of price) */
+.p-card-ndc-val {
+  font-family: var(--display, 'Manrope', sans-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+  margin-top: auto;
+  letter-spacing: -0.01em;
 }
 .p-pricing-box {
   display: none !important;
@@ -1108,30 +1038,31 @@ body {
     margin-top: 14px;
   }
   .p-card {
-    border-radius: 16px !important;
+    border-radius: 20px !important;
     background: #FFFFFF !important;
-    border: 1px solid #E5E7EB !important;
-    padding: 8px 8px 10px !important;
+    border: 1px solid #ECEEF0 !important;
+    padding: 8px 8px 12px !important;
     display: flex !important;
     flex-direction: column !important;
     min-width: 0 !important;
     width: 100% !important;
-    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04) !important;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03) !important;
   }
-  .p-card-media {
+  .p-card-image-box {
     width: 100% !important;
-    height: 140px !important;
-    border-radius: 12px !important;
-    background: #F4F5F7 !important;
+    height: 145px !important;
+    border-radius: 16px !important;
+    background: #F7F7F6 !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     position: relative !important;
     overflow: hidden !important;
   }
-  .p-card-media img {
-    max-height: 88% !important;
-    max-width: 88% !important;
+  .p-card-image-box img {
+    max-height: 84% !important;
+    max-width: 84% !important;
     width: auto !important;
     height: auto !important;
     object-fit: contain !important;
@@ -1139,83 +1070,53 @@ body {
     margin: 0 auto !important;
     mix-blend-mode: multiply !important;
   }
-  .p-card-badge-pill {
-    top: 6px !important;
-    left: 6px !important;
-    font-size: 8.5px !important;
-    padding: 2.5px 7px !important;
+  .p-card-pill {
+    top: 7px !important;
+    left: 7px !important;
+    font-size: 8px !important;
+    padding: 3px 8px !important;
     border-radius: 9999px !important;
     font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
   }
-  .p-card-heart-pill {
-    top: 6px !important;
-    right: 6px !important;
-    width: 24px !important;
-    height: 24px !important;
-  }
-  .p-card-heart-pill svg {
-    width: 12px !important;
-    height: 12px !important;
-  }
-  .p-card-content {
-    padding: 8px 2px 0 !important;
+  .p-card-info {
+    padding: 10px 4px 0 !important;
     display: flex !important;
     flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
     min-width: 0 !important;
     width: 100% !important;
   }
-  .p-card-header-row {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: baseline !important;
-    gap: 4px !important;
-    margin-bottom: 2px !important;
-  }
   .p-card-title {
     font-size: 12.5px !important;
-    line-height: 1.22 !important;
+    line-height: 1.25 !important;
     font-weight: 700 !important;
+    margin-bottom: 4px !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
-    height: 30px !important;
+    height: 31px !important;
     word-break: break-word !important;
-  }
-  .p-card-header-tag {
-    font-size: 11px !important;
-    font-weight: 800 !important;
-  }
-  .p-card-header-tag .tag-sub {
-    font-size: 8px !important;
+    text-align: center !important;
   }
   .p-card-desc {
     font-size: 9.5px !important;
     line-height: 1.35 !important;
     color: #6B7280 !important;
-    margin-top: 3px !important;
+    margin: 0 0 6px 0 !important;
+    text-align: center !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
   }
-  .p-card-specs-strip {
-    border-top: 1px solid #ECEEF1 !important;
-    margin-top: 8px !important;
-    padding-top: 6px !important;
-    gap: 2px !important;
-  }
-  .p-spec-col {
-    font-size: 8.5px !important;
-    gap: 2px !important;
-  }
-  .p-spec-col svg {
-    width: 10px !important;
-    height: 10px !important;
-  }
-  .p-spec-pipe {
-    font-size: 9px !important;
-    color: #D1D5DB !important;
+  .p-card-ndc-val {
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    margin-top: auto !important;
   }
   .p-pricing-box { display: none !important; }
   .specials-bottom-row { flex-direction: column; align-items: stretch; gap: 12px; }
@@ -1444,148 +1345,56 @@ body {
     <h1 class="section-title">A new month. More opportunity.</h1>
     <p class="section-subtitle">Featured prices from our November specials.</p>
 
-                        <div class="specials-grid">
+                                <div class="specials-grid">
       <!-- Special 1: Safety Pen Needles -->
       <article class="p-card">
-        <div class="p-card-media">
-          <span class="p-card-badge-pill">Special Price</span>
-          <button type="button" class="p-card-heart-pill" aria-label="Favorite" onclick="event.stopPropagation(); this.classList.toggle('active');">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
-          </button>
+        <div class="p-card-image-box">
+          <span class="p-card-pill">SPECIAL PRICE</span>
           <img src="src/assets/products/quick-touch-safety-packaging.png" alt="Quick Touch Safety Pen Needles" loading="lazy">
         </div>
-        <div class="p-card-content">
-          <div class="p-card-header-row">
-            <h3 class="p-card-title">Quick Touch Safety Pen Needles</h3>
-            <div class="p-card-header-tag">100 CT</div>
-          </div>
+        <div class="p-card-info">
+          <h3 class="p-card-title">Quick Touch Safety Pen Needles | 100 CT</h3>
           <p class="p-card-desc">Safety-shielded pen needle engineered for single-use protection and smooth injection comfort.</p>
-          <div class="p-card-specs-strip">
-            <div class="p-spec-col" title="Size: 31G × 4MM">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-              <span>Size: 31G × 4MM</span>
-            </div>
-            <span class="p-spec-pipe">|</span>
-            <div class="p-spec-col" title="Packaging: 100 CT">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-              <span>Qty: 100 CT</span>
-            </div>
-            <span class="p-spec-pipe">|</span>
-            <div class="p-spec-col" title="NDC: 73317-6816-04">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              <span>NDC: 6816-04</span>
-            </div>
-          </div>
+          <div class="p-card-ndc-val">NDC: 73317-6816-04</div>
         </div>
       </article>
 
       <!-- Special 2: Safety Lancets -->
       <article class="p-card">
-        <div class="p-card-media">
-          <span class="p-card-badge-pill">Special Price</span>
-          <button type="button" class="p-card-heart-pill" aria-label="Favorite" onclick="event.stopPropagation(); this.classList.toggle('active');">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
-          </button>
+        <div class="p-card-image-box">
+          <span class="p-card-pill">SPECIAL PRICE</span>
           <img src="src/assets/products/special-lancets.png" alt="Safety Lancets 28G" loading="lazy">
         </div>
-        <div class="p-card-content">
-          <div class="p-card-header-row">
-            <h3 class="p-card-title">Safety Lancets 28G</h3>
-            <div class="p-card-header-tag">100 CT</div>
-          </div>
+        <div class="p-card-info">
+          <h3 class="p-card-title">Safety Lancets 28G | 100 CT</h3>
           <p class="p-card-desc">Pressure-activated safety lancet for capillary blood sampling with automatic needle retraction.</p>
-          <div class="p-card-specs-strip">
-            <div class="p-spec-col" title="Gauge: 28G">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-              <span>Size: 28G</span>
-            </div>
-            <span class="p-spec-pipe">|</span>
-            <div class="p-spec-col" title="Packaging: 100 CT">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-              <span>Qty: 100 CT</span>
-            </div>
-            <span class="p-spec-pipe">|</span>
-            <div class="p-spec-col" title="NDC: 73317-4683-01">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              <span>NDC: 4683-01</span>
-            </div>
-          </div>
+          <div class="p-card-ndc-val">NDC: 73317-4683-01</div>
         </div>
       </article>
 
       <!-- Special 3: Lidocaine Patches -->
       <article class="p-card">
-        <div class="p-card-media">
-          <span class="p-card-badge-pill">Special Price</span>
-          <button type="button" class="p-card-heart-pill" aria-label="Favorite" onclick="event.stopPropagation(); this.classList.toggle('active');">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
-          </button>
+        <div class="p-card-image-box">
+          <span class="p-card-pill">SPECIAL PRICE</span>
           <img src="src/assets/products/lidocaine-patch-box.png" alt="Lidocaine 4% Patches" loading="lazy">
         </div>
-        <div class="p-card-content">
-          <div class="p-card-header-row">
-            <h3 class="p-card-title">Lidocaine 4% Topical Patches</h3>
-            <div class="p-card-header-tag">15 CT</div>
-          </div>
+        <div class="p-card-info">
+          <h3 class="p-card-title">Lidocaine 4% Topical Patches | 15 Patches</h3>
           <p class="p-card-desc">Maximum strength OTC lidocaine topical patch providing targeted temporary numbing pain relief.</p>
-          <div class="p-card-specs-strip">
-            <div class="p-spec-col" title="Strength: 4% Topical">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-              <span>Size: 4% Relief</span>
-            </div>
-            <span class="p-spec-pipe">|</span>
-            <div class="p-spec-col" title="Packaging: 15 Patches">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-              <span>Qty: 15 Patches</span>
-            </div>
-            <span class="p-spec-pipe">|</span>
-            <div class="p-spec-col" title="NDC: 73317-6866-05">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              <span>NDC: 6866-05</span>
-            </div>
-          </div>
+          <div class="p-card-ndc-val">NDC: 73317-6866-05</div>
         </div>
       </article>
 
       <!-- Special 4: Contour Next 100 CT -->
       <article class="p-card">
-        <div class="p-card-media">
-          <span class="p-card-badge-pill">Authorized Dealer</span>
-          <button type="button" class="p-card-heart-pill" aria-label="Favorite" onclick="event.stopPropagation(); this.classList.toggle('active');">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
-          </button>
+        <div class="p-card-image-box">
+          <span class="p-card-pill">AUTHORIZED DEALER</span>
           <img src="src/assets/products/contour-next-meter.png" alt="Contour Next Test Strips 100 CT" loading="lazy">
         </div>
-        <div class="p-card-content">
-          <div class="p-card-header-row">
-            <h3 class="p-card-title">Contour Next Retail Test Strips</h3>
-            <div class="p-card-header-tag">12 Units</div>
-          </div>
+        <div class="p-card-info">
+          <h3 class="p-card-title">Contour Next Retail Test Strips | 100 CT</h3>
           <p class="p-card-desc">High-accuracy blood glucose test strips featuring Second-Chance sampling and multi-pulse technology.</p>
-          <div class="p-card-specs-strip">
-            <div class="p-spec-col" title="Count: 100 CT">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-              <span>Size: 100 CT</span>
-            </div>
-            <span class="p-spec-pipe">|</span>
-            <div class="p-spec-col" title="Case Pack: 12 Units">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-              <span>Qty: 12/cs</span>
-            </div>
-            <span class="p-spec-pipe">|</span>
-            <div class="p-spec-col" title="NDC: 00193-7312-21">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              <span>NDC: 7312-21</span>
-            </div>
-          </div>
+          <div class="p-card-ndc-val">NDC: 00193-7312-21</div>
         </div>
       </article>
     </div><div class="specials-bottom-row">
