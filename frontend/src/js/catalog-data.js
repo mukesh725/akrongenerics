@@ -79,7 +79,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-6816-04",
       brand: "Quick Touch Safety",
       badges: ["High AWP", "Medicare Covered"],
-      image: "src/assets/products/special-pen-needles.png",
+      image: "src/assets/products/quick-touch-safety-packaging.png",
       description: "Automated shielding safety pen needles with 31G x 4MM needle for maximum comfort and needle-stick injury prevention."
     },
     {
@@ -92,7 +92,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-6816-05",
       brand: "Quick Touch Safety",
       badges: ["High AWP", "Medicare Covered"],
-      image: "src/assets/products/special-pen-needles.png",
+      image: "src/assets/products/quick-touch-safety-5mm-display.png",
       description: "Dual-shield safety mechanism, 31G x 5MM gauge needle designed for smooth, reliable insulin delivery with premium Medicare reimbursement."
     },
     {
@@ -105,7 +105,7 @@ window.AKRON_CATALOG = {
       ndc: "73317610905",
       brand: "Easy Comfort",
       badges: ["High AWP", "Low Acquisition"],
-      image: "src/assets/products/cat-pen-needles.png",
+      image: "src/assets/products/needle-31x4.png",
       description: "Ultra-thin wall technology, siliconized stainless steel needle for gentle, pain-free injection."
     },
     {
@@ -118,7 +118,7 @@ window.AKRON_CATALOG = {
       ndc: "73317610906",
       brand: "Easy Comfort",
       badges: ["High AWP", "Low Acquisition"],
-      image: "src/assets/products/cat-pen-needles.png",
+      image: "src/assets/products/needle-31x6.jpeg",
       description: "Universal fit design compatible with all major diabetes insulin delivery pens."
     },
     {
@@ -131,7 +131,7 @@ window.AKRON_CATALOG = {
       ndc: "73317610908",
       brand: "Easy Comfort",
       badges: ["High AWP", "Low Acquisition"],
-      image: "src/assets/products/cat-pen-needles.png",
+      image: "src/assets/products/quick-touch-needle-display.png",
       description: "Tri-bevel cut tip engineered for effortless skin penetration and optimal patient comfort."
     },
     {
@@ -144,7 +144,7 @@ window.AKRON_CATALOG = {
       ndc: "73317623705",
       brand: "Easy Comfort",
       badges: ["Ultra-Fine 33G", "High AWP"],
-      image: "src/assets/products/cat-pen-needles.png",
+      image: "src/assets/products/needle-33x5.jpeg",
       description: "Ultra-fine 33-gauge needle profile designed specifically for sensitive injection sites."
     },
     {
@@ -157,7 +157,7 @@ window.AKRON_CATALOG = {
       ndc: "73317623706",
       brand: "Easy Comfort",
       badges: ["Ultra-Fine 33G", "High AWP"],
-      image: "src/assets/products/cat-pen-needles.png",
+      image: "src/assets/products/needle-33x6.jpeg",
       description: "Precision engineered micro-cannula providing superior flow rate with minimum penetration force."
     },
     {
@@ -170,7 +170,7 @@ window.AKRON_CATALOG = {
       ndc: "73317612904",
       brand: "Easy Comfort",
       badges: ["Compact 4MM", "High AWP"],
-      image: "src/assets/products/cat-pen-needles.png",
+      image: "src/assets/products/needle-32x4.png",
       description: "Comfortable 4mm length suitable for pediatric and adult patients without skin pinch."
     },
     {
@@ -183,7 +183,7 @@ window.AKRON_CATALOG = {
       ndc: "73317612905",
       brand: "Easy Comfort",
       badges: ["High AWP", "Low Acquisition"],
-      image: "src/assets/products/cat-pen-needles.png",
+      image: "src/assets/products/needle-32x5.jpeg",
       description: "Sterile non-toxic medical grade pen needle with easy-peel protective seal."
     },
     {
@@ -196,7 +196,7 @@ window.AKRON_CATALOG = {
       ndc: "73317612906",
       brand: "Easy Comfort",
       badges: ["High AWP", "Low Acquisition"],
-      image: "src/assets/products/cat-pen-needles.png",
+      image: "src/assets/products/needle-32x6.jpeg",
       description: "Consistent medication dosage flow with reliable fit across all major pen injectors."
     },
 
@@ -237,7 +237,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-4610-01",
       brand: "Comfort Touch",
       badges: ["Low Acquisition", "High AWP"],
-      image: "src/assets/products/special-lancets.png",
+      image: "src/assets/products/comfort-touch-lancets-box.png",
       description: "Universal twist-top sterile lancets compatible with nearly all commercial lancing devices."
     },
     {
@@ -250,7 +250,7 @@ window.AKRON_CATALOG = {
       ndc: "50632-0007-03",
       brand: "Pro Comfort",
       badges: ["Antiseptic", "Best Seller"],
-      image: "src/assets/products/cat-lancets.png",
+      image: "src/assets/products/pro-comfort-alcohol-pads.jpeg",
       description: "Thick 2-ply non-woven sterile pads saturated with 70% isopropyl alcohol for rapid skin antisepsis."
     },
     {
@@ -263,7 +263,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-4416-01",
       brand: "Quick Touch",
       badges: ["High AWP", "Sterile"],
-      image: "src/assets/products/cat-lancets.png",
+      image: "src/assets/products/quick-touch-alcohol-pads.jpeg",
       description: "Individually sealed airtight foil packets maintaining optimal saturation and sterility."
     },
     {
@@ -276,7 +276,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-8801-01",
       brand: "Aum",
       badges: ["Value Pack", "Low Acquisition"],
-      image: "src/assets/products/cat-lancets.png",
+      image: "src/assets/products/aum-alcohol-pads.jpeg",
       description: "Everyday clinical antiseptic wipes for pre-injection cleansing and sanitization."
     },
 
@@ -291,7 +291,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-4428-01",
       brand: "Akron Diagnostic",
       badges: ["High AWP", "Medicare Covered"],
-      image: "src/assets/products/cat-blood-pressure.png",
+      image: "src/assets/products/comfort-touch-bp-monitor.png",
       description: "Large backlit LCD digital monitor with irregular heartbeat detection and multi-user memory."
     },
     {
@@ -332,7 +332,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-4422-01",
       brand: "Aum Medical",
       badges: ["High AWP", "Reimbursable"],
-      image: "src/assets/products/cat-nebulizers.png",
+      image: "src/assets/products/aum-nebulizer-packaging.png",
       description: "High-efficiency aerosol delivery system with tubing, medication cup, and adult mask."
     },
     {
@@ -345,7 +345,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-4424-01",
       brand: "Aum Medical",
       badges: ["High AWP", "Pediatric Care"],
-      image: "src/assets/products/cat-nebulizers.png",
+      image: "src/assets/products/aum-bear-pediatric-nebulizer.png",
       description: "Low-noise gentle aerosol compressor system to ease breathing treatments for young children."
     },
     {
@@ -358,7 +358,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-4952-01",
       brand: "Comfort Breathe",
       badges: ["Anti-Static", "High AWP"],
-      image: "src/assets/products/cat-nebulizers.png",
+      image: "src/assets/products/breathe-comfort-holding-chamber.png",
       description: "Clear anti-static chamber ensuring maximized medication suspension and lung delivery."
     },
     {
@@ -371,7 +371,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-4952-02",
       brand: "Comfort Breathe",
       badges: ["Anti-Static", "High AWP"],
-      image: "src/assets/products/cat-nebulizers.png",
+      image: "src/assets/products/breathe-comfort-chamber-packaging.png",
       description: "Universal MDI adapter with one-way exhalation valve for optimal meter-dose inhaler coordination."
     },
 
@@ -386,7 +386,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-6866-05",
       brand: "Aum Pharmaceutical",
       badges: ["High AWP", "24-Hour Relief"],
-      image: "src/assets/products/special-lidocaine.png",
+      image: "src/assets/products/lidocaine-patch-box.png",
       description: "Transdermal patch delivering continuous soothing 4% lidocaine relief to targeted nerves and muscles."
     },
 
