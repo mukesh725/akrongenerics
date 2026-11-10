@@ -211,7 +211,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-4682-01",
       brand: "Quick Touch",
       badges: ["Single-Use Safety", "Medicare Covered"],
-      image: "src/assets/products/special-lancets.png",
+      image: "src/assets/products/quick-touch-safety-lancets-30g.jpg",
       description: "Automatic retractable lancet to eliminate accidental needle sticks and cross-contamination."
     },
     {
@@ -224,7 +224,7 @@ window.AKRON_CATALOG = {
       ndc: "73317-4683-01",
       brand: "Comfort Touch",
       badges: ["High AWP", "Medicare Covered"],
-      image: "src/assets/products/special-lancets.png",
+      image: "src/assets/products/comfort-touch-safety-lancets-28g.jpg",
       description: "Pre-cocked design with push-button activation for painless fingerstick blood sampling."
     },
     {
