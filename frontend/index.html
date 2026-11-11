@@ -856,31 +856,47 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 }
 .cat-card-item {
   position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
+  display: block;
   background: #FFFFFF;
   border: 1.5px solid #E5E9F0;
   border-radius: 20px;
   overflow: hidden;
-  min-height: 185px;
+  height: 200px;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
   box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
 }
 .cat-card-item:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   border-color: #CBD5E1;
-  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 16px 32px -6px rgba(15, 23, 42, 0.12);
 }
-.cat-card-body {
-  flex: 1 1 56%;
-  padding: 22px 14px 20px 22px;
+.cat-card-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  z-index: 1;
+  transition: transform 0.4s ease;
+}
+.cat-card-item:hover .cat-card-bg-img {
+  transform: scale(1.03);
+}
+.cat-card-overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  width: 62%;
+  padding: 22px 18px 20px 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.92) 58%, rgba(255,255,255,0.35) 86%, rgba(255,255,255,0) 100%);
+  box-sizing: border-box;
 }
 .cat-card-eyebrow {
   display: block;
@@ -905,46 +921,33 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   font-family: var(--sans);
   font-size: 12px;
   font-weight: 400;
-  color: #64748B;
-  line-height: 1.35;
+  color: #475569;
+  line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .cat-card-arrow {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: #F1F3F5;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #0F172A;
-  margin-top: 10px;
-  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  align-self: flex-start;
+  flex-shrink: 0;
 }
 .cat-card-item:hover .cat-card-arrow {
-  background: #E2E8F0;
+  background: #0F172A;
+  color: #FFFFFF;
+  border-color: #0F172A;
   transform: translateX(3px);
-}
-.cat-card-media {
-  flex: 0 0 44%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px 12px 0;
-  background: #FFFFFF;
-}
-.cat-card-media img {
-  max-width: 100%;
-  max-height: 140px;
-  object-fit: contain;
-  display: block;
-  transition: transform 0.3s ease;
-}
-.cat-card-item:hover .cat-card-media img {
-  transform: scale(1.04);
 }
 
 .sec-head-simple{margin-bottom:34px}
@@ -1527,6 +1530,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   .split{grid-template-columns:1fr}
   .pgrid{grid-template-columns:repeat(2,1fr)}
   .cat-grid, .categories-grid{grid-template-columns:repeat(2,1fr)}
+  .cat-card-overlay{width:64%}
   .compliance-split, .faq-split{grid-template-columns:1fr;gap:36px}
   .next-step-strip{grid-template-columns:repeat(3,1fr);gap:24px}
   .next-step-intro{grid-column:1 / -1;padding-right:0;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:6px}
@@ -1566,13 +1570,13 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   .statement h2{font-size:clamp(25px,6.8vw,34px)}
   .pgrid{grid-template-columns:repeat(2, minmax(0, 1fr)) !important;gap:10px}
   .pcard.photo-card{height:140px}
-  .cat-grid, .categories-grid{grid-template-columns:1fr !important;gap:12px !important}
-  .cat-card-item{min-height:140px !important;border-radius:16px !important}
-  .cat-card-body{padding:16px 12px 14px 16px !important}
-  .cat-card-title{font-size:16px !important}
-  .cat-card-desc{font-size:11.5px !important}
-  .cat-card-arrow{width:28px !important;height:28px !important;margin-top:6px !important}
-  .cat-card-media img{max-height:110px !important}
+  .cat-grid, .categories-grid{grid-template-columns:1fr !important;gap:14px !important}
+  .cat-card-item{height:170px !important;min-height:unset !important;border-radius:16px !important}
+  .cat-card-overlay{width:68% !important;padding:18px 14px 16px 18px !important}
+  .cat-card-title{font-size:16px !important;margin-bottom:4px !important}
+  .cat-card-desc{font-size:11px !important;line-height:1.35 !important}
+  .cat-card-arrow{width:30px !important;height:30px !important}
+  .cat-card-arrow svg{width:13px !important;height:13px !important}
   .section-head-row{flex-direction:column;align-items:flex-start}
   .cat-card{border-radius:16px}
   .next-step-strip{grid-template-columns:1fr;gap:18px}
@@ -2126,8 +2130,9 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
     <div class="categories-grid">
       <!-- 1. Pen Needles -->
       <a href="catalog.html?category=pen-needles" class="cat-card-item" aria-label="Insulin Pen Needles">
-        <div class="cat-card-body">
-          <div>
+        <img src="src/assets/categories/cat-bg-pen-needles.png" alt="Insulin Pen Needles" class="cat-card-bg-img" loading="lazy">
+        <div class="cat-card-overlay">
+          <div class="cat-card-text">
             <span class="cat-card-eyebrow">PEN NEEDLES</span>
             <h3 class="cat-card-title">Insulin Pen Needles</h3>
             <p class="cat-card-desc">Ultra-thin, comfortable, and reliable for everyday insulin delivery.</p>
@@ -2136,15 +2141,13 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </div>
         </div>
-        <div class="cat-card-media">
-          <img src="src/assets/categories/thumbs/thumb-pen-needles.jpg" alt="Insulin Pen Needles" loading="lazy">
-        </div>
       </a>
 
       <!-- 2. Lancets & Alcohol Pads -->
       <a href="catalog.html?category=lancets" class="cat-card-item" aria-label="Lancets and Alcohol Pads">
-        <div class="cat-card-body">
-          <div>
+        <img src="src/assets/categories/cat-bg-lancets.png" alt="Lancets and Alcohol Pads" class="cat-card-bg-img" loading="lazy">
+        <div class="cat-card-overlay">
+          <div class="cat-card-text">
             <span class="cat-card-eyebrow">LANCETS &amp; ALCOHOL PADS</span>
             <h3 class="cat-card-title">Lancets &amp; Alcohol Pads</h3>
             <p class="cat-card-desc">Hygienic, safe, and easy-to-use essentials for confident testing and injection.</p>
@@ -2153,15 +2156,13 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </div>
         </div>
-        <div class="cat-card-media">
-          <img src="src/assets/categories/thumbs/thumb-lancets.jpg" alt="Lancets and Alcohol Pads" loading="lazy">
-        </div>
       </a>
 
       <!-- 3. Blood Pressure -->
       <a href="catalog.html?category=blood-pressure" class="cat-card-item" aria-label="Blood Pressure Monitor">
-        <div class="cat-card-body">
-          <div>
+        <img src="src/assets/categories/cat-bg-blood-pressure.png" alt="Blood Pressure Monitor" class="cat-card-bg-img" loading="lazy">
+        <div class="cat-card-overlay">
+          <div class="cat-card-text">
             <span class="cat-card-eyebrow">BLOOD PRESSURE</span>
             <h3 class="cat-card-title">Blood Pressure Monitor</h3>
             <p class="cat-card-desc">Accurate, reliable, and easy-to-use monitoring for everyday health tracking.</p>
@@ -2170,15 +2171,13 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </div>
         </div>
-        <div class="cat-card-media">
-          <img src="src/assets/categories/thumbs/thumb-blood-pressure.jpg" alt="Blood Pressure Monitor" loading="lazy">
-        </div>
       </a>
 
       <!-- 4. Nebulizers & Chambers -->
       <a href="catalog.html?category=nebulizers" class="cat-card-item" aria-label="Nebulizers and Chambers">
-        <div class="cat-card-body">
-          <div>
+        <img src="src/assets/categories/cat-bg-nebulizers.png" alt="Nebulizers and Chambers" class="cat-card-bg-img" loading="lazy">
+        <div class="cat-card-overlay">
+          <div class="cat-card-text">
             <span class="cat-card-eyebrow">NEBULIZERS &amp; CHAMBERS</span>
             <h3 class="cat-card-title">Nebulizers &amp; Chambers</h3>
             <p class="cat-card-desc">Reliable respiratory essentials designed for comfortable everyday care.</p>
@@ -2187,15 +2186,13 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </div>
         </div>
-        <div class="cat-card-media">
-          <img src="src/assets/categories/thumbs/thumb-nebulizers.jpg" alt="Nebulizers and Chambers" loading="lazy">
-        </div>
       </a>
 
       <!-- 5. Topical Pain Relief -->
       <a href="catalog.html?category=topical-relief" class="cat-card-item" aria-label="Topical Pain Relief">
-        <div class="cat-card-body">
-          <div>
+        <img src="src/assets/categories/cat-bg-topical-relief.png" alt="Topical Pain Relief" class="cat-card-bg-img" loading="lazy">
+        <div class="cat-card-overlay">
+          <div class="cat-card-text">
             <span class="cat-card-eyebrow">TOPICAL PAIN RELIEF</span>
             <h3 class="cat-card-title">Topical Pain Relief</h3>
             <p class="cat-card-desc">Fast-acting, targeted relief designed for everyday comfort care.</p>
@@ -2204,15 +2201,13 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </div>
         </div>
-        <div class="cat-card-media">
-          <img src="src/assets/categories/thumbs/thumb-topical-relief.jpg" alt="Topical Pain Relief" loading="lazy">
-        </div>
       </a>
 
       <!-- 6. Pharmacy Vials -->
       <a href="catalog.html?category=pharmacy-vials" class="cat-card-item" aria-label="Pharmacy Vials">
-        <div class="cat-card-body">
-          <div>
+        <img src="src/assets/categories/cat-bg-pharmacy-vials.png" alt="Pharmacy Vials" class="cat-card-bg-img" loading="lazy">
+        <div class="cat-card-overlay">
+          <div class="cat-card-text">
             <span class="cat-card-eyebrow">PHARMACY VIALS</span>
             <h3 class="cat-card-title">Pharmacy Vials</h3>
             <p class="cat-card-desc">Durable, high-quality vials for safe and reliable medication storage.</p>
@@ -2220,9 +2215,6 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
           <div class="cat-card-arrow" aria-hidden="true">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
           </div>
-        </div>
-        <div class="cat-card-media">
-          <img src="src/assets/categories/thumbs/thumb-pharmacy-vials.jpg" alt="Pharmacy Vials" loading="lazy">
         </div>
       </a>
     </div>
