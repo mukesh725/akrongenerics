@@ -401,7 +401,7 @@ window.AKRON_CATALOG = {
       ndc: "USP-VIAL-08D",
       brand: "Akron Rx Packaging",
       badges: ["USP Compliant", "Child-Resistant"],
-      image: "src/assets/products/vial-8dram.png",
+      image: "src/assets/products/vial-8dram.jpg",
       description: "Light-resistant amber polypropylene bottles with dual-action push-and-turn child-resistant closure."
     },
     {
@@ -414,7 +414,7 @@ window.AKRON_CATALOG = {
       ndc: "USP-VIAL-13D",
       brand: "Akron Rx Packaging",
       badges: ["USP Compliant", "Popular Size"],
-      image: "src/assets/products/vial-13dram.png",
+      image: "src/assets/products/vial-13dram.jpg",
       description: "Durable medical pharmacy vials tested to exceed CPSC child-resistant protocols."
     },
     {
@@ -427,7 +427,7 @@ window.AKRON_CATALOG = {
       ndc: "USP-VIAL-16D",
       brand: "Akron Rx Packaging",
       badges: ["USP Compliant", "Child-Resistant"],
-      image: "src/assets/products/vial-13dram.png",
+      image: "src/assets/products/vial-13dram.jpg",
       description: "Shatter-proof amber plastic shielding sensitive pharmaceuticals from UV degradation."
     },
     {
@@ -440,7 +440,7 @@ window.AKRON_CATALOG = {
       ndc: "USP-VIAL-30D",
       brand: "Akron Rx Packaging",
       badges: ["USP Compliant", "Child-Resistant"],
-      image: "src/assets/products/vial-30dram.png",
+      image: "src/assets/products/vial-30dram.jpg",
       description: "Spacious capacity prescription containers with precision molded child-safety caps."
     },
     {
@@ -453,7 +453,7 @@ window.AKRON_CATALOG = {
       ndc: "USP-VIAL-40D",
       brand: "Akron Rx Packaging",
       badges: ["USP Compliant", "High Capacity"],
-      image: "src/assets/products/vial-40dram.png",
+      image: "src/assets/products/vial-40dram.jpg",
       description: "Large volume prescription vials engineered for bulk tablet or capsule dispense."
     },
     {
@@ -466,7 +466,7 @@ window.AKRON_CATALOG = {
       ndc: "USP-VIAL-60D",
       brand: "Akron Rx Packaging",
       badges: ["USP Compliant", "Max Size"],
-      image: "src/assets/products/vial-60dram.png",
+      image: "src/assets/products/vial-60dram.jpg",
       description: "Maximum size prescription bottle for high count maintenance prescriptions."
     },
 
