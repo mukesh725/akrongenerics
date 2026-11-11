@@ -427,7 +427,7 @@ window.AKRON_CATALOG = {
       ndc: "USP-VIAL-16D",
       brand: "Akron Rx Packaging",
       badges: ["USP Compliant", "Child-Resistant"],
-      image: "src/assets/products/vial-13dram.jpg",
+      image: "src/assets/products/vial-16dram.jpg",
       description: "Shatter-proof amber plastic shielding sensitive pharmaceuticals from UV degradation."
     },
     {
