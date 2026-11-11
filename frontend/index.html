@@ -390,25 +390,26 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 }
 .hero-btn-white {
   background: #ffffff;
-  color: #0f172a;
+  color: #0f172a !important;
   font-family: var(--body);
   font-size: 15px;
   font-weight: 600;
   padding: 14px 34px;
   border-radius: var(--r-pill);
   text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  box-shadow: none !important;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2) !important;
   border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
 }
 .hero-btn-white:hover {
-  background: #f1f5f9;
-  transform: translateY(-1px);
-  box-shadow: none !important;
-  color: #0f172a;
+  background: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28) !important;
+  color: #0f172a !important;
 }
 .hero-btn-glass {
   background: rgba(255, 255, 255, 0.20);
@@ -1510,7 +1511,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   .hero-reimagined .hero-title{font-size:clamp(40px,9.5vw,60px);font-weight:700;line-height:1.06;margin-bottom:16px}
   .hero-reimagined .hero-subtitle{font-size:15px;line-height:1.5;margin-bottom:28px}
   .hero-reimagined .hero-cta-group{flex-direction:column;width:100%;gap:10px}
-  .hero-btn-white, .hero-btn-glass{width:100%;max-width:320px;text-align:center;justify-content:center}
+  .hero-btn-red, .hero-btn-white, .hero-btn-glass{width:100%;max-width:320px;text-align:center;justify-content:center}
   .hero{min-height:500px;padding:64px 20px 44px;border-radius:20px}
   .hero h1{font-size:clamp(28px,7.5vw,40px);line-height:1.14;max-width:100%;margin-bottom:16px}
   .hero p{font-size:15.5px;line-height:1.5;margin-bottom:26px}
@@ -1815,6 +1816,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
     
     <div class="hero-cta-group">
       <a href="become-a-customer.html" class="hero-btn-red">Create a Pharmacy Account <span style="font-size:1.15em;line-height:1;margin-left:4px;">↗</span></a>
+      <a href="catalog.html" class="hero-btn-white">Explore Products <span style="font-size:1.15em;line-height:1;margin-left:4px;">→</span></a>
     </div>
   </div>
 
