@@ -1,6 +1,7 @@
 /**
  * Akron Generics - Seed-Style Product Preview Modal
  * Full-bleed edge-to-edge product photography with floating lime badge.
+ * Balanced 980px layout with product overview description & specs.
  */
 
 (function() {
@@ -22,9 +23,9 @@
           </button>
 
           <!-- Left Column: Edge-to-Edge Full-Bleed Rounded Image Card -->
-          <div class="product-modal-media-card" style="position:relative;width:100%;height:100%;min-height:440px;border-radius:20px;overflow:hidden;padding:0;margin:0;background:#EBEBEB;display:flex;">
+          <div class="product-modal-media-card" style="position:relative;width:100%;height:100%;min-height:480px;border-radius:22px;overflow:hidden;padding:0;margin:0;background:#EBEBEB;display:flex;">
             <!-- Seed-Style Lime Green Pill Badge floating directly over image -->
-            <div class="seed-modal-badge" id="pModalBadge" style="position:absolute;top:14px;left:14px;background:#D8F8C8;color:#163B1D;border-radius:9999px;padding:5px 12px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:6px;z-index:10;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+            <div class="seed-modal-badge" id="pModalBadge" style="position:absolute;top:16px;left:16px;background:#D8F8C8;color:#163B1D;border-radius:9999px;padding:5px 13px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:6px;z-index:10;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
               <span class="seed-badge-dots" aria-hidden="true" style="display:inline-flex;align-items:center;gap:3px;">
                 <span class="seed-badge-dot" style="width:6px;height:6px;border-radius:50%;background:#163B1D;display:inline-block;"></span>
                 <span class="seed-badge-dot" style="width:6px;height:6px;border-radius:50%;background:#163B1D;display:inline-block;"></span>
@@ -38,11 +39,14 @@
             </div>
           </div>
 
-          <!-- Right Column: Editorial Typography & Actions -->
+          <!-- Right Column: Editorial Typography, Description & Actions -->
           <div class="product-modal-content">
             <div class="seed-modal-eyebrow" id="pModalCategory">PEN NEEDLES</div>
             <h2 class="seed-modal-title" id="pModalTitle">Product Name</h2>
             <p class="seed-modal-subtitle" id="pModalSpecs">Specification Details</p>
+
+            <!-- Product Description Paragraph -->
+            <p class="seed-modal-desc" id="pModalDesc">Detailed description of the product...</p>
 
             <!-- Soft-Tinted Product Specs -->
             <div class="seed-modal-specs-box">
@@ -131,7 +135,12 @@
     if (titleEl) titleEl.textContent = product.name;
 
     var specsEl = document.getElementById('pModalSpecs');
-    if (specsEl) specsEl.textContent = product.specs || product.description || '';
+    if (specsEl) specsEl.textContent = product.specs || '';
+
+    var descEl = document.getElementById('pModalDesc');
+    if (descEl) {
+      descEl.textContent = product.description || 'Authentic prescription drug and diagnostic wholesale supply distributed under strict NABP and DSCSA compliance standards.';
+    }
 
     // Attributes
     var ndcEl = document.getElementById('pModalNdc');
