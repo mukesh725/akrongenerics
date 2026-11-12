@@ -674,10 +674,14 @@ body {
   object-position: center;
   display: block;
   margin: 0 auto;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .p-card:hover .p-card-image-box img {
-  transform: scale(1.05);
+  transform: scale(1.05) translateZ(0);
 }
 
 /* Floating Top-Left Pill Badge */
@@ -1206,6 +1210,10 @@ body {
     object-position: center !important;
     display: block !important;
     margin: 0 auto !important;
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: high-quality !important;
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
   }
   .p-card-pill {
     top: 7px !important;
