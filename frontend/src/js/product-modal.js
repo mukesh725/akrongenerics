@@ -1,39 +1,40 @@
 /**
  * Akron Generics - Seed-Style Product Preview Modal
- * Minimalist luxury pharma layout:
- * - Warm neutral rounded media card
- * - Seed-style lime pill badge
- * - High-clarity product photography
- * - Editorial typography & soft-tinted spec box
- * - Dark forest green pill CTA & fine-print legal footnotes
+ * Full-bleed edge-to-edge product photography with floating lime badge.
  */
 
 (function() {
   'use strict';
 
   function initProductModalDOM() {
-    if (document.getElementById('productPreviewModal')) return;
+    // If an older modal element exists in the DOM, remove it to force fresh rebuild
+    var existingModal = document.getElementById('productPreviewModal');
+    if (existingModal) {
+      existingModal.remove();
+    }
 
     var modalHtml = `
       <div class="product-modal-overlay" id="productPreviewModal" onclick="if(event.target===this)closeProductPreview()" role="dialog" aria-modal="true" aria-labelledby="pModalTitle">
         <div class="product-modal-card">
-          <!-- Minimalist × Close Button -->
-          <button type="button" class="product-modal-close" onclick="closeProductPreview()" aria-label="Close product preview">
+          <!-- Minimalist × Close Button (no outline) -->
+          <button type="button" class="product-modal-close" onclick="closeProductPreview()" aria-label="Close product preview" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border:none;outline:none;box-shadow:none;background:transparent;cursor:pointer;padding:0;color:#4B5563;display:flex;align-items:center;justify-content:center;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
 
           <!-- Left Column: Edge-to-Edge Full-Bleed Rounded Image Card -->
-          <div class="product-modal-media-card">
-            <div class="seed-modal-badge" id="pModalBadge">
-              <span class="seed-badge-dots" aria-hidden="true">
-                <span class="seed-badge-dot"></span>
-                <span class="seed-badge-dot"></span>
+          <div class="product-modal-media-card" style="position:relative;width:100%;height:100%;min-height:440px;border-radius:20px;overflow:hidden;padding:0;margin:0;background:#EBEBEB;display:flex;">
+            <!-- Seed-Style Lime Green Pill Badge floating directly over image -->
+            <div class="seed-modal-badge" id="pModalBadge" style="position:absolute;top:14px;left:14px;background:#D8F8C8;color:#163B1D;border-radius:9999px;padding:5px 12px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:6px;z-index:10;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+              <span class="seed-badge-dots" aria-hidden="true" style="display:inline-flex;align-items:center;gap:3px;">
+                <span class="seed-badge-dot" style="width:6px;height:6px;border-radius:50%;background:#163B1D;display:inline-block;"></span>
+                <span class="seed-badge-dot" style="width:6px;height:6px;border-radius:50%;background:#163B1D;display:inline-block;"></span>
               </span>
               <span id="pModalBadgeText">HIGH AWP</span>
             </div>
             
-            <div class="seed-modal-img-wrap">
-              <img id="pModalImg" src="" alt="Product Preview">
+            <!-- Full bleed image wrap -->
+            <div class="seed-modal-img-wrap" style="position:absolute;inset:0;width:100%;height:100%;overflow:hidden;padding:0;margin:0;background:#EBEBEB;">
+              <img id="pModalImg" src="" alt="Product Preview" style="width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center;display:block;">
             </div>
           </div>
 
@@ -136,27 +137,19 @@
     var ndcEl = document.getElementById('pModalNdc');
     if (ndcEl) ndcEl.textContent = product.ndc || 'Pending / Inquire';
 
-    var itemTag = document.getElementById('pModalItemTag');
-    if (itemTag) itemTag.textContent = 'ITEM #' + (product.itemNo || product.id || 'AKRON');
-
     var brandEl = document.getElementById('pModalBrand');
     if (brandEl) brandEl.textContent = product.brand || 'Akron Generics';
 
     var packEl = document.getElementById('pModalPackage');
     if (packEl) packEl.textContent = packSpec || product.specs || 'Standard Packaging';
 
-    // Clear email input if previously entered
+    // Clear email input
     var emailInput = document.getElementById('seedModalEmail');
     if (emailInput) emailInput.value = '';
 
     // Show modal
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-
-    setTimeout(function() {
-      var closeBtn = modal.querySelector('.product-modal-close');
-      if (closeBtn) closeBtn.focus();
-    }, 50);
   };
 
   window.closeProductPreview = function() {

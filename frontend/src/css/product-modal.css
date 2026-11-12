@@ -32,25 +32,25 @@
 
 /* Modal Card Surface: Pure white with 20px outer frame padding */
 .product-modal-card {
-  width: 100%;
-  max-width: 880px;
-  min-height: 480px;
-  max-height: min(92vh, 680px);
-  background: #FFFFFF;
-  border-radius: 26px;
+  width: 100% !important;
+  max-width: 880px !important;
+  min-height: 480px !important;
+  max-height: min(92vh, 680px) !important;
+  background: #FFFFFF !important;
+  border-radius: 26px !important;
   box-shadow: 
     0 30px 70px -15px rgba(0, 0, 0, 0.28),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1.08fr;
-  gap: 24px;
-  overflow: hidden;
+    0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+  padding: 20px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1.08fr !important;
+  gap: 24px !important;
+  overflow: hidden !important;
   transform: scale(0.96) translateY(14px);
   transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  position: relative !important;
+  box-sizing: border-box !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -60,113 +60,126 @@
 
 /* Minimalist × Close Button in top-right corner */
 .product-modal-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: transparent;
-  color: #4B5563;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: color 0.18s ease, transform 0.18s ease, background-color 0.18s ease;
-  z-index: 20;
-  padding: 0;
+  position: absolute !important;
+  top: 16px !important;
+  right: 16px !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: #4B5563 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: color 0.18s ease, transform 0.18s ease, background-color 0.18s ease !important;
+  z-index: 20 !important;
+  padding: 0 !important;
+}
+
+.product-modal-close:focus,
+.product-modal-close:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .product-modal-close:hover {
-  color: #111827;
-  background: rgba(0, 0, 0, 0.05);
-  transform: scale(1.08);
+  color: #111827 !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  transform: scale(1.08) !important;
 }
 
 .product-modal-close:active {
-  transform: scale(0.94);
+  transform: scale(0.94) !important;
 }
 
 /* ================= LEFT COLUMN: FULL-BLEED IMAGE CARD ================= */
 .product-modal-media-card {
-  background: #F5F4EE;
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  min-height: 440px;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  box-sizing: border-box;
+  background: #EBEBEB !important;
+  border-radius: 20px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  height: 100% !important;
+  min-height: 440px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  box-sizing: border-box !important;
 }
 
 /* Seed-Style Lime Green Pill Badge floating over image */
 .seed-modal-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  background: #D8F8C8;
-  color: #163B1D;
-  border-radius: 9999px;
-  padding: 5px 12px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .02em;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  z-index: 10;
-  pointer-events: none;
+  position: absolute !important;
+  top: 14px !important;
+  left: 14px !important;
+  background: #D8F8C8 !important;
+  color: #163B1D !important;
+  border-radius: 9999px !important;
+  padding: 5px 12px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .02em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+  z-index: 10 !important;
+  pointer-events: none !important;
 }
 
 .seed-badge-dots {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 3px !important;
 }
 
 .seed-badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #163B1D;
-  display: inline-block;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: #163B1D !important;
+  display: inline-block !important;
 }
 
 /* Full-bleed edge-to-edge image filling the entire rounded card */
 .seed-modal-img-wrap {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background: #F5F4EE;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  inset: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: #EBEBEB !important;
 }
 
 .seed-modal-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .product-modal-media-card:hover .seed-modal-img-wrap img {
-  transform: scale(1.04);
+  transform: scale(1.04) !important;
 }
 
 /* ================= RIGHT COLUMN: EDITORIAL CONTENT & CTA ================= */
 .product-modal-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8px 6px 8px 0;
-  overflow-y: auto;
-  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 8px 6px 8px 0 !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
 }
 
 /* Clean scrollbar */
@@ -183,190 +196,190 @@
 
 /* Eyebrow & Headline */
 .seed-modal-eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #163B1D;
-  margin-bottom: 6px;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  color: #163B1D !important;
+  margin-bottom: 6px !important;
 }
 
 .seed-modal-title {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1.18;
-  color: #163B1D;
-  letter-spacing: -0.025em;
-  margin: 0 0 6px;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  line-height: 1.18 !important;
+  color: #163B1D !important;
+  letter-spacing: -0.025em !important;
+  margin: 0 0 6px !important;
 }
 
 .seed-modal-subtitle {
-  font-size: 14px;
-  line-height: 1.45;
-  color: #4B5563;
-  margin: 0 0 16px;
-  font-weight: 400;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  color: #4B5563 !important;
+  margin: 0 0 16px !important;
+  font-weight: 400 !important;
 }
 
 /* Soft-Tinted Specs Container (matching Seed's beige inputs) */
 .seed-modal-specs-box {
-  background: #F5F4EE;
-  border-radius: 14px;
-  padding: 10px 14px;
-  margin-bottom: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  background: #F5F4EE !important;
+  border-radius: 14px !important;
+  padding: 10px 14px !important;
+  margin-bottom: 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
 }
 
 .seed-spec-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12.5px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  font-size: 12.5px !important;
 }
 
 .seed-spec-lbl {
-  font-size: 10.5px;
-  font-weight: 700;
-  color: #8C8C85;
-  text-transform: uppercase;
-  letter-spacing: .05em;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  color: #8C8C85 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .05em !important;
 }
 
 .seed-spec-val {
-  font-size: 13px;
-  font-weight: 600;
-  color: #111827;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #111827 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
 }
 
 .seed-spec-val-simple {
-  font-size: 13px;
-  font-weight: 600;
-  color: #111827;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #111827 !important;
 }
 
 .seed-spec-divider {
-  height: 1px;
-  background: rgba(0, 0, 0, 0.05);
+  height: 1px !important;
+  background: rgba(0, 0, 0, 0.05) !important;
 }
 
 .seed-copy-btn {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 9999px;
-  padding: 2px 9px;
-  font-size: 10.5px;
-  font-weight: 700;
-  color: #163B1D;
-  cursor: pointer;
-  transition: all 0.16s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 9999px !important;
+  padding: 2px 9px !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  color: #163B1D !important;
+  cursor: pointer !important;
+  transition: all 0.16s ease !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
 }
 
 .seed-copy-btn:hover {
-  background: #163B1D;
-  color: #FFFFFF;
-  border-color: #163B1D;
+  background: #163B1D !important;
+  color: #FFFFFF !important;
+  border-color: #163B1D !important;
 }
 
 /* Seed-Style Email Input Box */
 .seed-modal-action-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 12px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  margin-bottom: 12px !important;
 }
 
 .seed-input-box input {
-  width: 100%;
-  height: 48px;
-  background: #F5F4EE;
-  border: 1px solid transparent;
-  border-radius: 12px;
-  padding: 0 16px;
-  font-size: 13.5px;
-  color: #111827;
-  outline: none;
-  box-sizing: border-box;
-  font-family: inherit;
-  transition: border-color 0.18s ease, background-color 0.18s ease;
+  width: 100% !important;
+  height: 48px !important;
+  background: #F5F4EE !important;
+  border: 1px solid transparent !important;
+  border-radius: 12px !important;
+  padding: 0 16px !important;
+  font-size: 13.5px !important;
+  color: #111827 !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+  transition: border-color 0.18s ease, background-color 0.18s ease !important;
 }
 
 .seed-input-box input::placeholder {
-  color: #8C8C85;
+  color: #8C8C85 !important;
 }
 
 .seed-input-box input:focus {
-  border-color: #163B1D;
-  background: #FFFFFF;
+  border-color: #163B1D !important;
+  background: #FFFFFF !important;
 }
 
 /* Seed-Style Dark Green Pill Button */
 .seed-btn-primary {
-  width: 100%;
-  height: 50px;
-  border-radius: 9999px;
-  background: #163B1D;
-  color: #FFFFFF;
-  font-size: 14.5px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 4px 14px rgba(22, 59, 29, 0.22);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-sizing: border-box;
+  width: 100% !important;
+  height: 50px !important;
+  border-radius: 9999px !important;
+  background: #163B1D !important;
+  color: #FFFFFF !important;
+  font-size: 14.5px !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  border: none !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(22, 59, 29, 0.22) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-sizing: border-box !important;
 }
 
 .seed-btn-primary:hover {
-  background: #0E2713;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(22, 59, 29, 0.32);
-  color: #FFFFFF;
+  background: #0E2713 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(22, 59, 29, 0.32) !important;
+  color: #FFFFFF !important;
 }
 
 .seed-btn-primary:active {
-  transform: scale(0.99);
+  transform: scale(0.99) !important;
 }
 
 /* Seed-Style Legal / Compliance Footnotes */
 .seed-modal-footnotes {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 4px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  margin-top: 4px !important;
 }
 
 .seed-footnote {
-  font-size: 10.5px;
-  line-height: 1.45;
-  color: #6B7280;
-  margin: 0;
+  font-size: 10.5px !important;
+  line-height: 1.45 !important;
+  color: #6B7280 !important;
+  margin: 0 !important;
 }
 
 .seed-footnote sup {
-  font-size: 9.5px;
-  font-weight: 700;
-  color: #163B1D;
+  font-size: 9.5px !important;
+  font-weight: 700 !important;
+  color: #163B1D !important;
 }
 
 .seed-footnote a {
-  color: #163B1D;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  color: #163B1D !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
 }
 
 .seed-footnote a:hover {
-  color: #0E2713;
+  color: #0E2713 !important;
 }
 
 /* ================= PRODUCT CARDS HOVER PILL ================= */
@@ -417,48 +430,48 @@
   }
 
   .product-modal-card {
-    grid-template-columns: 1fr;
-    max-height: 92vh;
-    border-radius: 22px 22px 18px 18px;
-    padding: 14px;
-    gap: 14px;
-    overflow-y: auto;
+    grid-template-columns: 1fr !important;
+    max-height: 92vh !important;
+    border-radius: 22px 22px 18px 18px !important;
+    padding: 14px !important;
+    gap: 14px !important;
+    overflow-y: auto !important;
   }
 
   .product-modal-close {
-    top: 12px;
-    right: 12px;
-    width: 30px;
-    height: 30px;
+    top: 12px !important;
+    right: 12px !important;
+    width: 30px !important;
+    height: 30px !important;
   }
 
   .product-modal-media-card {
-    min-height: 240px;
-    height: 240px;
-    border-radius: 16px;
+    min-height: 240px !important;
+    height: 240px !important;
+    border-radius: 16px !important;
   }
 
   .seed-modal-title {
-    font-size: 22px;
+    font-size: 22px !important;
   }
 
   .seed-modal-subtitle {
-    font-size: 13px;
-    margin-bottom: 12px;
+    font-size: 13px !important;
+    margin-bottom: 12px !important;
   }
 
   .seed-modal-specs-box {
-    padding: 8px 12px;
-    gap: 6px;
+    padding: 8px 12px !important;
+    gap: 6px !important;
   }
 
   .seed-input-box input {
-    height: 44px;
+    height: 44px !important;
   }
 
   .seed-btn-primary {
-    height: 46px;
-    font-size: 14px;
+    height: 46px !important;
+    font-size: 14px !important;
   }
 
   .p-card-quick-view {
