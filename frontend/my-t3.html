@@ -7,29 +7,32 @@
 <meta name="description" content="Akron Generics operates in full compliance with the federal Drug Supply Chain Security Act (DSCSA), providing complete, accurate, and secure T3 documentation (TI, TH, TS) for every eligible prescription drug shipment. Access your records 24/7.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --ground: #F4F6F8;
+  --ground: #EFEEEB;
   --card: #FFFFFF;
-  --surface: #F8FAFC;
-  --surface-hover: #F1F5F9;
-  --ink: #111827;
-  --ink-2: #4B5563;
-  --ink-3: #9CA3AF;
-  
+  --surface: #F5F7FA;
+  --ink: #16180F;
+  --ink-2: #5F6359;
+  --ink-3: #9A9D93;
+  --line: rgba(22, 24, 15, 0.10);
+  --line-2: rgba(22, 24, 15, 0.06);
+
   --color-navy: #0E335E;
-  --color-navy-hover: #09213D;
-  --color-crimson: #9E2235;
-  --color-crimson-hover: #831A29;
-  --border-light: #E5E9F0;
-  
+  --color-navy-dark: #0A192F;
+  --color-crimson: #942031;
+  --color-crimson-hover: #7D1A29;
+
+  --r-lg: 26px;
+  --r-md: 20px;
+  --r-sm: 14px;
   --r-pill: 9999px;
-  --r-card: 20px;
-  
-  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --display: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --pad: 16px;
+
+  --sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 *, *::before, *::after {
@@ -44,48 +47,17 @@ html {
 }
 
 body {
-  font-family: var(--sans);
   background-color: var(--ground);
   color: var(--ink);
-  line-height: 1.5;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  padding: 16px;
+  padding: 0;
   overflow-x: hidden;
 }
 
-/* ================= WRAPPER ================= */
-.wrap {
-  width: 100%;
-  max-width: none;
-  margin: 88px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* ================= APPLE SLOW FADE-IN ANIMATION ================= */
-@keyframes appleSlowFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(24px) scale(0.995);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.apple-fade-in {
-  opacity: 0;
-  animation: appleSlowFadeIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.delay-1 { animation-delay: 0.12s; }
-.delay-2 { animation-delay: 0.24s; }
-.delay-3 { animation-delay: 0.36s; }
-.delay-4 { animation-delay: 0.48s; }
-
-/* ================= SITE HEADER ================= */
+/* ================= DESKTOP HEADER ================= */
 .site-header {
   position: fixed;
   top: 0;
@@ -99,6 +71,7 @@ body {
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(22, 24, 15, 0.08);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
 }
 .site-header-inner {
   width: 100%;
@@ -131,7 +104,7 @@ body {
   gap: 24px;
 }
 .header-nav-link {
-  font-family: var(--sans);
+  font-family: var(--body);
   font-size: 13.5px;
   font-weight: 500;
   color: var(--ink);
@@ -204,28 +177,10 @@ body {
   transition: background 0.14s ease, color 0.14s ease;
 }
 .dropdown-menu a:hover {
-  background: var(--surface-hover);
+  background: var(--surface);
   color: var(--color-navy);
 }
 
-.header-dropdown .dropdown-menu a.dropdown-special-offers-link,
-.dropdown-menu a.dropdown-special-offers-link {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  padding: 6px 14px !important;
-  background: transparent !important;
-  border: none !important;
-  text-decoration: none !important;
-  line-height: 1 !important;
-  border-radius: 8px !important;
-  transition: background 0.15s ease, transform 0.15s ease !important;
-}
-.header-dropdown .dropdown-menu a.dropdown-special-offers-link:hover,
-.dropdown-menu a.dropdown-special-offers-link:hover {
-  background: rgba(148, 32, 49, 0.05) !important;
-  transform: translateY(-1px);
-}
 .dropdown-special-offers-img {
   height: 28px;
   width: auto;
@@ -251,15 +206,15 @@ body {
   display: inline-flex;
   align-items: center;
   background: var(--color-crimson);
-  color: #FFFFFF;
-  font-family: var(--sans);
+  color: #FFFFFF !important;
+  font-family: var(--body);
   font-size: 13px;
   font-weight: 600;
   padding: 8px 18px;
   border-radius: var(--r-pill);
   text-decoration: none;
   transition: background 0.18s ease, transform 0.18s ease;
-  box-shadow: 0 2px 8px rgba(158, 34, 53, 0.25);
+  box-shadow: 0 2px 8px rgba(148, 32, 49, 0.25);
 }
 .header-cta-red:hover {
   background: var(--color-crimson-hover);
@@ -360,7 +315,7 @@ body {
   gap: 4px;
 }
 .mobile-drawer-link {
-  font-family: var(--sans);
+  font-family: var(--body);
   font-size: 15px;
   font-weight: 500;
   color: var(--ink);
@@ -369,7 +324,7 @@ body {
   border-radius: 8px;
 }
 .mobile-drawer-link:hover {
-  background: var(--surface-hover);
+  background: var(--surface);
   color: var(--color-navy);
 }
 .mobile-drawer-divider {
@@ -387,540 +342,694 @@ body {
   margin-top: 8px;
 }
 
-/* ================= HERO CARD ================= */
-.t3-hero-card {
-  background: var(--card);
-  border-radius: 24px;
-  padding: clamp(36px, 4vw, 56px);
-  border: 1px solid rgba(22, 24, 15, 0.06);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: clamp(32px, 4vw, 52px);
-  align-items: center;
-}
-.t3-hero-left {
+/* ================= FULL BLEED EDITORIAL HERO ================= */
+.hero-centered-layout {
+  position: relative;
+  width: 100%;
+  min-height: clamp(660px, 86vh, 880px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  overflow: hidden;
+  isolation: isolate;
+  background: #000000;
 }
-.t3-compliance-pill {
+.hero-centered-layout .hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 0;
+}
+.hero-centered-layout .hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, 
+      rgba(0, 0, 0, 0.68) 0%, 
+      rgba(0, 0, 0, 0.48) 52%, 
+      rgba(0, 0, 0, 0.28) 100%),
+    linear-gradient(0deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      transparent 60%),
+    rgba(0, 0, 0, 0.16);
+}
+.hero-centered-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 130px clamp(24px, 5vw, 68px) 70px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Compliance Pill (Frosted glass with pulse dot) */
+.hero-compliance-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(158, 34, 53, 0.06);
-  border: 1px solid rgba(158, 34, 53, 0.18);
-  color: var(--color-crimson);
+  gap: 9px;
+  background: rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: var(--r-pill);
-  padding: 6px 14px;
-  font-family: var(--sans);
+  padding: 7px 18px;
+  font-family: var(--body);
   font-size: 11.5px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 20px;
-  align-self: flex-start;
+  color: #FFFFFF;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
-.pulse-dot {
+.hero-pulse-dot {
   width: 8px;
   height: 8px;
   background-color: #10B981;
   border-radius: 50%;
   display: inline-block;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.35);
   animation: pulseAnim 2s infinite;
 }
 @keyframes pulseAnim {
   0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
-.t3-hero-title {
-  font-family: var(--display);
-  font-size: clamp(32px, 3.6vw, 48px);
-  font-weight: 800;
-  color: #0F172A;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
-  margin-bottom: 20px;
+.hero-centered-layout .hero-title {
+  font-family: var(--sans);
+  font-size: clamp(44px, 5.4vw, 76px);
+  line-height: 1.05;
+  color: #FFFFFF;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  margin: 0 0 20px 0;
+  text-align: left;
+  max-width: 860px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.65);
 }
-.t3-hero-desc {
-  font-size: 16px;
-  line-height: 1.65;
-  color: #475569;
+.hero-centered-layout .hero-subtitle {
+  font-family: var(--body);
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(16.5px, 1.45vw, 20.5px);
+  max-width: 720px;
   font-weight: 400;
-  margin-bottom: 26px;
+  line-height: 1.6;
+  margin: 0 0 34px 0;
+  text-align: left;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
 }
 
-/* Key Trust Checkmarks */
-.t3-checkmarks-row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px 18px;
-  margin-bottom: 32px;
-  padding: 16px 20px;
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 14px;
-}
-.t3-check-item {
+.hero-cta-group {
   display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: center;
-  gap: 10px;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #1E293B;
+  margin-bottom: 34px;
 }
-.t3-check-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(158, 34, 53, 0.1);
-  color: var(--color-crimson);
+.hero-btn-red {
+  background: var(--color-crimson);
+  color: #FFFFFF !important;
+  font-family: var(--body);
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 15px 36px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 20px rgba(148, 32, 49, 0.40) !important;
+  border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  gap: 6px;
+}
+.hero-btn-red:hover {
+  background: var(--color-crimson-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(148, 32, 49, 0.55) !important;
+}
+.hero-btn-white {
+  background: #FFFFFF;
+  color: var(--color-navy-dark) !important;
+  font-family: var(--body);
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 15px 34px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25) !important;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.hero-btn-white:hover {
+  background: #F1F5F9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Trust checkmarks row inside hero */
+.hero-trust-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+}
+.hero-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+.hero-trust-check {
+  color: #38BDF8;
   font-weight: 800;
+  font-size: 15px;
+}
+
+/* ================= PAGE CANVAS WRAPPER ================= */
+.wrap {
+  width: 100%;
+  max-width: none;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pad);
+  padding: 0 var(--pad) var(--pad);
+}
+
+/* Value Proposition Bar (Shared AIRO Ticker) */
+.ticker {
+  background: var(--card);
+  border-radius: var(--r-lg);
+  padding: 22px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  border: 1px solid var(--line-2);
+  box-shadow: 0 2px 8px rgba(22, 24, 15, 0.04);
+  flex-wrap: wrap;
+}
+.ticker .item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ticker .item svg {
+  color: #204A75;
+  flex-shrink: 0;
+}
+.ticker .item span {
+  font-family: var(--sans);
+  font-weight: 600;
+  color: #182538;
+  font-size: 14.5px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.ticker .sep {
+  width: 1px;
+  height: 28px;
+  background: var(--line);
+}
+
+/* ================= SECTION SYSTEM ================= */
+.sec {
+  background: var(--card);
+  border-radius: var(--r-lg);
+  padding: 58px 48px;
+  border: 1px solid var(--line-2);
+  box-shadow: 0 2px 12px rgba(22, 24, 15, 0.03);
+}
+.sec-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #EEF4FA;
+  border: 1.5px solid #B4D3F2;
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #0A2540;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 4px rgba(10, 37, 64, 0.08);
+}
+.sec-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0A2540;
   flex-shrink: 0;
 }
 
-.t3-hero-actions {
+.sec-head {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 38px;
   flex-wrap: wrap;
 }
-.btn-primary-crimson {
+.sec-head h2 {
+  font-family: var(--sans);
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  max-width: 22ch;
+}
+.sec-head p {
+  color: var(--ink-2);
+  max-width: 44ch;
+  font-size: 15px;
+  line-height: 1.55;
+  border-left: 1.5px solid var(--line);
+  padding-left: 24px;
+}
+
+/* ================= SECTION 1: SPLIT OVERVIEW ================= */
+.overview-split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: stretch;
+}
+.overview-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.overview-content h2 {
+  font-family: var(--sans);
+  font-size: clamp(32px, 3.4vw, 48px);
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.italic-highlight {
+  font-family: "Georgia", serif;
+  font-style: italic;
+  color: #143565;
+  font-weight: 400;
+}
+.overview-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+.overview-p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.btn-create-acct {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: var(--color-crimson);
-  color: #FFFFFF;
-  font-family: var(--sans);
-  font-size: 14.5px;
-  font-weight: 700;
-  padding: 13px 26px;
-  border-radius: var(--r-pill);
-  text-decoration: none;
-  box-shadow: 0 4px 14px rgba(158, 34, 53, 0.3);
-  transition: all 0.2s ease;
-}
-.btn-primary-crimson:hover {
-  background: var(--color-crimson-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(158, 34, 53, 0.38);
-}
-.btn-secondary-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #FFFFFF;
-  color: var(--color-navy);
-  font-family: var(--sans);
+  color: #FFFFFF !important;
+  font-family: var(--body);
   font-size: 14.5px;
   font-weight: 600;
-  padding: 13px 24px;
+  padding: 13px 28px;
   border-radius: var(--r-pill);
   text-decoration: none;
-  border: 1px solid #CBD5E1;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(148, 32, 49, 0.28);
+  align-self: flex-start;
 }
-.btn-secondary-outline:hover {
-  background: #F1F5F9;
-  border-color: var(--color-navy);
-  color: var(--color-navy);
-  transform: translateY(-1px);
+.btn-create-acct:hover {
+  background: var(--color-crimson-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(148, 32, 49, 0.36);
 }
 
-/* Right Accreditation Panel */
-.t3-accreditation-panel {
-  background: linear-gradient(135deg, #0E335E 0%, #15457C 100%);
-  border-radius: 20px;
-  padding: 34px 30px;
-  color: #FFFFFF;
-  box-shadow: 0 10px 30px rgba(14, 51, 94, 0.18);
+/* Right Verification Card */
+.compliance-panel {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 16px;
 }
-.t3-panel-head {
+.comp-card-main {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  padding-bottom: 16px;
+  gap: 24px;
+  transition: border-color 0.2s ease;
 }
-.t3-panel-title {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
+.comp-card-main:hover {
+  border-color: #CBD5E1;
 }
-.t3-panel-badge {
-  background: rgba(16, 185, 129, 0.2);
-  color: #A7F3D0;
-  border: 1px solid rgba(16, 185, 129, 0.4);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: var(--r-pill);
-}
-
-.t3-logos-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-.t3-logo-box {
+.comp-logo-box {
+  width: 130px;
+  height: 60px;
   background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 12px;
-  padding: 14px 12px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  min-height: 90px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 8px 12px;
+  flex-shrink: 0;
 }
-.t3-logo-box img {
+.comp-logo-box img {
   max-width: 100%;
-  max-height: 42px;
+  max-height: 44px;
   width: auto;
   height: auto;
   object-fit: contain;
-  margin-bottom: 6px;
 }
-.t3-logo-box span {
-  font-size: 11px;
+.comp-text-box h3 {
+  font-family: var(--sans);
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.comp-text-box p {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.comp-facility-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 180px;
+  background: #0A192F;
+}
+.comp-facility-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+.comp-facility-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  background: rgba(10, 25, 47, 0.88);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #FFFFFF;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
   font-weight: 600;
-  color: #475569;
-}
-
-.t3-stats-banner {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  padding: 14px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  text-align: center;
-}
-.t3-stat-num {
-  font-family: var(--display);
-  font-size: 19px;
-  font-weight: 800;
-  color: #38BDF8;
-}
-.t3-stat-lbl {
-  font-size: 10.5px;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.25;
-  margin-top: 2px;
-}
-
-.t3-panel-foot {
-  font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.5;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-top: 14px;
   display: flex;
   align-items: center;
   gap: 8px;
-}
-.t3-panel-foot svg {
-  flex-shrink: 0;
-  color: #38BDF8;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* ================= SECTION COMMON STYLES ================= */
-.sec-card {
-  background: var(--card);
-  border-radius: var(--r-card);
-  padding: clamp(36px, 4vw, 52px);
-  border: 1px solid rgba(22, 24, 15, 0.06);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
-}
-.sec-head {
-  max-width: 820px;
-  margin-bottom: 38px;
-}
-.sec-eyebrow {
-  display: inline-block;
-  background: #F1F5F9;
-  border: 1px solid #E2E8F0;
-  border-radius: var(--r-pill);
-  padding: 4px 12px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #475569;
-  margin-bottom: 12px;
-}
-.sec-title {
-  font-family: var(--display);
-  font-size: clamp(26px, 3vw, 36px);
-  font-weight: 800;
-  color: #0F172A;
-  letter-spacing: -0.02em;
-  margin-bottom: 12px;
-}
-.sec-desc {
-  font-size: 15.5px;
-  color: #475569;
-  line-height: 1.6;
-}
-
-/* ================= 3 PILLARS: WHAT IS T3 DATA? ================= */
-.t3-pillars-grid {
+/* ================= SECTION 2: 3 PILLARS (EDITORIAL CARD GRID) ================= */
+.pillars-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 20px;
 }
-.t3-pillar-card {
+.pillar-card {
   background: #F8FAFC;
   border: 1px solid #E2E8F0;
   border-radius: 18px;
-  padding: 28px 24px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: all 0.25s ease;
-  position: relative;
-  overflow: hidden;
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
-.t3-pillar-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--color-navy);
-  opacity: 0.8;
-  transition: background 0.2s ease, height 0.2s ease;
-}
-.t3-pillar-card:hover {
+.pillar-card:hover {
   transform: translateY(-4px);
   border-color: #CBD5E1;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
-  background: #FFFFFF;
+  box-shadow: 0 14px 32px rgba(22, 24, 15, 0.08);
 }
-.t3-pillar-card:nth-child(1)::before { background: #0E335E; }
-.t3-pillar-card:nth-child(2)::before { background: #9E2235; }
-.t3-pillar-card:nth-child(3)::before { background: #0284C7; }
-
-.t3-pillar-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+.pillar-img-wrap {
+  height: 190px;
+  width: 100%;
+  overflow: hidden;
+  background: #E2E8F0;
+  position: relative;
 }
-.t3-pillar-badge {
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
+.pillar-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.pillar-card:hover .pillar-img-wrap img {
+  transform: scale(1.04);
+}
+.pillar-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(10, 25, 47, 0.88);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  font-family: var(--body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: var(--r-pill);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.t3-pillar-card:nth-child(1) .t3-pillar-badge { background: #E0E7FF; color: #3730A3; }
-.t3-pillar-card:nth-child(2) .t3-pillar-badge { background: #FFE4E6; color: #9F1239; }
-.t3-pillar-card:nth-child(3) .t3-pillar-badge { background: #E0F2FE; color: #075985; }
-
-.t3-pillar-abbr {
-  font-family: var(--display);
-  font-size: 28px;
-  font-weight: 800;
-  color: #0F172A;
-  opacity: 0.25;
+.pillar-body {
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
-
-.t3-pillar-card h3 {
-  font-family: var(--display);
+.pillar-body h3 {
+  font-family: var(--sans);
   font-size: 20px;
   font-weight: 700;
-  color: #0F172A;
-  margin-bottom: 12px;
-  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 10px;
 }
-.t3-pillar-card p {
-  font-size: 14.5px;
-  color: #475569;
+.pillar-body p {
+  font-size: 14px;
   line-height: 1.6;
+  color: var(--ink-2);
   margin-bottom: 20px;
   flex-grow: 1;
 }
-
-.t3-attr-list {
-  list-style: none;
-  border-top: 1px solid #E2E8F0;
+.manifest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   padding-top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  border-top: 1px solid #E2E8F0;
 }
-.t3-attr-list li {
-  font-size: 13px;
-  color: #334155;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  line-height: 1.4;
-}
-.t3-attr-list svg {
-  width: 14px;
-  height: 14px;
-  color: #10B981;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-/* ================= DELIVERY INFRASTRUCTURE ================= */
-.t3-delivery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-.t3-delivery-card {
+.manifest-tag {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* ================= SECTION 3: DELIVERY WORKFLOW ================= */
+.delivery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.delivery-card {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   border-radius: 18px;
-  padding: 30px 26px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
-  transition: all 0.2s ease;
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
 }
-.t3-delivery-card:hover {
-  transform: translateY(-3px);
-  border-color: #CBD5E1;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+.delivery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(22, 24, 15, 0.08);
 }
-.t3-del-icon-box {
-  width: 50px;
-  height: 50px;
-  border-radius: 14px;
-  background: #EFF6FF;
-  color: var(--color-navy);
+.delivery-img-wrap {
+  height: 180px;
+  width: 100%;
+  overflow: hidden;
+  background: #E2E8F0;
+}
+.delivery-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.delivery-card:hover .delivery-img-wrap img {
+  transform: scale(1.04);
+}
+.delivery-body {
+  padding: 24px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  flex: 1;
 }
-.t3-delivery-card:nth-child(2) .t3-del-icon-box { background: #FEF2F2; color: var(--color-crimson); }
-.t3-delivery-card:nth-child(3) .t3-del-icon-box { background: #F0FDF4; color: #166534; }
-
-.t3-delivery-card h3 {
-  font-family: var(--display);
+.delivery-body h3 {
+  font-family: var(--sans);
   font-size: 19px;
   font-weight: 700;
-  color: #0F172A;
+  color: var(--ink);
   margin-bottom: 10px;
 }
-.t3-delivery-card p {
-  font-size: 14.5px;
-  color: #475569;
+.delivery-body p {
+  font-size: 14px;
   line-height: 1.6;
+  color: var(--ink-2);
   margin-bottom: 18px;
 }
-.t3-sub-points {
+.delivery-list {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: auto;
   padding-top: 14px;
-  border-top: 1px solid #F1F5F9;
+  border-top: 1px solid #E2E8F0;
+  margin-top: auto;
 }
-.t3-sub-points li {
+.delivery-list li {
   font-size: 12.5px;
-  color: #64748B;
+  color: #475569;
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
+  font-weight: 500;
 }
-.t3-sub-points li::before {
-  content: "•";
-  color: var(--color-navy);
-  font-weight: bold;
+.delivery-list li::before {
+  content: "✓";
+  color: var(--color-crimson);
+  font-weight: 800;
+  font-size: 12px;
 }
 
-/* ================= ACCESS PATHS: NEW VS EXISTING ================= */
-.t3-access-grid {
+/* ================= SECTION 4: ACCESS CARDS (NEW VS EXISTING) ================= */
+.access-cards-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 28px;
+  gap: 24px;
 }
-.t3-access-card {
+.access-card {
   background: #F8FAFC;
   border: 1px solid #E2E8F0;
   border-radius: 20px;
-  padding: 38px 34px;
+  padding: 40px 36px;
   display: flex;
   flex-direction: column;
   transition: all 0.25s ease;
 }
-.t3-access-card.portal-highlight {
+.access-card.featured-card {
   background: #FFFFFF;
   border: 2px solid var(--color-navy);
   box-shadow: 0 12px 36px rgba(14, 51, 94, 0.08);
 }
-.t3-access-card-badge {
+.access-card-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-size: 11.5px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: var(--r-pill);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   align-self: flex-start;
 }
-.t3-badge-new { background: #FEF2F2; color: var(--color-crimson); border: 1px solid rgba(158, 34, 53, 0.2); }
-.t3-badge-exist { background: #EFF6FF; color: var(--color-navy); border: 1px solid rgba(14, 51, 94, 0.2); }
+.badge-new {
+  background: rgba(148, 32, 49, 0.08);
+  color: var(--color-crimson);
+  border: 1px solid rgba(148, 32, 49, 0.2);
+}
+.badge-existing {
+  background: rgba(14, 51, 94, 0.08);
+  color: var(--color-navy);
+  border: 1px solid rgba(14, 51, 94, 0.2);
+}
 
-.t3-access-card h3 {
-  font-family: var(--display);
-  font-size: 24px;
-  font-weight: 800;
-  color: #0F172A;
+.access-card h3 {
+  font-family: var(--sans);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink);
   margin-bottom: 14px;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
 }
-.t3-access-card p {
-  font-size: 14.5px;
-  color: #475569;
-  line-height: 1.6;
-  margin-bottom: 22px;
+.access-card p {
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.62;
+  margin-bottom: 24px;
 }
 
-/* Steps list */
-.t3-step-list {
+/* Timeline steps */
+.step-sequence {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
-.t3-step-item {
+.step-row {
   display: flex;
   align-items: flex-start;
   gap: 14px;
 }
-.t3-step-num {
+.step-number {
   width: 28px;
   height: 28px;
   border-radius: 50%;
   background: var(--color-crimson);
   color: #FFFFFF;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-size: 13px;
   font-weight: 700;
   display: flex;
@@ -929,173 +1038,107 @@ body {
   flex-shrink: 0;
   margin-top: 2px;
 }
-.t3-step-content strong {
+.step-details strong {
   display: block;
   font-size: 14.5px;
   font-weight: 700;
-  color: #0F172A;
+  color: var(--ink);
   margin-bottom: 2px;
 }
-.t3-step-content span {
-  font-size: 13px;
-  color: #64748B;
+.step-details span {
+  font-size: 13.5px;
+  color: var(--ink-2);
   line-height: 1.5;
 }
 
-.t3-guarantee-banner {
+.turnaround-banner {
   background: #FFFBEB;
   border: 1px solid #FDE68A;
   border-radius: 12px;
-  padding: 12px 16px;
-  font-size: 13px;
+  padding: 13px 18px;
+  font-size: 13.5px;
   color: #92400E;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 28px;
 }
 
-.t3-feature-checklist {
+.feature-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 26px;
+  gap: 12px;
+  margin-bottom: 28px;
 }
-.t3-feature-checklist li {
-  font-size: 13.5px;
+.feature-list li {
+  font-size: 14px;
   color: #334155;
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.t3-feature-checklist svg {
+.feature-list li::before {
+  content: "✓";
   color: #10B981;
-  flex-shrink: 0;
+  font-weight: 800;
+  font-size: 14px;
 }
 
-.t3-card-actions {
+.access-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-top: auto;
   flex-wrap: wrap;
 }
-.btn-access-red {
+.btn-solid-red {
   background: var(--color-crimson);
-  color: #FFFFFF;
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 700;
-  padding: 12px 24px;
-  border-radius: var(--r-pill);
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(158, 34, 53, 0.25);
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.btn-access-red:hover {
-  background: var(--color-crimson-hover);
-  transform: translateY(-1px);
-}
-.btn-access-navy {
-  background: var(--color-navy);
-  color: #FFFFFF;
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 700;
-  padding: 12px 24px;
-  border-radius: var(--r-pill);
-  text-decoration: none;
-  box-shadow: 0 4px 14px rgba(14, 51, 94, 0.25);
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.btn-access-navy:hover {
-  background: var(--color-navy-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(14, 51, 94, 0.32);
-}
-.btn-access-outline {
-  background: #FFFFFF;
-  color: var(--ink-2);
-  border: 1px solid #CBD5E1;
-  font-family: var(--sans);
-  font-size: 13.5px;
-  font-weight: 600;
-  padding: 11px 20px;
-  border-radius: var(--r-pill);
-  text-decoration: none;
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.btn-access-outline:hover {
-  background: #F1F5F9;
-  color: var(--ink);
-  border-color: #94A3B8;
-}
-
-/* ================= FAQ SECTION ================= */
-.t3-faq-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.t3-faq-item {
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 14px;
-  overflow: hidden;
-  transition: border-color 0.2s ease;
-}
-.t3-faq-item[open] {
-  border-color: #CBD5E1;
-  background: #FFFFFF;
-}
-.t3-faq-summary {
-  font-family: var(--sans);
-  font-size: 15.5px;
-  font-weight: 700;
-  color: #0F172A;
-  padding: 18px 24px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  list-style: none;
-  user-select: none;
-}
-.t3-faq-summary::-webkit-details-marker { display: none; }
-.t3-faq-summary::after {
-  content: "+";
-  font-size: 20px;
-  font-weight: 400;
-  color: #64748B;
-  transition: transform 0.2s ease;
-}
-.t3-faq-item[open] .t3-faq-summary::after {
-  content: "−";
-  transform: rotate(180deg);
-}
-.t3-faq-body {
-  padding: 0 24px 20px;
+  color: #FFFFFF !important;
+  font-family: var(--body);
   font-size: 14.5px;
-  color: #475569;
-  line-height: 1.6;
+  font-weight: 600;
+  padding: 13px 26px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(148, 32, 49, 0.28);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-solid-red:hover {
+  background: var(--color-crimson-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(148, 32, 49, 0.36);
+}
+.btn-outline-pill {
+  background: #FFFFFF;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  border: 1px solid #CBD5E1;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-outline-pill:hover {
+  background: #F1F5F9;
+  border-color: #94A3B8;
+  transform: translateY(-1px);
 }
 
-/* ================= HELP DESK STRIP ================= */
-.t3-help-card {
+/* ================= SECTION 5: CONTACT HELP STRIP ================= */
+.about-cta-card {
   background: linear-gradient(135deg, #0E335E 0%, #15457C 100%);
-  border-radius: var(--r-card);
-  padding: 44px 48px;
+  border-radius: var(--r-card, 20px);
+  padding: 48px;
   color: #FFFFFF;
   display: flex;
   align-items: center;
@@ -1103,57 +1146,57 @@ body {
   gap: 36px;
   box-shadow: 0 10px 30px rgba(14, 51, 94, 0.18);
 }
-.t3-help-info h3 {
-  font-family: var(--display);
-  font-size: clamp(22px, 2.5vw, 30px);
-  font-weight: 800;
+.about-cta-info h3 {
+  font-family: var(--sans);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 8px;
 }
-.t3-help-info p {
+.about-cta-info p {
   font-size: 15px;
   color: rgba(255, 255, 255, 0.85);
-  max-width: 620px;
+  max-width: 600px;
   line-height: 1.55;
 }
-.t3-help-actions {
+.about-cta-actions {
   display: flex;
   align-items: center;
   gap: 14px;
   flex-shrink: 0;
   flex-wrap: wrap;
 }
-.btn-white {
+.btn-cta-white {
   background: #FFFFFF;
-  color: var(--color-navy);
-  font-family: var(--sans);
+  color: var(--color-navy) !important;
+  font-family: var(--body);
   font-size: 14px;
   font-weight: 700;
-  padding: 12px 24px;
+  padding: 13px 26px;
   border-radius: var(--r-pill);
   text-decoration: none;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
   white-space: nowrap;
 }
-.btn-white:hover {
+.btn-cta-white:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
-.btn-outline-white {
+.btn-cta-outline-white {
   background: transparent;
-  color: #FFFFFF;
-  font-family: var(--sans);
+  color: #FFFFFF !important;
+  font-family: var(--body);
   font-size: 14px;
   font-weight: 600;
-  padding: 12px 24px;
+  padding: 13px 24px;
   border-radius: var(--r-pill);
   text-decoration: none;
   border: 1px solid rgba(255, 255, 255, 0.35);
   transition: background 0.18s ease, border-color 0.18s ease;
   white-space: nowrap;
 }
-.btn-outline-white:hover {
+.btn-cta-outline-white:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: #FFFFFF;
 }
@@ -1161,16 +1204,16 @@ body {
 /* ================= GLOBAL FOOTER ================= */
 .c-footer {
   background: var(--card);
-  border-radius: var(--r-card);
+  border-radius: var(--r-lg);
   padding: 44px 50px 32px;
-  border: 1px solid rgba(22, 24, 15, 0.06);
+  border: 1px solid var(--line-2);
 }
 .c-footer-grid {
   display: grid;
   grid-template-columns: 2.2fr 1fr 1fr 1.3fr;
   gap: 40px;
   padding-bottom: 36px;
-  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+  border-bottom: 1px solid var(--line);
 }
 .c-footer-brand-col {
   display: flex;
@@ -1215,7 +1258,7 @@ body {
 }
 
 .c-footer-links-col h6 {
-  font-family: var(--sans);
+  font-family: var(--body);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1269,37 +1312,34 @@ body {
 @media (max-width: 1040px) {
   .site-header { display: none !important; }
   .mobile-nav { display: flex !important; }
-  .wrap { margin-top: 72px; }
-  .t3-hero-card { grid-template-columns: 1fr; gap: 32px; }
-  .t3-pillars-grid { grid-template-columns: 1fr; }
-  .t3-delivery-grid { grid-template-columns: 1fr; }
-  .t3-access-grid { grid-template-columns: 1fr; }
-  .t3-help-card { flex-direction: column; align-items: flex-start; }
-  .t3-help-actions { width: 100%; }
+  .hero-centered-layout { padding-top: 60px; min-height: 600px; }
+  .overview-split { grid-template-columns: 1fr; gap: 32px; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .delivery-grid { grid-template-columns: 1fr; }
+  .access-cards-grid { grid-template-columns: 1fr; }
+  .about-cta-card { flex-direction: column; align-items: flex-start; }
+  .about-cta-actions { width: 100%; }
   .c-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
 }
 
 @media (max-width: 640px) {
-  body { padding: 8px 6px; }
-  .wrap { margin-top: 68px; gap: 12px; }
-  .t3-hero-card { padding: 22px 14px; border-radius: 18px; }
-  .t3-compliance-pill { font-size: 10.5px; padding: 4px 10px; margin-bottom: 14px; }
-  .t3-hero-title { font-size: clamp(24px, 6.5vw, 32px); line-height: 1.2; margin-bottom: 14px; }
-  .t3-hero-desc { font-size: 14px; line-height: 1.55; }
-  .t3-checkmarks-row { grid-template-columns: 1fr; padding: 12px 14px; }
-  .t3-hero-actions { flex-direction: column; width: 100%; }
-  .btn-primary-crimson, .btn-secondary-outline { width: 100%; text-align: center; justify-content: center; }
-  .t3-accreditation-panel { padding: 22px 18px; }
-  .t3-logos-grid { grid-template-columns: 1fr; }
-  .t3-stats-banner { grid-template-columns: 1fr; gap: 8px; }
-  .sec-card { padding: 22px 14px; border-radius: 18px; }
-  .sec-title { font-size: 22px; }
-  .t3-access-card { padding: 22px 16px; border-radius: 18px; }
-  .t3-card-actions { flex-direction: column; width: 100%; }
-  .btn-access-red, .btn-access-navy, .btn-access-outline { width: 100%; text-align: center; justify-content: center; }
-  .t3-help-card { padding: 24px 16px; border-radius: 18px; }
-  .btn-white, .btn-outline-white { width: 100%; text-align: center; justify-content: center; }
-  .c-footer { padding: 28px 16px 20px; }
+  .wrap { padding: 0 10px 16px; margin-top: 14px; }
+  .sec { padding: 32px 20px; border-radius: 18px; }
+  .hero-centered-layout .hero-title { font-size: clamp(34px, 8.5vw, 44px); line-height: 1.1; }
+  .hero-centered-layout .hero-subtitle { font-size: 15px; }
+  .hero-cta-group { flex-direction: column; width: 100%; }
+  .hero-btn-red, .hero-btn-white { width: 100%; text-align: center; }
+  .hero-trust-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .ticker { padding: 18px 20px; }
+  .ticker .sep { display: none; }
+  .sec-head h2 { font-size: 26px; }
+  .sec-head p { border-left: none; padding-left: 0; }
+  .access-card { padding: 26px 20px; border-radius: 18px; }
+  .access-actions { flex-direction: column; width: 100%; }
+  .btn-solid-red, .btn-outline-pill { width: 100%; justify-content: center; }
+  .about-cta-card { padding: 28px 20px; border-radius: 18px; }
+  .btn-cta-white, .btn-cta-outline-white { width: 100%; justify-content: center; }
+  .c-footer { padding: 28px 20px 24px; }
   .c-footer-grid { grid-template-columns: 1fr; gap: 24px; }
   .c-footer-bottom { flex-direction: column; align-items: flex-start; }
 }
@@ -1346,7 +1386,7 @@ body {
 
     <div class="site-header-actions">
       <a href="my-t3.html" class="header-nav-link active">My T3</a>
-      <span class="header-nav-divider"></span>
+      <span class="header-nav-divider" aria-hidden="true"></span>
       <a href="https://server.akrongenerics.com/login.php" class="header-nav-link" target="_blank" rel="noopener noreferrer">Login</a>
       <a href="become-a-customer.html" class="header-cta-red">Become a Customer</a>
     </div>
@@ -1394,336 +1434,337 @@ body {
   </div>
 </div>
 
-<!-- ================= FULL WIDTH WRAPPER ================= -->
+<!-- ================= FULL BLEED EDITORIAL HERO ================= -->
+<header class="hero-centered-layout" id="hero">
+  <img class="hero-bg-img" src="src/assets/hero-pharmaceutical-distribution-center.jpg" alt="Akron Generics Licensed Pharmaceutical Distribution Center">
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <div class="hero-centered-container">
+    <div class="hero-compliance-pill">
+      <span class="hero-pulse-dot"></span>
+      <span>NABP-ACCREDITED LICENSED WHOLESALER • DSCSA TITLE II COMPLIANT</span>
+    </div>
+
+    <h1 class="hero-title">DSCSA Compliance &amp;<br>T3 Traceability.</h1>
+    <p class="hero-subtitle">Complete, audit-ready Transaction Information (TI), Transaction History (TH), and Transaction Statements (TS) for every prescription shipment.</p>
+
+    <div class="hero-cta-group">
+      <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="hero-btn-red" target="_blank" rel="noopener noreferrer">
+        <span>Login to My T3 Portal</span>
+        <span style="font-size:1.15em;line-height:1;margin-left:4px;">↗</span>
+      </a>
+      <a href="#onboarding" class="hero-btn-white">
+        <span>Onboard Your Pharmacy</span>
+        <span style="font-size:1.15em;line-height:1;margin-left:4px;">→</span>
+      </a>
+    </div>
+
+    <div class="hero-trust-row">
+      <span class="hero-trust-item"><span class="hero-trust-check">✓</span> 100% Serialized Supply</span>
+      <span class="hero-trust-item"><span class="hero-trust-check">✓</span> Same-Day Carrier Dispatch</span>
+      <span class="hero-trust-item"><span class="hero-trust-check">✓</span> Direct Sourcing</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= MAIN WRAPPER ================= -->
 <div class="wrap">
 
-  <!-- ================= HERO SECTION ================= -->
-  <section class="t3-hero-card apple-fade-in">
-    <div class="t3-hero-left">
-      <div class="t3-compliance-pill">
-        <span class="pulse-dot"></span>
-        <span>NABP-ACCREDITED WHOLESALE DISTRIBUTOR · DSCSA TITLE II COMPLIANT</span>
-      </div>
-
-      <h1 class="t3-hero-title">DSCSA Compliance &amp;<br>T3 Traceability Data</h1>
-
-      <p class="t3-hero-desc">
-        At Akron Generics LLC, safeguarding the integrity of the pharmaceutical supply chain is our highest priority. As an NABP-accredited wholesale distributor, we operate in full compliance with the federal Drug Supply Chain Security Act (DSCSA), providing complete, accurate, and secure T3 documentation for every eligible prescription drug shipment.
-      </p>
-
-      <div class="t3-checkmarks-row">
-        <div class="t3-check-item">
-          <span class="t3-check-icon">✓</span>
-          <span>100% Serialized Supply</span>
-        </div>
-        <div class="t3-check-item">
-          <span class="t3-check-icon">✓</span>
-          <span>Interoperable GS1 EPCIS Exchange</span>
-        </div>
-        <div class="t3-check-item">
-          <span class="t3-check-icon">✓</span>
-          <span>6-Year Secure Audit Archiving</span>
-        </div>
-        <div class="t3-check-item">
-          <span class="t3-check-icon">✓</span>
-          <span>24-Hour Account Provisioning</span>
-        </div>
-      </div>
-
-      <div class="t3-hero-actions">
-        <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="btn-primary-crimson" target="_blank" rel="noopener noreferrer">
-          <span>Login to My T3 Portal</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-        </a>
-        <a href="#onboarding" class="btn-secondary-outline">
-          <span>New Customer? Get Access</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-        </a>
-      </div>
+  <!-- ================= VALUE PROPOSITION TICKER ================= -->
+  <div class="ticker">
+    <div class="item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#204A75" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+      <span>100% Title II Compliant</span>
     </div>
+    <div class="sep"></div>
+    <div class="item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#204A75" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+      </svg>
+      <span>Interoperable GS1 EPCIS</span>
+    </div>
+    <div class="sep"></div>
+    <div class="item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#204A75" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="8" y1="21" x2="16" y2="21"></line>
+        <line x1="12" y1="17" x2="12" y2="21"></line>
+      </svg>
+      <span>6-Year Audit Retention</span>
+    </div>
+    <div class="sep"></div>
+    <div class="item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#204A75" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      <span>24-Hour Credential Turnaround</span>
+    </div>
+  </div>
 
-    <!-- Right Accreditation Panel -->
-    <div class="t3-accreditation-panel">
-      <div class="t3-panel-head">
-        <span class="t3-panel-title">Federal Compliance &amp; Verification</span>
-        <span class="t3-panel-badge">DSCSA Certified</span>
+  <!-- ================= SECTION 1: EXECUTIVE OVERVIEW ================= -->
+  <section class="sec">
+    <div class="overview-split">
+      <div class="overview-content">
+        <div>
+          <div class="sec-eyebrow">SUPPLY CHAIN INTEGRITY</div>
+          <h2>Safeguarding the prescription drug <span class="italic-highlight">supply chain.</span></h2>
+          <div class="overview-paragraphs">
+            <p class="overview-p">
+              At Akron Generics LLC, safeguarding the integrity of the pharmaceutical supply chain is our highest priority. As an NABP-accredited wholesale distributor, we operate in full compliance with the federal Drug Supply Chain Security Act (DSCSA), providing complete, accurate, and secure T3 documentation for every eligible prescription drug shipment.
+            </p>
+            <p class="overview-p">
+              Every shipment leaving our 15,000 sq. ft. licensed facility is backed by end-to-end serialized track-and-trace data, protecting patient health, eliminating counterfeit risks, and keeping your pharmacy audit-ready at all times.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <a href="#onboarding" class="btn-create-acct">
+            <span>Get T3 Portal Access</span>
+            <span style="font-size:1.15em;line-height:1;margin-left:4px;">↗</span>
+          </a>
+        </div>
       </div>
 
-      <div class="t3-logos-grid">
-        <div class="t3-logo-box">
-          <img src="src/assets/compliance/logo-nabp.png" alt="NABP - National Association of Boards of Pharmacy">
-          <span>NABP Accredited Wholesaler</span>
+      <!-- Right Compliance Verification Panel -->
+      <div class="compliance-panel">
+        <div class="comp-card-main">
+          <div class="comp-logo-box">
+            <img src="src/assets/compliance/logo-nabp.png" alt="NABP - National Association of Boards of Pharmacy">
+          </div>
+          <div class="comp-text-box">
+            <h3>NABP Accredited Wholesaler</h3>
+            <p>The pharmaceutical industry's gold standard verification for legitimate, secure drug distribution.</p>
+          </div>
         </div>
-        <div class="t3-logo-box">
-          <img src="src/assets/compliance/logo-lspedia.png" alt="LSPedia OneScan - DSCSA EPCIS Partner">
-          <span>LSPedia EPCIS Partner</span>
-        </div>
-      </div>
 
-      <div class="t3-stats-banner">
-        <div>
-          <div class="t3-stat-num">100%</div>
-          <div class="t3-stat-lbl">Title II DSCSA Compliant</div>
+        <div class="comp-card-main">
+          <div class="comp-logo-box">
+            <img src="src/assets/compliance/logo-lspedia.png" alt="LSPedia OneScan Partner - DSCSA Traceability">
+          </div>
+          <div class="comp-text-box">
+            <h3>LSPedia EPCIS Partner</h3>
+            <p>Interoperable GS1 EPCIS data exchange ensuring seamless electronic transmission directly into pharmacy systems.</p>
+          </div>
         </div>
-        <div>
-          <div class="t3-stat-num">6+ Yrs</div>
-          <div class="t3-stat-lbl">Secure Record Retention</div>
-        </div>
-        <div>
-          <div class="t3-stat-num">&lt;24h</div>
-          <div class="t3-stat-lbl">New Account Credentialing</div>
-        </div>
-      </div>
 
-      <div class="t3-panel-foot">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-        <span>Full TI, TH &amp; TS documentation generated for every eligible Rx order.</span>
+        <div class="comp-facility-card">
+          <img src="src/assets/akron-facility.jpg" alt="Akron Generics 15,000 Sq. Ft. Facility in Commack, NY">
+          <div class="comp-facility-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>47 Mall Drive, Commack, NY · 15,000 Sq. Ft. Controlled Facility</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= SECTION 1: WHAT IS T3 DATA? ================= -->
-  <section class="sec-card apple-fade-in delay-1">
+  <!-- ================= SECTION 2: WHAT IS T3 DATA? ================= -->
+  <section class="sec">
     <div class="sec-head">
-      <span class="sec-eyebrow">STATUTORY PRODUCT TRACING</span>
-      <h2 class="sec-title">What is T3 Data?</h2>
-      <p class="sec-desc">
-        T3 refers to the three core components of product tracing data required under DSCSA regulations to verify that medications are authentic and handled safely at every stage of distribution:
+      <div>
+        <div class="sec-eyebrow">STATUTORY PRODUCT TRACING</div>
+        <h2>What is T3 Data?</h2>
+      </div>
+      <p>
+        T3 refers to the three core components of product tracing data required under DSCSA regulations to verify that medications are authentic and handled safely at every stage of distribution.
       </p>
     </div>
 
-    <div class="t3-pillars-grid">
-      <!-- 01: Transaction Information -->
-      <div class="t3-pillar-card">
-        <div class="t3-pillar-top">
-          <span class="t3-pillar-badge">Component 01</span>
-          <span class="t3-pillar-abbr">TI</span>
+    <div class="pillars-grid">
+      <!-- 01: TI -->
+      <div class="pillar-card">
+        <div class="pillar-img-wrap">
+          <img src="src/assets/purchasing-economics.jpg" alt="Transaction Information (TI)">
+          <span class="pillar-tag">Component 01 · TI</span>
         </div>
-        <h3>Transaction Information (TI)</h3>
-        <p>
-          Detailed product and shipment data, including the proprietary or established drug name, strength, dosage form, National Drug Code (NDC), container size, number of containers, lot number, transaction date, shipment date, and the business names and addresses of both Akron Generics and the receiving pharmacy or healthcare facility.
-        </p>
-        <ul class="t3-attr-list">
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Proprietary &amp; established medication name</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Strength, dosage form &amp; container size</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>FDA 10/11-digit National Drug Code (NDC)</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Batch/lot number &amp; expiration dates</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Exact shipment and delivery timestamps</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Trading partner licensed entity addresses</span>
-          </li>
-        </ul>
+        <div class="pillar-body">
+          <h3>Transaction Information (TI)</h3>
+          <p>
+            Detailed product and shipment data, including the proprietary or established drug name, strength, dosage form, National Drug Code (NDC), container size, number of containers, lot number, transaction date, shipment date, and the business names and addresses of both Akron Generics and the receiving pharmacy or healthcare facility.
+          </p>
+          <div class="manifest-tags">
+            <span class="manifest-tag">Drug Name &amp; Strength</span>
+            <span class="manifest-tag">11-Digit NDC</span>
+            <span class="manifest-tag">Lot &amp; Expiration</span>
+            <span class="manifest-tag">Container Count</span>
+            <span class="manifest-tag">Shipment Timestamps</span>
+            <span class="manifest-tag">Licensed Facility Addresses</span>
+          </div>
+        </div>
       </div>
 
-      <!-- 02: Transaction History -->
-      <div class="t3-pillar-card">
-        <div class="t3-pillar-top">
-          <span class="t3-pillar-badge">Component 02</span>
-          <span class="t3-pillar-abbr">TH</span>
+      <!-- 02: TH -->
+      <div class="pillar-card">
+        <div class="pillar-img-wrap">
+          <img src="src/assets/product-availability.jpg" alt="Transaction History (TH)">
+          <span class="pillar-tag">Component 02 · TH</span>
         </div>
-        <h3>Transaction History (TH)</h3>
-        <p>
-          A comprehensive record tracking the prior ownership history of the product back to the original manufacturer (applicable to legacy or non-serialized transactions).
-        </p>
-        <ul class="t3-attr-list">
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Full prior ownership chain of custody</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Original primary manufacturer provenance</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Intermediary wholesale distribution lineage</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Tamper-evident pedigree integrity</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Applicable legacy transfer tracking</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Board of Pharmacy audit-compliant logs</span>
-          </li>
-        </ul>
+        <div class="pillar-body">
+          <h3>Transaction History (TH)</h3>
+          <p>
+            A comprehensive record tracking the prior ownership history of the product back to the original manufacturer (applicable to legacy or non-serialized transactions).
+          </p>
+          <div class="manifest-tags">
+            <span class="manifest-tag">Prior Ownership Chain</span>
+            <span class="manifest-tag">Manufacturer Provenance</span>
+            <span class="manifest-tag">Chain of Custody</span>
+            <span class="manifest-tag">Authorized Transfer Logs</span>
+            <span class="manifest-tag">Non-Diverted Pedigree</span>
+          </div>
+        </div>
       </div>
 
-      <!-- 03: Transaction Statement -->
-      <div class="t3-pillar-card">
-        <div class="t3-pillar-top">
-          <span class="t3-pillar-badge">Component 03</span>
-          <span class="t3-pillar-abbr">TS</span>
+      <!-- 03: TS -->
+      <div class="pillar-card">
+        <div class="pillar-img-wrap">
+          <img src="src/assets/clearer-decisions.jpg" alt="Transaction Statement (TS)">
+          <span class="pillar-tag">Component 03 · TS</span>
         </div>
-        <h3>Transaction Statement (TS)</h3>
-        <p>
-          Formal attestation confirming that Akron Generics is an authorized trading partner under DSCSA, sourced the product from an authorized trading partner, did not knowingly ship suspect or illegitimate product, and maintains validated systems for product verification.
-        </p>
-        <ul class="t3-attr-list">
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Authorized Trading Partner (ATP) attestation</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Direct sourcing from certified partners</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Non-suspect and legitimate product warranty</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Validated verification &amp; quarantine systems</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Immediate illegitimate product reporting</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Compliance with federal Title II mandates</span>
-          </li>
-        </ul>
+        <div class="pillar-body">
+          <h3>Transaction Statement (TS)</h3>
+          <p>
+            Formal attestation confirming that Akron Generics is an authorized trading partner under DSCSA, sourced the product from an authorized trading partner, did not knowingly ship suspect or illegitimate product, and maintains validated systems for product verification.
+          </p>
+          <div class="manifest-tags">
+            <span class="manifest-tag">Authorized Trading Partner (ATP)</span>
+            <span class="manifest-tag">Direct Sourcing Warranty</span>
+            <span class="manifest-tag">Non-Suspect Product Attestation</span>
+            <span class="manifest-tag">Validated Quarantine Protocols</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= SECTION 2: HOW WE DELIVER YOUR TRACEABILITY DATA ================= -->
-  <section class="sec-card apple-fade-in delay-2">
+  <!-- ================= SECTION 3: HOW WE DELIVER YOUR TRACEABILITY DATA ================= -->
+  <section class="sec">
     <div class="sec-head">
-      <span class="sec-eyebrow">RECEIVING WORKFLOW &amp; AUDIT READINESS</span>
-      <h2 class="sec-title">How We Deliver Your Traceability Data</h2>
-      <p class="sec-desc">
+      <div>
+        <div class="sec-eyebrow">SEAMLESS RECEIVING WORKFLOWS</div>
+        <h2>How We Deliver Your Traceability Data</h2>
+      </div>
+      <p>
         To keep your receiving workflow fast and audit-ready, Akron Generics provides seamless access to your serialization and compliance records:
       </p>
     </div>
 
-    <div class="t3-delivery-grid">
+    <div class="delivery-grid">
       <!-- 1: 24/7 Portal & Electronic Access -->
-      <div class="t3-delivery-card">
-        <div class="t3-del-icon-box">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      <div class="delivery-card">
+        <div class="delivery-img-wrap">
+          <img src="src/assets/pharmacy-support.jpg" alt="24/7 Portal & Electronic Access">
         </div>
-        <h3>24/7 Portal &amp; Electronic Access</h3>
-        <p>
-          Customers can access and download DSCSA track-and-trace documentation directly through their Akron Generics online account or via interoperable GS1 EPCIS electronic exchange.
-        </p>
-        <ul class="t3-sub-points">
-          <li>Instant PDF &amp; CSV report exports</li>
-          <li>Interoperable GS1 EPCIS 1.2 data feeds</li>
-          <li>Search by NDC, Lot, PO, or Invoice #</li>
-        </ul>
+        <div class="delivery-body">
+          <h3>24/7 Portal &amp; Electronic Access</h3>
+          <p>
+            Customers can access and download DSCSA track-and-trace documentation directly through their Akron Generics online account or via interoperable GS1 EPCIS electronic exchange.
+          </p>
+          <ul class="delivery-list">
+            <li>Instant PDF and CSV documentation downloads</li>
+            <li>GS1 EPCIS 1.2 electronic data exchange</li>
+            <li>Search by NDC, Lot, PO, or Invoice number</li>
+          </ul>
+        </div>
       </div>
 
       <!-- 2: 6-Year Secure Archiving -->
-      <div class="t3-delivery-card">
-        <div class="t3-del-icon-box">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8v13H3V8"></path><path d="M1 3h22v5H1z"></path><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+      <div class="delivery-card">
+        <div class="delivery-img-wrap">
+          <img src="src/assets/facility.jpg" alt="6-Year Secure Archiving">
         </div>
-        <h3>6-Year Secure Archiving</h3>
-        <p>
-          All transaction records are securely maintained and readily retrievable for a minimum of six years to support FDA or Board of Pharmacy inspections.
-        </p>
-        <ul class="t3-sub-points">
-          <li>Fully compliant with federal DSCSA mandates</li>
-          <li>Encrypted redundant cloud storage</li>
-          <li>Instant audit report retrieval on demand</li>
-        </ul>
+        <div class="delivery-body">
+          <h3>6-Year Secure Archiving</h3>
+          <p>
+            All transaction records are securely maintained and readily retrievable for a minimum of six years to support FDA or Board of Pharmacy inspections.
+          </p>
+          <ul class="delivery-list">
+            <li>100% compliant with federal and state retention rules</li>
+            <li>Encrypted cloud backups with tamper-evident logs</li>
+            <li>Instant audit export generation for inspectors</li>
+          </ul>
+        </div>
       </div>
 
       <!-- 3: Dedicated Compliance Support -->
-      <div class="t3-delivery-card">
-        <div class="t3-del-icon-box">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      <div class="delivery-card">
+        <div class="delivery-img-wrap">
+          <img src="src/assets/hero-clinical-pharmacist.jpg" alt="Dedicated Compliance Support">
         </div>
-        <h3>Dedicated Compliance Support</h3>
-        <p>
-          Need assistance setting up your EPCIS connection or retrieving historical T3 records? Contact our compliance and onboarding team at <strong>(631) 215-3009</strong>.
-        </p>
-        <ul class="t3-sub-points">
-          <li>Direct phone support: (631) 215-3009</li>
-          <li>Assistance with LSPedia &amp; pharmacy systems</li>
-          <li>Rapid response for pending board audits</li>
-        </ul>
+        <div class="delivery-body">
+          <h3>Dedicated Compliance Support</h3>
+          <p>
+            Need assistance setting up your EPCIS connection or retrieving historical T3 records? Contact our compliance and onboarding team at <strong>(631) 215-3009</strong>.
+          </p>
+          <ul class="delivery-list">
+            <li>Direct phone support: (631) 215-3009</li>
+            <li>EPCIS setup support for LSPedia &amp; pharmacy systems</li>
+            <li>Rapid resolution for pending state board reviews</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= SECTION 3: HOW TO GET ACCESS TO MY T3 ================= -->
-  <section class="sec-card apple-fade-in delay-3" id="onboarding">
+  <!-- ================= SECTION 4: ACCESSING MY T3 (NEW VS EXISTING) ================= -->
+  <section class="sec" id="onboarding">
     <div class="sec-head">
-      <span class="sec-eyebrow">ACCOUNT ONBOARDING &amp; PORTAL ACCESS</span>
-      <h2 class="sec-title">Getting Access to My T3 Data</h2>
-      <p class="sec-desc">
-        Follow the streamlined paths below whether you are opening a new pharmacy wholesale account or logging in to retrieve records for past orders:
+      <div>
+        <div class="sec-eyebrow">PORTAL ACCESS &amp; ONBOARDING</div>
+        <h2>Getting Access to My T3 Data</h2>
+      </div>
+      <p>
+        Whether you are opening a new pharmacy wholesale account or logging in to retrieve records for past orders, follow the streamlined paths below:
       </p>
     </div>
 
-    <div class="t3-access-grid">
+    <div class="access-cards-grid">
       <!-- Path 1: For New Customers -->
-      <div class="t3-access-card">
-        <span class="t3-access-card-badge t3-badge-new">New Pharmacy Customers</span>
+      <div class="access-card">
+        <span class="access-card-badge badge-new">New Pharmacy Customers</span>
         <h3>Open an Account &amp; Get T3 Access</h3>
         <p>
           Akron Generics LLC is a licensed, NABP-accredited wholesale distributor operating in strict compliance with the federal Drug Supply Chain Security Act (DSCSA). Every eligible prescription medication we ship includes complete T3 traceability data—consisting of Transaction Information (TI), Transaction History (TH) (where applicable), and a Transaction Statement (TS). You can access your track-and-trace documentation anytime through your Akron Generics account login or via electronic EPCIS data exchange, with all records securely archived for at least six years. For onboarding or compliance questions, call us at (631) 215-3009.
         </p>
 
-        <div class="t3-step-list">
-          <div class="t3-step-item">
-            <div class="t3-step-num">1</div>
-            <div class="t3-step-content">
+        <div class="step-sequence">
+          <div class="step-row">
+            <div class="step-number">1</div>
+            <div class="step-details">
               <strong>Contact Sales Representative or Call Us</strong>
               <span>Reach out to your dedicated sales rep or call our team directly at <strong>(631) 215-3009</strong> or toll-free at <strong>1-866-760-6565</strong>.</span>
             </div>
           </div>
-          <div class="t3-step-item">
-            <div class="t3-step-num">2</div>
-            <div class="t3-step-content">
+          <div class="step-row">
+            <div class="step-number">2</div>
+            <div class="step-details">
               <strong>Submit Account Application &amp; Licenses</strong>
               <span>Submit your pharmacy state license, DEA registration, and authorized contact information through our simple onboarding form.</span>
             </div>
           </div>
-          <div class="t3-step-item">
-            <div class="t3-step-num">3</div>
-            <div class="t3-step-content">
+          <div class="step-row">
+            <div class="step-number">3</div>
+            <div class="step-details">
               <strong>Credentials Issued Within 24 Hours</strong>
               <span>Once verified, our team issues your secure credentials within 24 hours so you can order, track shipments, and view previous orders and T3 reports.</span>
             </div>
           </div>
         </div>
 
-        <div class="t3-guarantee-banner">
+        <div class="turnaround-banner">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
           <span><strong>Fast-Track Onboarding:</strong> Full credentials provided within 24 hours of account approval.</span>
         </div>
 
-        <div class="t3-card-actions">
-          <a href="become-a-customer.html" class="btn-access-red">
+        <div class="access-actions">
+          <a href="become-a-customer.html" class="btn-solid-red">
             <span>Open a Pharmacy Account</span>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+            <span style="font-size:1.15em;line-height:1;margin-left:4px;">↗</span>
           </a>
-          <a href="tel:6312153009" class="btn-access-outline">
+          <a href="tel:6312153009" class="btn-outline-pill">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
             <span>Call (631) 215-3009</span>
           </a>
@@ -1731,34 +1772,22 @@ body {
       </div>
 
       <!-- Path 2: Already a Customer -->
-      <div class="t3-access-card portal-highlight">
-        <span class="t3-access-card-badge t3-badge-exist">Existing Pharmacy Customers</span>
+      <div class="access-card featured-card">
+        <span class="access-card-badge badge-existing">Existing Pharmacy Partners</span>
         <h3>Already a Customer? Log In to My T3</h3>
         <p>
           If your pharmacy is already an authenticated Akron Generics customer, you have 24/7 access to your full DSCSA compliance files, shipment manifests, and historical orders. Use your existing credentials to log in below:
         </p>
 
-        <ul class="t3-feature-checklist">
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span><strong>Instant T3 Retrieval:</strong> Download TI, TH, and TS documentation for any past shipment.</span>
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span><strong>Full Order History:</strong> Review previous orders, re-order high-volume lines, and inspect invoices.</span>
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span><strong>Inspection-Ready Exports:</strong> Print or export comprehensive lot histories for board audits in seconds.</span>
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span><strong>Carrier Tracking:</strong> Monitor dispatched shipments with real-time tracking numbers and delivery manifests.</span>
-          </li>
+        <ul class="feature-list">
+          <li><strong>Instant T3 Retrieval:</strong> Download TI, TH, and TS documentation for any past shipment.</li>
+          <li><strong>Full Order History:</strong> Review previous orders, re-order high-volume lines, and inspect invoices.</li>
+          <li><strong>Inspection-Ready Exports:</strong> Print or export comprehensive lot histories for board audits in seconds.</li>
+          <li><strong>Carrier Tracking:</strong> Monitor dispatched shipments with real-time tracking numbers and delivery manifests.</li>
         </ul>
 
-        <div style="background:#F1F5F9;border-radius:12px;padding:16px 18px;margin-bottom:24px;">
-          <p style="font-size:13.5px;color:#1E293B;margin:0 0 6px;font-weight:600;">
+        <div style="background:#F1F5F9;border-radius:12px;padding:16px 18px;margin-bottom:26px;">
+          <p style="font-size:13.5px;color:#1E293B;margin:0 0 4px;font-weight:600;">
             Direct Access to Your Compliance Portal:
           </p>
           <span style="font-size:12.5px;color:#64748B;">
@@ -1766,87 +1795,46 @@ body {
           </span>
         </div>
 
-        <div class="t3-card-actions">
-          <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="btn-access-navy" target="_blank" rel="noopener noreferrer">
+        <div class="access-actions">
+          <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="btn-solid-red" target="_blank" rel="noopener noreferrer">
             <span>Login to My T3 Portal</span>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span style="font-size:1.15em;line-height:1;margin-left:4px;">↗</span>
           </a>
-          <a href="https://server.akrongenerics.com/login.php" class="btn-access-outline" target="_blank" rel="noopener noreferrer">
+          <a href="https://server.akrongenerics.com/login.php" class="btn-outline-pill" target="_blank" rel="noopener noreferrer">
             <span>Customer Login</span>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <span style="font-size:1.15em;line-height:1;margin-left:4px;">↗</span>
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= SECTION 4: DSCSA COMPLIANCE FAQ ================= -->
-  <section class="sec-card apple-fade-in delay-3">
-    <div class="sec-head">
-      <span class="sec-eyebrow">REGULATORY ANSWERS</span>
-      <h2 class="sec-title">DSCSA &amp; Traceability FAQs</h2>
-      <p class="sec-desc">
-        Key details on DSCSA Title II interoperability, statutory retention, and receiving procedures for independent pharmacies.
-      </p>
-    </div>
-
-    <div class="t3-faq-list">
-      <details class="t3-faq-item" open>
-        <summary class="t3-faq-summary">What is the Drug Supply Chain Security Act (DSCSA)?</summary>
-        <div class="t3-faq-body">
-          Enacted by Congress under Title II of the Drug Quality and Security Act (DQSA), the DSCSA outlines steps to build an electronic, interoperable system to identify and trace certain prescription drugs as they are distributed in the United States. Its primary goal is to protect consumers from drugs that may be counterfeit, stolen, contaminated, or otherwise harmful.
-        </div>
-      </details>
-
-      <details class="t3-faq-item">
-        <summary class="t3-faq-summary">How long must pharmacies retain T3 product tracing data?</summary>
-        <div class="t3-faq-body">
-          Under federal DSCSA regulations, dispensers (including independent retail pharmacies, hospital pharmacies, and clinics) must capture and maintain T3 product tracing records for a minimum of <strong>six (6) years</strong> from the transaction date. Akron Generics automatically maintains secure, audit-ready cloud archiving of all your T3 records for six years.
-        </div>
-      </details>
-
-      <details class="t3-faq-item">
-        <summary class="t3-faq-summary">How do I connect our pharmacy system to Akron Generics via EPCIS?</summary>
-        <div class="t3-faq-body">
-          Akron Generics utilizes modern, interoperable GS1 EPCIS (Electronic Product Code Information Services) standards through trusted compliance platforms such as LSPedia OneScan. If your pharmacy utilizes an automated compliance software (such as LSPedia, InfiniTrak, or TrackTraceRx), our compliance support team will establish your direct electronic data interchange (EDI/EPCIS) feed. Contact us at <strong>(631) 215-3009</strong> for setup support.
-        </div>
-      </details>
-
-      <details class="t3-faq-item">
-        <summary class="t3-faq-summary">How quickly are new customer credentials delivered?</summary>
-        <div class="t3-faq-body">
-          Once your state pharmacy license and DEA registration are verified by our compliance department, your ordering and My T3 portal credentials will be delivered within <strong>24 hours</strong>. This gives your staff immediate access to place wholesale orders, review catalog pricing, and access shipment track-and-trace files.
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <!-- ================= DIRECT CONTACT STRIP ================= -->
-  <section class="t3-help-card apple-fade-in delay-4">
-    <div class="t3-help-info">
+  <!-- ================= SECTION 5: CONTACT HELP STRIP ================= -->
+  <section class="about-cta-card">
+    <div class="about-cta-info">
       <h3>Have Questions About DSCSA Compliance or EPCIS?</h3>
       <p>
-        Our dedicated compliance specialists and sales representatives are available Monday through Friday from 10:00 am to 6:30 pm EST to assist with your regulatory audits, T3 file retrieval, and account setup.
+        Our dedicated compliance specialists and sales representatives are available Monday through Friday from 10:00 am to 6:30 pm EST to assist with regulatory audits, T3 file retrieval, and account setup.
       </p>
     </div>
-    <div class="t3-help-actions">
-      <a href="tel:6312153009" class="btn-white">
+    <div class="about-cta-actions">
+      <a href="tel:6312153009" class="btn-cta-white">
         <span>Call (631) 215-3009</span>
       </a>
-      <a href="mailto:orders@akrongenerics.com" class="btn-outline-white">
+      <a href="mailto:orders@akrongenerics.com" class="btn-cta-outline-white">
         <span>Email Compliance Team</span>
       </a>
     </div>
   </section>
 
   <!-- ================= GLOBAL FOOTER ================= -->
-  <footer class="c-footer apple-fade-in delay-4">
-    <div class="c-footer-grid c-footer-main">
-      <div class="c-footer-brand-col c-footer-brand-block">
+  <footer class="c-footer">
+    <div class="c-footer-grid">
+      <div class="c-footer-brand-col">
         <a href="index.html" aria-label="Akron Generics Home">
-          <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="c-footer-brand-img c-footer-logo">
+          <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="c-footer-brand-img">
         </a>
-        <p class="c-footer-desc c-footer-tagline">
+        <p class="c-footer-desc">
           NABP-accredited wholesale partner delivering premium high-AWP generics, diabetic supplies, and diagnostic essentials with maximized Medicare reimbursement and 100% DSCSA Title II compliance.
         </p>
         <div class="c-footer-contact-items">
@@ -1905,9 +1893,9 @@ body {
       </div>
     </div>
 
-    <div class="c-footer-bottom c-footer-bot">
+    <div class="c-footer-bottom">
       <span>&copy; Akron Generics. All rights reserved.</span>
-      <div class="c-footer-legal-links c-footer-legal">
+      <div class="c-footer-legal-links">
         <a href="index.html#privacy">Privacy Policy</a>
         <a href="index.html#terms">Terms of Sale</a>
         <a href="index.html#licensing">Licensing</a>
