@@ -1141,17 +1141,26 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 }
 .comp-card-top {
   background: #F5F7FA;
+  border: 1px solid rgba(20, 53, 101, 0.08);
   border-radius: 20px;
-  padding: 26px 28px;
+  padding: 24px 28px;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 24px;
+  gap: 26px;
   align-items: center;
-  transition: transform .24s, box-shadow .24s;
+  transition: transform .24s, box-shadow .24s, border-color .24s;
+  cursor: pointer;
+  position: relative;
+  text-align: left;
 }
 .comp-card-top:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(22,24,15,.05);
+  box-shadow: 0 14px 32px rgba(20, 53, 101, 0.08);
+  border-color: rgba(20, 53, 101, 0.22);
+}
+.comp-card-top:focus-visible {
+  outline: 2px solid #0071e3;
+  outline-offset: 3px;
 }
 .comp-card-top .comp-logo-area {
   display: flex;
@@ -1159,9 +1168,27 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   justify-content: center;
   flex-shrink: 0;
 }
+.comp-logo-nabp {
+  max-width: 195px;
+  width: auto;
+  height: auto;
+  max-height: 58px;
+  object-fit: contain;
+  display: block;
+}
 .comp-card-top .comp-info-area {
   border-left: 1px solid var(--line);
   padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+}
+.comp-info-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
 }
 .comp-card-top .comp-eyebrow {
   font-size: 11.5px;
@@ -1169,7 +1196,33 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   letter-spacing: .08em;
   text-transform: uppercase;
   color: #143565;
-  margin-bottom: 6px;
+  margin-bottom: 0;
+}
+.comp-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #065f46;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 3px 9px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+.comp-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: compPulse 2s infinite;
+}
+@keyframes compPulse {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 .comp-card-top h3 {
   font-family: var(--sans);
@@ -1183,6 +1236,26 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   font-size: 13.5px;
   line-height: 1.45;
   color: var(--ink-2);
+  margin-bottom: 10px;
+}
+.comp-verify-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #143565;
+  letter-spacing: 0.01em;
+  transition: color .2s, transform .2s;
+}
+.comp-card-top:hover .comp-verify-action-link {
+  color: #0071e3;
+}
+.comp-verify-action-link svg {
+  transition: transform .2s ease;
+}
+.comp-card-top:hover .comp-verify-action-link svg {
+  transform: translateX(3px);
 }
 
 .comp-card-row {
@@ -1192,11 +1265,13 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 }
 .comp-card-sm {
   background: #F5F7FA;
+  border: 1px solid rgba(20, 53, 101, 0.08);
   border-radius: 20px;
-  padding: 26px 24px;
+  padding: 24px 24px;
   display: flex;
   flex-direction: column;
   transition: transform .24s, box-shadow .24s;
+  text-align: left;
 }
 .comp-card-sm:hover {
   transform: translateY(-2px);
@@ -1206,7 +1281,22 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   height: 48px;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   margin-bottom: 16px;
+}
+.comp-logo-nacds {
+  max-width: 135px;
+  width: auto;
+  max-height: 38px;
+  object-fit: contain;
+  display: block;
+}
+.comp-logo-lspedia {
+  max-width: 148px;
+  width: auto;
+  max-height: 36px;
+  object-fit: contain;
+  display: block;
 }
 .comp-divider {
   width: 100%;
@@ -1226,6 +1316,355 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   font-size: 13.5px;
   line-height: 1.45;
   color: var(--ink-2);
+}
+
+/* ---------- NABP Verification Modal ---------- */
+.nabp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.nabp-modal-overlay.is-active {
+  display: flex;
+}
+.nabp-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 25, 47, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: nabpFadeIn .22s ease-out forwards;
+}
+.nabp-modal-dialog {
+  position: relative;
+  z-index: 2;
+  background: #FFFFFF;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px -15px rgba(10, 25, 47, 0.35), 0 0 0 1px rgba(20, 53, 101, 0.08);
+  max-width: 580px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: nabpSlideUp .26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes nabpFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes nabpSlideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.nabp-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(20, 53, 101, 0.12);
+  background: #F8FAFC;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .18s;
+  z-index: 10;
+}
+.nabp-modal-close:hover {
+  background: #E2E8F0;
+  color: #0F172A;
+  transform: rotate(90deg);
+}
+.nabp-modal-body {
+  padding: 32px 32px 28px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.nabp-modal-brand-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+  padding-right: 32px;
+  flex-wrap: wrap;
+}
+.nabp-modal-logo {
+  height: 38px;
+  width: auto;
+  max-width: 170px;
+  object-fit: contain;
+}
+.nabp-modal-accred-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #334155;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.nabp-verified-banner {
+  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+  border: 1px solid #A7F3D0;
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.nabp-verified-icon-wrap {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.nabp-verified-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #059669;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
+  position: relative;
+  z-index: 2;
+}
+.nabp-verified-pulse {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  border: 2px solid #10B981;
+  animation: nabpPulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+@keyframes nabpPulseRing {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0; }
+  100% { transform: scale(0.9); opacity: 0; }
+}
+.nabp-verified-text {
+  flex: 1;
+}
+.nabp-verified-status {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: #047857;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.nabp-modal-title {
+  font-family: var(--sans);
+  font-size: 19px;
+  font-weight: 700;
+  color: #064E3B;
+  letter-spacing: -.02em;
+  margin: 0 0 2px;
+}
+.nabp-modal-subtitle {
+  font-size: 12.5px;
+  color: #065F46;
+  margin: 0;
+  opacity: 0.9;
+}
+.nabp-cred-card {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+.nabp-cred-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  font-size: 13px;
+  border-bottom: 1px solid #EEF2F6;
+  gap: 12px;
+}
+.nabp-cred-row:last-child {
+  border-bottom: none;
+  padding-bottom: 4px;
+}
+.nabp-cred-row:first-child {
+  padding-top: 4px;
+}
+.nabp-cred-label {
+  color: #64748B;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.nabp-cred-value {
+  color: #0F172A;
+  font-weight: 600;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.nabp-bullet-active {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  display: inline-block;
+}
+.nabp-standards-box {
+  margin-bottom: 22px;
+}
+.nabp-standards-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #143565;
+  margin-bottom: 10px;
+}
+.nabp-standards-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.nabp-standards-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #334155;
+}
+.nabp-std-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.nabp-modal-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.nabp-registry-btn {
+  flex: 1;
+  background: #143565;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 12px 18px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all .2s;
+}
+.nabp-registry-btn:hover {
+  background: #0E274A;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(20, 53, 101, 0.25);
+}
+.nabp-close-btn {
+  background: #F1F5F9;
+  color: #334155;
+  border: 1px solid #CBD5E1;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all .18s;
+}
+.nabp-close-btn:hover {
+  background: #E2E8F0;
+  color: #0F172A;
+}
+.nabp-disclaimer {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #64748B;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .nabp-modal-dialog {
+    max-height: 92vh;
+    border-radius: 20px;
+  }
+  .nabp-modal-body {
+    padding: 24px 18px 20px;
+  }
+  .nabp-modal-brand-strip {
+    margin-bottom: 16px;
+    padding-right: 28px;
+  }
+  .nabp-modal-logo {
+    height: 32px;
+  }
+  .nabp-verified-banner {
+    padding: 14px 14px;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .nabp-modal-title {
+    font-size: 16px;
+  }
+  .nabp-cred-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 7px 0;
+  }
+  .nabp-cred-value {
+    text-align: left;
+    justify-content: flex-start;
+  }
+  .nabp-modal-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .nabp-registry-btn, .nabp-close-btn {
+    width: 100%;
+  }
 }
 
 /* ---------- Section: FAQ Accordion ---------- */
@@ -1636,9 +2075,13 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   .next-step-col{border-left:none!important;padding-left:0!important;border-top:1px solid var(--line);padding-top:18px}
   .next-step-col:nth-child(2){border-top:none;padding-top:0}
   .comp-card-top{grid-template-columns:1fr;gap:16px;padding:22px 18px}
+  .comp-card-top .comp-logo-area{justify-content:center;padding:4px 0}
+  .comp-logo-nabp{max-width:180px;max-height:52px;margin:0 auto}
   .comp-card-top .comp-info-area{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:16px}
   .comp-card-row{grid-template-columns:1fr;gap:14px}
   .comp-card-sm{padding:22px 18px;border-radius:16px}
+  .comp-logo-nacds{max-width:125px;max-height:36px}
+  .comp-logo-lspedia{max-width:140px;max-height:34px}
   .faq-accordion-trigger{font-size:15px;padding:16px 0;text-align:left}
   .split{grid-template-columns:1fr;gap:16px}
   .fcard{border-radius:20px}
@@ -2349,23 +2792,26 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 
       <div class="compliance-cards">
         <!-- Top Card: NABP -->
-        <div class="comp-card-top apple-reveal" data-delay="2">
+        <div class="comp-card-top apple-reveal" data-delay="2" onclick="openNabpVerificationModal()" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Verify NABP Accreditation for Akron Generics" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openNabpVerificationModal();}">
           <div class="comp-logo-area">
-            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NABP Accredited Drug Distributor Logo">
-              <circle cx="50" cy="50" r="46" stroke="#9E2235" stroke-width="3" fill="#fff"/>
-              <circle cx="50" cy="50" r="41" stroke="#9E2235" stroke-width="1.2" stroke-dasharray="2 2"/>
-              <path d="M50 22 C40 22 36 29 36 37 C36 44 42 48 50 48 C58 48 64 44 64 37 C64 29 60 22 50 22 Z" stroke="#9E2235" stroke-width="2.5" fill="none"/>
-              <line x1="50" y1="22" x2="50" y2="48" stroke="#9E2235" stroke-width="2.2"/>
-              <circle cx="50" cy="35" r="5" stroke="#9E2235" stroke-width="2" fill="none"/>
-              <text x="50" y="66" text-anchor="middle" fill="#9E2235" font-family="'Manrope',sans-serif" font-weight="900" font-size="14" letter-spacing="1">NABP</text>
-              <text x="50" y="76" text-anchor="middle" fill="#9E2235" font-family="'Inter',sans-serif" font-weight="700" font-size="6" letter-spacing="0.5">ACCREDITED</text>
-              <text x="50" y="83" text-anchor="middle" fill="#9E2235" font-family="'Inter',sans-serif" font-weight="600" font-size="5" letter-spacing="0.4">DRUG DISTRIBUTOR</text>
-            </svg>
+            <img src="src/assets/compliance/logo-nabp.png" alt="NABP - National Association of Boards of Pharmacy" class="comp-logo-nabp" />
           </div>
           <div class="comp-info-area">
-            <div class="comp-eyebrow">ACCREDITED DRUG DISTRIBUTOR</div>
+            <div class="comp-info-head-row">
+              <div class="comp-eyebrow">ACCREDITED DRUG DISTRIBUTOR</div>
+              <span class="comp-status-pill">
+                <span class="comp-pulse-dot"></span>
+                Verified Wholesaler
+              </span>
+            </div>
             <h3>NABP Accreditation</h3>
             <p>The industry's gold-standard verification of a legitimate, secure wholesaler.</p>
+            <div class="comp-verify-action-link">
+              <span>Click to Verify Accreditation</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17l10-10M17 7H7M17 7v10"/>
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -2374,11 +2820,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
           <!-- Card 1: NACDS -->
           <div class="comp-card-sm apple-reveal" data-delay="3">
             <div class="comp-logo-banner">
-              <svg width="124" height="38" viewBox="0 0 140 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="NACDS Logo">
-                <rect width="140" height="42" rx="6" fill="#004B87"/>
-                <text x="70" y="27" text-anchor="middle" fill="#FFFFFF" font-family="'Georgia',serif" font-weight="700" font-size="20" letter-spacing="2">NACDS</text>
-                <line x1="22" y1="32" x2="118" y2="32" stroke="#FFFFFF" stroke-width="1.5"/>
-              </svg>
+              <img src="src/assets/compliance/logo-nacds.png" alt="NACDS Member - National Association of Chain Drug Stores" class="comp-logo-nacds" />
             </div>
             <div class="comp-divider"></div>
             <h3>NACDS Member</h3>
@@ -2388,18 +2830,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
           <!-- Card 2: LSPedia -->
           <div class="comp-card-sm apple-reveal" data-delay="4">
             <div class="comp-logo-banner">
-              <svg width="140" height="38" viewBox="0 0 150 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="LSPedia Logo">
-                <g transform="translate(4, 4)">
-                  <path d="M16 2 L4 7 V18 C4 25.5 9 31 16 33 C23 31 28 25.5 28 18 V7 L16 2 Z" fill="#143565"/>
-                  <path d="M16 4 L6 8 V17 C6 23.5 10 28.5 16 30.5 C22 28.5 26 23.5 26 17 V8 L16 4 Z" fill="#2E4A7D"/>
-                  <rect x="10" y="10" width="3" height="3" fill="#60A5FA"/>
-                  <rect x="15" y="10" width="3" height="3" fill="#60A5FA"/>
-                  <rect x="10" y="15" width="3" height="3" fill="#EC4899"/>
-                  <rect x="15" y="15" width="3" height="3" fill="#A855F7"/>
-                  <path d="M12 23 C14 21 18 21 20 23" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
-                </g>
-                <text x="44" y="27" fill="#143565" font-family="'Manrope',sans-serif" font-weight="800" font-size="20" letter-spacing="-0.5">LS<tspan fill="#A02630">Pedia</tspan></text>
-              </svg>
+              <img src="src/assets/compliance/logo-lspedia.png" alt="LSPedia Partner - DSCSA Traceability" class="comp-logo-lspedia" />
             </div>
             <div class="comp-divider"></div>
             <h3>LSPedia Partner</h3>
@@ -2706,7 +3137,130 @@ document.addEventListener('click', function(e) {
     });
   }
 });
+
+/* NABP Accreditation Verification Modal Controls */
+function openNabpVerificationModal() {
+  var modal = document.getElementById('nabpModal');
+  if (modal) {
+    modal.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+    var closeBtn = modal.querySelector('.nabp-modal-close');
+    if (closeBtn) closeBtn.focus();
+  }
+}
+
+function closeNabpModal() {
+  var modal = document.getElementById('nabpModal');
+  if (modal) {
+    modal.classList.remove('is-active');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' || e.key === 'Esc') {
+    closeNabpModal();
+  }
+});
 </script>
+
+<!-- NABP ACCREDITATION VERIFICATION MODAL -->
+<div id="nabpModal" class="nabp-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="nabpModalTitle">
+  <div class="nabp-modal-backdrop" onclick="closeNabpModal()"></div>
+  <div class="nabp-modal-dialog">
+    <button type="button" class="nabp-modal-close" onclick="closeNabpModal()" aria-label="Close verification modal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <div class="nabp-modal-body">
+      <!-- Top Brand Strip -->
+      <div class="nabp-modal-brand-strip">
+        <img src="src/assets/compliance/logo-nabp.png" alt="NABP - National Association of Boards of Pharmacy" class="nabp-modal-logo">
+        <div class="nabp-modal-accred-tag">
+          <span class="nabp-tag-shield">🛡️</span>
+          <span>OFFICIAL ACCREDITATION RECORD</span>
+        </div>
+      </div>
+
+      <!-- Verified Hero Banner -->
+      <div class="nabp-verified-banner">
+        <div class="nabp-verified-icon-wrap">
+          <div class="nabp-verified-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="nabp-verified-pulse"></div>
+        </div>
+        <div class="nabp-verified-text">
+          <div class="nabp-verified-status">OFFICIALLY ACCREDITED &amp; VERIFIED</div>
+          <h3 id="nabpModalTitle" class="nabp-modal-title">Drug Distributor Accreditation</h3>
+          <p class="nabp-modal-subtitle">National Association of Boards of Pharmacy (NABP)</p>
+        </div>
+      </div>
+
+      <!-- Credential Summary Card -->
+      <div class="nabp-cred-card">
+        <div class="nabp-cred-row">
+          <span class="nabp-cred-label">Accredited Wholesaler</span>
+          <span class="nabp-cred-value"><strong>Akron Generics LLC</strong></span>
+        </div>
+        <div class="nabp-cred-row">
+          <span class="nabp-cred-label">Accreditation Program</span>
+          <span class="nabp-cred-value">Drug Distributor Accreditation (formerly VAWD)</span>
+        </div>
+        <div class="nabp-cred-row">
+          <span class="nabp-cred-label">Licensure &amp; Standing</span>
+          <span class="nabp-cred-value text-green"><span class="nabp-bullet-active"></span>Active &bull; In Full Good Standing</span>
+        </div>
+        <div class="nabp-cred-row">
+          <span class="nabp-cred-label">DSCSA Regulatory Status</span>
+          <span class="nabp-cred-value">Title II Interoperable &bull; EPCIS Spliced (LSPedia)</span>
+        </div>
+        <div class="nabp-cred-row">
+          <span class="nabp-cred-label">Facility Inspection</span>
+          <span class="nabp-cred-value">Passed Comprehensive Physical &amp; Security Audit</span>
+        </div>
+      </div>
+
+      <!-- Standards Checklist -->
+      <div class="nabp-standards-box">
+        <div class="nabp-standards-title">Verified Wholesaler Standards</div>
+        <ul class="nabp-standards-list">
+          <li>
+            <span class="nabp-std-check">✓</span>
+            <span><strong>Anti-Diversion &amp; Counterfeit Prevention:</strong> Multi-tiered serialization verification preventing compromised products from entering the supply chain.</span>
+          </li>
+          <li>
+            <span class="nabp-std-check">✓</span>
+            <span><strong>Secure Storage &amp; Climate Telemetry:</strong> 24/7 monitored temperature, humidity, and physical access controls matching USP and FDA guidelines.</span>
+          </li>
+          <li>
+            <span class="nabp-std-check">✓</span>
+            <span><strong>100% Authorized Pedigree:</strong> Direct manufacturer and verified distributor sourcing with full T3 documentation on every transaction.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Official Action Footer -->
+      <div class="nabp-modal-footer">
+        <a href="https://nabp.pharmacy/programs/accreditations-inspections/drug-distributor/" target="_blank" rel="noopener noreferrer" class="nabp-registry-btn">
+          <span>Verify on NABP.pharmacy</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+        <button type="button" class="nabp-close-btn" onclick="closeNabpModal()">Close</button>
+      </div>
+
+      <div class="nabp-disclaimer">
+        Akron Generics maintains active accreditation with NABP to provide independent pharmacies complete assurance of safe, compliant, and authentic prescription drug distribution.
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
