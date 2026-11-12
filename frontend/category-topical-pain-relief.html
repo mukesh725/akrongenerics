@@ -472,6 +472,13 @@ body {
   margin-bottom: 16px;
   letter-spacing: -0.02em;
 }
+.category-nav-wrapper {
+  position: relative;
+  width: 100%;
+}
+.cat-nav-btn {
+  display: none;
+}
 .category-list {
   list-style: none;
   display: flex;
@@ -908,79 +915,169 @@ body {
   .catalog-layout {
     grid-template-columns: 1fr;
     gap: 14px;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
   }
   .catalog-sidebar {
     position: static;
     margin-bottom: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
   .sidebar-heading {
     display: none;
   }
-  .category-list {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 2px 2px 6px;
-    gap: 8px;
-    margin-bottom: 6px;
-  }
-  .category-list::-webkit-scrollbar {
-    display: none;
-  }
-  .cat-item-btn {
-    flex-shrink: 0;
-    white-space: nowrap;
-    width: auto;
-    padding: 7px 14px;
-    border-radius: var(--r-pill);
-    background: #F1F5F9;
-    border: 1px solid #E2E8F0;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--ink-2);
-    display: inline-flex;
+  .category-nav-wrapper {
+    display: flex !important;
     align-items: center;
     gap: 6px;
+    width: 100%;
+    min-width: 0;
+    position: relative;
+    margin-bottom: 8px;
   }
-  .cat-item-btn:hover {
-    background: #E2E8F0;
-    color: var(--ink);
+  .cat-nav-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1.5px solid #CBD5E1;
+    color: #1E293B;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 2;
+    padding: 0;
   }
-  .cat-item-btn.active {
+  .cat-nav-btn:hover {
     background: var(--color-navy);
     color: #FFFFFF;
     border-color: var(--color-navy);
+    transform: scale(1.05);
+  }
+  .cat-nav-btn:active {
+    transform: scale(0.95);
+  }
+  .category-list {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-x !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    padding: 4px 2px 6px !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    scroll-behavior: smooth;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .category-list.is-dragging {
+    cursor: grabbing !important;
+    scroll-behavior: auto !important;
+  }
+  .category-list::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .category-list li {
+    flex: 0 0 auto !important;
+    display: inline-flex !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .cat-item-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    padding: 7px 14px !important;
+    border-radius: var(--r-pill) !important;
+    background: #F1F5F9 !important;
+    border: 1px solid #E2E8F0 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--ink-2) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    transition: all 0.18s ease !important;
+  }
+  .cat-item-btn:hover {
+    background: #E2E8F0 !important;
+    color: var(--ink) !important;
+  }
+  .cat-item-btn.active {
+    background: var(--color-navy) !important;
+    color: #FFFFFF !important;
+    border-color: var(--color-navy) !important;
   }
   .cat-item-btn.active .cat-count-badge {
-    background: rgba(255, 255, 255, 0.25);
-    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.25) !important;
+    color: #FFFFFF !important;
   }
   .sidebar-pdf-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    background: #F8FAFC;
-    border-radius: 12px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin-bottom: 8px;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 12px !important;
+    background: #F8FAFC !important;
+    border-radius: 12px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-x !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    margin-bottom: 8px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .sidebar-pdf-card.is-dragging {
+    cursor: grabbing !important;
+    scroll-behavior: auto !important;
   }
   .sidebar-pdf-card::-webkit-scrollbar {
-    display: none;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
   .sidebar-pdf-title {
-    display: none;
+    display: none !important;
   }
   .sidebar-pdf-btn {
-    flex-shrink: 0;
-    padding: 6px 12px;
-    font-size: 11.5px;
-    border-radius: var(--r-pill);
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 6px 12px !important;
+    font-size: 11.5px !important;
+    border-radius: var(--r-pill) !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
   }
   .product-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -1298,7 +1395,7 @@ body {
           Products <span class="chevron"></span>
         </button>
         <div class="dropdown-menu">
-          <a href="catalog.html">All Products</a>
+          <a href="catalog.html" style="font-weight:600;color:var(--ink);">All Products</a>
           <a href="products.html" class="dropdown-special-offers-link" aria-label="Special Offers">
             <img src="src/assets/special-offers-badge.png" alt="Special Offers" class="dropdown-special-offers-img">
           </a>
@@ -1396,9 +1493,17 @@ body {
       <!-- Left Sidebar: Categories (Screenshot 2) -->
       <aside class="catalog-sidebar">
         <h3 class="sidebar-heading">Categories</h3>
-        <ul class="category-list" id="categoryList">
-          <!-- Populated dynamically via JavaScript -->
-        </ul>
+        <div class="category-nav-wrapper">
+          <button type="button" class="cat-nav-btn cat-nav-prev" onclick="scrollCatList(-220)" aria-label="Previous categories">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+          </button>
+          <ul class="category-list" id="categoryList">
+            <!-- Populated dynamically via JavaScript -->
+          </ul>
+          <button type="button" class="cat-nav-btn cat-nav-next" onclick="scrollCatList(220)" aria-label="Next categories">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+        </div>
 
         <!-- PDF Downloads Box -->
         <div class="sidebar-pdf-card">
@@ -1544,6 +1649,69 @@ body {
 let activeCategory = 'topical-relief';
 let searchQuery = '';
 
+function scrollCatList(amount) {
+  const catList = document.getElementById('categoryList');
+  if (catList) {
+    catList.scrollBy({ left: amount, behavior: 'smooth' });
+  }
+}
+
+function enableHorizontalSwipe(el) {
+  if (!el || el.dataset.swipeBound) return;
+  el.dataset.swipeBound = 'true';
+
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+  let hasDragged = false;
+
+  el.addEventListener('mousedown', function(e) {
+    if (e.button !== 0) return;
+    isDown = true;
+    hasDragged = false;
+    startX = e.pageX - el.offsetLeft;
+    scrollLeft = el.scrollLeft;
+    el.classList.add('is-dragging');
+  });
+
+  window.addEventListener('mouseup', function() {
+    if (!isDown) return;
+    isDown = false;
+    el.classList.remove('is-dragging');
+    setTimeout(function() { hasDragged = false; }, 60);
+  });
+
+  window.addEventListener('mousemove', function(e) {
+    if (!isDown) return;
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    if (Math.abs(x - startX) > 5) {
+      hasDragged = true;
+      e.preventDefault();
+    }
+    el.scrollLeft = scrollLeft - walk;
+  });
+
+  // Prevent accidental clicks when dragging
+  el.addEventListener('click', function(e) {
+    if (hasDragged) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true);
+
+  // Wheel horizontal scroll support (shift-wheel or mouse wheel over horizontal carousel)
+  el.addEventListener('wheel', function(e) {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      return;
+    }
+    if (el.scrollWidth > el.clientWidth && e.deltaY !== 0) {
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    }
+  }, { passive: false });
+}
+
 function initCatalog() {
   // Parse category from URL query or hash (?category=xxx or #category=xxx)
   const urlParams = new URLSearchParams(window.location.search);
@@ -1555,6 +1723,11 @@ function initCatalog() {
 
   renderCategories();
   renderProducts();
+
+  const catList = document.getElementById('categoryList');
+  if (catList) enableHorizontalSwipe(catList);
+  const pdfCard = document.querySelector('.sidebar-pdf-card');
+  if (pdfCard) enableHorizontalSwipe(pdfCard);
 }
 
 function selectCategory(catId) {
@@ -1596,6 +1769,18 @@ function renderCategories() {
     `;
   });
   catList.innerHTML = html;
+
+  // Center active category pill smoothly into view
+  setTimeout(function() {
+    const activeBtn = catList.querySelector('.cat-item-btn.active');
+    if (activeBtn) {
+      const listRect = catList.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+      if (btnRect.left < listRect.left || btnRect.right > listRect.right) {
+        activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  }, 60);
 }
 
 function handleSearch(val) {
