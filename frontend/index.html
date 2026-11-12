@@ -586,10 +586,17 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   border-left:1.5px solid var(--line);padding-left:24px;
 }
 
-/* ---------- Section 2: Why Akron Generics ---------- */
+/* ---------- Section 2: Why Akron Generics & Purchasing Benefits ---------- */
 .sec-eyebrow{
-  font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:#143565;margin-bottom:18px;
+  display:inline-flex;align-items:center;gap:8px;
+  background:#EEF4FA;border:1px solid #C8DCF0;border-radius:9999px;
+  padding:5px 14px;font-family:var(--sans);font-size:12px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;color:#0E3466;
+  margin-bottom:18px;box-shadow:0 1px 3px rgba(14,52,102,0.05);
+}
+.sec-eyebrow::before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:#0E3466;flex-shrink:0;
 }
 .why-akron-sec{
   background:var(--card);border-radius:var(--r-lg);padding:58px 48px;
