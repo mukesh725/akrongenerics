@@ -1812,7 +1812,7 @@ function renderProducts() {
   if (searchQuery) {
     filtered = filtered.filter(p => {
       const matchName = p.name.toLowerCase().includes(searchQuery);
-      const matchNdc = p.ndc.toLowerCase().includes(searchQuery);
+      const matchNdc = p.ndc && (p.ndc.toLowerCase().includes(searchQuery) || p.ndc.replace(/-/g, "").includes(searchQuery.replace(/-/g, "")));
       const matchSpecs = p.specs.toLowerCase().includes(searchQuery);
       const matchItem = p.itemNo && p.itemNo.toLowerCase().includes(searchQuery);
       return matchName || matchNdc || matchSpecs || matchItem;

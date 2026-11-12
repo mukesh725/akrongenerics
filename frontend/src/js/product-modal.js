@@ -143,8 +143,18 @@
     }
 
     // Attributes
+    function formatNdc(val) {
+      if (!val) return 'Pending / Inquire';
+      var s = String(val).trim();
+      if (s.includes('-')) return s;
+      if (/^\d{11}$/.test(s)) {
+        return s.slice(0, 5) + '-' + s.slice(5, 9) + '-' + s.slice(9);
+      }
+      return s;
+    }
+
     var ndcEl = document.getElementById('pModalNdc');
-    if (ndcEl) ndcEl.textContent = product.ndc || 'Pending / Inquire';
+    if (ndcEl) ndcEl.textContent = formatNdc(product.ndc);
 
     var brandEl = document.getElementById('pModalBrand');
     if (brandEl) brandEl.textContent = product.brand || 'Akron Generics';
