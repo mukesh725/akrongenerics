@@ -325,7 +325,21 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   z-index: 0;
 }
 .hero-reimagined .hero-scrim {
-  display: none !important;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: 
+    linear-gradient(90deg, 
+      rgba(255, 255, 255, 0.90) 0%, 
+      rgba(255, 255, 255, 0.80) 38%, 
+      rgba(255, 255, 255, 0.48) 72%, 
+      rgba(255, 255, 255, 0.30) 100%),
+    linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.45) 0%, 
+      transparent 20%, 
+      transparent 80%, 
+      rgba(255, 255, 255, 0.60) 100%);
 }
 .hero-reimagined .hero-inner {
   position: relative;
@@ -2018,7 +2032,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   body{padding:0}
   .wrap{margin-top:20px;gap:10px;padding:0 12px 16px}
   .hero-reimagined{min-height:92vh;align-items:flex-start;text-align:left}
-  .hero-reimagined .hero-scrim{display:none !important}
+  .hero-reimagined .hero-scrim{display:block !important;background:linear-gradient(180deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.78) 50%, rgba(255,255,255,0.40) 100%) !important}
   .hero-reimagined .hero-inner{padding:100px 20px 70px;align-items:flex-start;text-align:left}
   .hero-reimagined .hero-title{font-size:clamp(38px,9vw,56px);font-weight:700;line-height:1.06;margin-bottom:16px;text-align:left;color:#000000}
   .hero-reimagined .hero-subtitle{font-size:15px;line-height:1.5;margin-bottom:28px;text-align:left;color:#000000}
