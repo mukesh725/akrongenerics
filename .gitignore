@@ -63,3 +63,7 @@ dist/
 *.sublime-project
 *.sublime-workspace
 .vercel
+
+# External Reference Repositories
+ECC/
+
