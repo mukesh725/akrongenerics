@@ -98,10 +98,10 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   transition: opacity 0.25s ease;
 }
 .site-brand .logo-white {
-  display: block !important;
+  display: none !important;
 }
 .site-brand .logo-color {
-  display: none !important;
+  display: block !important;
 }
 .site-header.scrolled .site-brand .logo-white {
   display: none !important;
@@ -125,8 +125,8 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 .header-nav-link {
   font-family: var(--sans);
   font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
+  font-weight: 550;
+  color: #111827;
   text-decoration: none;
   padding: 6px 2px;
   transition: color 0.2s ease, opacity 0.2s ease;
@@ -141,7 +141,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 }
 .header-nav-link:hover,
 .header-dropdown.open > .header-nav-link {
-  color: #ffffff;
+  color: #000000;
 }
 .site-header.scrolled .header-nav-link {
   color: #374151;
@@ -176,7 +176,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   display: inline-block;
   width: 1px;
   height: 15px;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(22, 24, 15, 0.16);
   margin: 0 4px;
 }
 .site-header.scrolled .header-nav-divider {
@@ -328,12 +328,13 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: 
-    linear-gradient(180deg, 
-      rgba(10, 25, 47, 0.40) 0%, 
-      rgba(10, 25, 47, 0.50) 35%, 
-      rgba(10, 25, 47, 0.82) 70%, 
-      rgba(10, 25, 47, 0.95) 100%);
+  background: linear-gradient(to top, 
+    rgba(10, 25, 47, 0.98) 0%, 
+    rgba(10, 25, 47, 0.88) 18%, 
+    rgba(10, 25, 47, 0.50) 30%, 
+    rgba(10, 25, 47, 0.15) 38%, 
+    transparent 42%, 
+    transparent 100%);
 }
 .hero-main-container {
   position: relative;
@@ -2103,6 +2104,14 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   body{padding:0}
   .wrap{margin-top:20px;gap:10px;padding:0 12px 16px}
   .hero-split-layout { min-height: 88vh; }
+  .hero-split-layout .hero-scrim {
+    background: linear-gradient(to top, 
+      rgba(10, 25, 47, 0.98) 0%, 
+      rgba(10, 25, 47, 0.88) 22%, 
+      rgba(10, 25, 47, 0.50) 38%, 
+      transparent 48%, 
+      transparent 100%) !important;
+  }
   .hero-main-container { padding: 90px 20px 0; }
   .hero-split-row { grid-template-columns: 1fr; gap: 20px; padding-bottom: 24px; }
   .hero-split-left .hero-title { font-size: clamp(34px, 8.5vw, 48px); }
