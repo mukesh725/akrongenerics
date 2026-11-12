@@ -1,7 +1,11 @@
 /**
- * Akron Generics - Apple-Style Product Preview Modal
- * Provides interactive quick-view modal with full product intelligence,
- * high-res imagery, NDC copying, and direct pharmacy ordering pathways.
+ * Akron Generics - Seed-Style Product Preview Modal
+ * Minimalist luxury pharma layout:
+ * - Warm neutral rounded media card
+ * - Seed-style lime pill badge
+ * - High-clarity product photography
+ * - Editorial typography & soft-tinted spec box
+ * - Dark forest green pill CTA & fine-print legal footnotes
  */
 
 (function() {
@@ -13,76 +17,77 @@
     var modalHtml = `
       <div class="product-modal-overlay" id="productPreviewModal" onclick="if(event.target===this)closeProductPreview()" role="dialog" aria-modal="true" aria-labelledby="pModalTitle">
         <div class="product-modal-card">
+          <!-- Minimalist × Close Button -->
           <button type="button" class="product-modal-close" onclick="closeProductPreview()" aria-label="Close product preview">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
 
-          <!-- Left Media Column: Product Showcase -->
-          <div class="product-modal-media">
-            <span class="product-modal-badge-floating" id="pModalBadge">HIGH AWP</span>
-            <div class="product-modal-img-wrap">
+          <!-- Left Column: Warm-Neutral Rounded Image Card -->
+          <div class="product-modal-media-card">
+            <div class="seed-modal-badge" id="pModalBadge">
+              <span class="seed-badge-dots" aria-hidden="true">
+                <span class="seed-badge-dot"></span>
+                <span class="seed-badge-dot"></span>
+              </span>
+              <span id="pModalBadgeText">HIGH AWP</span>
+            </div>
+            
+            <div class="seed-modal-img-wrap">
               <img id="pModalImg" src="" alt="Product Preview">
             </div>
-            <div class="product-modal-caption">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>100% Authentic &bull; Serialized DSCSA Track &amp; Trace</span>
+
+            <div class="seed-modal-media-footer">
+              <span id="pModalItemTag">ITEM #18366</span>
+              <span>&bull;</span>
+              <span>COMMACK, NY DISPATCH</span>
             </div>
           </div>
 
-          <!-- Right Information Column: Product Intelligence -->
-          <div class="product-modal-info">
-            <div class="product-modal-eyebrow" id="pModalCategory">PEN NEEDLES</div>
-            <h2 class="product-modal-title" id="pModalTitle">Product Name</h2>
-            <div class="product-modal-specs-sub" id="pModalSpecs">Specification Details</div>
+          <!-- Right Column: Editorial Typography & Actions -->
+          <div class="product-modal-content">
+            <div class="seed-modal-eyebrow" id="pModalCategory">PEN NEEDLES</div>
+            <h2 class="seed-modal-title" id="pModalTitle">Product Name</h2>
+            <p class="seed-modal-subtitle" id="pModalSpecs">Specification Details</p>
 
-            <div class="product-modal-tags" id="pModalTags">
-              <span class="product-modal-tag tag-accent">High AWP</span>
-              <span class="product-modal-tag">NABP Accredited</span>
-            </div>
-
-            <!-- Key Spec Tiles -->
-            <div class="product-modal-grid">
-              <div class="product-modal-attr">
-                <span class="product-modal-attr-lbl">National Drug Code (NDC)</span>
-                <span class="product-modal-attr-val">
+            <!-- Soft-Tinted Product Specs -->
+            <div class="seed-modal-specs-box">
+              <div class="seed-spec-row">
+                <span class="seed-spec-lbl">National Drug Code (NDC)</span>
+                <div class="seed-spec-val">
                   <span id="pModalNdc">73317-6816-04</span>
-                  <button type="button" class="product-modal-copy-ndc" onclick="copyModalNdc(this)" title="Copy NDC">Copy</button>
-                </span>
+                  <button type="button" class="seed-copy-btn" onclick="copyModalNdc(this)" title="Copy NDC">Copy</button>
+                </div>
               </div>
-              <div class="product-modal-attr">
-                <span class="product-modal-attr-lbl">Item Number</span>
-                <span class="product-modal-attr-val" id="pModalItemNo">18366</span>
+              <div class="seed-spec-divider"></div>
+              <div class="seed-spec-row">
+                <span class="seed-spec-lbl">Packaging Format</span>
+                <span class="seed-spec-val-simple" id="pModalPackage">100 CT / Box</span>
               </div>
-              <div class="product-modal-attr">
-                <span class="product-modal-attr-lbl">Brand / Manufacturer</span>
-                <span class="product-modal-attr-val" id="pModalBrand">Quick Touch Safety</span>
-              </div>
-              <div class="product-modal-attr">
-                <span class="product-modal-attr-lbl">Packaging Format</span>
-                <span class="product-modal-attr-val" id="pModalPackage">100 CT / Box</span>
+              <div class="seed-spec-divider"></div>
+              <div class="seed-spec-row">
+                <span class="seed-spec-lbl">Brand / Manufacturer</span>
+                <span class="seed-spec-val-simple" id="pModalBrand">Quick Touch Safety</span>
               </div>
             </div>
 
-            <!-- Product Overview -->
-            <div class="product-modal-desc-heading">Product Overview &amp; Specifications</div>
-            <p class="product-modal-desc" id="pModalDesc">Detailed description of the product...</p>
-
-            <!-- Actions -->
-            <div class="product-modal-actions">
-              <a href="become-a-customer.html" class="product-modal-btn-primary">
+            <!-- Email Input & Primary Dark Green Pill Action -->
+            <div class="seed-modal-action-wrap">
+              <div class="seed-input-box">
+                <input type="email" id="seedModalEmail" placeholder="Enter pharmacy email for instant pricing sheet" aria-label="Pharmacy Email Address">
+              </div>
+              <button type="button" class="seed-btn-primary" onclick="handleSeedModalSubmit()">
                 <span>Request Wholesale Pricing</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <a href="tel:18667606565" class="product-modal-btn-secondary">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <span>1-866-760-6565</span>
-              </a>
+              </button>
             </div>
 
-            <!-- Assurance Note -->
-            <div class="product-modal-assurance">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-              <span>NABP Drug Distributor Accredited &bull; DSCSA T3 Pedigree Verified</span>
+            <!-- Seed-Style Legal & Compliance Footnotes -->
+            <div class="seed-modal-footnotes">
+              <p class="seed-footnote">
+                <sup>&dagger;</sup> Wholesale distribution exclusively to verified US pharmacies, healthcare networks, and licensed practitioners. Zero retail sales.
+              </p>
+              <p class="seed-footnote">
+                <sup>*</sup> 100% serialized under DSCSA Title II. Direct orders: <a href="tel:18667606565">1-866-760-6565</a> or <a href="become-a-customer.html">Apply for Wholesale Account</a>.
+              </p>
             </div>
           </div>
         </div>
@@ -121,7 +126,7 @@
     }
 
     var badgeText = (product.badges && product.badges.length) ? product.badges[0].toUpperCase() : (product.categoryName || 'AKRON').toUpperCase();
-    var badgeEl = document.getElementById('pModalBadge');
+    var badgeEl = document.getElementById('pModalBadgeText');
     if (badgeEl) badgeEl.textContent = badgeText;
 
     var catEl = document.getElementById('pModalCategory');
@@ -131,28 +136,14 @@
     if (titleEl) titleEl.textContent = product.name;
 
     var specsEl = document.getElementById('pModalSpecs');
-    if (specsEl) specsEl.textContent = product.specs || '';
-
-    // Tags
-    var tagsContainer = document.getElementById('pModalTags');
-    if (tagsContainer) {
-      var tagsHtml = '';
-      if (product.badges && product.badges.length) {
-        product.badges.forEach(function(b) {
-          tagsHtml += '<span class="product-modal-tag tag-accent">' + b + '</span>';
-        });
-      }
-      tagsHtml += '<span class="product-modal-tag">NABP Accredited</span>';
-      tagsHtml += '<span class="product-modal-tag">DSCSA Verified</span>';
-      tagsContainer.innerHTML = tagsHtml;
-    }
+    if (specsEl) specsEl.textContent = product.specs || product.description || '';
 
     // Attributes
     var ndcEl = document.getElementById('pModalNdc');
     if (ndcEl) ndcEl.textContent = product.ndc || 'Pending / Inquire';
 
-    var itemEl = document.getElementById('pModalItemNo');
-    if (itemEl) itemEl.textContent = product.itemNo || product.id || 'N/A';
+    var itemTag = document.getElementById('pModalItemTag');
+    if (itemTag) itemTag.textContent = 'ITEM #' + (product.itemNo || product.id || 'AKRON');
 
     var brandEl = document.getElementById('pModalBrand');
     if (brandEl) brandEl.textContent = product.brand || 'Akron Generics';
@@ -160,11 +151,9 @@
     var packEl = document.getElementById('pModalPackage');
     if (packEl) packEl.textContent = packSpec || product.specs || 'Standard Packaging';
 
-    // Description
-    var descEl = document.getElementById('pModalDesc');
-    if (descEl) {
-      descEl.textContent = product.description || 'Authentic prescription drug and diagnostic wholesale supply distributed under strict NABP and DSCSA compliance standards.';
-    }
+    // Clear email input if previously entered
+    var emailInput = document.getElementById('seedModalEmail');
+    if (emailInput) emailInput.value = '';
 
     // Show modal
     modal.classList.add('active');
@@ -192,9 +181,9 @@
       navigator.clipboard.writeText(ndcText).then(function() {
         var originalText = btn.textContent;
         btn.textContent = 'Copied';
-        btn.style.background = '#34C759';
+        btn.style.background = '#163B1D';
         btn.style.color = '#FFFFFF';
-        btn.style.borderColor = '#34C759';
+        btn.style.borderColor = '#163B1D';
         setTimeout(function() {
           btn.textContent = originalText;
           btn.style.background = '';
@@ -203,6 +192,17 @@
         }, 1500);
       });
     }
+  };
+
+  window.handleSeedModalSubmit = function() {
+    var emailInput = document.getElementById('seedModalEmail');
+    var emailVal = emailInput ? emailInput.value.trim() : '';
+    
+    var destination = 'become-a-customer.html';
+    if (emailVal && emailVal.indexOf('@') > 0) {
+      destination += '?email=' + encodeURIComponent(emailVal);
+    }
+    window.location.href = destination;
   };
 
   document.addEventListener('keydown', function(e) {
