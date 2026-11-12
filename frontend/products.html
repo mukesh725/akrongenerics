@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/css/product-modal.css">
 
 <style>
 :root {
@@ -1349,10 +1350,11 @@ body {
 
                                 <div class="specials-grid">
       <!-- Special 1: Safety Pen Needles -->
-      <article class="p-card">
+      <article class="p-card" onclick="openProductPreview('18366')" role="button" tabindex="0" aria-label="View Quick Touch Safety Pen Needles details" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProductPreview('18366');}">
         <div class="p-card-image-box">
           <span class="p-card-pill">SPECIAL PRICE</span>
           <img src="src/assets/products/quick-touch-safety-packaging.png" alt="Quick Touch Safety Pen Needles" loading="lazy">
+          <div class="p-card-quick-view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg><span>Quick View</span></div>
         </div>
         <div class="p-card-info">
           <h3 class="p-card-title">Quick Touch Safety Pen Needles | 100 CT</h3>
@@ -1362,10 +1364,11 @@ body {
       </article>
 
       <!-- Special 2: Safety Lancets -->
-      <article class="p-card">
+      <article class="p-card" onclick="openProductPreview('17178')" role="button" tabindex="0" aria-label="View Safety Lancets 28G details" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProductPreview('17178');}">
         <div class="p-card-image-box">
           <span class="p-card-pill">SPECIAL PRICE</span>
           <img src="src/assets/products/comfort-touch-safety-lancets-28g.jpg" alt="Safety Lancets 28G" loading="lazy">
+          <div class="p-card-quick-view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg><span>Quick View</span></div>
         </div>
         <div class="p-card-info">
           <h3 class="p-card-title">Safety Lancets 28G | 100 CT</h3>
@@ -1375,10 +1378,11 @@ body {
       </article>
 
       <!-- Special 3: Lidocaine Patches -->
-      <article class="p-card">
+      <article class="p-card" onclick="openProductPreview('18365')" role="button" tabindex="0" aria-label="View Lidocaine 4% Patches details" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProductPreview('18365');}">
         <div class="p-card-image-box">
           <span class="p-card-pill">SPECIAL PRICE</span>
           <img src="src/assets/products/lidocaine-patch-box.png" alt="Lidocaine 4% Patches" loading="lazy">
+          <div class="p-card-quick-view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg><span>Quick View</span></div>
         </div>
         <div class="p-card-info">
           <h3 class="p-card-title">Lidocaine 4% Topical Patches | 15 Patches</h3>
@@ -1388,10 +1392,11 @@ body {
       </article>
 
       <!-- Special 4: Contour Next 100 CT -->
-      <article class="p-card">
+      <article class="p-card" onclick="openProductPreview('18368')" role="button" tabindex="0" aria-label="View Contour Next Test Strips 100 CT details" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProductPreview('18368');}">
         <div class="p-card-image-box">
           <span class="p-card-pill">AUTHORIZED DEALER</span>
           <img src="src/assets/products/contour-next-100ct.jpg" alt="Contour Next Test Strips 100 CT" loading="lazy">
+          <div class="p-card-quick-view"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg><span>Quick View</span></div>
         </div>
         <div class="p-card-info">
           <h3 class="p-card-title">Contour Next Retail Test Strips | 100 CT</h3>
@@ -1632,5 +1637,7 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
+<script src="src/js/catalog-data.js"></script>
+<script src="src/js/product-modal.js"></script>
 </body>
 </html>
