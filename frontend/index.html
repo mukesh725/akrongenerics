@@ -98,10 +98,10 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   transition: opacity 0.25s ease;
 }
 .site-brand .logo-white {
-  display: none !important;
+  display: block !important;
 }
 .site-brand .logo-color {
-  display: block !important;
+  display: none !important;
 }
 .site-header.scrolled .site-brand .logo-white {
   display: none !important;
@@ -125,8 +125,8 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 .header-nav-link {
   font-family: var(--sans);
   font-size: 14px;
-  font-weight: 550;
-  color: #111827;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
   text-decoration: none;
   padding: 6px 2px;
   transition: color 0.2s ease, opacity 0.2s ease;
@@ -141,7 +141,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 }
 .header-nav-link:hover,
 .header-dropdown.open > .header-nav-link {
-  color: #000000;
+  color: #ffffff;
 }
 .site-header.scrolled .header-nav-link {
   color: #374151;
@@ -176,7 +176,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   display: inline-block;
   width: 1px;
   height: 15px;
-  background: rgba(22, 24, 15, 0.16);
+  background: rgba(255, 255, 255, 0.35);
   margin: 0 4px;
 }
 .site-header.scrolled .header-nav-divider {
@@ -300,168 +300,187 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 /* Legacy .nav support if referenced anywhere */
 .nav{display:none}
 
-/* ---------- Hero Reimagined (Left-Aligned on Clean Clinical Photo, Perfectly Balanced) ---------- */
-.hero-reimagined {
+/* ---------- Hero Split Layout (Matching Reference Placement) ---------- */
+.hero-split-layout {
   position: relative;
   width: 100%;
-  min-height: clamp(660px, 88vh, 860px);
+  min-height: 94vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-end;
   text-align: left;
   overflow: hidden;
   isolation: isolate;
-  background: #F8FAFC;
+  background: #0A192F;
 }
-.hero-reimagined .hero-bg-img {
+.hero-split-layout .hero-bg-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: right center;
+  object-position: center 32%;
   display: block;
   z-index: 0;
 }
-.hero-reimagined .hero-scrim {
+.hero-split-layout .hero-scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   background: 
-    linear-gradient(90deg, 
-      rgba(255, 255, 255, 0.92) 0%, 
-      rgba(255, 255, 255, 0.82) 38%, 
-      rgba(255, 255, 255, 0.48) 72%, 
-      rgba(255, 255, 255, 0.30) 100%),
     linear-gradient(180deg, 
-      rgba(255, 255, 255, 0.45) 0%, 
-      transparent 20%, 
-      transparent 80%, 
-      rgba(255, 255, 255, 0.60) 100%);
+      rgba(10, 25, 47, 0.40) 0%, 
+      rgba(10, 25, 47, 0.50) 35%, 
+      rgba(10, 25, 47, 0.82) 70%, 
+      rgba(10, 25, 47, 0.95) 100%);
 }
-.hero-reimagined .hero-inner {
+.hero-main-container {
   position: relative;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 140px clamp(24px, 4vw, 48px) 75px;
+  padding: 130px clamp(24px, 4vw, 56px) 0;
   box-sizing: border-box;
-}
-
-/* Hero Eyebrow Pill Badge */
-.hero-eyebrow-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: var(--r-pill);
-  background: rgba(148, 32, 49, 0.08);
-  border: 1px solid rgba(148, 32, 49, 0.20);
-  color: #942031;
-  font-family: var(--sans);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  box-shadow: 0 1px 4px rgba(148, 32, 49, 0.06);
-}
-.hero-eyebrow-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #16A34A;
-  display: inline-block;
-  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.20);
-}
-.hero-eyebrow-sep {
-  opacity: 0.45;
-  font-weight: 400;
-}
-
-.hero-reimagined .hero-title {
-  font-family: var(--sans);
-  font-size: clamp(48px, 6.2vw, 84px);
-  line-height: 1.03;
-  color: #000000;
-  font-weight: 750;
-  letter-spacing: -0.035em;
-  margin-bottom: 22px;
-  text-align: left;
-  max-width: 660px;
-  text-shadow: none;
-}
-.hero-reimagined .hero-subtitle {
-  font-family: var(--body);
-  color: #1F2937;
-  font-size: clamp(17px, 1.55vw, 20.5px);
-  max-width: 580px;
-  font-weight: 450;
-  line-height: 1.58;
-  margin-bottom: 32px;
-  text-align: left;
-  text-shadow: none;
-}
-.hero-reimagined .hero-cta-group {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.hero-split-row {
+  display: grid;
+  grid-template-columns: 1.18fr 0.82fr;
+  gap: 48px;
+  align-items: flex-end;
+  padding-bottom: 38px;
+}
+.hero-split-left .hero-title {
+  font-family: var(--sans);
+  font-size: clamp(38px, 4.6vw, 68px);
+  line-height: 1.06;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+.hero-split-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  max-width: 480px;
+  justify-self: flex-end;
+}
+.hero-split-right .hero-subtitle {
+  font-family: var(--body);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(15px, 1.25vw, 17px);
+  font-weight: 400;
+  line-height: 1.58;
+  margin: 0;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+}
+.hero-cta-wrap {
+  display: flex;
+  align-items: center;
   gap: 14px;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 24px;
 }
-
-/* Hero Trust Verification Micro-Row */
-.hero-trust-row {
+.hero-pill-btn {
+  background: #ffffff;
+  color: #0A192F;
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 5px 6px 5px 22px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.hero-pill-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.38);
+  background: #f8fafc;
+  color: #0A192F;
+}
+.hero-pill-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #942031;
+  color: #ffffff;
   display: flex;
   align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
-  margin-top: 4px;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
-.hero-trust-item {
+.hero-pill-btn:hover .hero-pill-icon {
+  background: #7d1a29;
+  transform: scale(1.05);
+}
+.hero-pill-secondary {
+  color: #ffffff;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 9px 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.10);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--body);
-  font-size: 13px;
-  font-weight: 600;
-  color: #374151;
-  letter-spacing: -0.01em;
+  transition: all 0.2s ease;
 }
-.hero-trust-item svg {
-  flex-shrink: 0;
+.hero-pill-secondary:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.65);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.hero-sub-strip {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.20);
+  padding: 16px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.hero-strip-tag, .hero-strip-pillars {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
 }
 
+/* Fallback & legacy buttons support */
 .hero-btn-red {
   background: #942031;
   color: #ffffff !important;
   font-family: var(--body);
   font-size: 15.5px;
   font-weight: 600;
-  letter-spacing: 0.01em;
   padding: 15px 36px;
   border-radius: var(--r-pill);
   text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 4px 16px rgba(148, 32, 49, 0.25) !important;
-  border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-}
-.hero-btn-red:hover {
-  background: #7d1a29;
-  transform: translateY(-1px);
-  color: #ffffff;
 }
 .hero-btn-white {
   background: #ffffff;
@@ -469,17 +488,12 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   font-family: var(--body);
   font-size: 15.5px;
   font-weight: 600;
-  letter-spacing: 0.01em;
   padding: 15px 34px;
   border-radius: var(--r-pill);
   text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
-  border: 1.5px solid rgba(15, 23, 42, 0.16);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
 }
 .hero-btn-white:hover {
   background: #f8fafc;
@@ -2088,13 +2102,14 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 @media(max-width:768px){
   body{padding:0}
   .wrap{margin-top:20px;gap:10px;padding:0 12px 16px}
-  .hero-reimagined{min-height:86vh;align-items:flex-start;text-align:left}
-  .hero-reimagined .hero-scrim{display:block !important;background:linear-gradient(180deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.78) 50%, rgba(255,255,255,0.40) 100%) !important}
-  .hero-reimagined .hero-inner{padding:105px 20px 60px;align-items:flex-start;text-align:left}
-  .hero-reimagined .hero-title{font-size:clamp(38px,9vw,56px);font-weight:750;line-height:1.06;margin-bottom:16px;text-align:left;color:#000000}
-  .hero-reimagined .hero-subtitle{font-size:16px;line-height:1.55;margin-bottom:24px;text-align:left;color:#1F2937}
-  .hero-reimagined .hero-cta-group{flex-direction:column;width:100%;gap:10px;align-items:flex-start;margin-bottom:18px}
-  .hero-trust-row{flex-direction:column;gap:10px;align-items:flex-start}
+  .hero-split-layout { min-height: 88vh; }
+  .hero-main-container { padding: 90px 20px 0; }
+  .hero-split-row { grid-template-columns: 1fr; gap: 20px; padding-bottom: 24px; }
+  .hero-split-left .hero-title { font-size: clamp(34px, 8.5vw, 48px); }
+  .hero-split-right { max-width: 100%; gap: 18px; }
+  .hero-split-right .hero-subtitle { font-size: 15px; }
+  .hero-pill-btn { width: 100%; justify-content: space-between; padding: 6px 6px 6px 20px; }
+  .hero-sub-strip { flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px 0 20px; }
   .hero-btn-red, .hero-btn-white, .hero-btn-glass{width:100%;max-width:320px;text-align:center;justify-content:center}
   .hero{min-height:500px;padding:64px 20px 44px;border-radius:20px}
   .hero h1{font-size:clamp(28px,7.5vw,40px);line-height:1.14;max-width:100%;margin-bottom:16px}
@@ -2437,48 +2452,36 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   </div>
 </div>
 
-<!-- HERO: YOUR PHARMACY. OUR PRIORITY. -->
-<header class="hero-reimagined" id="hero">
+<!-- HERO: YOUR PHARMACY. OUR PRIORITY. (Split Layout Placement) -->
+<header class="hero-split-layout" id="hero">
   <img class="hero-bg-img" src="src/assets/hero-clinical-pharmacist.jpg" alt="Akron Generics Licensed Pharmacy Wholesale Facility">
   <div class="hero-scrim" aria-hidden="true"></div>
   
-  <div class="hero-inner">
-    <div class="hero-eyebrow-pill">
-      <span class="hero-eyebrow-dot"></span>
-      <span>NABP-Accredited Licensed Wholesaler</span>
-      <span class="hero-eyebrow-sep">•</span>
-      <span>DSCSA Title II Compliant</span>
+  <div class="hero-main-container">
+    <div class="hero-split-row">
+      <div class="hero-split-left">
+        <h1 class="hero-title">Your Pharmacy.<br>Our Priority.</h1>
+      </div>
+      <div class="hero-split-right">
+        <p class="hero-subtitle">NABP-accredited wholesale partner delivering premium high-AWP generics, diabetic supplies, and diagnostic essentials with maximized Medicare reimbursement.</p>
+        <div class="hero-cta-wrap">
+          <a href="become-a-customer.html" class="hero-pill-btn">
+            <span>Create Pharmacy Account</span>
+            <span class="hero-pill-icon">↗</span>
+          </a>
+          <a href="catalog.html" class="hero-pill-secondary">
+            <span>Explore Catalog</span>
+            <span style="font-size:1.15em;margin-left:3px;">→</span>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <h1 class="hero-title">Your Pharmacy.<br>Our Priority.</h1>
-    <p class="hero-subtitle">NABP-accredited wholesale partner delivering premium high-AWP generics, diabetic supplies, and diagnostic essentials with maximized Medicare reimbursement.</p>
-    
-    <div class="hero-cta-group">
-      <a href="become-a-customer.html" class="hero-btn-red">Create a Pharmacy Account <span style="font-size:1.15em;line-height:1;margin-left:4px;">↗</span></a>
-      <a href="catalog.html" class="hero-btn-white">Explore Products <span style="font-size:1.15em;line-height:1;margin-left:4px;">→</span></a>
-    </div>
-
-    <div class="hero-trust-row">
-      <div class="hero-trust-item">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#942031" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>100% Serialized Supply</span>
-      </div>
-      <div class="hero-trust-item">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#942031" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>Same-Day Carrier Dispatch</span>
-      </div>
-      <div class="hero-trust-item">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#942031" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>Direct Sourcing</span>
-      </div>
+    <div class="hero-sub-strip">
+      <div class="hero-strip-tag">TRUSTED HEALTHCARE SOLUTIONS</div>
+      <div class="hero-strip-pillars">QUALITY &nbsp;•&nbsp; RELIABILITY &nbsp;•&nbsp; CARE</div>
     </div>
   </div>
-
-  <a href="#why-akron" class="hero-scroll-cue" aria-label="Scroll down to content">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M6 9l6 6 6-6"/>
-    </svg>
-  </a>
 </header>
 
 <div class="wrap">
