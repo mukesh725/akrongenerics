@@ -22,7 +22,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
 
-          <!-- Left Column: Warm-Neutral Rounded Image Card -->
+          <!-- Left Column: Edge-to-Edge Full-Bleed Rounded Image Card -->
           <div class="product-modal-media-card">
             <div class="seed-modal-badge" id="pModalBadge">
               <span class="seed-badge-dots" aria-hidden="true">
@@ -34,12 +34,6 @@
             
             <div class="seed-modal-img-wrap">
               <img id="pModalImg" src="" alt="Product Preview">
-            </div>
-
-            <div class="seed-modal-media-footer">
-              <span id="pModalItemTag">ITEM #18366</span>
-              <span>&bull;</span>
-              <span>COMMACK, NY DISPATCH</span>
             </div>
           </div>
 

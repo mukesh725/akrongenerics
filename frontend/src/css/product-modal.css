@@ -1,16 +1,18 @@
 /* ==========================================================================
    AKRON GENERICS - SEED-STYLE PRODUCT PREVIEW MODAL
-   Minimalist, editorial wellness/pharma luxury aesthetic
-   Inspired by Seed's iconic split layout: warm neutral image card,
-   lime green badge, bold editorial typography, dark green pill CTA,
-   and clean compliance footnotes.
+   Minimalist luxury wellness/pharma layout:
+   - Full-bleed edge-to-edge product photography inside rounded card
+   - Seed-style floating lime badge with dual dots
+   - Outer white container with generous frame padding
+   - Editorial typography & soft-tinted spec container
+   - Dark forest green pill CTA & fine-print footnotes
    ========================================================================== */
 
 /* Overlay backdrop */
 .product-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(17, 24, 39, 0.52);
+  background: rgba(17, 24, 39, 0.55);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   z-index: 99999;
@@ -28,20 +30,21 @@
   opacity: 1;
 }
 
-/* Modal Card Surface: Pure white with generous 24px outer padding */
+/* Modal Card Surface: Pure white with 20px outer frame padding */
 .product-modal-card {
   width: 100%;
   max-width: 880px;
-  max-height: min(92vh, 720px);
+  min-height: 480px;
+  max-height: min(92vh, 680px);
   background: #FFFFFF;
   border-radius: 26px;
   box-shadow: 
     0 30px 70px -15px rgba(0, 0, 0, 0.28),
     0 0 0 1px rgba(0, 0, 0, 0.05);
-  padding: 24px;
+  padding: 20px;
   display: grid;
   grid-template-columns: 1fr 1.08fr;
-  gap: 28px;
+  gap: 24px;
   overflow: hidden;
   transform: scale(0.96) translateY(14px);
   transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
@@ -58,10 +61,10 @@
 /* Minimalist × Close Button in top-right corner */
 .product-modal-close {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 34px;
-  height: 34px;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: none;
   background: transparent;
@@ -85,26 +88,25 @@
   transform: scale(0.94);
 }
 
-/* ================= LEFT COLUMN: WARM-NEUTRAL IMAGE CARD ================= */
+/* ================= LEFT COLUMN: FULL-BLEED IMAGE CARD ================= */
 .product-modal-media-card {
   background: #F5F4EE;
   border-radius: 20px;
-  padding: 24px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
-  min-height: 340px;
+  height: 100%;
+  min-height: 440px;
+  padding: 0;
+  margin: 0;
+  display: flex;
   box-sizing: border-box;
 }
 
-/* Seed-Style Lime Green Pill Badge */
+/* Seed-Style Lime Green Pill Badge floating over image */
 .seed-modal-badge {
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 14px;
+  left: 14px;
   background: #D8F8C8;
   color: #163B1D;
   border-radius: 9999px;
@@ -115,8 +117,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 1px 4px rgba(22, 59, 29, 0.08);
-  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  pointer-events: none;
 }
 
 .seed-badge-dots {
@@ -133,44 +136,27 @@
   display: inline-block;
 }
 
-/* Floating Product Image Container */
+/* Full-bleed edge-to-edge image filling the entire rounded card */
 .seed-modal-img-wrap {
   width: 100%;
-  max-width: 320px;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-  box-sizing: border-box;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #F5F4EE;
 }
 
 .seed-modal-img-wrap img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   object-position: center;
   display: block;
-  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.08));
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.seed-modal-img-wrap:hover img {
-  transform: scale(1.05);
-}
-
-/* Left Card Sub-Footer */
-.seed-modal-media-footer {
-  margin-top: auto;
-  padding-top: 14px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  color: #8C8C85;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.product-modal-media-card:hover .seed-modal-img-wrap img {
+  transform: scale(1.04);
 }
 
 /* ================= RIGHT COLUMN: EDITORIAL CONTENT & CTA ================= */
@@ -178,7 +164,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-right: 6px;
+  padding: 8px 6px 8px 0;
   overflow-y: auto;
   box-sizing: border-box;
 }
@@ -434,26 +420,22 @@
     grid-template-columns: 1fr;
     max-height: 92vh;
     border-radius: 22px 22px 18px 18px;
-    padding: 16px;
-    gap: 16px;
+    padding: 14px;
+    gap: 14px;
     overflow-y: auto;
   }
 
   .product-modal-close {
     top: 12px;
     right: 12px;
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
   }
 
   .product-modal-media-card {
-    min-height: 220px;
-    padding: 20px 14px 14px;
+    min-height: 240px;
+    height: 240px;
     border-radius: 16px;
-  }
-
-  .seed-modal-img-wrap {
-    max-width: 200px;
   }
 
   .seed-modal-title {
