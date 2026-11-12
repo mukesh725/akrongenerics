@@ -1,5 +1,5 @@
 /**
- * Akron Generics - Product Preview Modal
+ * Akron Generics - Apple-Style Product Preview Modal
  * Provides interactive quick-view modal with full product intelligence,
  * high-res imagery, NDC copying, and direct pharmacy ordering pathways.
  */
@@ -14,22 +14,22 @@
       <div class="product-modal-overlay" id="productPreviewModal" onclick="if(event.target===this)closeProductPreview()" role="dialog" aria-modal="true" aria-labelledby="pModalTitle">
         <div class="product-modal-card">
           <button type="button" class="product-modal-close" onclick="closeProductPreview()" aria-label="Close product preview">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
 
-          <!-- Left Media Column -->
+          <!-- Left Media Column: Product Showcase -->
           <div class="product-modal-media">
             <span class="product-modal-badge-floating" id="pModalBadge">HIGH AWP</span>
             <div class="product-modal-img-wrap">
               <img id="pModalImg" src="" alt="Product Preview">
             </div>
             <div class="product-modal-caption">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               <span>100% Authentic &bull; Serialized DSCSA Track &amp; Trace</span>
             </div>
           </div>
 
-          <!-- Right Information Column -->
+          <!-- Right Information Column: Product Intelligence -->
           <div class="product-modal-info">
             <div class="product-modal-eyebrow" id="pModalCategory">PEN NEEDLES</div>
             <h2 class="product-modal-title" id="pModalTitle">Product Name</h2>
@@ -40,17 +40,17 @@
               <span class="product-modal-tag">NABP Accredited</span>
             </div>
 
-            <!-- Attributes Grid -->
+            <!-- Key Spec Tiles -->
             <div class="product-modal-grid">
               <div class="product-modal-attr">
                 <span class="product-modal-attr-lbl">National Drug Code (NDC)</span>
                 <span class="product-modal-attr-val">
                   <span id="pModalNdc">73317-6816-04</span>
-                  <button type="button" class="product-modal-copy-ndc" onclick="copyModalNdc(this)" title="Copy NDC to clipboard">Copy</button>
+                  <button type="button" class="product-modal-copy-ndc" onclick="copyModalNdc(this)" title="Copy NDC">Copy</button>
                 </span>
               </div>
               <div class="product-modal-attr">
-                <span class="product-modal-attr-lbl">Akron Item Number</span>
+                <span class="product-modal-attr-lbl">Item Number</span>
                 <span class="product-modal-attr-val" id="pModalItemNo">18366</span>
               </div>
               <div class="product-modal-attr">
@@ -63,15 +63,15 @@
               </div>
             </div>
 
-            <!-- Clinical / Product Description -->
+            <!-- Product Overview -->
             <div class="product-modal-desc-heading">Product Overview &amp; Specifications</div>
             <p class="product-modal-desc" id="pModalDesc">Detailed description of the product...</p>
 
-            <!-- Action Buttons -->
+            <!-- Actions -->
             <div class="product-modal-actions">
               <a href="become-a-customer.html" class="product-modal-btn-primary">
                 <span>Request Wholesale Pricing</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
               <a href="tel:18667606565" class="product-modal-btn-secondary">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -79,9 +79,9 @@
               </a>
             </div>
 
-            <!-- Compliance Note -->
+            <!-- Assurance Note -->
             <div class="product-modal-assurance">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
               <span>NABP Drug Distributor Accredited &bull; DSCSA T3 Pedigree Verified</span>
             </div>
           </div>
@@ -191,13 +191,15 @@
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(ndcText).then(function() {
         var originalText = btn.textContent;
-        btn.textContent = 'Copied!';
-        btn.style.background = '#059669';
+        btn.textContent = 'Copied';
+        btn.style.background = '#34C759';
         btn.style.color = '#FFFFFF';
+        btn.style.borderColor = '#34C759';
         setTimeout(function() {
           btn.textContent = originalText;
           btn.style.background = '';
           btn.style.color = '';
+          btn.style.borderColor = '';
         }, 1500);
       });
     }
