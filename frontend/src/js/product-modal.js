@@ -304,34 +304,7 @@
       localStorage.setItem('akron_pricing_requests', JSON.stringify(stored.slice(0, 100)));
     } catch (e) {}
 
-    // 2. Direct email dispatch via FormSubmit AJAX to info@akrongenerics.com
-    var formSubmitData = {
-      _subject: 'Wholesale Pricing Request: ' + productName + ' (NDC: ' + ndc + ') - ' + emailVal,
-      _template: 'table',
-      _captcha: 'false',
-      'Customer Email': emailVal,
-      'Product Name': productName,
-      'National Drug Code (NDC)': ndc,
-      'Packaging Format': packaging,
-      'Brand / Manufacturer': brand,
-      'Category': category,
-      'Specifications': specs,
-      'Request Timestamp': formattedTime,
-      'Page Source URL': window.location.href
-    };
-
-    fetch('https://formsubmit.co/ajax/info@akrongenerics.com', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(formSubmitData)
-    }).catch(function(err) {
-      console.log('Notice: FormSubmit notification status:', err);
-    });
-
-    // 3. Dispatch to local / serverless backend endpoints
+    // 2. Dispatch ONLY to Akron Generics private backend (Zero 3rd-party data leaks)
     var backendEndpoints = [
       '/api/request-pricing',
       'http://localhost:3000/api/request-pricing',
