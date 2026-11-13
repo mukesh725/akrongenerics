@@ -17,6 +17,25 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..'))
 FRONTEND_DIR = os.path.join(PROJECT_ROOT, 'frontend')
 
+# Automatically load .env configuration if present
+def load_dotenv():
+    for env_path in [os.path.join(PROJECT_ROOT, '.env'), os.path.join(BASE_DIR, '.env')]:
+        if os.path.exists(env_path):
+            try:
+                with open(env_path, 'r') as f:
+                    for line in f:
+                        line = line.strip()
+                        if line and not line.startswith('#') and '=' in line:
+                            k, v = line.split('=', 1)
+                            k = k.strip()
+                            v = v.strip().strip('"').strip("'")
+                            if k not in os.environ:
+                                os.environ[k] = v
+            except Exception:
+                pass
+
+load_dotenv()
+
 SUBMISSIONS_DIR = os.path.join(BASE_DIR, 'data', 'submissions')
 if not os.path.exists(SUBMISSIONS_DIR):
     legacy_dir = os.path.join(PROJECT_ROOT, 'submissions')
