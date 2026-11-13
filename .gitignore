@@ -35,6 +35,7 @@ wheels/
 # Customer Submissions & Confidential Records (PII & Payment Data)
 backend/data/submissions/
 backend/data/pricing_requests/
+backend/data/contact_inquiries/
 submissions/
 *.pdf.tmp
 test_*.pdf

@@ -48,10 +48,12 @@ if not os.path.exists(SUBMISSIONS_DIR):
 MAIN_ACCOUNT_DIR = os.path.join(SUBMISSIONS_DIR, 'main_account')
 BY_REP_DIR = os.path.join(SUBMISSIONS_DIR, 'by_representative')
 PRICING_REQUESTS_DIR = os.path.join(BASE_DIR, 'data', 'pricing_requests')
+CONTACT_INQUIRIES_DIR = os.path.join(BASE_DIR, 'data', 'contact_inquiries')
 
 os.makedirs(MAIN_ACCOUNT_DIR, exist_ok=True)
 os.makedirs(BY_REP_DIR, exist_ok=True)
 os.makedirs(PRICING_REQUESTS_DIR, exist_ok=True)
+os.makedirs(CONTACT_INQUIRIES_DIR, exist_ok=True)
 
 def sanitize_name(name):
     return re.sub(r'[^a-zA-Z0-9_\-]', '_', str(name).strip().lower())
@@ -75,10 +77,15 @@ def is_rate_limited(ip, limit=6, window=60):
 
 def send_secure_email_notification(payload):
     """
-    Direct in-house email notification using Google Apps Script or corporate SMTP over encrypted TLS.
+    Universal in-house email notification using Google Apps Script or corporate SMTP over encrypted TLS.
+    Delivers to:
+    - Primary: info@akrongenerics.com
+    - Secondary: mukesh@akrongenerics.com
     Zero third-party SaaS services, zero intermediaries, 100% private.
     """
-    recipient = os.environ.get('NOTIFICATION_RECIPIENT', 'info@akrongenerics.com')
+    primary_to = os.environ.get('NOTIFICATION_RECIPIENT', 'info@akrongenerics.com')
+    secondary_cc = os.environ.get('NOTIFICATION_CC', 'mukesh@akrongenerics.com')
+    all_recipients = [r.strip() for r in [primary_to, secondary_cc] if r and r.strip()]
 
     # Option A: Private Google Apps Script Webhook
     google_script_url = os.environ.get('GOOGLE_SCRIPT_URL')
@@ -90,7 +97,7 @@ def send_secure_email_notification(payload):
                 headers={'Content-Type': 'application/json'}
             )
             with urllib.request.urlopen(req, timeout=12) as response:
-                print(f"[GOOGLE APPS SCRIPT] Successfully dispatched email notification for '{payload.get('productName')}' to {recipient}")
+                print(f"[GOOGLE APPS SCRIPT] Successfully dispatched email notification to {primary_to} (CC: {secondary_cc})")
                 return True
         except Exception as g_err:
             print(f"[GOOGLE APPS SCRIPT ERROR] {g_err}")
@@ -102,67 +109,116 @@ def send_secure_email_notification(payload):
     smtp_pass = os.environ.get('SMTP_PASS')
 
     if not (smtp_host and smtp_user and smtp_pass):
-        print(f"[SECURE IN-HOUSE] Direct SMTP or Google Script credentials not set in environment. Saved inquiry '{payload.get('id')}' to secure local server storage.")
+        print(f"[SECURE IN-HOUSE] Direct SMTP or Google Script credentials not set. Saved inquiry '{payload.get('id')}' to secure local server storage.")
         return False
 
     try:
         msg = MIMEMultipart('alternative')
-        prod = clean_header_val(payload.get('productName', 'Pharmaceutical Product'))
-        ndc = clean_header_val(payload.get('ndc', 'N/A'))
-        customer_email = clean_header_val(payload.get('email', 'N/A'))
+        is_contact = (payload.get('formType') == 'contact' or payload.get('message') or payload.get('reason'))
 
-        msg['Subject'] = f"Wholesale Pricing Request: {prod} (NDC: {ndc}) - {customer_email}"
-        msg['From'] = clean_header_val(smtp_user)
-        msg['To'] = clean_header_val(recipient)
+        if is_contact:
+            full_name = clean_header_val(payload.get('fullName') or ((payload.get('firstName', '') + ' ' + payload.get('lastName', '')).strip()) or 'Website Visitor')
+            reason = clean_header_val(payload.get('reason', 'General Inquiry'))
+            pharmacy = clean_header_val(payload.get('pharmacyName', 'N/A'))
+            customer_email = clean_header_val(payload.get('email', 'N/A'))
 
-        html_body = f"""
-        <html>
-        <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #111827; line-height: 1.5; padding: 20px;">
-            <div style="max-width: 600px; margin: 0 auto; border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; background: #FFFFFF;">
-                <div style="background: #0B2240; color: #FFFFFF; padding: 22px 24px;">
-                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #93C5FD; font-weight: 700; margin-bottom: 4px;">Akron Generics &bull; Private In-House Alert</div>
-                    <h2 style="margin: 0; font-size: 20px; font-weight: 700;">Wholesale Product Pricing Request</h2>
-                </div>
-                <div style="padding: 24px;">
-                    <p style="font-size: 14.5px; margin-top: 0; color: #334155;">
-                        A pharmacy customer has requested wholesale pricing via the Akron Generics product preview modal:
-                    </p>
-                    <table style="width: 100%; border-collapse: collapse; margin-top: 16px; margin-bottom: 24px;">
-                        <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600; width: 38%;">Customer Email:</td><td style="padding: 9px 0; font-size: 14px; font-weight: 700; color: #0D498F;"><a href="mailto:{customer_email}" style="color: #0D498F; text-decoration: none;">{customer_email}</a></td></tr>
-                        <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Product Requested:</td><td style="padding: 9px 0; font-size: 14px; font-weight: 700; color: #0F172A;">{prod}</td></tr>
-                        <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">NDC:</td><td style="padding: 9px 0; font-size: 13px; font-family: monospace; color: #1E293B;">{ndc}</td></tr>
-                        <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Packaging Format:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;">{payload.get('packaging', 'N/A')}</td></tr>
-                        <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Brand / Manufacturer:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;">{payload.get('brand', 'N/A')}</td></tr>
-                        <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Category:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;">{payload.get('category', 'N/A')}</td></tr>
-                        <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Specifications:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;">{payload.get('specs', 'N/A')}</td></tr>
-                        <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Request Timestamp:</td><td style="padding: 9px 0; font-size: 13px; color: #64748B;">{payload.get('requestedAtFormatted', 'N/A')}</td></tr>
-                        <tr><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Internal Request ID:</td><td style="padding: 9px 0; font-size: 12px; font-family: monospace; color: #64748B;">{payload.get('id', 'N/A')}</td></tr>
-                    </table>
-                    <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px; margin-bottom: 20px;">
-                        <a href="mailto:{customer_email}?subject=Akron%20Generics%20Wholesale%20Pricing%3A%20{prod}&body=Hello,%0D%0A%0D%0AThank%20you%20for%20contacting%20Akron%20Generics.%20Attached%20is%20our%20wholesale%20pricing%20schedule%20for%20{prod}.%0D%0A%0D%0ABest%20regards,%0D%0AAkron%20Generics%20Sales%20Team" style="display: inline-block; background: #16A34A; color: #FFFFFF; font-weight: 600; font-size: 13px; padding: 8px 16px; border-radius: 6px; text-decoration: none;">Reply to Customer &rarr;</a>
+            msg['Subject'] = f"📨 New Contact Inquiry: {reason} — {full_name} ({pharmacy})"
+            html_body = f"""
+            <html>
+            <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #111827; line-height: 1.5; padding: 20px;">
+                <div style="max-width: 620px; margin: 0 auto; border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; background: #FFFFFF;">
+                    <div style="background: #9E2235; color: #FFFFFF; padding: 22px 24px;">
+                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #FECDD3; font-weight: bold; margin-bottom: 4px;">Akron Generics &bull; Contact Center</div>
+                        <h2 style="margin: 0; font-size: 20px; font-weight: 700;">New Customer Message Submitted</h2>
                     </div>
-                    <div style="font-size: 11.5px; color: #94A3B8; border-top: 1px solid #E2E8F0; padding-top: 14px;">
-                        Confidential &bull; Dispatched securely via Akron Generics Direct SMTP &bull; Zero third-party intermediaries.
+                    <div style="padding: 24px;">
+                        <div style="background: #FEF2F2; border-left: 4px solid #DC2626; padding: 12px 16px; margin-bottom: 20px; border-radius: 4px;">
+                            <strong style="color: #991B1B; font-size: 14px;">Reason: {reason}</strong>
+                        </div>
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600; width: 35%;">Contact Name:</td><td style="padding: 9px 0; font-size: 14px; font-weight: 700; color: #0F172A;">{full_name}</td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Email Address:</td><td style="padding: 9px 0; font-size: 14px; font-weight: 700; color: #0D498F;"><a href="mailto:{customer_email}">{customer_email}</a></td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Phone Number:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;"><a href="tel:{payload.get('phone')}">{payload.get('phone')}</a></td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Pharmacy / Practice:</td><td style="padding: 9px 0; font-size: 13.5px; font-weight: 600; color: #0F172A;">{pharmacy}</td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Role:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;">{payload.get('role')}</td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">State:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;">{payload.get('state')}</td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">SMS Consent:</td><td style="padding: 9px 0; font-size: 13px; color: #64748B;">{"Yes (Opted In)" if payload.get('smsConsent') else "No"}</td></tr>
+                            <tr><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Submitted Time:</td><td style="padding: 9px 0; font-size: 13px; color: #64748B;">{payload.get('submittedAtFormatted', '')}</td></tr>
+                        </table>
+                        <div style="margin-bottom: 24px;">
+                            <div style="font-size: 12px; text-transform: uppercase; font-weight: bold; color: #64748B; margin-bottom: 8px;">Customer Message:</div>
+                            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; font-size: 14px; color: #1E293B; white-space: pre-wrap; line-height: 1.6;">{payload.get('message', '')}</div>
+                        </div>
+                        <div style="margin-bottom: 16px;">
+                            <a href="mailto:{customer_email}?subject=Re:%20Akron%20Generics%20Inquiry%20-%20{urllib.parse.quote(reason)}" style="display: inline-block; background: #9E2235; color: #FFFFFF; font-weight: 600; font-size: 13px; padding: 9px 18px; border-radius: 6px; text-decoration: none;">Reply to Customer &rarr;</a>
+                        </div>
+                        <div style="font-size: 11.5px; color: #94A3B8; border-top: 1px solid #E2E8F0; padding-top: 12px;">
+                            Delivered to Primary: {primary_to} &bull; CC: {secondary_cc} &bull; Akron Generics Secure Dispatcher.
+                        </div>
                     </div>
                 </div>
-            </div>
-        </body>
-        </html>
-        """
+            </body>
+            </html>
+            """
+        else:
+            prod = clean_header_val(payload.get('productName', 'Pharmaceutical Product'))
+            ndc = clean_header_val(payload.get('ndc', 'N/A'))
+            customer_email = clean_header_val(payload.get('email', 'N/A'))
+
+            msg['Subject'] = f"🔒 Wholesale Pricing Request: {prod} (NDC: {ndc}) - {customer_email}"
+            html_body = f"""
+            <html>
+            <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #111827; line-height: 1.5; padding: 20px;">
+                <div style="max-width: 600px; margin: 0 auto; border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; background: #FFFFFF;">
+                    <div style="background: #0B2240; color: #FFFFFF; padding: 22px 24px;">
+                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #93C5FD; font-weight: 700; margin-bottom: 4px;">Akron Generics &bull; Private In-House Alert</div>
+                        <h2 style="margin: 0; font-size: 20px; font-weight: 700;">Wholesale Product Pricing Request</h2>
+                    </div>
+                    <div style="padding: 24px;">
+                        <p style="font-size: 14.5px; margin-top: 0; color: #334155;">
+                            A pharmacy customer has requested wholesale pricing via the Akron Generics product preview modal:
+                        </p>
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 16px; margin-bottom: 24px;">
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600; width: 38%;">Customer Email:</td><td style="padding: 9px 0; font-size: 14px; font-weight: 700; color: #0D498F;"><a href="mailto:{customer_email}" style="color: #0D498F; text-decoration: none;">{customer_email}</a></td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Product Requested:</td><td style="padding: 9px 0; font-size: 14px; font-weight: 700; color: #0F172A;">{prod}</td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">NDC:</td><td style="padding: 9px 0; font-size: 13px; font-family: monospace; color: #1E293B;">{ndc}</td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Packaging Format:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;">{payload.get('packaging', 'N/A')}</td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Brand / Manufacturer:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;">{payload.get('brand', 'N/A')}</td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Category:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;">{payload.get('category', 'N/A')}</td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Specifications:</td><td style="padding: 9px 0; font-size: 13.5px; color: #334155;">{payload.get('specs', 'N/A')}</td></tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;"><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Request Timestamp:</td><td style="padding: 9px 0; font-size: 13px; color: #64748B;">{payload.get('requestedAtFormatted', 'N/A')}</td></tr>
+                            <tr><td style="padding: 9px 0; color: #64748B; font-size: 13px; font-weight: 600;">Internal Request ID:</td><td style="padding: 9px 0; font-size: 12px; font-family: monospace; color: #64748B;">{payload.get('id', 'N/A')}</td></tr>
+                        </table>
+                        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px; margin-bottom: 20px;">
+                            <a href="mailto:{customer_email}?subject=Akron%20Generics%20Wholesale%20Pricing%3A%20{prod}&body=Hello,%0D%0A%0D%0AThank%20you%20for%20contacting%20Akron%20Generics.%20Attached%20is%20our%20wholesale%20pricing%20schedule%20for%20{prod}.%0D%0A%0D%0ABest%20regards,%0D%0AAkron%20Generics%20Sales%20Team" style="display: inline-block; background: #16A34A; color: #FFFFFF; font-weight: 600; font-size: 13px; padding: 8px 16px; border-radius: 6px; text-decoration: none;">Reply to Customer &rarr;</a>
+                        </div>
+                        <div style="font-size: 11.5px; color: #94A3B8; border-top: 1px solid #E2E8F0; padding-top: 14px;">
+                            Delivered to Primary: {primary_to} &bull; CC: {secondary_cc} &bull; Akron Generics Direct SMTP.
+                        </div>
+                    </div>
+                </div>
+            </body>
+            </html>
+            """
+
         msg.attach(MIMEText(html_body, 'html'))
+        msg['From'] = clean_header_val(smtp_user)
+        msg['To'] = clean_header_val(primary_to)
+        if secondary_cc:
+            msg['Cc'] = clean_header_val(secondary_cc)
 
         context = ssl.create_default_context()
         if smtp_port == 465:
             with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
                 server.login(smtp_user, smtp_pass)
-                server.sendmail(smtp_user, [recipient], msg.as_string())
+                server.sendmail(smtp_user, all_recipients, msg.as_string())
         else:
             with smtplib.SMTP(smtp_host, smtp_port) as server:
                 server.starttls(context=context)
                 server.login(smtp_user, smtp_pass)
-                server.sendmail(smtp_user, [recipient], msg.as_string())
+                server.sendmail(smtp_user, all_recipients, msg.as_string())
 
-        print(f"[SECURE SMTP SUCCESS] Direct TLS email dispatched to {recipient} for '{prod}'")
+        print(f"[SECURE SMTP SUCCESS] Direct TLS email dispatched to {primary_to} (CC: {secondary_cc})")
         return True
     except Exception as err:
         print(f"[SECURE SMTP ERROR] Could not dispatch direct email: {err}")
@@ -256,6 +312,25 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                         except Exception:
                             pass
             self.wfile.write(json.dumps(pricing_reqs).encode('utf-8'))
+            return
+
+        # GET /api/contact-inquiries
+        if path == '/api/contact-inquiries':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            
+            inquiries = []
+            if os.path.exists(CONTACT_INQUIRIES_DIR):
+                for fname in sorted(os.listdir(CONTACT_INQUIRIES_DIR), reverse=True):
+                    if fname.endswith('.json'):
+                        try:
+                            with open(os.path.join(CONTACT_INQUIRIES_DIR, fname), 'r') as f:
+                                data = json.load(f)
+                                inquiries.append(data)
+                        except Exception:
+                            pass
+            self.wfile.write(json.dumps(inquiries).encode('utf-8'))
             return
 
         # GET /api/download-official-pdf?id=AKR-2026-XXXX
@@ -476,6 +551,75 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                     "id": req_id,
                     "email_dispatched": email_sent,
                     "message": f"Pricing request for {prod} successfully logged. Notification dispatched to sales team."
+                }
+                self.wfile.write(json.dumps(response).encode('utf-8'))
+                return
+            except Exception as e:
+                self.send_response(400)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": str(e)}).encode('utf-8'))
+                return
+
+        # POST /api/contact
+        if path == '/api/contact':
+            client_ip = self.client_address[0] if self.client_address else '127.0.0.1'
+            if is_rate_limited(client_ip, limit=6, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many requests. Please wait a moment."}).encode('utf-8'))
+                return
+
+            content_length = int(self.headers.get('Content-Length', 0))
+            if content_length > 65536:
+                self.send_response(413)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Payload exceeds allowed size."}).encode('utf-8'))
+                return
+
+            post_data = self.rfile.read(content_length)
+            try:
+                payload = json.loads(post_data.decode('utf-8'))
+                email = str(payload.get('email', '')).strip()
+
+                if not re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
+                    self.send_response(400)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "error", "message": "Invalid email address format."}).encode('utf-8'))
+                    return
+
+                req_id = payload.get('id') or ('CNT-' + str(int(time.time() * 1000)))
+                payload['id'] = req_id
+                payload['formType'] = 'contact'
+                payload['received_at'] = time.strftime('%Y-%m-%d %H:%M:%S')
+
+                full_name = clean_header_val(payload.get('fullName') or ((payload.get('firstName', '') + ' ' + payload.get('lastName', '')).strip()))
+                reason = clean_header_val(payload.get('reason', 'General Inquiry'))
+
+                print(f"[CONTACT INQUIRY] Received from '{full_name}' ({email}) regarding '{reason}'")
+
+                safe_name = sanitize_name(full_name)
+                safe_email = sanitize_name(email)
+                filename = f"{req_id}_{safe_name}_{safe_email}.json"
+                req_path = os.path.join(CONTACT_INQUIRIES_DIR, filename)
+
+                with open(req_path, 'w') as f:
+                    json.dump(payload, f, indent=2)
+
+                # Send email notification to info@akrongenerics.com (CC: mukesh@akrongenerics.com)
+                email_sent = send_secure_email_notification(payload)
+
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                response = {
+                    "status": "success",
+                    "id": req_id,
+                    "email_dispatched": email_sent,
+                    "message": "Contact message recorded and notification dispatched to info@akrongenerics.com & mukesh@akrongenerics.com."
                 }
                 self.wfile.write(json.dumps(response).encode('utf-8'))
                 return

@@ -1516,9 +1516,61 @@ function handleContactPageSubmit(e) {
   var alertEl = document.getElementById('cpSuccessAlert');
   if (btn) {
     btn.disabled = true;
-    btn.textContent = 'Submitting...';
+    btn.textContent = 'Submitting message...';
   }
 
+  // Gather Form Data
+  var firstName = (document.getElementById('cpFirstName') && document.getElementById('cpFirstName').value.trim()) || '';
+  var lastName = (document.getElementById('cpLastName') && document.getElementById('cpLastName').value.trim()) || '';
+  var email = (document.getElementById('cpEmail') && document.getElementById('cpEmail').value.trim()) || '';
+  var phone = (document.getElementById('cpPhone') && document.getElementById('cpPhone').value.trim()) || '';
+  var role = (document.getElementById('cpRole') && document.getElementById('cpRole').value) || '';
+  var pharmacyName = (document.getElementById('cpPharmacyName') && document.getElementById('cpPharmacyName').value.trim()) || '';
+  var state = (document.getElementById('cpState') && document.getElementById('cpState').value) || '';
+  var reason = (document.getElementById('cpReason') && document.getElementById('cpReason').value) || '';
+  var message = (document.getElementById('cpMessage') && document.getElementById('cpMessage').value.trim()) || '';
+  var smsConsent = document.getElementById('cpSmsConsent') ? document.getElementById('cpSmsConsent').checked : false;
+
+  var now = new Date();
+  var payload = {
+    id: 'CNT-' + Date.now(),
+    formType: 'contact',
+    firstName: firstName,
+    lastName: lastName,
+    fullName: (firstName + ' ' + lastName).trim(),
+    email: email,
+    phone: phone,
+    role: role,
+    pharmacyName: pharmacyName,
+    state: state,
+    reason: reason,
+    message: message,
+    smsConsent: smsConsent,
+    submittedAt: now.toISOString(),
+    submittedAtFormatted: now.toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'full', timeStyle: 'short' }) + ' (EST)',
+    sourceUrl: window.location.href,
+    recipientEmail: 'info@akrongenerics.com',
+    secondaryRecipient: 'mukesh@akrongenerics.com'
+  };
+
+  // 1. Save to LocalStorage for offline and dashboard access
+  try {
+    var stored = JSON.parse(localStorage.getItem('akron_contact_inquiries') || '[]');
+    stored.unshift(payload);
+    localStorage.setItem('akron_contact_inquiries', JSON.stringify(stored.slice(0, 100)));
+  } catch(e) {}
+
+  // 2. Dispatch to In-House Backend (Direct SMTP or Google Apps Script Webhook)
+  var endpoints = ['/api/contact', 'http://localhost:3000/api/contact', 'http://127.0.0.1:3000/api/contact'];
+  endpoints.forEach(function(ep) {
+    fetch(ep, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function() {});
+  });
+
+  // UI Success Transition
   setTimeout(function() {
     if (btn) {
       btn.textContent = 'Message Submitted ✓';
@@ -1538,7 +1590,7 @@ function handleContactPageSubmit(e) {
       cb.setAttribute('aria-checked', 'false');
     }
     if (hidden) hidden.value = 'false';
-  }, 650);
+  }, 600);
 
   return false;
 }
