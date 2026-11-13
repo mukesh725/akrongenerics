@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akron Generics — Executive Admin Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --color-navy: #0D498F;
+  --color-navy-dark: #0B2240;
+  --color-crimson: #9E2235;
+  --color-bg-page: #F8FAFC;
+  --color-bg-card: #FFFFFF;
+  --color-bg-subtle: #F1F5F9;
+  
+  --color-border: #E2E8F0;
+  --color-border-input: #CBD5E1;
+  --color-text-main: #0F172A;
+  --color-text-body: #334155;
+  --color-text-muted: #64748B;
+  
+  --color-success: #16A34A;
+  --color-warning: #D97706;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-page);
+  color: var(--color-text-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.dash-header {
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+.dash-header-inner {
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand-zone {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+.logo-img { height: 26px; width: auto; }
+.portal-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background: var(--color-navy);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-nav-link {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--color-text-body);
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-input);
+  background: #FFFFFF;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-nav-link:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-main);
+}
+.btn-primary-action {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: var(--color-navy);
+  text-decoration: none;
+  padding: 7px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-primary-action:hover { background: var(--color-navy-dark); }
+
+/* Main Container */
+.dash-wrapper {
+  max-width: 1360px;
+  margin: 24px auto 80px;
+  padding: 0 24px;
+}
+
+/* Page Intro */
+.dash-intro-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.dash-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-text-main);
+  letter-spacing: -0.02em;
+}
+.dash-desc {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* Metric Cards */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+@media (max-width: 900px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .metrics-grid { grid-template-columns: 1fr; }
+}
+.metric-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.metric-card.active-metric {
+  border-color: var(--color-navy);
+  box-shadow: 0 0 0 1px var(--color-navy);
+}
+.metric-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.metric-value {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-text-main);
+}
+.metric-sub {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* Navigation Tabs */
+.tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 20px;
+}
+.tab-btn {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px 18px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.15s ease;
+}
+.tab-btn:hover { color: var(--color-text-main); }
+.tab-btn.active { color: var(--color-navy); }
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-navy);
+}
+.tab-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: #E2E8F0;
+  color: #475569;
+}
+.tab-btn.active .tab-badge {
+  background: #DBEAFE;
+  color: var(--color-navy);
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Filter Card */
+.filter-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.filter-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.search-input {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--color-text-main);
+  outline: none;
+  min-width: 260px;
+}
+.search-input:focus, .select-filter:focus { border-color: var(--color-navy); }
+.select-filter {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--color-text-main);
+  outline: none;
+  cursor: pointer;
+}
+
+/* Table Card */
+.table-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.dash-table th {
+  background: #F8FAFC;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid var(--color-border);
+}
+.dash-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+.dash-table tr:last-child td { border-bottom: none; }
+.dash-table tr:hover { background: #FAFBFC; }
+
+.prod-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #E2E8F0;
+  background: #F1F5F9;
+  display: block;
+}
+.cat-pill {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #F1F5F9;
+  color: #334155;
+  text-transform: uppercase;
+}
+.badge-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 600;
+  background: #E0F2FE;
+  color: #0369A1;
+  margin-right: 4px;
+}
+
+.badge-status {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-pending { background: #FEF3C7; color: #92400E; }
+.badge-approved { background: #DCFCE7; color: #166534; }
+.badge-review { background: #DBEAFE; color: #1E40AF; }
+
+.btn-action {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 1px solid var(--color-border-input);
+  background: #FFFFFF;
+  color: var(--color-text-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-action:hover {
+  background: var(--color-bg-subtle);
+  border-color: #94A3B8;
+}
+.btn-action-primary {
+  background: var(--color-navy);
+  color: #FFFFFF;
+  border-color: var(--color-navy);
+}
+.btn-action-primary:hover {
+  background: var(--color-navy-dark);
+  border-color: var(--color-navy-dark);
+}
+.btn-action-danger {
+  color: #DC2626;
+  border-color: #FCA5A5;
+}
+.btn-action-danger:hover {
+  background: #FEF2F2;
+  border-color: #DC2626;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--color-text-muted);
+}
+.empty-state-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 6px;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  max-width: 840px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+.modal-close-btn:hover { background: #F1F5F9; color: var(--color-text-main); }
+.modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--color-border);
+  background: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.prod-form-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+}
+@media (max-width: 700px) {
+  .prod-form-grid { grid-template-columns: 1fr; }
+}
+.img-preview-box {
+  width: 100%;
+  height: 220px;
+  border: 2px dashed #CBD5E1;
+  border-radius: 8px;
+  background: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.img-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.btn-upload-file {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-input);
+  background: #FFFFFF;
+  color: var(--color-text-main);
+  cursor: pointer;
+  text-align: center;
+  display: block;
+}
+.btn-upload-file:hover { background: #F1F5F9; }
+
+.form-group { margin-bottom: 14px; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 4px;
+}
+.form-control {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--color-text-main);
+  outline: none;
+}
+.form-control:focus { border-color: var(--color-navy); }
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.toast-msg {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #0F172A;
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  display: none;
+  z-index: 200;
+  align-items: center;
+  gap: 10px;
+}
+
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.4);
+  z-index: 90;
+  display: none;
+}
+.drawer-overlay.open { display: block; }
+.drawer-panel {
+  position: fixed;
+  top: 0;
+  right: -580px;
+  width: 580px;
+  max-width: 90vw;
+  height: 100vh;
+  background: #FFFFFF;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+  z-index: 95;
+  transition: right 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.drawer-panel.open { right: 0; }
+.drawer-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.drawer-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+.drawer-field { margin-bottom: 14px; font-size: 13px; }
+.drawer-field strong {
+  display: block;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="dash-header">
+  <div class="dash-header-inner">
+    <a href="index.html" class="brand-zone">
+      <img src="src/assets/logo.png" alt="Akron Generics" class="logo-img" onerror="this.style.display='none'">
+      <span style="font-family:var(--font-heading);font-weight:800;font-size:17px;color:#0D498F;">AKRON GENERICS</span>
+      <span class="portal-badge">Admin Console</span>
+    </a>
+    <div class="header-actions">
+      <a href="catalog.html" target="_blank" class="btn-nav-link">
+        <span>Storefront Catalog</span> &rarr;
+      </a>
+      <a href="become-a-customer.html" target="_blank" class="btn-nav-link">
+        <span>B2B Onboarding</span>
+      </a>
+      <button type="button" class="btn-nav-link" onclick="openApiKeyModal()">
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#16A34A;margin-right:4px;"></span>
+        <span>Admin Key</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Main Wrapper -->
+<main class="dash-wrapper">
+  
+  <!-- Intro Row -->
+  <div class="dash-intro-row">
+    <div>
+      <h1 class="dash-title">Executive Operations Portal</h1>
+      <p class="dash-desc">Manage products, pricing leads, customer messages, and pharmacy onboarding in one place.</p>
+    </div>
+    <div>
+      <button type="button" class="btn-primary-action" onclick="openAddProductModal()">
+        <span>+ Add New Product</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Metric Summary Cards -->
+  <div class="metrics-grid">
+    <div class="metric-card active-metric" onclick="switchTab('tab-products')">
+      <div class="metric-label">Products in Catalog</div>
+      <div class="metric-value" id="kpiProductCount">33</div>
+      <div class="metric-sub" id="kpiCategoryCount">8 Active Categories</div>
+    </div>
+    <div class="metric-card" onclick="switchTab('tab-pricing')">
+      <div class="metric-label">Pricing Requests</div>
+      <div class="metric-value" id="kpiPricingCount">0</div>
+      <div class="metric-sub">Product popup leads</div>
+    </div>
+    <div class="metric-card" onclick="switchTab('tab-contact')">
+      <div class="metric-label">Contact Messages</div>
+      <div class="metric-value" id="kpiContactCount">0</div>
+      <div class="metric-sub">Customer inquiries</div>
+    </div>
+    <div class="metric-card" onclick="switchTab('tab-applications')">
+      <div class="metric-label">B2B Applications</div>
+      <div class="metric-value" id="kpiAppCount">0</div>
+      <div class="metric-sub">Pharmacy accounts</div>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs-bar">
+    <button type="button" class="tab-btn active" id="tabBtn-products" onclick="switchTab('tab-products')">
+      <span>Products &amp; Images</span>
+      <span class="tab-badge" id="badgeProducts">33</span>
+    </button>
+    <button type="button" class="tab-btn" id="tabBtn-pricing" onclick="switchTab('tab-pricing')">
+      <span>Pricing Requests</span>
+      <span class="tab-badge" id="badgePricing">0</span>
+    </button>
+    <button type="button" class="tab-btn" id="tabBtn-contact" onclick="switchTab('tab-contact')">
+      <span>Contact Inquiries</span>
+      <span class="tab-badge" id="badgeContact">0</span>
+    </button>
+    <button type="button" class="tab-btn" id="tabBtn-applications" onclick="switchTab('tab-applications')">
+      <span>Pharmacy Applications</span>
+      <span class="tab-badge" id="badgeApplications">0</span>
+    </button>
+  </div>
+
+  <!-- TAB 1: PRODUCTS & IMAGES -->
+  <div class="tab-panel active" id="tab-products">
+    <div class="filter-card">
+      <div class="filter-left">
+        <input type="text" id="prodSearchInput" class="search-input" placeholder="Search by name, NDC, brand, or SKU..." oninput="filterProducts()">
+        <select id="prodCategoryFilter" class="select-filter" onchange="filterProducts()">
+          <option value="all">All Categories</option>
+          <option value="pen-needles">Pen Needles</option>
+          <option value="lancets">Lancets &amp; Prep Pads</option>
+          <option value="blood-pressure">Blood Pressure</option>
+          <option value="nebulizers">Nebulizers &amp; Chambers</option>
+          <option value="topical-relief">Topical Relief</option>
+          <option value="pharmacy-vials">Pharmacy Vials</option>
+          <option value="contour-next">Contour Next</option>
+        </select>
+        <button type="button" class="btn-action" onclick="loadCatalogProducts()">
+          <span>&#x21bb; Refresh</span>
+        </button>
+      </div>
+      <div>
+        <button type="button" class="btn-action btn-action-primary" onclick="openAddProductModal()">
+          <span>+ Add Product</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th style="width:56px;">Image</th>
+            <th>Product Name &amp; Brand</th>
+            <th>Category</th>
+            <th>NDC</th>
+            <th>Specifications</th>
+            <th>Badges</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="productsTableBody">
+          <tr>
+            <td colspan="7" class="empty-state">Loading products...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 2: PRICING REQUESTS -->
+  <div class="tab-panel" id="tab-pricing">
+    <div class="filter-card">
+      <div class="filter-left">
+        <input type="text" id="pricingSearchInput" class="search-input" placeholder="Filter pricing requests by email, product, or NDC..." oninput="filterPricingRequests()">
+        <button type="button" class="btn-action" onclick="loadPricingRequests()">
+          <span>&#x21bb; Refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>Date / Time</th>
+            <th>Product Requested</th>
+            <th>NDC</th>
+            <th>Pharmacy / Customer Email</th>
+            <th>Source Page</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="pricingTableBody">
+          <tr>
+            <td colspan="6" class="empty-state">No wholesale pricing requests logged yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 3: CONTACT INQUIRIES -->
+  <div class="tab-panel" id="tab-contact">
+    <div class="filter-card">
+      <div class="filter-left">
+        <input type="text" id="contactSearchInput" class="search-input" placeholder="Filter contact inquiries by name, pharmacy, or email..." oninput="filterContactInquiries()">
+        <button type="button" class="btn-action" onclick="loadContactInquiries()">
+          <span>&#x21bb; Refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>Date / Time</th>
+            <th>Contact Name</th>
+            <th>Pharmacy / Practice</th>
+            <th>Reason</th>
+            <th>Contact Info</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="contactTableBody">
+          <tr>
+            <td colspan="6" class="empty-state">No contact inquiries logged yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 4: PHARMACY APPLICATIONS -->
+  <div class="tab-panel" id="tab-applications">
+    <div class="filter-card">
+      <div class="filter-left">
+        <input type="text" id="appSearchInput" class="search-input" placeholder="Filter applications by pharmacy name, city, state, or ID..." oninput="filterApplications()">
+        <button type="button" class="btn-action" onclick="loadApplications()">
+          <span>&#x21bb; Refresh</span>
+        </button>
+      </div>
+      <div>
+        <button type="button" class="btn-action" onclick="exportApplicationsJson()">
+          <span>Export JSON</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>Application Ref</th>
+            <th>Pharmacy Business Name</th>
+            <th>Contact</th>
+            <th>State</th>
+            <th>License / DEA</th>
+            <th>Status</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="appTableBody">
+          <tr>
+            <td colspan="7" class="empty-state">No pharmacy applications submitted yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<!-- MODAL: ADD / EDIT PRODUCT -->
+<div class="modal-overlay" id="productEditModal" onclick="if(event.target===this)closeProductModal()">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalProductTitle">Edit Product</h2>
+      <button type="button" class="modal-close-btn" onclick="closeProductModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="productEditForm" onsubmit="event.preventDefault(); saveCurrentProduct();">
+        <input type="hidden" id="editProdId">
+        
+        <div class="prod-form-grid">
+          <div>
+            <div class="form-label">Product Image</div>
+            <div class="img-preview-box" id="imgPreviewBox">
+              <img id="editProdImgPreview" src="src/assets/products/quick-touch-safety-packaging.png" alt="Preview" onerror="this.src='src/assets/logo.png'">
+            </div>
+            
+            <input type="file" id="prodImgFileInput" accept="image/png,image/jpeg,image/webp,image/jpg" style="display:none;" onchange="handleImageFileSelected(this)">
+            <button type="button" class="btn-upload-file" onclick="document.getElementById('prodImgFileInput').click()">
+              <span>Upload New Image</span>
+            </button>
+            <div style="font-size:11px;color:#94A3B8;text-align:center;margin-top:6px;">PNG, JPG, or WEBP up to 15MB</div>
+            
+            <div class="form-group" style="margin-top:12px;">
+              <label class="form-label" for="editProdImgPath">Image Path / URL</label>
+              <input type="text" id="editProdImgPath" class="form-control" placeholder="src/assets/products/..." oninput="updateImagePreviewFromInput(this.value)">
+            </div>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label class="form-label" for="editProdName">Product Name <span style="color:#DC2626;">*</span></label>
+              <input type="text" id="editProdName" class="form-control" required placeholder="e.g. Quick Touch Safety Pen Needles">
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="editProdCategory">Category</label>
+                <select id="editProdCategory" class="form-control">
+                  <option value="pen-needles">Pen Needles</option>
+                  <option value="lancets">Lancets &amp; Prep Pads</option>
+                  <option value="blood-pressure">Blood Pressure</option>
+                  <option value="nebulizers">Nebulizers &amp; Chambers</option>
+                  <option value="topical-relief">Topical Pain Relief</option>
+                  <option value="pharmacy-vials">Pharmacy Vials</option>
+                  <option value="contour-next">Contour Next</option>
+                  <option value="all">General / Unassigned</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editProdItemNo">Item / SKU #</label>
+                <input type="text" id="editProdItemNo" class="form-control" placeholder="e.g. 18366">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="editProdNdc">National Drug Code (NDC)</label>
+                <input type="text" id="editProdNdc" class="form-control" placeholder="e.g. 73317-6816-04">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editProdBrand">Brand / Manufacturer</label>
+                <input type="text" id="editProdBrand" class="form-control" placeholder="e.g. Quick Touch Safety">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editProdSpecs">Specifications (Gauge, Length, Count)</label>
+              <input type="text" id="editProdSpecs" class="form-control" placeholder="e.g. 31G &times; 4MM &middot; 100 CT">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editProdBadges">Badges (comma separated)</label>
+              <input type="text" id="editProdBadges" class="form-control" placeholder="e.g. High AWP, Medicare Covered">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editProdDesc">Product Description</label>
+              <textarea id="editProdDesc" class="form-control" rows="3" placeholder="Clinical and dispensing specifications..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer" style="margin:24px -24px -24px -24px;">
+          <button type="button" class="btn-action" onclick="closeProductModal()">Cancel</button>
+          <button type="submit" class="btn-action btn-action-primary" id="btnSaveProduct">
+            <span>Save Changes</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ADMIN ACCESS KEY -->
+<div class="modal-overlay" id="apiKeyModal" onclick="if(event.target===this)closeApiKeyModal()">
+  <div class="modal-card" style="max-width:440px;">
+    <div class="modal-header">
+      <h2 class="modal-title">Admin API Access Key</h2>
+      <button type="button" class="modal-close-btn" onclick="closeApiKeyModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:#64748B;margin-bottom:14px;">
+        Local connections (localhost:3000) have automatic authorization. If managing Akron Generics remotely, enter your secret <code>ADMIN_API_KEY</code> here:
+      </p>
+      <div class="form-group">
+        <label class="form-label" for="adminKeyInput">Secret Admin Key</label>
+        <input type="password" id="adminKeyInput" class="form-control" placeholder="Enter key (leave blank for local dev)">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-action" onclick="closeApiKeyModal()">Cancel</button>
+      <button type="button" class="btn-action btn-action-primary" onclick="saveApiKey()">Save Key</button>
+    </div>
+  </div>
+</div>
+
+<!-- SIDE DRAWER: DETAILS -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer-panel" id="drawerPanel">
+  <div class="drawer-header">
+    <h2 style="font-size:16px;font-weight:700;" id="drawerTitle">Record Details</h2>
+    <button type="button" class="modal-close-btn" onclick="closeDrawer()">&times;</button>
+  </div>
+  <div class="drawer-content" id="drawerBody"></div>
+</div>
+
+<!-- Toast Message Container -->
+<div class="toast-msg" id="toastMsg">Notification</div>
+
+<!-- Scripts -->
+<script src="src/js/catalog-data.js?v=admin2"></script>
+<script src="src/js/dashboard.js?v=admin2"></script>
+
+</body>
+</html>

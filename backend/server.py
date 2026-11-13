@@ -13,6 +13,7 @@ import ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import pdf_filler
+import catalog_manager
 
 PORT = 3000
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -96,22 +97,21 @@ def is_rate_limited(ip, limit=6, window=60):
 
 def is_admin_authorized(handler):
     """
-    Ensure administrative endpoints are accessible only via loopback (local host)
-    or with an authorized ADMIN_API_KEY bearer token / query param.
+    Ensure administrative endpoints are accessible only:
+    1. With an authorized ADMIN_API_KEY bearer token or query param, OR
+    2. If no ADMIN_API_KEY is configured, strictly via direct socket loopback (local host).
+    Never trust spoofable X-Forwarded-For headers for authorization!
     """
-    client_ip = get_client_ip(handler)
-    is_loopback = client_ip in ('127.0.0.1', '::1', 'localhost', '0.0.0.0')
-
     auth_header = handler.headers.get('Authorization', '')
     query_key = urllib.parse.parse_qs(urllib.parse.urlparse(handler.path).query).get('key', [''])[0]
 
     if ADMIN_API_KEY:
-        if auth_header == f"Bearer {ADMIN_API_KEY}" or query_key == ADMIN_API_KEY:
-            return True
-        if not is_loopback:
-            return False
+        # Enforce API key strictly whenever configured
+        return auth_header == f"Bearer {ADMIN_API_KEY}" or query_key == ADMIN_API_KEY
 
-    return is_loopback
+    # In local development without ADMIN_API_KEY, verify direct socket peer is loopback
+    direct_peer = handler.client_address[0] if handler.client_address else ''
+    return direct_peer in ('127.0.0.1', '::1')
 
 def send_secure_email_notification(payload):
     """
@@ -364,6 +364,22 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
         path = parsed.path
         query = urllib.parse.parse_qs(parsed.query)
 
+        # GET /api/admin/products (Protected administrative endpoint)
+        if path == '/api/admin/products':
+            if not is_admin_authorized(self):
+                self.send_response(401)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Unauthorized"}).encode('utf-8'))
+                return
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            catalog_data = catalog_manager.load_catalog()
+            self.wfile.write(json.dumps(catalog_data).encode('utf-8'))
+            return
+
         # GET /api/applications (Protected administrative endpoint)
         if path == '/api/applications':
             if not is_admin_authorized(self):
@@ -503,6 +519,156 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
+
+        # POST /api/admin/products/save (Protected administrative endpoint)
+        if path == '/api/admin/products/save':
+            if not is_admin_authorized(self):
+                self.send_response(401)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Unauthorized"}).encode('utf-8'))
+                return
+
+            content_length = int(self.headers.get('Content-Length', 0))
+            if content_length > 10 * 1024 * 1024:
+                self.send_response(413)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Payload exceeds allowed size."}).encode('utf-8'))
+                return
+
+            post_data = self.rfile.read(content_length)
+            try:
+                payload = json.loads(post_data.decode('utf-8'))
+                success, msg = catalog_manager.save_catalog(payload)
+                if success:
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({
+                        "status": "success",
+                        "message": msg,
+                        "productCount": len(payload.get('products', []))
+                    }).encode('utf-8'))
+                else:
+                    self.send_response(400)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "error", "message": msg}).encode('utf-8'))
+                return
+            except Exception as e:
+                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
+                self.send_response(400)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
+                return
+
+        # POST /api/admin/upload-image (Protected administrative endpoint)
+        if path == '/api/admin/upload-image':
+            if not is_admin_authorized(self):
+                self.send_response(401)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Unauthorized"}).encode('utf-8'))
+                return
+
+            content_length = int(self.headers.get('Content-Length', 0))
+            if content_length > 20 * 1024 * 1024:
+                self.send_response(413)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Image payload exceeds 20MB limit."}).encode('utf-8'))
+                return
+
+            post_data = self.rfile.read(content_length)
+            try:
+                payload = json.loads(post_data.decode('utf-8'))
+                file_name = payload.get('fileName', '')
+                data_url = payload.get('dataUrl', '')
+                if not data_url:
+                    self.send_response(400)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "error", "message": "Missing image dataUrl."}).encode('utf-8'))
+                    return
+
+                rel_path, err = catalog_manager.save_uploaded_image(file_name, data_url)
+                if err:
+                    self.send_response(400)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "error", "message": err}).encode('utf-8'))
+                    return
+
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    "status": "success",
+                    "imagePath": rel_path
+                }).encode('utf-8'))
+                return
+            except Exception as e:
+                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
+                self.send_response(400)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
+                return
+
+        # POST /api/admin/products/delete (Protected administrative endpoint)
+        if path == '/api/admin/products/delete':
+            if not is_admin_authorized(self):
+                self.send_response(401)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Unauthorized"}).encode('utf-8'))
+                return
+
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length) if content_length > 0 else b'{}'
+            try:
+                payload = json.loads(post_data.decode('utf-8')) if post_data else {}
+                delete_id = str(payload.get('id', '')).strip()
+                if not delete_id:
+                    self.send_response(400)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "error", "message": "Missing product id."}).encode('utf-8'))
+                    return
+
+                cat_data = catalog_manager.load_catalog()
+                orig_len = len(cat_data.get('products', []))
+                cat_data['products'] = [p for p in cat_data.get('products', []) if str(p.get('id')) != delete_id and str(p.get('itemNo')) != delete_id]
+                new_len = len(cat_data['products'])
+
+                if new_len == orig_len:
+                    self.send_response(404)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "error", "message": f"Product {delete_id} not found."}).encode('utf-8'))
+                    return
+
+                success, msg = catalog_manager.save_catalog(cat_data)
+                if success:
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "success", "deletedId": delete_id, "message": msg}).encode('utf-8'))
+                else:
+                    self.send_response(500)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "error", "message": msg}).encode('utf-8'))
+                return
+            except Exception as e:
+                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
+                self.send_response(400)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
+                return
 
         # POST /api/generate-official-pdf (On-the-fly PDF from JSON payload)
         if path == '/api/generate-official-pdf':
@@ -647,10 +813,11 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 return
 
             except Exception as e:
+                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": str(e)}).encode('utf-8'))
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
                 return
 
         # POST /api/request-pricing
@@ -729,10 +896,11 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps(response).encode('utf-8'))
                 return
             except Exception as e:
+                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": str(e)}).encode('utf-8'))
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
                 return
 
         # POST /api/contact
@@ -811,10 +979,11 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps(response).encode('utf-8'))
                 return
             except Exception as e:
+                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": str(e)}).encode('utf-8'))
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
                 return
 
         self.send_response(404)

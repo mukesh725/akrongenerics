@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Akron Generics — Representative &amp; Account Application Dashboard</title>
+<title>Akron Generics — Executive Admin Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -52,7 +52,7 @@ body {
   align-items: center;
 }
 .dash-header-inner {
-  max-width: 1300px;
+  max-width: 1360px;
   width: 100%;
   margin: 0 auto;
   padding: 0 24px;
@@ -70,21 +70,20 @@ body {
 .portal-badge {
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-navy);
-  background: #EFF6FF;
-  border: 1px solid #DBEAFE;
-  padding: 3px 8px;
+  color: #FFFFFF;
+  background: var(--color-navy);
+  padding: 4px 10px;
   border-radius: 4px;
 }
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 .btn-nav-link {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 500;
   color: var(--color-text-body);
   text-decoration: none;
@@ -93,27 +92,35 @@ body {
   border: 1px solid var(--color-border-input);
   background: #FFFFFF;
   transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .btn-nav-link:hover {
   background: var(--color-bg-subtle);
   color: var(--color-text-main);
 }
-.btn-new-app {
-  font-size: 13px;
+.btn-primary-action {
+  font-size: 12.5px;
   font-weight: 600;
   color: #FFFFFF;
-  background: var(--color-crimson);
+  background: var(--color-navy);
   text-decoration: none;
   padding: 7px 16px;
   border-radius: 6px;
+  border: none;
+  cursor: pointer;
   transition: background 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
-.btn-new-app:hover { background: #831A29; }
+.btn-primary-action:hover { background: var(--color-navy-dark); }
 
 /* Main Container */
 .dash-wrapper {
-  max-width: 1300px;
-  margin: 28px auto 80px;
+  max-width: 1360px;
+  margin: 24px auto 80px;
   padding: 0 24px;
 }
 
@@ -134,7 +141,7 @@ body {
   letter-spacing: -0.02em;
 }
 .dash-desc {
-  font-size: 13.5px;
+  font-size: 13px;
   color: var(--color-text-muted);
   margin-top: 4px;
 }
@@ -149,7 +156,7 @@ body {
 @media (max-width: 900px) {
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 500px) {
+@media (max-width: 520px) {
   .metrics-grid { grid-template-columns: 1fr; }
 }
 .metric-card {
@@ -157,9 +164,19 @@ body {
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 18px 20px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.metric-card.active-metric {
+  border-color: var(--color-navy);
+  box-shadow: 0 0 0 1px var(--color-navy);
 }
 .metric-label {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   color: var(--color-text-muted);
   text-transform: uppercase;
@@ -178,41 +195,76 @@ body {
   margin-top: 4px;
 }
 
-/* Filter Bar */
+/* Navigation Tabs */
+.tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 20px;
+}
+.tab-btn {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px 18px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.15s ease;
+}
+.tab-btn:hover { color: var(--color-text-main); }
+.tab-btn.active { color: var(--color-navy); }
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-navy);
+}
+.tab-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: #E2E8F0;
+  color: #475569;
+}
+.tab-btn.active .tab-badge {
+  background: #DBEAFE;
+  color: var(--color-navy);
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Filter Card */
 .filter-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  padding: 16px 20px;
+  padding: 14px 18px;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 .filter-left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
   flex: 1;
-}
-.filter-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-text-main);
-}
-.select-filter {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  padding: 8px 14px;
-  border: 1px solid var(--color-border-input);
-  border-radius: 6px;
-  background: #FFFFFF;
-  color: var(--color-text-main);
-  outline: none;
-  cursor: pointer;
 }
 .search-input {
   font-family: var(--font-sans);
@@ -225,16 +277,26 @@ body {
   outline: none;
   min-width: 260px;
 }
-.search-input:focus, .select-filter:focus {
-  border-color: var(--color-navy);
+.search-input:focus, .select-filter:focus { border-color: var(--color-navy); }
+.select-filter {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--color-text-main);
+  outline: none;
+  cursor: pointer;
 }
 
-/* Applications Table */
+/* Table Card */
 .table-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
 }
 .dash-table {
   width: 100%;
@@ -248,973 +310,673 @@ body {
   font-weight: 600;
   color: #475569;
   border-bottom: 1px solid var(--color-border);
-  font-size: 11.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 .dash-table td {
-  padding: 14px 16px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--color-border);
   vertical-align: middle;
 }
 .dash-table tr:last-child td { border-bottom: none; }
-.dash-table tr:hover td { background: #FAFAFA; }
+.dash-table tr:hover { background: #FAFBFC; }
 
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+.prod-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #E2E8F0;
+  background: #F1F5F9;
+  display: block;
+}
+.cat-pill {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
   font-size: 11px;
   font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 999px;
+  background: #F1F5F9;
+  color: #334155;
+  text-transform: uppercase;
 }
-.status-pending { background: #FEF3C7; color: #92400E; }
-.status-approved { background: #DCFCE7; color: #166534; }
+.badge-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 600;
+  background: #E0F2FE;
+  color: #0369A1;
+  margin-right: 4px;
+}
 
-.btn-print-row {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+.badge-status {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-pending { background: #FEF3C7; color: #92400E; }
+.badge-approved { background: #DCFCE7; color: #166534; }
+.badge-review { background: #DBEAFE; color: #1E40AF; }
+
+.btn-action {
+  font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
-  color: #FFFFFF;
-  background: var(--color-navy);
-  border: none;
   padding: 6px 12px;
   border-radius: 5px;
+  border: 1px solid var(--color-border-input);
+  background: #FFFFFF;
+  color: var(--color-text-main);
   cursor: pointer;
-  text-decoration: none;
-  transition: background 0.15s ease;
-}
-.btn-print-row:hover { background: var(--color-navy-dark); }
-
-.btn-view-row {
+  transition: all 0.15s ease;
   display: inline-flex;
   align-items: center;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--color-text-body);
-  background: #FFFFFF;
-  border: 1px solid var(--color-border-input);
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 6px;
+  gap: 4px;
 }
-.btn-view-row:hover { background: var(--color-bg-subtle); color: var(--color-text-main); }
+.btn-action:hover {
+  background: var(--color-bg-subtle);
+  border-color: #94A3B8;
+}
+.btn-action-primary {
+  background: var(--color-navy);
+  color: #FFFFFF;
+  border-color: var(--color-navy);
+}
+.btn-action-primary:hover {
+  background: var(--color-navy-dark);
+  border-color: var(--color-navy-dark);
+}
+.btn-action-danger {
+  color: #DC2626;
+  border-color: #FCA5A5;
+}
+.btn-action-danger:hover {
+  background: #FEF2F2;
+  border-color: #DC2626;
+}
 
-/* Details Drawer Modal */
-.drawer-overlay {
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--color-text-muted);
+}
+.empty-state-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 6px;
+}
+
+/* Modals */
+.modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(4px);
-  z-index: 1000;
+  z-index: 100;
   display: none;
   align-items: center;
   justify-content: center;
   padding: 20px;
 }
-.drawer-overlay.active { display: flex; }
-.drawer-card {
+.modal-overlay.open { display: flex; }
+.modal-card {
   background: #FFFFFF;
-  border-radius: 10px;
-  max-width: 740px;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  max-width: 840px;
   width: 100%;
-  max-height: 85vh;
-  overflow-y: auto;
-  padding: 32px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-  position: relative;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
-.drawer-close {
-  position: absolute;
-  top: 18px;
-  right: 20px;
-  font-size: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-text-muted);
+.modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.drawer-title {
+.modal-title {
   font-family: var(--font-heading);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
+  color: var(--color-text-main);
+}
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+.modal-close-btn:hover { background: #F1F5F9; color: var(--color-text-main); }
+.modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--color-border);
+  background: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.prod-form-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+}
+@media (max-width: 700px) {
+  .prod-form-grid { grid-template-columns: 1fr; }
+}
+.img-preview-box {
+  width: 100%;
+  height: 220px;
+  border: 2px dashed #CBD5E1;
+  border-radius: 8px;
+  background: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.img-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.btn-upload-file {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-input);
+  background: #FFFFFF;
+  color: var(--color-text-main);
+  cursor: pointer;
+  text-align: center;
+  display: block;
+}
+.btn-upload-file:hover { background: #F1F5F9; }
+
+.form-group { margin-bottom: 14px; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--color-text-main);
   margin-bottom: 4px;
 }
-.drawer-section-title {
+.form-control {
+  width: 100%;
+  font-family: var(--font-sans);
   font-size: 13px;
-  font-weight: 700;
-  color: var(--color-navy);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 20px 0 8px;
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 4px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--color-text-main);
+  outline: none;
 }
-.drawer-grid {
+.form-control:focus { border-color: var(--color-navy); }
+.form-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  font-size: 13px;
 }
-.drawer-field strong { color: #475569; font-size: 11.5px; text-transform: uppercase; display: block; margin-bottom: 2px; }
-.drawer-field span { color: #0F172A; font-weight: 500; }
+
+.toast-msg {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #0F172A;
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  display: none;
+  z-index: 200;
+  align-items: center;
+  gap: 10px;
+}
+
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.4);
+  z-index: 90;
+  display: none;
+}
+.drawer-overlay.open { display: block; }
+.drawer-panel {
+  position: fixed;
+  top: 0;
+  right: -580px;
+  width: 580px;
+  max-width: 90vw;
+  height: 100vh;
+  background: #FFFFFF;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+  z-index: 95;
+  transition: right 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.drawer-panel.open { right: 0; }
+.drawer-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.drawer-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+.drawer-field { margin-bottom: 14px; font-size: 13px; }
+.drawer-field strong {
+  display: block;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
 </style>
 </head>
+
 <body>
 
 <!-- Header -->
 <header class="dash-header">
   <div class="dash-header-inner">
     <a href="index.html" class="brand-zone">
-      <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="logo-img">
-      <span class="portal-badge">Partner &amp; Representative Portal</span>
+      <img src="src/assets/logo.png" alt="Akron Generics" class="logo-img" onerror="this.style.display='none'">
+      <span style="font-family:var(--font-heading);font-weight:800;font-size:17px;color:#0D498F;">AKRON GENERICS</span>
+      <span class="portal-badge">Admin Console</span>
     </a>
     <div class="header-actions">
-      <a href="index.html" class="btn-nav-link">← Back to Website</a>
-      <a href="become-a-customer.html" class="btn-new-app">+ New Application</a>
+      <a href="catalog.html" target="_blank" class="btn-nav-link">
+        <span>Storefront Catalog</span> &rarr;
+      </a>
+      <a href="become-a-customer.html" target="_blank" class="btn-nav-link">
+        <span>B2B Onboarding</span>
+      </a>
+      <button type="button" class="btn-nav-link" onclick="openApiKeyModal()">
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#16A34A;margin-right:4px;"></span>
+        <span>Admin Key</span>
+      </button>
     </div>
   </div>
 </header>
 
-<div class="dash-wrapper">
-
+<!-- Main Wrapper -->
+<main class="dash-wrapper">
+  
+  <!-- Intro Row -->
   <div class="dash-intro-row">
     <div>
-      <h1 class="dash-title">Wholesale Account Submissions</h1>
-      <p class="dash-desc">Manage verified onboarding applications filed under the Main Account and individual Sales Representatives.</p>
+      <h1 class="dash-title">Executive Operations Portal</h1>
+      <p class="dash-desc">Manage products, pricing leads, customer messages, and pharmacy onboarding in one place.</p>
     </div>
-    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-      <button type="button" class="btn-nav-link" onclick="loadApplications(); loadPricingRequests(); loadContactInquiries();" style="color:var(--color-navy);font-weight:600;">
-        🔄 Refresh Data
-      </button>
-      <button type="button" class="btn-nav-link" onclick="quickAddSample()" style="color:var(--color-crimson);font-weight:600;border-color:#FCA5A5;">
-        + Create Instant Test Application
-      </button>
-      <button type="button" class="btn-nav-link" onclick="exportAllJson()">
-        Export Backend JSON
+    <div>
+      <button type="button" class="btn-primary-action" onclick="openAddProductModal()">
+        <span>+ Add New Product</span>
       </button>
     </div>
   </div>
 
-  <!-- Metric Overview -->
+  <!-- Metric Summary Cards -->
   <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="metric-label">Total Applications</div>
-      <div class="metric-value" id="statTotalApps">0</div>
-      <div class="metric-sub">Stored locally &amp; in submissions/</div>
+    <div class="metric-card active-metric" onclick="switchTab('tab-products')">
+      <div class="metric-label">Products in Catalog</div>
+      <div class="metric-value" id="kpiProductCount">33</div>
+      <div class="metric-sub" id="kpiCategoryCount">8 Active Categories</div>
     </div>
-    <div class="metric-card">
-      <div class="metric-label">Pending Compliance</div>
-      <div class="metric-value" id="statPendingApps" style="color:var(--color-warning);">0</div>
-      <div class="metric-sub">Awaiting license &amp; DEA check</div>
+    <div class="metric-card" onclick="switchTab('tab-pricing')">
+      <div class="metric-label">Pricing Requests</div>
+      <div class="metric-value" id="kpiPricingCount">0</div>
+      <div class="metric-sub">Product popup leads</div>
     </div>
-    <div class="metric-card">
-      <div class="metric-label">Active Representatives</div>
-      <div class="metric-value" id="statTotalReps">0</div>
-      <div class="metric-sub">Sales manager routing folders</div>
+    <div class="metric-card" onclick="switchTab('tab-contact')">
+      <div class="metric-label">Contact Messages</div>
+      <div class="metric-value" id="kpiContactCount">0</div>
+      <div class="metric-sub">Customer inquiries</div>
     </div>
-    <div class="metric-card">
-      <div class="metric-label">Storage Partitioning</div>
-      <div class="metric-value" style="font-size:16px;margin-top:6px;color:var(--color-navy);">Main + By Rep</div>
-      <div class="metric-sub">Saved in submissions/ folder</div>
-    </div>
-  </div>
-
-  <!-- Filter & Search Bar -->
-  <div class="filter-card">
-    <div class="filter-left">
-      <label class="filter-label" for="repFilterSelect">Filter by Account / Representative:</label>
-      <select id="repFilterSelect" class="select-filter" onchange="filterApplications()">
-        <option value="ALL">All Accounts (Master Admin View)</option>
-        <option value="MAIN">Direct / Main Account</option>
-      </select>
-
-      <input type="text" id="searchQuery" class="search-input" placeholder="Search by Pharmacy, Ref Code, Tax ID..." oninput="filterApplications()">
-    </div>
-    <div>
-      <select id="statusFilterSelect" class="select-filter" onchange="filterApplications()">
-        <option value="ALL">All Statuses</option>
-        <option value="PENDING">Pending Compliance</option>
-        <option value="APPROVED">Approved</option>
-      </select>
+    <div class="metric-card" onclick="switchTab('tab-applications')">
+      <div class="metric-label">B2B Applications</div>
+      <div class="metric-value" id="kpiAppCount">0</div>
+      <div class="metric-sub">Pharmacy accounts</div>
     </div>
   </div>
 
-  <!-- Applications Table -->
-  <div class="table-card">
-    <table class="dash-table">
-      <thead>
-        <tr>
-          <th>Ref ID</th>
-          <th>Submitted</th>
-          <th>Pharmacy / Business Name</th>
-          <th>Sales Representative</th>
-          <th>Contact &amp; Phone</th>
-          <th>Payment Mode</th>
-          <th>Attachments</th>
-          <th>Status</th>
-          <th style="text-align:right;">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="appsTableBody">
-        <!-- Populated via JS -->
-      </tbody>
-    </table>
+  <!-- Navigation Tabs -->
+  <div class="tabs-bar">
+    <button type="button" class="tab-btn active" id="tabBtn-products" onclick="switchTab('tab-products')">
+      <span>Products &amp; Images</span>
+      <span class="tab-badge" id="badgeProducts">33</span>
+    </button>
+    <button type="button" class="tab-btn" id="tabBtn-pricing" onclick="switchTab('tab-pricing')">
+      <span>Pricing Requests</span>
+      <span class="tab-badge" id="badgePricing">0</span>
+    </button>
+    <button type="button" class="tab-btn" id="tabBtn-contact" onclick="switchTab('tab-contact')">
+      <span>Contact Inquiries</span>
+      <span class="tab-badge" id="badgeContact">0</span>
+    </button>
+    <button type="button" class="tab-btn" id="tabBtn-applications" onclick="switchTab('tab-applications')">
+      <span>Pharmacy Applications</span>
+      <span class="tab-badge" id="badgeApplications">0</span>
+    </button>
   </div>
 
-  <!-- Wholesale Product Pricing Inquiries & Leads -->
-  <div style="margin-top: 44px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-    <div>
-      <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--color-navy-dark);">
-        Product Wholesale Pricing Inquiries &amp; Leads
-      </h2>
-      <p style="font-size: 13.5px; color: var(--color-text-muted);">
-        Real-time pricing inquiries submitted by pharmacy customers across all catalog products. Email alerts are dispatched to info@akrongenerics.com.
-      </p>
+  <!-- TAB 1: PRODUCTS & IMAGES -->
+  <div class="tab-panel active" id="tab-products">
+    <div class="filter-card">
+      <div class="filter-left">
+        <input type="text" id="prodSearchInput" class="search-input" placeholder="Search by name, NDC, brand, or SKU..." oninput="filterProducts()">
+        <select id="prodCategoryFilter" class="select-filter" onchange="filterProducts()">
+          <option value="all">All Categories</option>
+          <option value="pen-needles">Pen Needles</option>
+          <option value="lancets">Lancets &amp; Prep Pads</option>
+          <option value="blood-pressure">Blood Pressure</option>
+          <option value="nebulizers">Nebulizers &amp; Chambers</option>
+          <option value="topical-relief">Topical Relief</option>
+          <option value="pharmacy-vials">Pharmacy Vials</option>
+          <option value="contour-next">Contour Next</option>
+        </select>
+        <button type="button" class="btn-action" onclick="loadCatalogProducts()">
+          <span>&#x21bb; Refresh</span>
+        </button>
+      </div>
+      <div>
+        <button type="button" class="btn-action btn-action-primary" onclick="openAddProductModal()">
+          <span>+ Add Product</span>
+        </button>
+      </div>
     </div>
-    <span class="status-badge" style="background:#E0F2FE;color:#0369A1;font-size:12px;font-weight:700;" id="pricingRequestsBadge">
-      0 Requests Logged
-    </span>
-  </div>
 
-  <div class="table-card">
-    <table class="dash-table">
-      <thead>
-        <tr>
-          <th>Request ID</th>
-          <th>Date &amp; Time</th>
-          <th>Customer Pharmacy Email</th>
-          <th>Product Requested</th>
-          <th>NDC</th>
-          <th>Packaging</th>
-          <th>Brand / Manufacturer</th>
-          <th style="text-align:right;">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="pricingTableBody">
-        <tr>
-          <td colspan="8" style="text-align:center;padding:32px;color:var(--color-text-muted);">
-            Loading wholesale pricing inquiries...
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Contact Us Inquiries & Customer Messages -->
-  <div style="margin-top: 44px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-    <div>
-      <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--color-navy-dark);">
-        Contact Us Inquiries &amp; Customer Messages
-      </h2>
-      <p style="font-size: 13.5px; color: var(--color-text-muted);">
-        Real-time messages submitted from contact.html. Email alerts dispatched to info@akrongenerics.com and mukesh@akrongenerics.com.
-      </p>
+    <div class="table-card">
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th style="width:56px;">Image</th>
+            <th>Product Name &amp; Brand</th>
+            <th>Category</th>
+            <th>NDC</th>
+            <th>Specifications</th>
+            <th>Badges</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="productsTableBody">
+          <tr>
+            <td colspan="7" class="empty-state">Loading products...</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <span class="status-badge" style="background:#FEE2E2;color:#991B1B;font-size:12px;font-weight:700;" id="contactInquiriesBadge">
-      0 Messages Logged
-    </span>
   </div>
 
-  <div class="table-card">
-    <table class="dash-table">
-      <thead>
-        <tr>
-          <th>Inquiry ID</th>
-          <th>Submitted Time</th>
-          <th>Contact Name &amp; Role</th>
-          <th>Pharmacy / State</th>
-          <th>Contact Email &amp; Phone</th>
-          <th>Reason for Contact</th>
-          <th>Customer Message</th>
-          <th style="text-align:right;">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="contactTableBody">
-        <tr>
-          <td colspan="8" style="text-align:center;padding:32px;color:var(--color-text-muted);">
-            Loading contact inquiries...
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- TAB 2: PRICING REQUESTS -->
+  <div class="tab-panel" id="tab-pricing">
+    <div class="filter-card">
+      <div class="filter-left">
+        <input type="text" id="pricingSearchInput" class="search-input" placeholder="Filter pricing requests by email, product, or NDC..." oninput="filterPricingRequests()">
+        <button type="button" class="btn-action" onclick="loadPricingRequests()">
+          <span>&#x21bb; Refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>Date / Time</th>
+            <th>Product Requested</th>
+            <th>NDC</th>
+            <th>Pharmacy / Customer Email</th>
+            <th>Source Page</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="pricingTableBody">
+          <tr>
+            <td colspan="6" class="empty-state">No wholesale pricing requests logged yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
+  <!-- TAB 3: CONTACT INQUIRIES -->
+  <div class="tab-panel" id="tab-contact">
+    <div class="filter-card">
+      <div class="filter-left">
+        <input type="text" id="contactSearchInput" class="search-input" placeholder="Filter contact inquiries by name, pharmacy, or email..." oninput="filterContactInquiries()">
+        <button type="button" class="btn-action" onclick="loadContactInquiries()">
+          <span>&#x21bb; Refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>Date / Time</th>
+            <th>Contact Name</th>
+            <th>Pharmacy / Practice</th>
+            <th>Reason</th>
+            <th>Contact Info</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="contactTableBody">
+          <tr>
+            <td colspan="6" class="empty-state">No contact inquiries logged yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 4: PHARMACY APPLICATIONS -->
+  <div class="tab-panel" id="tab-applications">
+    <div class="filter-card">
+      <div class="filter-left">
+        <input type="text" id="appSearchInput" class="search-input" placeholder="Filter applications by pharmacy name, city, state, or ID..." oninput="filterApplications()">
+        <button type="button" class="btn-action" onclick="loadApplications()">
+          <span>&#x21bb; Refresh</span>
+        </button>
+      </div>
+      <div>
+        <button type="button" class="btn-action" onclick="exportApplicationsJson()">
+          <span>Export JSON</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>Application Ref</th>
+            <th>Pharmacy Business Name</th>
+            <th>Contact</th>
+            <th>State</th>
+            <th>License / DEA</th>
+            <th>Status</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="appTableBody">
+          <tr>
+            <td colspan="7" class="empty-state">No pharmacy applications submitted yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<!-- MODAL: ADD / EDIT PRODUCT -->
+<div class="modal-overlay" id="productEditModal" onclick="if(event.target===this)closeProductModal()">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalProductTitle">Edit Product</h2>
+      <button type="button" class="modal-close-btn" onclick="closeProductModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="productEditForm" onsubmit="event.preventDefault(); saveCurrentProduct();">
+        <input type="hidden" id="editProdId">
+        
+        <div class="prod-form-grid">
+          <div>
+            <div class="form-label">Product Image</div>
+            <div class="img-preview-box" id="imgPreviewBox">
+              <img id="editProdImgPreview" src="src/assets/products/quick-touch-safety-packaging.png" alt="Preview" onerror="this.src='src/assets/logo.png'">
+            </div>
+            
+            <input type="file" id="prodImgFileInput" accept="image/png,image/jpeg,image/webp,image/jpg" style="display:none;" onchange="handleImageFileSelected(this)">
+            <button type="button" class="btn-upload-file" onclick="document.getElementById('prodImgFileInput').click()">
+              <span>Upload New Image</span>
+            </button>
+            <div style="font-size:11px;color:#94A3B8;text-align:center;margin-top:6px;">PNG, JPG, or WEBP up to 15MB</div>
+            
+            <div class="form-group" style="margin-top:12px;">
+              <label class="form-label" for="editProdImgPath">Image Path / URL</label>
+              <input type="text" id="editProdImgPath" class="form-control" placeholder="src/assets/products/..." oninput="updateImagePreviewFromInput(this.value)">
+            </div>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label class="form-label" for="editProdName">Product Name <span style="color:#DC2626;">*</span></label>
+              <input type="text" id="editProdName" class="form-control" required placeholder="e.g. Quick Touch Safety Pen Needles">
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="editProdCategory">Category</label>
+                <select id="editProdCategory" class="form-control">
+                  <option value="pen-needles">Pen Needles</option>
+                  <option value="lancets">Lancets &amp; Prep Pads</option>
+                  <option value="blood-pressure">Blood Pressure</option>
+                  <option value="nebulizers">Nebulizers &amp; Chambers</option>
+                  <option value="topical-relief">Topical Pain Relief</option>
+                  <option value="pharmacy-vials">Pharmacy Vials</option>
+                  <option value="contour-next">Contour Next</option>
+                  <option value="all">General / Unassigned</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editProdItemNo">Item / SKU #</label>
+                <input type="text" id="editProdItemNo" class="form-control" placeholder="e.g. 18366">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="editProdNdc">National Drug Code (NDC)</label>
+                <input type="text" id="editProdNdc" class="form-control" placeholder="e.g. 73317-6816-04">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editProdBrand">Brand / Manufacturer</label>
+                <input type="text" id="editProdBrand" class="form-control" placeholder="e.g. Quick Touch Safety">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editProdSpecs">Specifications (Gauge, Length, Count)</label>
+              <input type="text" id="editProdSpecs" class="form-control" placeholder="e.g. 31G &times; 4MM &middot; 100 CT">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editProdBadges">Badges (comma separated)</label>
+              <input type="text" id="editProdBadges" class="form-control" placeholder="e.g. High AWP, Medicare Covered">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editProdDesc">Product Description</label>
+              <textarea id="editProdDesc" class="form-control" rows="3" placeholder="Clinical and dispensing specifications..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer" style="margin:24px -24px -24px -24px;">
+          <button type="button" class="btn-action" onclick="closeProductModal()">Cancel</button>
+          <button type="submit" class="btn-action btn-action-primary" id="btnSaveProduct">
+            <span>Save Changes</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
-<!-- Application Details Modal Drawer -->
-<div id="detailsModal" class="drawer-overlay" onclick="closeDetailsIfClickOutside(event)">
-  <div class="drawer-card">
-    <button type="button" class="drawer-close" onclick="closeDetails()">&times;</button>
-    <div class="drawer-title" id="drawerPharmacyName">Pharmacy Name</div>
-    <div style="font-size:12.5px;color:var(--color-text-muted);" id="drawerRefMeta">Ref ID &bull; Submitted Date</div>
-
-    <div class="drawer-section-title">Representative Routing</div>
-    <div class="drawer-grid">
-      <div class="drawer-field"><strong>Sales Manager:</strong><span id="dRepName">--</span></div>
-      <div class="drawer-field"><strong>Representative Email:</strong><span id="dRepEmail">--</span></div>
+<!-- MODAL: ADMIN ACCESS KEY -->
+<div class="modal-overlay" id="apiKeyModal" onclick="if(event.target===this)closeApiKeyModal()">
+  <div class="modal-card" style="max-width:440px;">
+    <div class="modal-header">
+      <h2 class="modal-title">Admin API Access Key</h2>
+      <button type="button" class="modal-close-btn" onclick="closeApiKeyModal()">&times;</button>
     </div>
-
-    <div class="drawer-section-title">Business &amp; Licensure</div>
-    <div class="drawer-grid">
-      <div class="drawer-field"><strong>Legal Entity Name:</strong><span id="dBizName">--</span></div>
-      <div class="drawer-field"><strong>Tax ID (EIN):</strong><span id="dTaxId">--</span></div>
-      <div class="drawer-field"><strong>Billing Address:</strong><span id="dBizAddress">--</span></div>
-      <div class="drawer-field"><strong>Shipping Address:</strong><span id="dShipAddress">--</span></div>
-      <div class="drawer-field"><strong>Pharmacy Phone:</strong><span id="dBizPhone">--</span></div>
-      <div class="drawer-field"><strong>Pharmacy Email:</strong><span id="dBizEmail">--</span></div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:#64748B;margin-bottom:14px;">
+        Local connections (localhost:3000) have automatic authorization. If managing Akron Generics remotely, enter your secret <code>ADMIN_API_KEY</code> here:
+      </p>
+      <div class="form-group">
+        <label class="form-label" for="adminKeyInput">Secret Admin Key</label>
+        <input type="password" id="adminKeyInput" class="form-control" placeholder="Enter key (leave blank for local dev)">
+      </div>
     </div>
-
-    <div class="drawer-section-title">Authorized Purchasers</div>
-    <div class="drawer-grid">
-      <div class="drawer-field"><strong>Primary Purchaser:</strong><span id="dBuyer1">--</span></div>
-      <div class="drawer-field"><strong>Purchaser Email:</strong><span id="dBuyer1Email">--</span></div>
-    </div>
-
-    <div class="drawer-section-title">Payment Method &amp; Trade</div>
-    <div class="drawer-grid">
-      <div class="drawer-field"><strong>Payment Method:</strong><span id="dPaymentMode">--</span></div>
-      <div class="drawer-field"><strong>Bank Reference:</strong><span id="dBankRef">--</span></div>
-      <div class="drawer-field"><strong>Primary Trade Ref:</strong><span id="dTrade1">--</span></div>
-    </div>
-
-    <div class="drawer-section-title">Attached Verification Files</div>
-    <div id="dAttachmentsList" style="font-size:13px;display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">
-      <!-- File links -->
-    </div>
-
-    <div style="margin-top:28px;padding-top:18px;border-top:1px solid var(--color-border);display:flex;justify-content:flex-end;gap:12px;">
-      <button type="button" class="btn-nav-link" onclick="closeDetails()">Close</button>
-      <a id="drawerDownloadPdfBtn" href="#" target="_blank" class="btn-print-row" style="padding:8px 16px;background:#0D498F;">
-        📥 Download Original Filled PDF
-      </a>
-      <a id="drawerPrintBtn" href="#" target="_blank" class="btn-print-row" style="padding:8px 16px;">
-        🖨️ View & Print Original PDF
-      </a>
+    <div class="modal-footer">
+      <button type="button" class="btn-action" onclick="closeApiKeyModal()">Cancel</button>
+      <button type="button" class="btn-action btn-action-primary" onclick="saveApiKey()">Save Key</button>
     </div>
   </div>
 </div>
 
-<script>
-var allApplications = [];
-
-document.addEventListener('DOMContentLoaded', function() {
-  loadApplications();
-  loadPricingRequests();
-  loadContactInquiries();
-});
-
-function loadApplications() {
-  var localList = [];
-  try {
-    localList = JSON.parse(localStorage.getItem('akron_submitted_applications') || '[]');
-  } catch(e) {}
-
-  // Check if draft exists and not yet in list
-  try {
-    var draft = JSON.parse(localStorage.getItem('akron_app_draft') || '{}');
-    if (draft.businessName && !localList.some(function(x) { return x.businessName === draft.businessName; })) {
-      draft.ref_id = draft.ref_id || ('AKR-' + new Date().getFullYear() + '-DRAFT');
-      draft.submitted_at = draft.submitted_at || (new Date().toLocaleString() + ' (Draft)');
-      draft.status = 'DRAFT';
-      localList.unshift(draft);
-    }
-  } catch(e) {}
-
-  // Try fetching backend applications from relative endpoint
-  var apiUrls = ['/api/applications'];
-
-  function tryFetch(index) {
-    if (index >= apiUrls.length) {
-      // Backend not reached or done, use merged localList
-      finishLoad(localList);
-      return;
-    }
-
-    fetch(apiUrls[index], { cache: 'no-store' })
-      .then(function(res) {
-        if (res.ok) return res.json();
-        throw new Error('Not ok');
-      })
-      .then(function(serverData) {
-        if (Array.isArray(serverData)) {
-          // Merge serverData with localList (dedup by ref_id or businessName)
-          var merged = serverData.slice();
-          localList.forEach(function(localItem) {
-            var exists = merged.some(function(srv) {
-              return (srv.ref_id && srv.ref_id === localItem.ref_id) ||
-                     (srv.businessName && srv.businessName === localItem.businessName);
-            });
-            if (!exists) {
-              merged.push(localItem);
-            }
-          });
-          finishLoad(merged);
-        } else {
-          tryFetch(index + 1);
-        }
-      })
-      .catch(function() {
-        tryFetch(index + 1);
-      });
-  }
-
-  tryFetch(0);
-}
-
-function finishLoad(list) {
-  if (list.length === 0) {
-    list = [
-      {
-        ref_id: 'AKR-2026-8492',
-        submitted_at: '2026-11-05 14:15:00',
-        businessName: 'Metro Community Pharmacy LLC',
-        salesManager: 'John Davis',
-        repEmail: 'john@akrongenerics.com',
-        bizStreet: '1240 Broadway Ave',
-        bizCity: 'Commack',
-        bizState: 'NY',
-        bizZip: '11725',
-        bizPhone: '(631) 555-0192',
-        bizEmail: 'admin@metropharmacy.com',
-        taxIdNum: '11-3948291',
-        respPharmacyName: 'Metro Community Pharmacy',
-        buyer1Name: 'Dr. Michael Hayes, PharmD',
-        buyer1Title: 'Supervising Pharmacist',
-        buyer1Phone: '(631) 555-0192',
-        buyer1Email: 'mhayes@metropharmacy.com',
-        refBankName: 'Chase Commercial Banking',
-        refBankAcctNum: '9482710492',
-        paymentMode: 'ach',
-        status: 'PENDING',
-        attachments: {
-          licenses: [{ name: 'NYS_Pharmacy_Board_License.pdf' }],
-          checks: [{ name: 'Voided_Check.pdf' }]
-        }
-      }
-    ];
-  }
-
-  allApplications = list;
-  try {
-    localStorage.setItem('akron_submitted_applications', JSON.stringify(list));
-  } catch(e) {}
-  renderDashboard();
-}
-
-function quickAddSample() {
-  var reps = ['Sarah Miller', 'John Davis', 'Robert Taylor', 'Main Account'];
-  var pickedRep = reps[Math.floor(Math.random() * reps.length)];
-  var randId = 'AKR-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
-  
-  var sample = {
-    ref_id: randId,
-    submitted_at: new Date().toLocaleString(),
-    businessName: 'Live Test Pharmacy (' + randId + ')',
-    salesManager: pickedRep,
-    repEmail: (pickedRep === 'Main Account') ? 'sales@akrongenerics.com' : (pickedRep.toLowerCase().replace(' ', '.') + '@akrongenerics.com'),
-    bizStreet: '782 Sunken Meadow Rd',
-    bizCity: 'Commack',
-    bizState: 'NY',
-    bizZip: '11725',
-    bizPhone: '(631) 215-3009',
-    bizEmail: 'test@pharmacy.com',
-    taxIdNum: '12-9482910',
-    respPharmacyName: 'Live Test Pharmacy',
-    buyer1Name: 'Jane Smith, RPh',
-    buyer1Title: 'Lead Pharmacist',
-    buyer1Phone: '(631) 215-3009',
-    buyer1Email: 'buyer@pharmacy.com',
-    refBankName: 'TD Commercial Bank',
-    refBankAcctNum: '4829104928',
-    paymentMode: 'ach',
-    status: 'PENDING',
-    attachments: { licenses: [{ name: 'Test_State_License.pdf' }] }
-  };
-
-  allApplications.unshift(sample);
-  try {
-    localStorage.setItem('akron_submitted_applications', JSON.stringify(allApplications));
-  } catch(e) {}
-
-  // Post to backend
-  fetch('/api/submit-application', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(sample)
-  }).catch(function() {});
-
-  renderDashboard();
-  alert('Added test application for ' + pickedRep + '! It is now displayed in the dashboard.');
-}
-
-function loadFromLocalStorage() {
-  var localData = [];
-  try {
-    localData = JSON.parse(localStorage.getItem('akron_submitted_applications') || '[]');
-  } catch(e) {}
-
-  if (localData.length === 0) {
-    // Add default sample application so the user can immediately test
-    localData = [
-      {
-        ref_id: 'AKR-2026-8492',
-        submitted_at: '2026-11-05 14:15:00',
-        businessName: 'Metro Community Pharmacy LLC',
-        salesManager: 'John Davis',
-        repEmail: 'john@akrongenerics.com',
-        bizStreet: '1240 Broadway Ave',
-        bizCity: 'Commack',
-        bizState: 'NY',
-        bizZip: '11725',
-        bizPhone: '(631) 555-0192',
-        bizEmail: 'admin@metropharmacy.com',
-        taxIdNum: '11-3948291',
-        respPharmacyName: 'Metro Community Pharmacy',
-        buyer1Name: 'Dr. Michael Hayes, PharmD',
-        buyer1Title: 'Supervising Pharmacist',
-        buyer1Phone: '(631) 555-0192',
-        buyer1Email: 'mhayes@metropharmacy.com',
-        refBankName: 'Chase Commercial Banking',
-        refBankAcctNum: '9482710492',
-        paymentMode: 'ach',
-        achAcctType: 'Checking',
-        status: 'PENDING',
-        attachments: {
-          licenses: [{ name: 'NYS_Pharmacy_Board_License.pdf' }, { name: 'DEA_Registration_Cert.pdf' }],
-          checks: [{ name: 'Voided_Check.pdf' }]
-        }
-      }
-    ];
-    localStorage.setItem('akron_submitted_applications', JSON.stringify(localData));
-  }
-
-  allApplications = localData;
-  renderDashboard();
-}
-
-function renderDashboard() {
-  // Populate Rep Filter Options
-  var repSet = new Set();
-  allApplications.forEach(function(app) {
-    if (app.salesManager && app.salesManager.trim() !== '' && app.salesManager !== 'Main Account') {
-      repSet.add(app.salesManager.trim());
-    } else if (app.repEmail) {
-      repSet.add(app.repEmail.trim());
-    }
-  });
-
-  var repSelect = document.getElementById('repFilterSelect');
-  // keep first 2
-  repSelect.innerHTML = '<option value="ALL">All Accounts (Master Admin View)</option><option value="MAIN">Direct / Main Account</option>';
-  repSet.forEach(function(rep) {
-    var opt = document.createElement('option');
-    opt.value = rep;
-    opt.textContent = 'Rep: ' + rep;
-    repSelect.appendChild(opt);
-  });
-
-  // Calculate Metrics
-  document.getElementById('statTotalApps').textContent = allApplications.length;
-  var pendingCount = allApplications.filter(function(a) { return (a.status || 'PENDING') === 'PENDING'; }).length;
-  document.getElementById('statPendingApps').textContent = pendingCount;
-  document.getElementById('statTotalReps').textContent = repSet.size;
-
-  filterApplications();
-}
-
-function filterApplications() {
-  var repFilter = document.getElementById('repFilterSelect').value;
-  var query = document.getElementById('searchQuery').value.toLowerCase().trim();
-  var statusFilter = document.getElementById('statusFilterSelect').value;
-
-  var filtered = allApplications.filter(function(app) {
-    // Rep filter
-    if (repFilter === 'MAIN') {
-      var isMain = !app.salesManager || app.salesManager === 'Main Account' || app.salesManager.trim() === '';
-      if (!isMain) return false;
-    } else if (repFilter !== 'ALL') {
-      var matchRep = (app.salesManager === repFilter) || (app.repEmail === repFilter);
-      if (!matchRep) return false;
-    }
-
-    // Status filter
-    var appStatus = app.status || 'PENDING';
-    if (statusFilter !== 'ALL' && appStatus !== statusFilter) {
-      return false;
-    }
-
-    // Query filter
-    if (query !== '') {
-      var fullStr = (app.businessName || '') + ' ' + (app.ref_id || '') + ' ' + (app.taxIdNum || app.taxId || '') + ' ' + (app.mainContactName || app.buyer1Name || '');
-      if (fullStr.toLowerCase().indexOf(query) === -1) {
-        return false;
-      }
-    }
-
-    return true;
-  });
-
-  renderTable(filtered);
-}
-
-function renderTable(list) {
-  var tbody = document.getElementById('appsTableBody');
-  tbody.innerHTML = '';
-
-  if (list.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:36px;color:#64748B;">No applications found matching the selected filter criteria.</td></tr>';
-    return;
-  }
-
-  list.forEach(function(app) {
-    var tr = document.createElement('tr');
-
-    var attCount = 0;
-    if (app.attachments) {
-      if (app.attachments.licenses) attCount += app.attachments.licenses.length;
-      if (app.attachments.checks) attCount += app.attachments.checks.length;
-    }
-
-    var repDisplay = app.salesManager || 'Direct / Main';
-    if (app.repEmail) repDisplay += '<br><span style="font-size:11px;color:#64748B;">' + app.repEmail + '</span>';
-
-    var statusHtml = (app.status === 'APPROVED') 
-      ? '<span class="status-badge status-approved">✓ Approved</span>'
-      : '<span class="status-badge status-pending">● Pending Review</span>';
-
-    tr.innerHTML = 
-      '<td><strong>' + (app.ref_id || 'AKR-2026') + '</strong></td>' +
-      '<td>' + (app.submitted_at || '--') + '</td>' +
-      '<td><strong>' + (app.businessName || '--') + '</strong><br><span style="font-size:11.5px;color:#64748B;">' + (app.bizCity || '') + ', ' + (app.bizState || '') + '</span></td>' +
-      '<td>' + repDisplay + '</td>' +
-      '<td>' + (app.mainContactName || app.buyer1Name || '--') + '<br><span style="font-size:11.5px;color:#64748B;">' + (app.bizPhone || app.buyer1Phone || '--') + '</span></td>' +
-      '<td><span style="text-transform:uppercase;font-weight:600;font-size:11.5px;">' + (app.paymentMode || 'ACH') + '</span></td>' +
-      '<td>' + (attCount > 0 ? ('<span style="color:#0D498F;font-weight:600;">' + attCount + ' files</span>') : 'None') + '</td>' +
-      '<td>' + statusHtml + '</td>' +
-      '<td style="text-align:right;white-space:nowrap;">' +
-        '<a href="/api/download-official-pdf?id=' + app.ref_id + '" target="_blank" class="btn-print-row" style="background:#0D498F;margin-right:6px;" title="Download Original Akron Generics PDF">' +
-          '📥 Original PDF' +
-        '</a>' +
-        '<a href="print-dossier.html?id=' + app.ref_id + '" target="_blank" class="btn-print-row" title="View & Print Original PDF">' +
-          '🖨️ View & Print' +
-        '</a>' +
-        '<button type="button" class="btn-view-row" onclick="openDetails(\'' + app.ref_id + '\')">Details</button>' +
-      '</td>';
-
-    tbody.appendChild(tr);
-  });
-}
-
-function openDetails(refId) {
-  var app = allApplications.find(function(a) { return a.ref_id === refId; });
-  if (!app) return;
-
-  document.getElementById('drawerPharmacyName').textContent = app.businessName || 'Pharmacy Details';
-  document.getElementById('drawerRefMeta').textContent = 'Ref ID: ' + app.ref_id + ' • Submitted: ' + (app.submitted_at || '--');
-
-  document.getElementById('dRepName').textContent = app.salesManager || 'Direct / Main Account';
-  document.getElementById('dRepEmail').textContent = app.repEmail || '--';
-
-  document.getElementById('dBizName').textContent = app.businessName || '--';
-  document.getElementById('dTaxId').textContent = app.taxIdNum || app.taxId || '--';
-  document.getElementById('dBizAddress').textContent = (app.bizStreet || '') + ', ' + (app.bizCity || '') + ', ' + (app.bizState || '') + ' ' + (app.bizZip || '');
-  document.getElementById('dShipAddress').textContent = (app.shipStreet || app.bizStreet || '') + ', ' + (app.shipCity || app.bizCity || '') + ', ' + (app.shipState || app.bizState || '') + ' ' + (app.shipZip || app.bizZip || '');
-  document.getElementById('dBizPhone').textContent = app.bizPhone || '--';
-  document.getElementById('dBizEmail').textContent = app.bizEmail || '--';
-
-  document.getElementById('dBuyer1').textContent = (app.buyer1Name || '--') + ' (' + (app.buyer1Title || '--') + ')';
-  document.getElementById('dBuyer1Email').textContent = (app.buyer1Email || '--') + ' | ' + (app.buyer1Phone || '--');
-
-  document.getElementById('dPaymentMode').textContent = (app.paymentMode || 'ACH').toUpperCase();
-  document.getElementById('dBankRef').textContent = (app.refBankName || app.achBankName || '--') + ' (Acct: ' + (app.refBankAcctNum || app.achAcctNumber || '--') + ')';
-  document.getElementById('dTrade1').textContent = app.trade1Name || '--';
-
-  var attList = document.getElementById('dAttachmentsList');
-  attList.innerHTML = '';
-  var atts = app.attachments || {};
-  if (atts.licenses && atts.licenses.length > 0) {
-    atts.licenses.forEach(function(l) {
-      var badge = document.createElement('span');
-      badge.style.cssText = 'background:#EFF6FF;border:1px solid #BFDBFE;color:#0D498F;padding:4px 10px;border-radius:4px;font-size:12px;font-weight:600;';
-      badge.textContent = '📄 ' + l.name;
-      attList.appendChild(badge);
-    });
-  }
-  if (atts.checks && atts.checks.length > 0) {
-    atts.checks.forEach(function(c) {
-      var badge = document.createElement('span');
-      badge.style.cssText = 'background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46;padding:4px 10px;border-radius:4px;font-size:12px;font-weight:600;';
-      badge.textContent = '🏦 ' + c.name;
-      attList.appendChild(badge);
-    });
-  }
-  if (attList.innerHTML === '') {
-    attList.innerHTML = '<span style="color:#94A3B8;">No attachments uploaded</span>';
-  }
-
-  document.getElementById('drawerDownloadPdfBtn').href = '/api/download-official-pdf?id=' + app.ref_id;
-  document.getElementById('drawerPrintBtn').href = 'print-dossier.html?id=' + app.ref_id;
-  document.getElementById('detailsModal').classList.add('active');
-}
-
-function closeDetails() {
-  document.getElementById('detailsModal').classList.remove('active');
-}
-
-function closeDetailsIfClickOutside(e) {
-  if (e.target.id === 'detailsModal') closeDetails();
-}
-
-function exportAllJson() {
-  var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(allApplications, null, 2));
-  var downloadAnchor = document.createElement('a');
-  downloadAnchor.setAttribute('href', dataStr);
-  downloadAnchor.setAttribute('download', 'akron_generics_onboarding_database_export.json');
-  document.body.appendChild(downloadAnchor);
-  downloadAnchor.click();
-  downloadAnchor.remove();
-}
-
-function escapeHtml(str) {
-  if (str === null || str === undefined) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
-
-function loadPricingRequests() {
-  var localList = [];
-  try {
-    localList = JSON.parse(localStorage.getItem('akron_pricing_requests') || '[]');
-  } catch(e) {}
-
-  var apiUrls = ['/api/pricing-requests'];
-
-  function tryFetch(index) {
-    if (index >= apiUrls.length) {
-      renderPricingRequests(localList);
-      return;
-    }
-    fetch(apiUrls[index], { cache: 'no-store' })
-      .then(function(res) {
-        if (res.ok) return res.json();
-        throw new Error('Not ok');
-      })
-      .then(function(serverData) {
-        if (Array.isArray(serverData)) {
-          var merged = serverData.slice();
-          localList.forEach(function(localItem) {
-            var exists = merged.some(function(s) {
-              return (s.id && s.id === localItem.id) ||
-                     (s.email === localItem.email && s.productName === localItem.productName && s.requestedAt === localItem.requestedAt);
-            });
-            if (!exists) merged.push(localItem);
-          });
-          renderPricingRequests(merged);
-        } else {
-          tryFetch(index + 1);
-        }
-      })
-      .catch(function() {
-        tryFetch(index + 1);
-      });
-  }
-
-  tryFetch(0);
-}
-
-function renderPricingRequests(list) {
-  var tbody = document.getElementById('pricingTableBody');
-  var badge = document.getElementById('pricingRequestsBadge');
-  if (badge) {
-    badge.textContent = list.length + ' Request' + (list.length === 1 ? '' : 's') + ' Logged';
-  }
-  if (!tbody) return;
-
-  if (list.length === 0) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="8" style="text-align:center;padding:32px;color:var(--color-text-muted);">
-          No product pricing requests logged yet. When customers click "Request Wholesale Pricing" on any product, their request will appear here and trigger an email alert to info@akrongenerics.com.
-        </td>
-      </tr>
-    `;
-    return;
-  }
-
-  var html = '';
-  list.forEach(function(item) {
-    var rawEmail = item.email || '--';
-    var rawProdName = item.productName || 'Pharmaceutical Product';
-    var rawNdc = item.ndc || '--';
-    var rawPack = item.packaging || '--';
-    var rawBrand = item.brand || '--';
-    var rawReqId = item.id || '--';
-    var rawTimeStr = item.requestedAtFormatted || item.requestedAt || '--';
-
-    var safeEmail = escapeHtml(rawEmail);
-    var safeProdName = escapeHtml(rawProdName);
-    var safeNdc = escapeHtml(rawNdc);
-    var safePack = escapeHtml(rawPack);
-    var safeBrand = escapeHtml(rawBrand);
-    var safeReqId = escapeHtml(rawReqId);
-    var safeTimeStr = escapeHtml(rawTimeStr);
-
-    html += `
-      <tr>
-        <td><strong style="color:var(--color-navy);font-size:12px;">${safeReqId}</strong></td>
-        <td style="font-size:12px;color:var(--color-text-muted);">${safeTimeStr}</td>
-        <td>
-          <a href="mailto:${encodeURIComponent(rawEmail)}?subject=Akron%20Generics%20Wholesale%20Pricing%3A%20${encodeURIComponent(rawProdName)}" style="color:var(--color-navy);font-weight:600;text-decoration:none;">
-            ${safeEmail}
-          </a>
-        </td>
-        <td><strong>${safeProdName}</strong></td>
-        <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:12px;">${safeNdc}</code></td>
-        <td style="font-size:12.5px;">${safePack}</td>
-        <td style="font-size:12.5px;">${safeBrand}</td>
-        <td style="text-align:right;white-space:nowrap;">
-          <a href="mailto:${encodeURIComponent(rawEmail)}?subject=Akron%20Generics%20Wholesale%20Pricing%3A%20${encodeURIComponent(rawProdName)}&body=Hello,%0D%0A%0D%0AThank%20you%20for%20requesting%20wholesale%20pricing%20for%20${encodeURIComponent(rawProdName)}%20(NDC:%20${encodeURIComponent(rawNdc)}).%0D%0A%0D%0A" style="display:inline-block;padding:4px 10px;background:#16A34A;color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;margin-right:6px;">
-            Email Customer
-          </a>
-          <a href="become-a-customer.html?email=${encodeURIComponent(rawEmail)}" target="_blank" style="display:inline-block;padding:4px 10px;background:var(--color-navy);color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;">
-            Account Form &rarr;
-          </a>
-        </td>
-      </tr>
-    `;
-  });
-  tbody.innerHTML = html;
-}
-
-function loadContactInquiries() {
-  var localList = [];
-  try {
-    localList = JSON.parse(localStorage.getItem('akron_contact_inquiries') || '[]');
-  } catch(e) {}
-
-  var apiUrls = ['/api/contact-inquiries'];
-
-  function tryFetch(index) {
-    if (index >= apiUrls.length) {
-      renderContactInquiries(localList);
-      return;
-    }
-    fetch(apiUrls[index], { cache: 'no-store' })
-      .then(function(res) {
-        if (res.ok) return res.json();
-        throw new Error('Not ok');
-      })
-      .then(function(serverData) {
-        if (Array.isArray(serverData)) {
-          var merged = serverData.slice();
-          localList.forEach(function(localItem) {
-            var exists = merged.some(function(s) {
-              return (s.id && s.id === localItem.id) ||
-                     (s.email === localItem.email && s.message === localItem.message);
-            });
-            if (!exists) merged.push(localItem);
-          });
-          renderContactInquiries(merged);
-        } else {
-          tryFetch(index + 1);
-        }
-      })
-      .catch(function() {
-        tryFetch(index + 1);
-      });
-  }
-
-  tryFetch(0);
-}
-
-function renderContactInquiries(list) {
-  var tbody = document.getElementById('contactTableBody');
-  var badge = document.getElementById('contactInquiriesBadge');
-  if (badge) {
-    badge.textContent = list.length + ' Message' + (list.length === 1 ? '' : 's') + ' Logged';
-  }
-  if (!tbody) return;
-
-  if (list.length === 0) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="8" style="text-align:center;padding:32px;color:var(--color-text-muted);">
-          No contact messages logged yet. When customers submit the Contact Us form, their inquiries will appear here and email alerts will be dispatched to info@akrongenerics.com & mukesh@akrongenerics.com.
-        </td>
-      </tr>
-    `;
-    return;
-  }
-
-  var html = '';
-  list.forEach(function(item) {
-    var rawInqId = item.id || '--';
-    var rawTimeStr = item.submittedAtFormatted || item.submittedAt || '--';
-    var rawName = item.fullName || ((item.firstName || '') + ' ' + (item.lastName || '')).trim() || 'Visitor';
-    var rawRole = item.role || '--';
-    var rawPharmacy = item.pharmacyName || '--';
-    var rawState = item.state || '--';
-    var rawEmail = item.email || '--';
-    var rawPhone = item.phone || '--';
-    var rawReason = item.reason || 'General';
-    var rawMessage = item.message || '';
-
-    var safeInqId = escapeHtml(rawInqId);
-    var safeTimeStr = escapeHtml(rawTimeStr);
-    var safeName = escapeHtml(rawName);
-    var safeRole = escapeHtml(rawRole);
-    var safePharmacy = escapeHtml(rawPharmacy);
-    var safeState = escapeHtml(rawState);
-    var safeEmail = escapeHtml(rawEmail);
-    var safePhone = escapeHtml(rawPhone);
-    var safeReason = escapeHtml(rawReason);
-    var safeMessage = escapeHtml(rawMessage);
-
-    html += `
-      <tr>
-        <td><strong style="color:var(--color-crimson);font-size:12px;">${safeInqId}</strong></td>
-        <td style="font-size:12px;color:var(--color-text-muted);">${safeTimeStr}</td>
-        <td>
-          <div style="font-weight:700;color:var(--color-text-main);font-size:13.5px;">${safeName}</div>
-          <div style="font-size:11.5px;color:var(--color-text-muted);">${safeRole}</div>
-        </td>
-        <td>
-          <div style="font-weight:600;font-size:13px;">${safePharmacy}</div>
-          <div style="font-size:11.5px;color:var(--color-text-muted);">State: ${safeState}</div>
-        </td>
-        <td>
-          <div><a href="mailto:${encodeURIComponent(rawEmail)}" style="color:var(--color-navy);font-weight:600;text-decoration:none;font-size:13px;">${safeEmail}</a></div>
-          <div style="font-size:11.5px;color:var(--color-text-muted);">${safePhone}</div>
-        </td>
-        <td>
-          <span style="display:inline-block;padding:3px 8px;background:#FEF2F2;color:#991B1B;border-radius:4px;font-size:11.5px;font-weight:600;">
-            ${safeReason}
-          </span>
-        </td>
-        <td style="max-width:240px;font-size:12px;color:#334155;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${safeMessage}">
-          ${safeMessage}
-        </td>
-        <td style="text-align:right;white-space:nowrap;">
-          <a href="mailto:${encodeURIComponent(rawEmail)}?subject=Re:%20Akron%20Generics%20Inquiry%20-%20${encodeURIComponent(rawReason)}" style="display:inline-block;padding:4px 10px;background:#9E2235;color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;">
-            Reply
-          </a>
-        </td>
-      </tr>
-    `;
-  });
-  tbody.innerHTML = html;
-}
-</script>
+<!-- SIDE DRAWER: DETAILS -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer-panel" id="drawerPanel">
+  <div class="drawer-header">
+    <h2 style="font-size:16px;font-weight:700;" id="drawerTitle">Record Details</h2>
+    <button type="button" class="modal-close-btn" onclick="closeDrawer()">&times;</button>
+  </div>
+  <div class="drawer-content" id="drawerBody"></div>
+</div>
+
+<!-- Toast Message Container -->
+<div class="toast-msg" id="toastMsg">Notification</div>
+
+<!-- Scripts -->
+<script src="src/js/catalog-data.js?v=admin2"></script>
+<script src="src/js/dashboard.js?v=admin2"></script>
 
 </body>
 </html>
