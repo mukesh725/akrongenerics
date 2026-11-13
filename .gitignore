@@ -36,6 +36,7 @@ wheels/
 backend/data/submissions/
 backend/data/pricing_requests/
 backend/data/contact_inquiries/
+backend/data/catalog_backups/
 submissions/
 *.pdf.tmp
 test_*.pdf

@@ -52,7 +52,7 @@ body {
   align-items: center;
 }
 .dash-header-inner {
-  max-width: 1360px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
   padding: 0 24px;
@@ -106,7 +106,7 @@ body {
   color: #FFFFFF;
   background: var(--color-navy);
   text-decoration: none;
-  padding: 7px 16px;
+  padding: 8px 18px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
@@ -119,7 +119,7 @@ body {
 
 /* Main Container */
 .dash-wrapper {
-  max-width: 1360px;
+  max-width: 1400px;
   margin: 24px auto 80px;
   padding: 0 24px;
 }
@@ -146,17 +146,14 @@ body {
   margin-top: 4px;
 }
 
-/* Metric Cards */
+/* Metric Cards (3 Clean Cards) */
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-bottom: 24px;
 }
-@media (max-width: 900px) {
-  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 520px) {
+@media (max-width: 800px) {
   .metrics-grid { grid-template-columns: 1fr; }
 }
 .metric-card {
@@ -246,25 +243,88 @@ body {
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-/* Filter Card */
-.filter-card {
-  background: var(--color-bg-card);
+/* Category Pills Bar */
+.category-pills-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+}
+.cat-chip {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 9999px;
   border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: 14px 18px;
+  background: #FFFFFF;
+  color: var(--color-text-body);
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+.cat-chip:hover {
+  background: #F1F5F9;
+  color: var(--color-text-main);
+  border-color: #CBD5E1;
+}
+.cat-chip.active {
+  background: #0B2240;
+  color: #FFFFFF;
+  border-color: #0B2240;
+}
+.cat-chip .chip-count {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: #F1F5F9;
+  color: #475569;
+}
+.cat-chip.active .chip-count {
+  background: rgba(255,255,255,0.22);
+  color: #FFFFFF;
+}
+
+/* Category Active Banner & Controls */
+.cat-header-banner {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 18px 22px;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 16px;
   flex-wrap: wrap;
 }
-.filter-left {
+.cat-header-info {
+  flex: 1;
+  min-width: 260px;
+}
+.cat-header-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 800;
+  color: #0B2240;
+  margin-bottom: 4px;
+}
+.cat-header-desc {
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+}
+.cat-header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
-  flex: 1;
 }
 .search-input {
   font-family: var(--font-sans);
@@ -277,20 +337,157 @@ body {
   outline: none;
   min-width: 260px;
 }
-.search-input:focus, .select-filter:focus { border-color: var(--color-navy); }
-.select-filter {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  padding: 8px 14px;
+.search-input:focus { border-color: var(--color-navy); }
+
+/* View Mode Toggles */
+.view-toggle-group {
+  display: inline-flex;
   border: 1px solid var(--color-border-input);
   border-radius: 6px;
+  overflow: hidden;
   background: #FFFFFF;
-  color: var(--color-text-main);
-  outline: none;
+}
+.view-toggle-btn {
+  background: #FFFFFF;
+  border: none;
+  padding: 7px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.view-toggle-btn.active {
+  background: #0B2240;
+  color: #FFFFFF;
 }
 
-/* Table Card */
+/* Category-Wise Section Dividers */
+.category-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 32px 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #E2E8F0;
+}
+.category-section-title {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 800;
+  color: #0B2240;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Product Cards Grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+.product-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+}
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  border-color: #CBD5E1;
+}
+.product-card-media {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  background: #F8FAFC;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #F1F5F9;
+}
+.product-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+  transition: transform 0.2s ease;
+}
+.product-card:hover .product-card-img { transform: scale(1.04); }
+
+.btn-quick-img {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+.product-card:hover .btn-quick-img { opacity: 1; }
+.btn-quick-img:hover { background: #0B2240; }
+
+.product-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.product-card-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+.ndc-copy-tag {
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-size: 11.5px;
+  font-family: monospace;
+  color: #1E293B;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.ndc-copy-tag:hover {
+  background: #E2E8F0;
+  color: #0F172A;
+}
+.badge-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 600;
+  background: #E0F2FE;
+  color: #0369A1;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+/* Compact Table View */
 .table-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
@@ -338,27 +535,6 @@ body {
   color: #334155;
   text-transform: uppercase;
 }
-.badge-tag {
-  display: inline-block;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-size: 10.5px;
-  font-weight: 600;
-  background: #E0F2FE;
-  color: #0369A1;
-  margin-right: 4px;
-}
-
-.badge-status {
-  display: inline-block;
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 600;
-}
-.badge-pending { background: #FEF3C7; color: #92400E; }
-.badge-approved { background: #DCFCE7; color: #166534; }
-.badge-review { background: #DBEAFE; color: #1E40AF; }
 
 .btn-action {
   font-family: var(--font-sans);
@@ -395,18 +571,6 @@ body {
 .btn-action-danger:hover {
   background: #FEF2F2;
   border-color: #DC2626;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 48px 24px;
-  color: var(--color-text-muted);
-}
-.empty-state-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--color-text-main);
-  margin-bottom: 6px;
 }
 
 /* Modals */
@@ -608,6 +772,9 @@ body {
 
 <body>
 
+<!-- Quick file input for direct 1-click image change on product cards -->
+<input type="file" id="quickImgFileInput" accept="image/png,image/jpeg,image/webp,image/jpg" style="display:none;" onchange="handleQuickImageSelected(this)">
+
 <!-- Header -->
 <header class="dash-header">
   <div class="dash-header-inner">
@@ -620,8 +787,8 @@ body {
       <a href="catalog.html" target="_blank" class="btn-nav-link">
         <span>Storefront Catalog</span> &rarr;
       </a>
-      <a href="become-a-customer.html" target="_blank" class="btn-nav-link">
-        <span>B2B Onboarding</span>
+      <a href="contact.html" target="_blank" class="btn-nav-link">
+        <span>Contact Page</span>
       </a>
       <button type="button" class="btn-nav-link" onclick="openApiKeyModal()">
         <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#16A34A;margin-right:4px;"></span>
@@ -637,17 +804,17 @@ body {
   <!-- Intro Row -->
   <div class="dash-intro-row">
     <div>
-      <h1 class="dash-title">Executive Operations Portal</h1>
-      <p class="dash-desc">Manage products, pricing leads, customer messages, and pharmacy onboarding in one place.</p>
+      <h1 class="dash-title">Executive Product &amp; Lead Management</h1>
+      <p class="dash-desc">Manage products category-wise, update descriptions &amp; images, and follow up with wholesale customer leads.</p>
     </div>
     <div>
       <button type="button" class="btn-primary-action" onclick="openAddProductModal()">
-        <span>+ Add New Product</span>
+        <span id="addProdBtnText">+ Add New Product</span>
       </button>
     </div>
   </div>
 
-  <!-- Metric Summary Cards -->
+  <!-- Metric Summary Cards (3 Focused Cards) -->
   <div class="metrics-grid">
     <div class="metric-card active-metric" onclick="switchTab('tab-products')">
       <div class="metric-label">Products in Catalog</div>
@@ -655,7 +822,7 @@ body {
       <div class="metric-sub" id="kpiCategoryCount">8 Active Categories</div>
     </div>
     <div class="metric-card" onclick="switchTab('tab-pricing')">
-      <div class="metric-label">Pricing Requests</div>
+      <div class="metric-label">Wholesale Pricing Requests</div>
       <div class="metric-value" id="kpiPricingCount">0</div>
       <div class="metric-sub">Product popup leads</div>
     </div>
@@ -664,14 +831,9 @@ body {
       <div class="metric-value" id="kpiContactCount">0</div>
       <div class="metric-sub">Customer inquiries</div>
     </div>
-    <div class="metric-card" onclick="switchTab('tab-applications')">
-      <div class="metric-label">B2B Applications</div>
-      <div class="metric-value" id="kpiAppCount">0</div>
-      <div class="metric-sub">Pharmacy accounts</div>
-    </div>
   </div>
 
-  <!-- Navigation Tabs -->
+  <!-- Navigation Tabs (Only Products, Pricing, and Contact) -->
   <div class="tabs-bar">
     <button type="button" class="tab-btn active" id="tabBtn-products" onclick="switchTab('tab-products')">
       <span>Products &amp; Images</span>
@@ -685,65 +847,89 @@ body {
       <span>Contact Inquiries</span>
       <span class="tab-badge" id="badgeContact">0</span>
     </button>
-    <button type="button" class="tab-btn" id="tabBtn-applications" onclick="switchTab('tab-applications')">
-      <span>Pharmacy Applications</span>
-      <span class="tab-badge" id="badgeApplications">0</span>
-    </button>
   </div>
 
-  <!-- TAB 1: PRODUCTS & IMAGES -->
+  <!-- ===================================================================== -->
+  <!-- TAB 1: CATEGORY-WISE PRODUCT & IMAGE CATALOG MANAGER                  -->
+  <!-- ===================================================================== -->
   <div class="tab-panel active" id="tab-products">
-    <div class="filter-card">
-      <div class="filter-left">
+    
+    <!-- Interactive Category Navigation Pills Bar -->
+    <div class="category-pills-bar" id="categoryPillsBar">
+      <!-- Populated dynamically with live item counts -->
+    </div>
+
+    <!-- Active Category Banner & Controls -->
+    <div class="cat-header-banner">
+      <div class="cat-header-info">
+        <h2 class="cat-header-title" id="activeCatHeaderTitle">All Products</h2>
+        <p class="cat-header-desc" id="activeCatHeaderDesc">Showing all products across all categories. You can edit information, upload new images, or reassign categories.</p>
+      </div>
+
+      <div class="cat-header-actions">
+        <!-- Live Instant Search -->
         <input type="text" id="prodSearchInput" class="search-input" placeholder="Search by name, NDC, brand, or SKU..." oninput="filterProducts()">
-        <select id="prodCategoryFilter" class="select-filter" onchange="filterProducts()">
-          <option value="all">All Categories</option>
-          <option value="pen-needles">Pen Needles</option>
-          <option value="lancets">Lancets &amp; Prep Pads</option>
-          <option value="blood-pressure">Blood Pressure</option>
-          <option value="nebulizers">Nebulizers &amp; Chambers</option>
-          <option value="topical-relief">Topical Relief</option>
-          <option value="pharmacy-vials">Pharmacy Vials</option>
-          <option value="contour-next">Contour Next</option>
-        </select>
-        <button type="button" class="btn-action" onclick="loadCatalogProducts()">
+
+        <!-- Grid vs Table View Mode Toggle -->
+        <div class="view-toggle-group">
+          <button type="button" class="view-toggle-btn active" data-mode="grid" onclick="setViewMode('grid')" title="Visual Cards View">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Cards</span>
+          </button>
+          <button type="button" class="view-toggle-btn" data-mode="table" onclick="setViewMode('table')" title="Compact Table View">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            <span>Table</span>
+          </button>
+        </div>
+
+        <button type="button" class="btn-action" onclick="loadCatalogProducts()" title="Refresh catalog data">
           <span>&#x21bb; Refresh</span>
         </button>
       </div>
-      <div>
-        <button type="button" class="btn-action btn-action-primary" onclick="openAddProductModal()">
-          <span>+ Add Product</span>
-        </button>
+    </div>
+
+    <!-- View Mode A: User-Friendly Category-Wise Product Cards Grid -->
+    <div id="productsGridContainer" style="display:block;">
+      <!-- Populated dynamically grouped by category -->
+    </div>
+
+    <!-- View Mode B: Compact Tabular List View -->
+    <div id="productsTableContainer" style="display:none;">
+      <div class="table-card">
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th style="width:56px;">Image</th>
+              <th>Product Name &amp; Brand</th>
+              <th>Category</th>
+              <th>NDC</th>
+              <th>Specifications</th>
+              <th>Badges</th>
+              <th style="text-align:right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody">
+            <tr>
+              <td colspan="7" class="empty-state">Loading products...</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <div class="table-card">
-      <table class="dash-table">
-        <thead>
-          <tr>
-            <th style="width:56px;">Image</th>
-            <th>Product Name &amp; Brand</th>
-            <th>Category</th>
-            <th>NDC</th>
-            <th>Specifications</th>
-            <th>Badges</th>
-            <th style="text-align:right;">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="productsTableBody">
-          <tr>
-            <td colspan="7" class="empty-state">Loading products...</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 
-  <!-- TAB 2: PRICING REQUESTS -->
+  <!-- ===================================================================== -->
+  <!-- TAB 2: WHOLESALE PRICING REQUESTS                                    -->
+  <!-- ===================================================================== -->
   <div class="tab-panel" id="tab-pricing">
-    <div class="filter-card">
-      <div class="filter-left">
-        <input type="text" id="pricingSearchInput" class="search-input" placeholder="Filter pricing requests by email, product, or NDC..." oninput="filterPricingRequests()">
+    <div class="cat-header-banner" style="margin-bottom:16px;">
+      <div class="cat-header-info">
+        <h2 class="cat-header-title">Wholesale Pricing Inquiries</h2>
+        <p class="cat-header-desc">Pharmacy customers who entered their email to request pricing sheets on specific catalog products.</p>
+      </div>
+      <div class="cat-header-actions">
+        <input type="text" id="pricingSearchInput" class="search-input" placeholder="Filter requests by email, product, or NDC..." oninput="filterPricingRequests()">
         <button type="button" class="btn-action" onclick="loadPricingRequests()">
           <span>&#x21bb; Refresh</span>
         </button>
@@ -771,11 +957,17 @@ body {
     </div>
   </div>
 
-  <!-- TAB 3: CONTACT INQUIRIES -->
+  <!-- ===================================================================== -->
+  <!-- TAB 3: CONTACT INQUIRIES                                             -->
+  <!-- ===================================================================== -->
   <div class="tab-panel" id="tab-contact">
-    <div class="filter-card">
-      <div class="filter-left">
-        <input type="text" id="contactSearchInput" class="search-input" placeholder="Filter contact inquiries by name, pharmacy, or email..." oninput="filterContactInquiries()">
+    <div class="cat-header-banner" style="margin-bottom:16px;">
+      <div class="cat-header-info">
+        <h2 class="cat-header-title">Customer Contact Inquiries</h2>
+        <p class="cat-header-desc">Messages submitted through the public Contact Us page.</p>
+      </div>
+      <div class="cat-header-actions">
+        <input type="text" id="contactSearchInput" class="search-input" placeholder="Filter inquiries by name, pharmacy, or email..." oninput="filterContactInquiries()">
         <button type="button" class="btn-action" onclick="loadContactInquiries()">
           <span>&#x21bb; Refresh</span>
         </button>
@@ -803,47 +995,11 @@ body {
     </div>
   </div>
 
-  <!-- TAB 4: PHARMACY APPLICATIONS -->
-  <div class="tab-panel" id="tab-applications">
-    <div class="filter-card">
-      <div class="filter-left">
-        <input type="text" id="appSearchInput" class="search-input" placeholder="Filter applications by pharmacy name, city, state, or ID..." oninput="filterApplications()">
-        <button type="button" class="btn-action" onclick="loadApplications()">
-          <span>&#x21bb; Refresh</span>
-        </button>
-      </div>
-      <div>
-        <button type="button" class="btn-action" onclick="exportApplicationsJson()">
-          <span>Export JSON</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="table-card">
-      <table class="dash-table">
-        <thead>
-          <tr>
-            <th>Application Ref</th>
-            <th>Pharmacy Business Name</th>
-            <th>Contact</th>
-            <th>State</th>
-            <th>License / DEA</th>
-            <th>Status</th>
-            <th style="text-align:right;">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="appTableBody">
-          <tr>
-            <td colspan="7" class="empty-state">No pharmacy applications submitted yet.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
 </main>
 
-<!-- MODAL: ADD / EDIT PRODUCT -->
+<!-- ===================================================================== -->
+<!-- MODAL: ADD / EDIT PRODUCT                                             -->
+<!-- ===================================================================== -->
 <div class="modal-overlay" id="productEditModal" onclick="if(event.target===this)closeProductModal()">
   <div class="modal-card">
     <div class="modal-header">
@@ -855,6 +1011,7 @@ body {
         <input type="hidden" id="editProdId">
         
         <div class="prod-form-grid">
+          <!-- Left: Image Preview & Upload -->
           <div>
             <div class="form-label">Product Image</div>
             <div class="img-preview-box" id="imgPreviewBox">
@@ -873,6 +1030,7 @@ body {
             </div>
           </div>
 
+          <!-- Right: Product Details -->
           <div>
             <div class="form-group">
               <label class="form-label" for="editProdName">Product Name <span style="color:#DC2626;">*</span></label>
@@ -938,7 +1096,9 @@ body {
   </div>
 </div>
 
-<!-- MODAL: ADMIN ACCESS KEY -->
+<!-- ===================================================================== -->
+<!-- MODAL: ADMIN ACCESS KEY                                               -->
+<!-- ===================================================================== -->
 <div class="modal-overlay" id="apiKeyModal" onclick="if(event.target===this)closeApiKeyModal()">
   <div class="modal-card" style="max-width:440px;">
     <div class="modal-header">
@@ -961,7 +1121,9 @@ body {
   </div>
 </div>
 
-<!-- SIDE DRAWER: DETAILS -->
+<!-- ===================================================================== -->
+<!-- SIDE DRAWER: MESSAGE DETAILS                                          -->
+<!-- ===================================================================== -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 <div class="drawer-panel" id="drawerPanel">
   <div class="drawer-header">
@@ -975,8 +1137,8 @@ body {
 <div class="toast-msg" id="toastMsg">Notification</div>
 
 <!-- Scripts -->
-<script src="src/js/catalog-data.js?v=admin2"></script>
-<script src="src/js/dashboard.js?v=admin2"></script>
+<script src="src/js/catalog-data.js?v=admin3"></script>
+<script src="src/js/dashboard.js?v=admin3"></script>
 
 </body>
 </html>
