@@ -177,13 +177,13 @@ def send_secure_email_notification(payload):
             time_esc = html.escape(time_clean)
             msg_esc = html.escape(msg_raw)
 
-            msg['Subject'] = f"📨 New Contact Inquiry: {reason_clean} — {full_name_clean} ({pharmacy_clean})"
+            msg['Subject'] = f"Contact Inquiry: {reason_clean} — {full_name_clean} ({pharmacy_clean})"
             html_body = f"""
             <html>
             <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #111827; line-height: 1.5; padding: 20px;">
                 <div style="max-width: 620px; margin: 0 auto; border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; background: #FFFFFF;">
                     <div style="background: #9E2235; color: #FFFFFF; padding: 22px 24px;">
-                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #FECDD3; font-weight: bold; margin-bottom: 4px;">Akron Generics &bull; Contact Center</div>
+                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #FECDD3; font-weight: bold; margin-bottom: 4px;">Akron Generics &bull; Customer Inquiry</div>
                         <h2 style="margin: 0; font-size: 20px; font-weight: 700;">New Customer Message Submitted</h2>
                     </div>
                     <div style="padding: 24px;">
@@ -234,13 +234,13 @@ def send_secure_email_notification(payload):
             specs_esc = html.escape(specs_clean)
             time_esc = html.escape(time_clean)
 
-            msg['Subject'] = f"🔒 Wholesale Pricing Request: {prod_clean} (NDC: {ndc_clean}) - {customer_email_clean}"
+            msg['Subject'] = f"Wholesale Pricing Request: {prod_clean} (NDC: {ndc_clean}) - {customer_email_clean}"
             html_body = f"""
             <html>
             <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #111827; line-height: 1.5; padding: 20px;">
                 <div style="max-width: 600px; margin: 0 auto; border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; background: #FFFFFF;">
                     <div style="background: #0B2240; color: #FFFFFF; padding: 22px 24px;">
-                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #93C5FD; font-weight: 700; margin-bottom: 4px;">Akron Generics &bull; Private In-House Alert</div>
+                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #93C5FD; font-weight: 700; margin-bottom: 4px;">Akron Generics &bull; B2B Customer Portal</div>
                         <h2 style="margin: 0; font-size: 20px; font-weight: 700;">Wholesale Product Pricing Request</h2>
                     </div>
                     <div style="padding: 24px;">
