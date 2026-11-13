@@ -341,18 +341,9 @@
               </div>
               <strong style="font-size:14px;color:#14532D;font-weight:700;">Wholesale Pricing Request Received!</strong>
             </div>
-            <p style="font-size:12.5px;line-height:1.45;color:#166534;margin:0 0 12px 0;">
+            <p style="font-size:12.5px;line-height:1.45;color:#166534;margin:0;">
               Wholesale pricing sheet for <strong>${escapeHtml(productName)}</strong> (NDC: ${escapeHtml(ndc)}) has been requested. An automated notification has been delivered to <strong>info@akrongenerics.com</strong> and an Akron Generics account representative will follow up with <strong>${escapeHtml(emailVal)}</strong> within one business day.
             </p>
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <a href="become-a-customer.html?email=${encodeURIComponent(emailVal)}" style="display:inline-flex;align-items:center;gap:6px;background:#163B1D;color:#FFFFFF;padding:9px 15px;border-radius:9999px;font-size:12px;font-weight:600;text-decoration:none;">
-                <span>Create Pharmacy Account</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </a>
-              <button type="button" onclick="closeProductPreview()" style="background:transparent;border:1px solid #D1D5DB;color:#4B5563;padding:8px 14px;border-radius:9999px;font-size:12px;font-weight:600;cursor:pointer;">
-                Continue Browsing
-              </button>
-            </div>
           </div>
         `;
       }
