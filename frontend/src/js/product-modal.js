@@ -304,14 +304,29 @@
       localStorage.setItem('akron_pricing_requests', JSON.stringify(stored.slice(0, 100)));
     } catch (e) {}
 
-    // 2. Dispatch to Akron Generics private backend endpoint (Zero 3rd-party data leaks)
-    fetch('/api/request-pricing', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(function(err) {
-      console.warn('[Pricing Dispatch Notice]', err);
-    });
+    // 2. Resilient Dual-Route Dispatcher
+    var GOOGLE_SCRIPT_WEBHOOK = 'https://script.google.com/macros/s/AKfycbxaQ9hXd_jnFuA35yqS_hVIGoVd8VAFEQ6NBUNj7cwsbdsVg_8eiJSfbYUFrmWrX_fc/exec';
+
+    // A. Direct Google Apps Script Delivery (Guaranteed across all browsers, ports, protocols & domains)
+    try {
+      fetch(GOOGLE_SCRIPT_WEBHOOK, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      }).catch(function(gErr) {
+        console.warn('[Google Script Direct Dispatch Notice]', gErr);
+      });
+    } catch(e) {}
+
+    // B. Also notify local backend /api endpoint if running via HTTP/HTTPS
+    if (window.location.protocol.startsWith('http')) {
+      fetch('/api/request-pricing', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(function() {});
+    }
 
     // Transition UI to Confirmation State
     setTimeout(function() {

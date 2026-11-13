@@ -35,8 +35,9 @@ export default async function handler(req, res) {
 
     console.log(`[CONTACT INQUIRY] Received from '${firstName} ${lastName}' (${email}) for '${reason}'`);
 
-    // If Google Apps Script URL is configured in environment, dispatch to it
-    const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
+    // If Google Apps Script URL is configured in environment, dispatch to it (with active default)
+    const DEFAULT_GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaQ9hXd_jnFuA35yqS_hVIGoVd8VAFEQ6NBUNj7cwsbdsVg_8eiJSfbYUFrmWrX_fc/exec';
+    const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL || DEFAULT_GOOGLE_SCRIPT_URL;
     if (googleScriptUrl && googleScriptUrl.startsWith('https://script.google.com/')) {
       try {
         await fetch(googleScriptUrl, {

@@ -38,8 +38,9 @@ export default async function handler(req, res) {
 
     console.log(`[SECURE IN-HOUSE INQUIRY] Logged: ${productName} (NDC: ${ndc}) for customer: ${email}`);
 
-    // If Google Apps Script Webhook is configured, dispatch directly
-    const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
+    // If Google Apps Script Webhook is configured, dispatch directly (with active default)
+    const DEFAULT_GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaQ9hXd_jnFuA35yqS_hVIGoVd8VAFEQ6NBUNj7cwsbdsVg_8eiJSfbYUFrmWrX_fc/exec';
+    const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL || DEFAULT_GOOGLE_SCRIPT_URL;
     if (googleScriptUrl && googleScriptUrl.startsWith('https://script.google.com/')) {
       try {
         await fetch(googleScriptUrl, {
