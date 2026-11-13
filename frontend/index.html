@@ -302,7 +302,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 /* Legacy .nav support if referenced anywhere */
 .nav{display:none}
 
-/* ---------- Hero Left Layout (Black Overlay with Left-Aligned Bold Typography) ---------- */
+/* ---------- Hero Centered Layout (Black Overlay with Centered Bold Typography) ---------- */
 .hero-centered-layout {
   position: relative;
   width: 100%;
@@ -310,8 +310,8 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  text-align: center;
   overflow: hidden;
   isolation: isolate;
   background: #000000;
@@ -325,6 +325,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   object-position: center center;
   display: block;
   z-index: 0;
+  filter: brightness(0.55) contrast(1.1);
 }
 .hero-centered-layout .hero-scrim {
   position: absolute;
@@ -332,25 +333,22 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   z-index: 1;
   pointer-events: none;
   background: 
-    linear-gradient(90deg, 
-      rgba(0, 0, 0, 0.72) 0%, 
-      rgba(0, 0, 0, 0.60) 36%, 
-      rgba(0, 0, 0, 0.38) 68%, 
-      rgba(0, 0, 0, 0.18) 100%),
-    rgba(0, 0, 0, 0.12);
+    radial-gradient(ellipse at center, rgba(8, 14, 24, 0.72) 0%, rgba(5, 10, 18, 0.85) 60%, rgba(2, 5, 10, 0.94) 100%),
+    linear-gradient(180deg, rgba(3, 7, 14, 0.65) 0%, rgba(3, 7, 14, 0.45) 40%, rgba(3, 7, 14, 0.75) 80%, rgba(3, 7, 14, 0.92) 100%),
+    rgba(0, 0, 0, 0.35);
 }
 .hero-centered-container {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1400px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 140px clamp(24px, 5vw, 68px) 80px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  text-align: center;
 }
 
 .hero-centered-layout .hero-title {
@@ -360,29 +358,29 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   color: #ffffff;
   font-weight: 750;
   letter-spacing: -0.035em;
-  margin: 0 0 22px 0;
-  text-align: left;
-  max-width: 780px;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.65);
+  margin: 0 auto 22px auto;
+  text-align: center;
+  max-width: 860px;
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.9), 0 8px 45px rgba(0, 0, 0, 0.75);
 }
 .hero-centered-layout .hero-subtitle {
   font-family: var(--body);
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255, 255, 255, 0.96);
   font-size: clamp(17.5px, 1.55vw, 21.5px);
-  max-width: 620px;
-  font-weight: 400;
-  line-height: 1.58;
-  margin: 0 0 34px 0;
-  text-align: left;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
+  max-width: 680px;
+  font-weight: 450;
+  line-height: 1.6;
+  margin: 0 auto 36px auto;
+  text-align: center;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 4px 28px rgba(0, 0, 0, 0.75);
 }
 .hero-centered-layout .hero-cta-group {
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 0;
+  margin: 0 auto;
 }
 .hero-btn-red {
   background: #942031;
@@ -2040,14 +2038,16 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 @media(max-width:768px){
   body{padding:0}
   .wrap{margin-top:20px;gap:10px;padding:0 12px 16px}
-  .hero-centered-layout { min-height: 84vh; align-items: flex-start; text-align: left; }
+  .hero-centered-layout { min-height: 84vh; align-items: center; text-align: center; }
   .hero-centered-layout .hero-scrim {
-    background: rgba(0, 0, 0, 0.48) !important;
+    background: 
+      radial-gradient(ellipse at center, rgba(8, 14, 24, 0.78) 0%, rgba(3, 7, 14, 0.90) 80%, rgba(2, 5, 10, 0.96) 100%),
+      rgba(0, 0, 0, 0.50) !important;
   }
-  .hero-centered-container { padding: 95px 20px 46px; align-items: flex-start; text-align: left; }
-  .hero-centered-layout .hero-title { font-size: clamp(34px, 8.8vw, 48px); margin-bottom: 16px; text-align: left; }
-  .hero-centered-layout .hero-subtitle { font-size: 16px; margin-bottom: 24px; text-align: left; }
-  .hero-centered-layout .hero-cta-group { flex-direction: column; width: 100%; gap: 10px; margin-bottom: 0; align-items: flex-start; }
+  .hero-centered-container { padding: 95px 20px 46px; align-items: center; text-align: center; }
+  .hero-centered-layout .hero-title { font-size: clamp(34px, 8.8vw, 48px); margin: 0 auto 16px auto; text-align: center; }
+  .hero-centered-layout .hero-subtitle { font-size: 16px; margin: 0 auto 24px auto; text-align: center; }
+  .hero-centered-layout .hero-cta-group { flex-direction: column; width: 100%; gap: 10px; margin-bottom: 0; align-items: center; justify-content: center; }
   .hero-btn-red, .hero-btn-white, .hero-btn-glass{width:100%;max-width:320px;text-align:center;justify-content:center}
   .hero{min-height:500px;padding:64px 20px 44px;border-radius:20px}
   .hero h1{font-size:clamp(28px,7.5vw,40px);line-height:1.14;max-width:100%;margin-bottom:16px}
@@ -2392,17 +2392,17 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 </div>
 
 <!-- HERO: YOUR PHARMACY. OUR PRIORITY. (Centered Layout with Black Overlay) -->
-<header class="hero-centered-layout" id="hero">
-  <img class="hero-bg-img" src="src/assets/hero-pharmaceutical-distribution-center.jpg" alt="Akron Generics Modern Pharmaceutical Distribution Warehouse">
-  <div class="hero-scrim" aria-hidden="true"></div>
+<header class="hero-centered-layout" id="hero" style="display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; text-align: center !important; width: 100% !important; min-height: clamp(700px, 92vh, 920px) !important; position: relative !important; background: #000000 !important; overflow: hidden !important;">
+  <img class="hero-bg-img" src="src/assets/hero-pharmaceutical-distribution-center.jpg" alt="Akron Generics Modern Pharmaceutical Distribution Warehouse" style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; filter: brightness(0.50) contrast(1.12) !important; z-index: 0 !important;">
+  <div class="hero-scrim" aria-hidden="true" style="position: absolute !important; inset: 0 !important; z-index: 1 !important; pointer-events: none !important; background: radial-gradient(ellipse at center, rgba(6, 12, 22, 0.78) 0%, rgba(4, 8, 16, 0.88) 60%, rgba(2, 4, 8, 0.96) 100%), linear-gradient(180deg, rgba(2, 5, 10, 0.65) 0%, rgba(2, 5, 10, 0.45) 40%, rgba(2, 5, 10, 0.80) 80%, rgba(2, 5, 10, 0.95) 100%), rgba(0, 0, 0, 0.4) !important;"></div>
   
-  <div class="hero-centered-container">
-    <h1 class="hero-title">Your Pharmacy.<br>Our Priority.</h1>
-    <p class="hero-subtitle">NABP-accredited wholesale partner delivering premium high-AWP generics, diabetic supplies, and diagnostic essentials with maximized Medicare reimbursement.</p>
+  <div class="hero-centered-container" style="position: relative !important; z-index: 2 !important; width: 100% !important; max-width: 980px !important; margin-left: auto !important; margin-right: auto !important; margin-top: 0 !important; margin-bottom: 0 !important; padding: 140px 24px 80px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important;">
+    <h1 class="hero-title" style="font-family: var(--sans) !important; font-size: clamp(48px, 5.5vw, 82px) !important; line-height: 1.05 !important; color: #ffffff !important; font-weight: 750 !important; letter-spacing: -0.035em !important; margin: 0 auto 22px auto !important; text-align: center !important; max-width: 860px !important; text-shadow: 0 3px 20px rgba(0, 0, 0, 0.95), 0 8px 45px rgba(0, 0, 0, 0.8) !important;">Your Pharmacy.<br>Our Priority.</h1>
+    <p class="hero-subtitle" style="font-family: var(--body) !important; color: rgba(255, 255, 255, 0.96) !important; font-size: clamp(17px, 1.5vw, 21px) !important; max-width: 700px !important; font-weight: 450 !important; line-height: 1.6 !important; margin: 0 auto 34px auto !important; text-align: center !important; text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95), 0 4px 28px rgba(0, 0, 0, 0.8) !important;">NABP-accredited wholesale partner delivering premium high-AWP generics, diabetic supplies, and diagnostic essentials with maximized Medicare reimbursement.</p>
     
-    <div class="hero-cta-group">
-      <a href="become-a-customer.html" class="hero-btn-red">Create a Pharmacy Account <span style="font-size:1.15em;line-height:1;margin-left:4px;">↗</span></a>
-      <a href="catalog.html" class="hero-btn-white">Explore Products <span style="font-size:1.15em;line-height:1;margin-left:4px;">→</span></a>
+    <div class="hero-cta-group" style="display: flex !important; gap: 14px !important; flex-wrap: wrap !important; justify-content: center !important; align-items: center !important; margin: 0 auto !important;">
+      <a href="become-a-customer.html" class="hero-btn-red" style="margin: 0 !important;">Create a Pharmacy Account <span style="font-size:1.15em;line-height:1;margin-left:4px;">↗</span></a>
+      <a href="catalog.html" class="hero-btn-white" style="margin: 0 !important;">Explore Products <span style="font-size:1.15em;line-height:1;margin-left:4px;">→</span></a>
     </div>
   </div>
 </header>
