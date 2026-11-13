@@ -595,5 +595,51 @@ window.AKRON_CATALOG = {
       "image": "src/assets/products/contour-next-gen-meter.jpg",
       "description": "Smartlight target range indicator and Bluetooth wireless sync to the Contour Diabetes app."
     }
-  ]
+  ],
+  "specialOffers": {
+    "eyebrow": "AKRON GENERICS · SPECIAL OFFERS",
+    "title": "A new month. More opportunity.",
+    "subtitle": "Featured prices from our November specials.",
+    "notice": "Promotional allocation. Offer valid till November 30, 2026. Confirm availability before ordering.",
+    "catalogUrl": "src/november-specials.pdf",
+    "catalogBtnText": "Explore the Catalog ↗",
+    "items": [
+      {
+        "id": "SPEC-1",
+        "productId": "18366",
+        "title": "Quick Touch Safety Pen Needles | 100 CT",
+        "badge": "SPECIAL PRICE",
+        "image": "src/assets/products/quick-touch-safety-packaging.png",
+        "description": "Safety-shielded pen needle engineered for single-use protection and smooth injection comfort.",
+        "ndc": "73317-6816-04"
+      },
+      {
+        "id": "SPEC-2",
+        "productId": "17178",
+        "title": "Safety Lancets 28G | 100 CT",
+        "badge": "SPECIAL PRICE",
+        "image": "src/assets/products/comfort-touch-safety-lancets-28g.jpg",
+        "description": "Pressure-activated safety lancet for capillary blood sampling with automatic needle retraction.",
+        "ndc": "73317-4683-01"
+      },
+      {
+        "id": "SPEC-3",
+        "productId": "18365",
+        "title": "Lidocaine 4% Topical Patches | 15 Patches",
+        "badge": "SPECIAL PRICE",
+        "image": "src/assets/products/lidocaine-patch-box.png",
+        "description": "Maximum strength OTC lidocaine topical patch providing targeted temporary numbing pain relief.",
+        "ndc": "73317-6866-05"
+      },
+      {
+        "id": "SPEC-4",
+        "productId": "CONTOUR-100",
+        "title": "Contour Next Retail Test Strips | 100 CT",
+        "badge": "AUTHORIZED DEALER",
+        "image": "src/assets/products/contour-next-100ct.jpg",
+        "description": "High-accuracy blood glucose test strips featuring Second-Chance sampling and multi-pulse technology.",
+        "ndc": "00193-7312-21"
+      }
+    ]
+  }
 };

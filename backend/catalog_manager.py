@@ -35,14 +35,65 @@ def _clean_json_str(content):
     body = re.sub(r'^\s*window\.AKRON_CATALOG\s*=\s*', '', body.strip())
     return body.rstrip(';').strip()
 
+def get_default_special_offers():
+    """
+    Returns default monthly special offers structure matching the hero section.
+    """
+    return {
+        "eyebrow": "AKRON GENERICS · SPECIAL OFFERS",
+        "title": "A new month. More opportunity.",
+        "subtitle": "Featured prices from our November specials.",
+        "notice": "Promotional allocation. Offer valid till November 30, 2026. Confirm availability before ordering.",
+        "catalogUrl": "src/november-specials.pdf",
+        "catalogBtnText": "Explore the Catalog ↗",
+        "items": [
+            {
+                "id": "SPEC-1",
+                "productId": "18366",
+                "title": "Quick Touch Safety Pen Needles | 100 CT",
+                "badge": "SPECIAL PRICE",
+                "image": "src/assets/products/quick-touch-safety-packaging.png",
+                "description": "Safety-shielded pen needle engineered for single-use protection and smooth injection comfort.",
+                "ndc": "73317-6816-04"
+            },
+            {
+                "id": "SPEC-2",
+                "productId": "17178",
+                "title": "Safety Lancets 28G | 100 CT",
+                "badge": "SPECIAL PRICE",
+                "image": "src/assets/products/comfort-touch-safety-lancets-28g.jpg",
+                "description": "Pressure-activated safety lancet for capillary blood sampling with automatic needle retraction.",
+                "ndc": "73317-4683-01"
+            },
+            {
+                "id": "SPEC-3",
+                "productId": "18365",
+                "title": "Lidocaine 4% Topical Patches | 15 Patches",
+                "badge": "SPECIAL PRICE",
+                "image": "src/assets/products/lidocaine-patch-box.png",
+                "description": "Maximum strength OTC lidocaine topical patch providing targeted temporary numbing pain relief.",
+                "ndc": "73317-6866-05"
+            },
+            {
+                "id": "SPEC-4",
+                "productId": "CONTOUR-100",
+                "title": "Contour Next Retail Test Strips | 100 CT",
+                "badge": "AUTHORIZED DEALER",
+                "image": "src/assets/products/contour-next-100ct.jpg",
+                "description": "High-accuracy blood glucose test strips featuring Second-Chance sampling and multi-pulse technology.",
+                "ndc": "00193-7312-21"
+            }
+        ]
+    }
+
 def load_catalog():
     """
     Load the catalog data dictionary from catalog-data.js using pure Python.
-    Returns: dict {"categories": [...], "products": [...]}
+    Returns: dict {"categories": [...], "products": [...], "specialOffers": {...}}
     """
     path = get_catalog_path()
     if not os.path.exists(path):
-        return {"categories": [], "products": []}
+        return {"categories": [], "products": [], "specialOffers": get_default_special_offers()}
 
     try:
         with open(path, 'r', encoding='utf-8') as f:
@@ -50,22 +101,35 @@ def load_catalog():
 
         raw_json = _clean_json_str(content)
 
+        parsed_data = None
         # 1. Direct standard JSON parsing
         try:
-            return json.loads(raw_json)
+            parsed_data = json.loads(raw_json)
         except json.JSONDecodeError:
             pass
 
-        # 2. Pure Python fallback: Quote unquoted object keys and parse
-        # Matches unquoted keys like "  name:" -> '  "name":'
-        fixed = re.sub(r'([{,]\s*)([a-zA-Z0-9_$]+)\s*:', r'\1"\2":', raw_json)
-        # Remove trailing commas before } or ]
-        fixed = re.sub(r',\s*([}\]])', r'\1', fixed)
-        return json.loads(fixed)
+        if parsed_data is None:
+            # 2. Pure Python fallback: Quote unquoted object keys and parse
+            fixed = re.sub(r'([{,]\s*)([a-zA-Z0-9_$]+)\s*:', r'\1"\2":', raw_json)
+            fixed = re.sub(r',\s*([}\]])', r'\1', fixed)
+            parsed_data = json.loads(fixed)
+
+        if not isinstance(parsed_data, dict):
+            parsed_data = {"categories": [], "products": []}
+
+        if 'specialOffers' not in parsed_data or not isinstance(parsed_data.get('specialOffers'), dict):
+            parsed_data['specialOffers'] = get_default_special_offers()
+
+        return parsed_data
 
     except Exception as e:
         print(f"[CATALOG_MANAGER ERROR] Could not parse catalog-data.js: {e}")
-        return {"categories": [], "products": [], "error": "Unable to parse catalog file"}
+        return {
+            "categories": [],
+            "products": [],
+            "specialOffers": get_default_special_offers(),
+            "error": "Unable to parse catalog file"
+        }
 
 def save_catalog(catalog_dict):
     """
@@ -138,10 +202,50 @@ def save_catalog(catalog_dict):
             pass
 
     # Build Javascript content with formatted JSON
-    catalog_json = json.dumps({
+    save_obj = {
         "categories": categories,
         "products": products
-    }, indent=2, ensure_ascii=False)
+    }
+
+    special_offers = catalog_dict.get('specialOffers')
+    if special_offers and isinstance(special_offers, dict):
+        raw_items = special_offers.get('items')
+        items = raw_items if isinstance(raw_items, list) else []
+        valid_items = []
+        for idx, item in enumerate(items):
+            if isinstance(item, dict) and item.get('title'):
+                valid_items.append({
+                    "id": str(item.get('id') or f"SPEC-{int(time.time() * 1000) + idx}").strip(),
+                    "productId": str(item.get('productId') or '').strip(),
+                    "title": str(item.get('title') or '').strip(),
+                    "badge": str(item.get('badge') or 'SPECIAL PRICE').strip(),
+                    "image": str(item.get('image') or 'src/assets/products/quick-touch-safety-packaging.png').strip(),
+                    "description": str(item.get('description') or '').strip(),
+                    "ndc": str(item.get('ndc') or '').strip()
+                })
+
+        raw_url = str(special_offers.get('catalogUrl') or special_offers.get('catalogLink') or 'src/november-specials.pdf').strip()
+        if not re.match(r'^(https?:\/\/|\/|src\/|[a-zA-Z0-9_\-\.\/]+\.pdf)', raw_url, re.IGNORECASE):
+            raw_url = 'src/november-specials.pdf'
+
+        save_obj['specialOffers'] = {
+            "eyebrow": str(special_offers.get('eyebrow') or 'AKRON GENERICS · SPECIAL OFFERS').strip(),
+            "title": str(special_offers.get('title') or special_offers.get('heading') or 'A new month. More opportunity.').strip(),
+            "subtitle": str(special_offers.get('subtitle') or 'Featured prices from our November specials.').strip(),
+            "notice": str(special_offers.get('notice') or 'Promotional allocation. Offer valid till November 30, 2026. Confirm availability before ordering.').strip(),
+            "catalogUrl": raw_url,
+            "catalogBtnText": str(special_offers.get('catalogBtnText') or special_offers.get('catalogButtonText') or 'Explore the Catalog ↗').strip(),
+            "items": valid_items
+        }
+    else:
+        # Preserve default or existing special offers if available
+        try:
+            current_data = load_catalog()
+            save_obj['specialOffers'] = current_data.get('specialOffers', get_default_special_offers())
+        except Exception:
+            save_obj['specialOffers'] = get_default_special_offers()
+
+    catalog_json = json.dumps(save_obj, indent=2, ensure_ascii=False)
 
     js_content = f"// Akron Generics Product Catalog Data\nwindow.AKRON_CATALOG = {catalog_json};\n"
 

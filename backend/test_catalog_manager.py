@@ -138,5 +138,66 @@ class TestCatalogManager(unittest.TestCase):
         outside_file = os.path.join(self.test_dir, "malicious.png")
         self.assertFalse(os.path.exists(outside_file))
 
+    def test_load_and_save_special_offers(self):
+        data = catalog_manager.load_catalog()
+        self.assertIn("specialOffers", data)
+        self.assertIn("items", data["specialOffers"])
+        self.assertEqual(len(data["specialOffers"]["items"]), 4)
+
+        # Modify a special offer and save
+        data["specialOffers"]["items"].append({
+            "id": "SPEC-TEST",
+            "productId": "9999",
+            "title": "New Monthly Special Offer Item",
+            "badge": "EXCLUSIVE DEAL",
+            "image": "src/assets/products/custom.png",
+            "description": "Exclusive test offer",
+            "ndc": "73317-999-99"
+        })
+        data["specialOffers"]["title"] = "December Specials"
+
+        success, msg = catalog_manager.save_catalog(data)
+        self.assertTrue(success, msg)
+
+        reloaded = catalog_manager.load_catalog()
+        self.assertEqual(reloaded["specialOffers"]["title"], "December Specials")
+        self.assertEqual(len(reloaded["specialOffers"]["items"]), 5)
+        last_item = reloaded["specialOffers"]["items"][-1]
+        self.assertEqual(last_item["title"], "New Monthly Special Offer Item")
+        self.assertEqual(last_item["badge"], "EXCLUSIVE DEAL")
+
+    def test_special_offers_null_items_handling(self):
+        data = catalog_manager.load_catalog()
+        data["specialOffers"] = {
+            "title": "Null Items Test",
+            "items": None,
+            "catalogUrl": "javascript:alert(1)"
+        }
+        success, msg = catalog_manager.save_catalog(data)
+        self.assertTrue(success, msg)
+        reloaded = catalog_manager.load_catalog()
+        self.assertEqual(reloaded["specialOffers"]["items"], [])
+        self.assertEqual(reloaded["specialOffers"]["catalogUrl"], "src/november-specials.pdf")
+
+    def test_special_offers_attribute_whitelisting(self):
+        data = catalog_manager.load_catalog()
+        data["specialOffers"]["items"] = [{
+            "id": "SPEC-WL",
+            "title": "Whitelisted Item",
+            "badge": "SPECIAL PRICE",
+            "description": "Clean description",
+            "ndc": "12345-678-90",
+            "image": "src/assets/products/placeholder.jpg",
+            "malicious_script": "<script>alert(1)</script>",
+            "arbitrary_field": "injected"
+        }]
+        success, msg = catalog_manager.save_catalog(data)
+        self.assertTrue(success, msg)
+        reloaded = catalog_manager.load_catalog()
+        saved_item = reloaded["specialOffers"]["items"][0]
+        self.assertNotIn("malicious_script", saved_item)
+        self.assertNotIn("arbitrary_field", saved_item)
+        self.assertEqual(saved_item["title"], "Whitelisted Item")
+
 if __name__ == '__main__':
     unittest.main()

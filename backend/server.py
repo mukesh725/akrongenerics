@@ -564,6 +564,66 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
                 return
 
+        # POST /api/admin/specials/save (Protected administrative endpoint)
+        if path == '/api/admin/specials/save':
+            if not is_admin_authorized(self):
+                self.send_response(401)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Unauthorized"}).encode('utf-8'))
+                return
+
+            content_length = int(self.headers.get('Content-Length', 0))
+            if content_length > 5 * 1024 * 1024:
+                self.send_response(413)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Payload too large."}).encode('utf-8'))
+                return
+
+            post_data = self.rfile.read(content_length)
+            try:
+                payload = json.loads(post_data.decode('utf-8'))
+                if not isinstance(payload, dict) or ('specialOffers' not in payload and 'items' not in payload):
+                    self.send_response(400)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "error", "message": "Invalid payload format. Must include 'specialOffers' or 'items'."}).encode('utf-8'))
+                    return
+
+                cat_data = catalog_manager.load_catalog()
+
+                if 'specialOffers' in payload and isinstance(payload['specialOffers'], dict):
+                    cat_data['specialOffers'] = payload['specialOffers']
+                elif 'items' in payload and isinstance(payload['items'], list):
+                    if 'specialOffers' not in cat_data or not isinstance(cat_data['specialOffers'], dict):
+                        cat_data['specialOffers'] = catalog_manager.get_default_special_offers()
+                    cat_data['specialOffers']['items'] = payload['items']
+
+                success, msg = catalog_manager.save_catalog(cat_data)
+                if success:
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({
+                        "status": "success",
+                        "message": "Special offers saved successfully",
+                        "specialOffers": cat_data.get('specialOffers')
+                    }).encode('utf-8'))
+                else:
+                    self.send_response(400)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "error", "message": msg}).encode('utf-8'))
+                return
+            except Exception as e:
+                print(f"[ADMIN ERROR] /api/admin/specials/save: {e}")
+                self.send_response(400)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save special offers payload."}).encode('utf-8'))
+                return
+
         # POST /api/admin/upload-image (Protected administrative endpoint)
         if path == '/api/admin/upload-image':
             if not is_admin_authorized(self):

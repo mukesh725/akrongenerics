@@ -86,8 +86,13 @@
 
     const cards = document.querySelectorAll('.metric-card');
     if (tabId === 'tab-products' && cards[0]) cards[0].classList.add('active-metric');
-    if (tabId === 'tab-pricing' && cards[1]) cards[1].classList.add('active-metric');
-    if (tabId === 'tab-contact' && cards[2]) cards[2].classList.add('active-metric');
+    if (tabId === 'tab-specials' && cards[1]) cards[1].classList.add('active-metric');
+    if (tabId === 'tab-pricing' && cards[2]) cards[2].classList.add('active-metric');
+    if (tabId === 'tab-contact' && cards[3]) cards[3].classList.add('active-metric');
+
+    if (tabId === 'tab-specials') {
+      renderSpecialOffersTab();
+    }
   };
 
   // ----------------------------------------------------------------------------
@@ -200,6 +205,7 @@
       }
       renderCategoryPills();
       filterProducts();
+      renderSpecialOffersTab();
       updateKpis();
     })
     .catch(err => {
@@ -208,6 +214,7 @@
         currentCatalog = window.AKRON_CATALOG;
         renderCategoryPills();
         filterProducts();
+        renderSpecialOffersTab();
         updateKpis();
       }
     });
@@ -216,14 +223,21 @@
   function updateKpis() {
     const prodCount = (currentCatalog.products || []).length;
     const catCount = (currentCatalog.categories || []).length || 8;
+    const specialsCount = ((currentCatalog.specialOffers && currentCatalog.specialOffers.items) || []).length;
     
     const kpiP = document.getElementById('kpiProductCount');
     const kpiC = document.getElementById('kpiCategoryCount');
     const badgeP = document.getElementById('badgeProducts');
 
+    const kpiS = document.getElementById('kpiSpecialsCount');
+    const badgeS = document.getElementById('badgeSpecials');
+
     if (kpiP) kpiP.textContent = prodCount;
     if (kpiC) kpiC.textContent = `${catCount} Active Categories`;
     if (badgeP) badgeP.textContent = prodCount;
+
+    if (kpiS) kpiS.textContent = specialsCount;
+    if (badgeS) badgeS.textContent = specialsCount;
   }
 
   window.filterProducts = function() {
@@ -991,6 +1005,459 @@
     window.loadCatalogProducts();
     window.loadPricingRequests();
     window.loadContactInquiries();
+  };
+
+  // ----------------------------------------------------------------------------
+  // MONTHLY SPECIAL OFFERS MANAGEMENT
+  // ----------------------------------------------------------------------------
+  let quickSpecialTargetId = null;
+
+  window.renderSpecialOffersTab = function() {
+    const specialsData = currentCatalog.specialOffers || {
+      eyebrow: 'AKRON GENERICS · SPECIAL OFFERS',
+      title: 'A new month. More opportunity.',
+      subtitle: 'Featured prices from our November specials.',
+      notice: 'Promotional allocation. Offer valid till November 30, 2026. Confirm availability before ordering.',
+      catalogUrl: 'src/november-specials.pdf',
+      catalogBtnText: 'Explore the Catalog ↗',
+      items: []
+    };
+
+    const eyebrowEl = document.getElementById('dashSpecialsEyebrow');
+    const titleEl = document.getElementById('dashSpecialsTitle');
+    const subtitleEl = document.getElementById('dashSpecialsSubtitle');
+    const noticeEl = document.getElementById('dashSpecialsNotice');
+    const btnTextEl = document.getElementById('dashSpecialsBtnText');
+    const gridEl = document.getElementById('dashSpecialsGrid');
+
+    if (eyebrowEl) eyebrowEl.textContent = specialsData.eyebrow || 'AKRON GENERICS · SPECIAL OFFERS';
+    if (titleEl) titleEl.textContent = specialsData.title || 'A new month. More opportunity.';
+    if (subtitleEl) subtitleEl.textContent = specialsData.subtitle || 'Featured prices from our November specials.';
+    if (noticeEl) noticeEl.textContent = specialsData.notice || 'Promotional allocation. Offer valid till November 30, 2026. Confirm availability before ordering.';
+    if (btnTextEl) btnTextEl.textContent = specialsData.catalogBtnText || 'Explore the Catalog ↗';
+
+    const items = specialsData.items || [];
+    const kpiSpecials = document.getElementById('kpiSpecialsCount');
+    const badgeSpecials = document.getElementById('badgeSpecials');
+    if (kpiSpecials) kpiSpecials.textContent = items.length;
+    if (badgeSpecials) badgeSpecials.textContent = items.length;
+
+    if (!gridEl) return;
+
+    if (items.length === 0) {
+      gridEl.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 48px 20px; background: #F8FAFC; border: 2px dashed #CBD5E1; border-radius: 16px;">
+          <div style="font-size: 32px; margin-bottom: 8px;">✨</div>
+          <h3 style="font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 4px;">No Monthly Special Offers Added Yet</h3>
+          <p style="font-size: 13px; color: #64748B; margin-bottom: 16px;">Click the button below to add your first featured special offer product.</p>
+          <button type="button" class="btn-action btn-action-primary" onclick="openAddSpecialModal()">+ Add Product to Specials</button>
+        </div>
+      `;
+      return;
+    }
+
+    gridEl.innerHTML = items.map((item) => {
+      const badge = item.badge || 'SPECIAL PRICE';
+      const img = item.image || 'src/assets/products/quick-touch-safety-packaging.png';
+      const title = item.title || item.name || 'Special Offer';
+      const desc = item.description || '';
+      const ndc = item.ndc ? `NDC: ${item.ndc}` : '';
+
+      return `
+        <article class="special-p-card" data-id="${escapeHtml(item.id)}">
+          <div class="special-p-card-image-box">
+            <span class="special-p-card-pill">${escapeHtml(badge)}</span>
+            <img src="${escapeHtml(img)}" alt="${escapeHtml(title)}" onerror="this.src='src/assets/products/quick-touch-safety-packaging.png'">
+          </div>
+          <div class="special-p-card-info">
+            <h3 class="special-p-card-title">${escapeHtml(title)}</h3>
+            <p class="special-p-card-desc">${escapeHtml(desc)}</p>
+            ${ndc ? `<div class="special-p-card-ndc">${escapeHtml(ndc)}</div>` : ''}
+          </div>
+          <div class="special-card-admin-actions">
+            <button type="button" class="btn-action btn-action-primary" data-action="edit-special" data-id="${escapeHtml(item.id)}">
+              ✎ Edit
+            </button>
+            <button type="button" class="btn-action" data-action="quick-image-special" data-id="${escapeHtml(item.id)}">
+              📷 Image
+            </button>
+            <button type="button" class="btn-action btn-action-danger" data-action="remove-special" data-id="${escapeHtml(item.id)}">
+              🗑 Remove
+            </button>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    if (!gridEl._hasSpecialsEventListener) {
+      gridEl._hasSpecialsEventListener = true;
+      gridEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-action]');
+        if (!btn) return;
+        const action = btn.dataset.action;
+        const specialId = btn.dataset.id;
+        if (!specialId) return;
+
+        if (action === 'edit-special') {
+          openEditSpecialModal(specialId);
+        } else if (action === 'quick-image-special') {
+          triggerQuickSpecialImgUpload(specialId);
+        } else if (action === 'remove-special') {
+          removeSpecialOffer(specialId);
+        }
+      });
+    }
+  };
+
+  // Populate catalog product picker dropdown in Special Offer Modal
+  function populateSpecialProductPicker() {
+    const picker = document.getElementById('specialProductPicker');
+    if (!picker) return;
+
+    const products = currentCatalog.products || [];
+    picker.innerHTML = '<option value="">-- Choose an existing product to copy information --</option>' +
+      products.map(p => {
+        const specs = p.specs ? ` (${p.specs})` : '';
+        return `<option value="${escapeHtml(p.id)}">${escapeHtml(p.name)}${escapeHtml(specs)} — NDC: ${escapeHtml(p.ndc || 'N/A')}</option>`;
+      }).join('');
+  }
+
+  window.onCatalogProductSelectedForSpecial = function(prodId) {
+    if (!prodId) return;
+    const prod = (currentCatalog.products || []).find(p => String(p.id) === String(prodId));
+    if (!prod) return;
+
+    const titleField = document.getElementById('editSpecialName');
+    const ndcField = document.getElementById('editSpecialNdc');
+    const imgPathField = document.getElementById('editSpecialImgPath');
+    const descField = document.getElementById('editSpecialDesc');
+    const badgeField = document.getElementById('editSpecialBadge');
+    const prodIdField = document.getElementById('editSpecialProdId');
+    const imgPreview = document.getElementById('editSpecialImgPreview');
+
+    const titleWithSpecs = prod.name + (prod.specs ? ` | ${prod.specs}` : '');
+    if (titleField) titleField.value = titleWithSpecs;
+    if (ndcField) ndcField.value = prod.ndc || '';
+    if (imgPathField) imgPathField.value = prod.image || 'src/assets/products/quick-touch-safety-packaging.png';
+    if (descField) descField.value = prod.description || '';
+    if (prodIdField) prodIdField.value = prod.id;
+    if (badgeField && !badgeField.value) badgeField.value = (prod.badges && prod.badges[0]) || 'SPECIAL PRICE';
+    if (imgPreview) imgPreview.src = prod.image || 'src/assets/products/quick-touch-safety-packaging.png';
+  };
+
+  window.openAddSpecialModal = function() {
+    document.getElementById('modalSpecialTitle').textContent = 'Add Product to Special Offers';
+    document.getElementById('editSpecialId').value = '';
+    document.getElementById('editSpecialName').value = '';
+    document.getElementById('editSpecialBadge').value = 'SPECIAL PRICE';
+    document.getElementById('editSpecialNdc').value = '';
+    document.getElementById('editSpecialDesc').value = '';
+    document.getElementById('editSpecialProdId').value = '';
+    document.getElementById('editSpecialImgPath').value = 'src/assets/products/quick-touch-safety-packaging.png';
+    document.getElementById('editSpecialImgPreview').src = 'src/assets/products/quick-touch-safety-packaging.png';
+
+    populateSpecialProductPicker();
+    document.getElementById('specialProductPicker').value = '';
+    document.getElementById('specialOfferModal').classList.add('open');
+  };
+
+  window.openEditSpecialModal = function(specialId) {
+    const specials = (currentCatalog.specialOffers && currentCatalog.specialOffers.items) || [];
+    const item = specials.find(s => String(s.id) === String(specialId));
+    if (!item) {
+      alert('Special offer item not found.');
+      return;
+    }
+
+    document.getElementById('modalSpecialTitle').textContent = 'Edit Special Offer';
+    document.getElementById('editSpecialId').value = item.id;
+    document.getElementById('editSpecialName').value = item.title || item.name || '';
+    document.getElementById('editSpecialBadge').value = item.badge || 'SPECIAL PRICE';
+    document.getElementById('editSpecialNdc').value = item.ndc || '';
+    document.getElementById('editSpecialDesc').value = item.description || '';
+    document.getElementById('editSpecialProdId').value = item.productId || '';
+    document.getElementById('editSpecialImgPath').value = item.image || 'src/assets/products/quick-touch-safety-packaging.png';
+    document.getElementById('editSpecialImgPreview').src = item.image || 'src/assets/products/quick-touch-safety-packaging.png';
+
+    populateSpecialProductPicker();
+    if (item.productId) {
+      document.getElementById('specialProductPicker').value = item.productId;
+    } else {
+      document.getElementById('specialProductPicker').value = '';
+    }
+
+    document.getElementById('specialOfferModal').classList.add('open');
+  };
+
+  window.closeSpecialOfferModal = function() {
+    document.getElementById('specialOfferModal').classList.remove('open');
+  };
+
+  window.updateSpecialImagePreviewFromInput = function(val) {
+    const preview = document.getElementById('editSpecialImgPreview');
+    if (preview && val) preview.src = val.trim();
+  };
+
+  window.handleSpecialImageFileSelected = function(input) {
+    const file = input.files && input.files[0];
+    if (!file) return;
+
+    if (file.size > 15 * 1024 * 1024) {
+      alert('Selected image exceeds 15MB size limit.');
+      return;
+    }
+
+    showToast('Uploading special offer image...');
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      fetch('/api/admin/upload-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+        body: JSON.stringify({ fileName: file.name, dataUrl: dataUrl })
+      })
+      .then(res => res.json())
+      .then(resData => {
+        if (resData.status === 'success' && resData.imagePath) {
+          document.getElementById('editSpecialImgPath').value = resData.imagePath;
+          document.getElementById('editSpecialImgPreview').src = resData.imagePath;
+          showToast('Image uploaded successfully!');
+        } else {
+          alert('Upload failed: ' + (resData.message || 'Unknown error'));
+        }
+      })
+      .catch(err => alert('Upload error: ' + err));
+    };
+    reader.readAsDataURL(file);
+    input.value = '';
+  };
+
+  window.saveSpecialOfferForm = function() {
+    const id = document.getElementById('editSpecialId').value;
+    const title = (document.getElementById('editSpecialName').value || '').trim();
+    const badge = (document.getElementById('editSpecialBadge').value || '').trim() || 'SPECIAL PRICE';
+    const ndc = (document.getElementById('editSpecialNdc').value || '').trim();
+    const desc = (document.getElementById('editSpecialDesc').value || '').trim();
+    const prodId = (document.getElementById('editSpecialProdId').value || '').trim();
+    const img = (document.getElementById('editSpecialImgPath').value || '').trim() || 'src/assets/products/quick-touch-safety-packaging.png';
+
+    if (!title) {
+      alert('Please enter a product title.');
+      return;
+    }
+    if (!ndc) {
+      alert('Please enter an NDC number.');
+      return;
+    }
+
+    if (!currentCatalog.specialOffers) {
+      currentCatalog.specialOffers = {
+        eyebrow: 'AKRON GENERICS · SPECIAL OFFERS',
+        title: 'A new month. More opportunity.',
+        subtitle: 'Featured prices from our November specials.',
+        notice: 'Promotional allocation. Offer valid till November 30, 2026. Confirm availability before ordering.',
+        catalogUrl: 'src/november-specials.pdf',
+        catalogBtnText: 'Explore the Catalog ↗',
+        items: []
+      };
+    }
+    if (!Array.isArray(currentCatalog.specialOffers.items)) {
+      currentCatalog.specialOffers.items = [];
+    }
+
+    const items = currentCatalog.specialOffers.items;
+    if (id) {
+      // Edit existing
+      const idx = items.findIndex(s => String(s.id) === String(id));
+      if (idx !== -1) {
+        items[idx] = {
+          ...items[idx],
+          title,
+          badge,
+          ndc,
+          description: desc,
+          productId: prodId,
+          image: img
+        };
+      } else {
+        alert('Special offer item no longer exists. Please refresh.');
+        return;
+      }
+    } else {
+      // Add new
+      const newId = `SPEC-${Date.now()}`;
+      items.push({
+        id: newId,
+        productId: prodId,
+        title,
+        badge,
+        image: img,
+        description: desc,
+        ndc
+      });
+    }
+
+    const btn = document.getElementById('btnSaveSpecial');
+    if (btn) btn.disabled = true;
+
+    fetch('/api/admin/specials/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+      body: JSON.stringify({ specialOffers: currentCatalog.specialOffers })
+    })
+    .then(res => res.json())
+    .then(resData => {
+      if (btn) btn.disabled = false;
+      if (resData.status === 'success') {
+        if (resData.specialOffers) currentCatalog.specialOffers = resData.specialOffers;
+        renderSpecialOffersTab();
+        closeSpecialOfferModal();
+        showToast(id ? 'Special offer updated successfully!' : 'New product added to special offers!');
+      } else {
+        alert('Save failed: ' + (resData.message || 'Unknown error'));
+      }
+    })
+    .catch(err => {
+      if (btn) btn.disabled = false;
+      alert('Network error saving special offers: ' + err);
+    });
+  };
+
+  window.removeSpecialOffer = function(specialId) {
+    if (!confirm('Are you sure you want to remove this product from the monthly special offers?')) {
+      return;
+    }
+
+    if (!currentCatalog.specialOffers || !Array.isArray(currentCatalog.specialOffers.items)) return;
+
+    currentCatalog.specialOffers.items = currentCatalog.specialOffers.items.filter(s => String(s.id) !== String(specialId));
+
+    showToast('Removing special offer...');
+    fetch('/api/admin/specials/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+      body: JSON.stringify({ specialOffers: currentCatalog.specialOffers })
+    })
+    .then(res => res.json())
+    .then(resData => {
+      if (resData.status === 'success') {
+        if (resData.specialOffers) currentCatalog.specialOffers = resData.specialOffers;
+        renderSpecialOffersTab();
+        showToast('Special offer removed successfully.');
+      } else {
+        alert('Remove failed: ' + (resData.message || 'Unknown error'));
+      }
+    })
+    .catch(err => alert('Network error: ' + err));
+  };
+
+  // Quick 1-click image upload on special offer cards
+  window.triggerQuickSpecialImgUpload = function(specialId) {
+    quickSpecialTargetId = specialId;
+    const fileInput = document.getElementById('quickSpecialImgFileInput');
+    if (fileInput) fileInput.click();
+  };
+
+  window.handleQuickSpecialImageSelected = function(input) {
+    const file = input.files && input.files[0];
+    if (!file || !quickSpecialTargetId) return;
+
+    if (file.size > 15 * 1024 * 1024) {
+      alert('Selected file exceeds maximum limit of 15MB.');
+      return;
+    }
+
+    const specials = (currentCatalog.specialOffers && currentCatalog.specialOffers.items) || [];
+    const targetItem = specials.find(s => String(s.id) === String(quickSpecialTargetId));
+    if (!targetItem) return;
+
+    showToast(`Uploading new image for "${targetItem.title}"...`);
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      fetch('/api/admin/upload-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+        body: JSON.stringify({ fileName: file.name, dataUrl: dataUrl })
+      })
+      .then(res => res.json())
+      .then(resData => {
+        if (resData.status === 'success' && resData.imagePath) {
+          targetItem.image = resData.imagePath;
+
+          fetch('/api/admin/specials/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+            body: JSON.stringify({ specialOffers: currentCatalog.specialOffers })
+          })
+          .then(res => res.json())
+          .then(saveRes => {
+            if (saveRes.status === 'success') {
+              if (saveRes.specialOffers) currentCatalog.specialOffers = saveRes.specialOffers;
+              showToast(`Image updated for "${targetItem.title}"!`);
+              renderSpecialOffersTab();
+            } else {
+              alert('Failed to save special offer after image upload: ' + (saveRes.message || 'Unknown error'));
+            }
+          })
+          .catch(saveErr => alert('Network error saving special offers: ' + saveErr));
+        } else {
+          alert('Upload failed: ' + (resData.message || 'Unknown error'));
+        }
+      })
+      .catch(err => alert('Upload error: ' + err));
+    };
+    reader.readAsDataURL(file);
+    input.value = '';
+  };
+
+  // Section Details Modal
+  window.openSpecialsSectionModal = function() {
+    const data = currentCatalog.specialOffers || {};
+    document.getElementById('secEyebrow').value = data.eyebrow || 'AKRON GENERICS · SPECIAL OFFERS';
+    document.getElementById('secTitle').value = data.title || 'A new month. More opportunity.';
+    document.getElementById('secSubtitle').value = data.subtitle || 'Featured prices from our November specials.';
+    document.getElementById('secNotice').value = data.notice || 'Promotional allocation. Offer valid till November 30, 2026. Confirm availability before ordering.';
+    document.getElementById('secCatalogUrl').value = data.catalogUrl || 'src/november-specials.pdf';
+    document.getElementById('secBtnText').value = data.catalogBtnText || 'Explore the Catalog ↗';
+
+    document.getElementById('specialsSectionModal').classList.add('open');
+  };
+
+  window.closeSpecialsSectionModal = function() {
+    document.getElementById('specialsSectionModal').classList.remove('open');
+  };
+
+  window.saveSpecialsSectionDetails = function() {
+    if (!currentCatalog.specialOffers) {
+      currentCatalog.specialOffers = { items: [] };
+    }
+
+    currentCatalog.specialOffers.eyebrow = (document.getElementById('secEyebrow').value || '').trim() || 'AKRON GENERICS · SPECIAL OFFERS';
+    currentCatalog.specialOffers.title = (document.getElementById('secTitle').value || '').trim() || 'A new month. More opportunity.';
+    currentCatalog.specialOffers.subtitle = (document.getElementById('secSubtitle').value || '').trim() || 'Featured prices from our November specials.';
+    currentCatalog.specialOffers.notice = (document.getElementById('secNotice').value || '').trim();
+    currentCatalog.specialOffers.catalogUrl = (document.getElementById('secCatalogUrl').value || '').trim() || 'src/november-specials.pdf';
+    currentCatalog.specialOffers.catalogBtnText = (document.getElementById('secBtnText').value || '').trim() || 'Explore the Catalog ↗';
+
+    fetch('/api/admin/specials/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+      body: JSON.stringify({ specialOffers: currentCatalog.specialOffers })
+    })
+    .then(res => res.json())
+    .then(resData => {
+      if (resData.status === 'success') {
+        if (resData.specialOffers) currentCatalog.specialOffers = resData.specialOffers;
+        renderSpecialOffersTab();
+        closeSpecialsSectionModal();
+        showToast('Specials section details updated successfully!');
+      } else {
+        alert('Failed: ' + (resData.message || 'Unknown error'));
+      }
+    })
+    .catch(err => alert('Network error: ' + err));
   };
 
   // ----------------------------------------------------------------------------
