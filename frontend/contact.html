@@ -404,48 +404,50 @@
       text-decoration: underline;
     }
 
-    /* Right Column: Real Value Rx Style Card Form */
+    /* Right Column: Clean Modern Form Card (Matching Reference Theme) */
     .contact-form-card {
       background: #FFFFFF;
-      border-radius: 18px;
-      padding: clamp(26px, 4vw, 42px);
-      box-shadow: 0 4px 24px rgba(15, 23, 42, 0.05);
-      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 24px;
+      padding: clamp(28px, 4vw, 44px);
+      box-shadow: 0 4px 24px rgba(22, 24, 15, 0.04);
+      border: 1px solid rgba(22, 24, 15, 0.08);
     }
 
     .contact-form-header {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .contact-form-title {
       font-family: var(--sans);
-      font-size: 23px;
+      font-size: 24px;
       font-weight: 750;
-      color: #111827;
+      color: #16180F;
       letter-spacing: -0.025em;
-      margin: 0 0 5px 0;
+      margin: 0 0 6px 0;
     }
 
     .contact-form-subtitle {
-      font-size: 13.5px;
-      color: #6B7280;
+      font-size: 14px;
+      color: #5F6359;
       margin: 0;
       font-weight: 400;
+      line-height: 1.5;
     }
 
     .c-section-heading {
       font-family: var(--sans);
-      font-size: 13.5px;
+      font-size: 11.5px;
       font-weight: 700;
-      color: #111827;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #78776F;
       padding-bottom: 8px;
-      border-bottom: 1px solid #E5E7EB;
-      margin: 22px 0 16px 0;
-      letter-spacing: -0.01em;
+      border-bottom: 1px solid rgba(22, 24, 15, 0.08);
+      margin: 24px 0 16px 0;
     }
 
     .c-section-heading:first-of-type {
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
     .c-form-row {
@@ -476,14 +478,23 @@
     .c-field-group label {
       display: block;
       font-size: 13px;
-      font-weight: 550;
-      color: #1F2937;
-      margin-bottom: 6px;
+      font-weight: 600;
+      color: #16180F;
+      margin-bottom: 7px;
+      letter-spacing: -0.01em;
     }
 
     .c-field-group label .c-req {
-      color: #111827;
+      color: #16180F;
       font-weight: 600;
+      margin-left: 2px;
+    }
+
+    .c-field-group label .c-opt {
+      color: #78776F;
+      font-weight: 400;
+      font-size: 12px;
+      margin-left: 4px;
     }
 
     .c-field-group input,
@@ -491,29 +502,29 @@
     .c-field-group textarea {
       width: 100%;
       box-sizing: border-box;
-      background: #FFFFFF;
-      border: 1px solid #D1D5DB;
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 14px;
-      color: #111827;
-      font-family: var(--body);
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      background: #F0EFEA;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 14.5px;
+      color: #16180F;
+      font-family: var(--sans);
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .c-field-group input::placeholder,
     .c-field-group textarea::placeholder {
-      color: #9CA3AF;
-      font-size: 13.5px;
+      color: #8E8D86;
+      font-size: 14px;
     }
 
     .c-field-group input:focus,
     .c-field-group select:focus,
     .c-field-group textarea:focus {
       outline: none;
-      background: #FFFFFF;
-      border-color: #2563EB;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      background: #EBE7DF;
+      border-color: rgba(22, 24, 15, 0.22);
+      box-shadow: 0 0 0 3px rgba(22, 24, 15, 0.05);
     }
 
     .c-field-group textarea {
@@ -531,238 +542,109 @@
       appearance: none;
       -webkit-appearance: none;
       cursor: pointer;
-      padding-right: 38px;
-      background: #FFFFFF;
+      padding-right: 42px;
+      background: #F0EFEA;
     }
 
     .c-select-arrow {
       position: absolute;
-      right: 14px;
+      right: 16px;
       top: 50%;
       transform: translateY(-50%);
       pointer-events: none;
-      color: #6B7280;
+      color: #16180F;
       display: flex;
       align-items: center;
     }
 
-    .c-followup-note {
-      font-size: 12.5px;
-      color: #4B5563;
-      margin: 18px 0 12px 0;
-      line-height: 1.5;
+    /* Submit Button: Pill-shaped Solid Deep Black matching reference theme */
+    .btn-contact-submit {
+      width: 100%;
+      background: #16180F;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 9999px;
+      padding: 16px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+      font-family: var(--sans);
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(22, 24, 15, 0.12);
     }
 
-    .c-sms-consent {
+    .btn-contact-submit:hover {
+      background: #2D3025;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(22, 24, 15, 0.18);
+    }
+
+    .btn-contact-submit:active {
+      transform: translateY(0);
+    }
+
+    .btn-contact-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Checkbox & Consent Area directly below submit button */
+    .c-consent-group {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .c-consent-item {
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      margin-bottom: 20px;
-      font-size: 11.5px;
+      font-size: 12px;
       line-height: 1.5;
-      color: #4B5563;
+      color: #5F6359;
       cursor: pointer;
+      user-select: none;
     }
 
-    .c-sms-consent input[type="checkbox"] {
-      width: 15px;
-      height: 15px;
+    .c-consent-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
       margin-top: 2px;
-      accent-color: #D9222A;
+      accent-color: #16180F;
+      border-radius: 4px;
       flex-shrink: 0;
       cursor: pointer;
     }
 
-    .c-sms-consent a {
-      color: inherit;
+    .c-consent-item a {
+      color: #16180F;
       text-decoration: underline;
-    }
-
-    /* reCAPTCHA v2 Widget */
-    .recaptcha-widget-container {
-      margin: 18px 0 20px 0;
-    }
-
-    .recaptcha-box {
-      width: 302px;
-      max-width: 100%;
-      height: 74px;
-      background: #F9F9F9;
-      border: 1px solid #D3D3D3;
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 12px;
-      box-sizing: border-box;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      cursor: pointer;
-      user-select: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .recaptcha-box.has-error {
-      border-color: #DC2626 !important;
-      box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
-    }
-
-    .recaptcha-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .recaptcha-checkbox {
-      width: 26px;
-      height: 26px;
-      background: #FFFFFF;
-      border: 2px solid #C1C1C1;
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s ease;
-      position: relative;
-    }
-
-    .recaptcha-box:hover .recaptcha-checkbox {
-      border-color: #A6A6A6;
-    }
-
-    .recaptcha-checkbox.checked {
-      border-color: transparent !important;
-      background: transparent !important;
-    }
-
-    .recaptcha-checkmark {
-      display: none;
-      width: 24px;
-      height: 24px;
-    }
-
-    .recaptcha-checkbox.checked .recaptcha-checkmark {
-      display: block;
-    }
-
-    .recaptcha-spinner {
-      display: none;
-      width: 18px;
-      height: 18px;
-      border: 2.5px solid #4285F4;
-      border-top-color: transparent;
-      border-radius: 50%;
-      animation: recaptcha-spin 0.7s linear infinite;
-    }
-
-    .recaptcha-checkbox.loading .recaptcha-spinner {
-      display: block;
-    }
-
-    @keyframes recaptcha-spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .recaptcha-label {
-      font-family: Roboto, Arial, sans-serif;
-      font-size: 14px;
-      color: #222222;
-      font-weight: 400;
-      cursor: pointer;
-    }
-
-    .recaptcha-brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .recaptcha-text {
-      font-family: Roboto, Arial, sans-serif;
-      font-size: 10px;
-      color: #555555;
-      font-weight: 500;
-      margin-top: 2px;
-      letter-spacing: -0.01em;
-    }
-
-    .recaptcha-links {
-      font-family: Roboto, Arial, sans-serif;
-      font-size: 8px;
-      color: #555555;
-      margin-top: 1px;
-    }
-
-    .recaptcha-links a {
-      color: #555555;
-      text-decoration: none;
-    }
-
-    .recaptcha-links a:hover {
-      text-decoration: underline;
-    }
-
-    .recaptcha-error-msg {
-      display: none;
-      font-size: 12px;
-      color: #DC2626;
-      margin-top: 6px;
-      font-weight: 500;
-    }
-
-    .recaptcha-error-msg.visible {
-      display: block;
-    }
-
-    /* Submit Button (Vibrant Clean Red like Real Value Rx) */
-    .btn-realvalue-submit {
-      width: 100%;
-      background: #D9222A;
-      color: #FFFFFF;
-      border: none;
-      border-radius: 8px;
-      padding: 14px 24px;
-      font-size: 15px;
       font-weight: 600;
-      cursor: pointer;
-      transition: background 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
-      box-shadow: 0 4px 14px rgba(217, 34, 42, 0.22);
-      font-family: var(--sans);
-      margin-top: 8px;
     }
 
-    .btn-realvalue-submit:hover {
-      background: #B91C1C;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(217, 34, 42, 0.30);
-    }
-
-    .btn-realvalue-submit:active {
-      transform: translateY(0);
+    .c-consent-item a:hover {
+      color: #000000;
     }
 
     .c-success-alert {
       display: none;
       margin-top: 18px;
-      background: #DCFCE7;
-      color: #166534;
-      border: 1px solid #86EFAC;
-      padding: 14px 18px;
-      border-radius: 10px;
+      background: #E8F5E9;
+      color: #1E4620;
+      border: 1px solid #C8E6C9;
+      padding: 16px 20px;
+      border-radius: 12px;
       font-size: 14px;
       line-height: 1.5;
-      font-weight: 500;
-    }
-
-    color: #166534;
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    text-align: center;
+      font-weight: 600;
+      text-align: center;
     }
 
     /* ---------- REFINED CONTACT PAGE FOOTER ---------- */
@@ -1497,14 +1379,13 @@
             <div class="c-section-heading">How can we help</div>
 
             <div class="c-field-group full-width">
-              <label for="cpReason">Reason for contact <span class="c-req">*</span></label>
+              <label for="cpReason">Inquiry Type <span class="c-req">*</span></label>
               <div class="c-select-wrap">
                 <select id="cpReason" name="reason" required>
-                  <option value="" disabled selected>Select a reason</option>
-                  <option value="Wholesale Pharmacy Purchasing">Wholesale Pharmacy Purchasing</option>
+                  <option value="" disabled>Select an inquiry type</option>
+                  <option value="Wholesale Pharmacy Purchasing" selected>Wholesale Pharmacy Purchasing</option>
                   <option value="New Customer Account Onboarding">New Customer Account Onboarding</option>
-                  <option value="Product Sourcing & Shortage Inquiries">Product Sourcing &amp; Shortage Inquiries
-                  </option>
+                  <option value="Product Sourcing & Shortage Inquiries">Product Sourcing &amp; Shortage Inquiries</option>
                   <option value="Order Tracking & Delivery Logistics">Order Tracking &amp; Delivery Logistics</option>
                   <option value="T3 & DSCSA Traceability Support">T3 &amp; DSCSA Traceability Support</option>
                   <option value="Pricing & Contract Tier Inquiries">Pricing &amp; Contract Tier Inquiries</option>
@@ -1519,72 +1400,35 @@
             </div>
 
             <div class="c-field-group full-width">
-              <label for="cpMessage">How can we help? <span class="c-req">*</span></label>
-              <textarea id="cpMessage" name="message" rows="5" placeholder="Write whats on your mind...."
-                required></textarea>
+              <label for="cpMessage">Message <span class="c-opt">(Optional)</span></label>
+              <textarea id="cpMessage" name="message" rows="5" placeholder="Tell us more about your request..."></textarea>
             </div>
 
-            <!-- FOLLOW UP NOTE -->
-            <p class="c-followup-note">An Akron Generics representative will follow up within one business day.</p>
-
-            <!-- SMS CONSENT CHECKBOX -->
-            <label class="c-sms-consent" for="cpSmsConsent">
-              <input type="checkbox" id="cpSmsConsent" name="smsConsent">
-              <span>I consent to receive conversational and informational SMS messages from Akron Generics regarding my
-                orders and account. Reply STOP to opt-out; Reply HELP for help; Message &amp; data rates may apply;
-                Messaging frequency may vary. View our Privacy Policy at <a href="index.html#privacy" target="_blank"
-                  rel="noopener noreferrer">akrongenerics.com/privacy-policy/</a>.</span>
-            </label>
-
-            <!-- SMS CONSENT CHECKBOX -->
-            <label class="c-sms-consent" for="cpSmsConsent">
-              <input type="checkbox" id="cpSmsConsent" name="smsConsent">
-              <span>I consent to receive conversational and informational SMS messages from Akron Generics regarding my
-                orders and account. Reply STOP to opt-out; Reply HELP for help; Message &amp; data rates may apply;
-                Messaging frequency may vary. View our Privacy Policy at <a href="index.html#privacy" target="_blank"
-                  rel="noopener noreferrer">akrongenerics.com/privacy-policy/</a>.</span>
-            </label>
-
-            <!-- Anti-Bot Honeypot (Hidden from humans, traps bots) -->
-            <div style="display:none !important; position:absolute !important; left:-9999px !important;"
-              aria-hidden="true">
+            <!-- Anti-Bot Honeypot (Hidden from humans, traps automated spam) -->
+            <div style="display:none !important; position:absolute !important; left:-9999px !important;" aria-hidden="true">
               <label for="cpWebsiteHoneypot">Leave this field blank</label>
               <input type="text" id="cpWebsiteHoneypot" name="website" tabindex="-1" autocomplete="off">
             </div>
 
-            <!-- RECAPTCHA V2 WIDGET -->
-            <div class="recaptcha-widget-container" id="recaptchaContainer">
-              <div class="recaptcha-box" id="recaptchaBox" onclick="toggleRecaptcha()">
-                <div class="recaptcha-left">
-                  <div class="recaptcha-checkbox" id="recaptchaCheckbox" role="checkbox" aria-checked="false"
-                    tabindex="0"
-                    onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();toggleRecaptcha();}">
-                    <span class="recaptcha-spinner" id="recaptchaSpinner"></span>
-                    <svg class="recaptcha-checkmark" id="recaptchaCheckmark" viewBox="0 0 24 24" fill="none"
-                      stroke="#16a34a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    <span class="recaptcha-text">reCAPTCHA</span>
-                    <div class="recaptcha-links">
-                      <a href="https://www.google.com/intl/en/policies/privacy/" target="_blank"
-                        rel="noopener noreferrer">Privacy</a> -
-                      <a href="https://www.google.com/intl/en/policies/terms/" target="_blank"
-                        rel="noopener noreferrer">Terms</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="recaptcha-error-msg" id="recaptchaError">Please verify that you are not a robot.</div>
-                <input type="hidden" id="cpCaptchaVerified" name="captchaVerified" value="false">
-              </div>
+            <!-- SUBMIT BUTTON: Solid Black Pill Matching Reference Theme -->
+            <button type="submit" class="btn-contact-submit" id="cpSubmitBtn">Submit</button>
 
-              <!-- SUBMIT BUTTON -->
-              <button type="submit" class="btn-realvalue-submit" id="cpSubmitBtn">Submit</button>
+            <!-- Checkbox agreement directly below submit button -->
+            <div class="c-consent-group">
+              <label class="c-consent-item" for="cpConsentPrivacy">
+                <input type="checkbox" id="cpConsentPrivacy" checked required>
+                <span>By submitting this form, I agree to the <a href="index.html#privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span>
+              </label>
+              <label class="c-consent-item" for="cpSmsConsent">
+                <input type="checkbox" id="cpSmsConsent" name="smsConsent">
+                <span>I consent to receive conversational and informational SMS messages from Akron Generics regarding orders and account inquiries. Reply STOP to opt-out; Reply HELP for help; Message &amp; data rates may apply.</span>
+              </label>
+            </div>
 
-              <!-- SUCCESS ALERT -->
-              <div id="cpSuccessAlert" class="c-success-alert">
-                ✓ Thank you! Your message has been sent. An Akron Generics representative will follow up within one
-                business day.
-              </div>
+            <!-- SUCCESS ALERT -->
+            <div id="cpSuccessAlert" class="c-success-alert">
+              ✓ Thank you! Your message has been sent. An Akron Generics representative will follow up within one business day.
+            </div>
 
           </form>
         </div>
@@ -1685,54 +1529,36 @@
   </div>
 
   <script>
-    var captchaState = {
-      verified: false,
-      loading: false
-    };
-
-    function toggleRecaptcha() {
-      if (captchaState.verified || captchaState.loading) return;
-      var box = document.getElementById('recaptchaBox');
-      var cb = document.getElementById('recaptchaCheckbox');
-      var err = document.getElementById('recaptchaError');
-      var hidden = document.getElementById('cpCaptchaVerified');
-
-      captchaState.loading = true;
-      cb.classList.add('loading');
-      if (box) box.classList.remove('has-error');
-      if (err) err.classList.remove('visible');
-
-      setTimeout(function () {
-        captchaState.loading = false;
-        captchaState.verified = true;
-        cb.classList.remove('loading');
-        cb.classList.add('checked');
-        cb.setAttribute('aria-checked', 'true');
-        if (hidden) hidden.value = 'true';
-      }, 450);
-    }
-
-  // Auto-verify CAPTCHA check on form submit for seamless customer experience
-  if (!captchaState.verified && (!hidden || hidden.value !== 'true')) {
-    toggleRecaptcha();
-  }
-
-      // Verify CAPTCHA check
-      if (!captchaState.verified && (!hidden || hidden.value !== 'true')) {
-        if (box) box.classList.add('has-error');
-        if (err) err.classList.add('visible');
-        box.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return false;
-      }
+    function handleContactPageSubmit(e) {
+      if (e) e.preventDefault();
 
       var btn = document.getElementById('cpSubmitBtn');
       var alertEl = document.getElementById('cpSuccessAlert');
+
+      var firstName = (document.getElementById('cpFirstName') && document.getElementById('cpFirstName').value.trim()) || '';
+      var lastName = (document.getElementById('cpLastName') && document.getElementById('cpLastName').value.trim()) || '';
+      var email = (document.getElementById('cpEmail') && document.getElementById('cpEmail').value.trim()) || '';
+      var phone = (document.getElementById('cpPhone') && document.getElementById('cpPhone').value.trim()) || '';
+      var role = (document.getElementById('cpRole') && document.getElementById('cpRole').value) || '';
+      var pharmacyName = (document.getElementById('cpPharmacyName') && document.getElementById('cpPharmacyName').value.trim()) || '';
+      var state = (document.getElementById('cpState') && document.getElementById('cpState').value) || '';
+      var reason = (document.getElementById('cpReason') && document.getElementById('cpReason').value) || '';
+      var message = (document.getElementById('cpMessage') && document.getElementById('cpMessage').value.trim()) || '';
+      var smsCheckbox = document.getElementById('cpSmsConsent');
+      var smsConsent = smsCheckbox ? smsCheckbox.checked : false;
+
+      // Anti-Bot Honeypot: trap automated bots silently
+      var website = (document.getElementById('cpWebsiteHoneypot') && document.getElementById('cpWebsiteHoneypot').value.trim()) || '';
+      if (website) {
+        console.warn('[Anti-bot Honeypot]: spam submission caught');
+        if (btn) btn.disabled = true;
+        return false;
+      }
+
       if (btn) {
         btn.disabled = true;
         btn.textContent = 'Submitting message...';
       }
-
-      var website = (document.getElementById('cpWebsiteHoneypot') && document.getElementById('cpWebsiteHoneypot').value.trim()) || '';
 
       var now = new Date();
       var payload = {
@@ -1757,82 +1583,42 @@
         secondaryRecipient: 'mukesh@akrongenerics.com'
       };
 
-      var now = new Date();
-      var payload = {
-        id: 'CNT-' + Date.now(),
-        formType: 'contact',
-        firstName: firstName,
-        lastName: lastName,
-        fullName: (firstName + ' ' + lastName).trim(),
-        email: email,
-        phone: phone,
-        role: role,
-        pharmacyName: pharmacyName,
-        state: state,
-        reason: reason,
-        message: message,
-        smsConsent: smsConsent,
-        submittedAt: now.toISOString(),
-        submittedAtFormatted: now.toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'full', timeStyle: 'short' }) + ' (EST)',
-        sourceUrl: window.location.href,
-        recipientEmail: 'info@akrongenerics.com',
-        secondaryRecipient: 'mukesh@akrongenerics.com'
-      };
+      // Resilient Dual-Route Dispatcher:
+      // Primary Route: Google Apps Script Webhook directly notifying info@akrongenerics.com & mukesh@akrongenerics.com
+      var GOOGLE_SCRIPT_WEBHOOK = 'https://script.google.com/macros/s/AKfycbxaQ9hXd_jnFuA35yqS_hVIGoVd8VAFEQ6NBUNj7cwsbdsVg_8eiJSfbYUFrmWrX_fc/exec';
+      try {
+        fetch(GOOGLE_SCRIPT_WEBHOOK, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(payload)
+        }).catch(function (gErr) {
+          console.warn('[Google Script Direct Dispatch Notice]', gErr);
+        });
+      } catch (err) {}
 
-  // 2. Resilient Dual-Route Dispatcher
-  var GOOGLE_SCRIPT_WEBHOOK = 'https://script.google.com/macros/s/AKfycbxaQ9hXd_jnFuA35yqS_hVIGoVd8VAFEQ6NBUNj7cwsbdsVg_8eiJSfbYUFrmWrX_fc/exec';
-
-  // A. Direct Cloud Delivery (Guaranteed across all browsers, ports, protocols & domains)
-  try {
-    fetch(GOOGLE_SCRIPT_WEBHOOK, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
-    }).catch(function(gErr) {
-      console.warn('[Google Script Direct Dispatch Notice]', gErr);
-    });
-  } catch(e) {}
-
-  // B. Also notify local backend /api endpoint if running via HTTP/HTTPS
-  if (window.location.protocol.startsWith('http')) {
-    fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(function() {});
-  }
-
-      // 2. Dispatch to In-House Backend (Direct SMTP or Google Apps Script Webhook)
-      var endpoints = ['/api/contact', 'http://localhost:3000/api/contact', 'http://127.0.0.1:3000/api/contact'];
-      endpoints.forEach(function (ep) {
-        fetch(ep, {
+      // Secondary Route: Local backend /api/contact endpoint (if running via web server)
+      if (window.location.protocol.startsWith('http')) {
+        fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        }).catch(function () { });
-      });
+        }).catch(function () {});
+      }
 
       // UI Success Transition
       setTimeout(function () {
         if (btn) {
           btn.textContent = 'Message Submitted ✓';
-          btn.style.background = '#15803D';
+          btn.style.background = '#16180F';
+          btn.disabled = false;
         }
         if (alertEl) {
           alertEl.style.display = 'block';
           alertEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-        document.getElementById('contactPageForm').reset();
-
-        // Reset captcha state
-        captchaState.verified = false;
-        var cb = document.getElementById('recaptchaCheckbox');
-        if (cb) {
-          cb.classList.remove('checked', 'loading');
-          cb.setAttribute('aria-checked', 'false');
-        }
-        if (hidden) hidden.value = 'false';
+        var form = document.getElementById('contactPageForm');
+        if (form) form.reset();
       }, 600);
 
       return false;
