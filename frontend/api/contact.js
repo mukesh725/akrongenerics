@@ -20,11 +20,17 @@ export default async function handler(req, res) {
     const payload = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
     const { email, firstName, lastName, phone, role, pharmacyName, state, reason, message } = payload;
 
+    // Bot honeypot protection
+    if (payload.website || payload.honeypot) {
+      return res.status(200).json({ status: 'success', id: 'CNT-BOT', message: 'Inquiry received.' });
+    }
+
     if (!email || !email.includes('@')) {
       return res.status(400).json({ error: 'Valid customer email is required' });
     }
 
     const reqId = payload.id || ('CNT-' + Date.now());
+    payload.id = reqId;
     payload.formType = 'contact';
 
     console.log(`[CONTACT INQUIRY] Received from '${firstName} ${lastName}' (${email}) for '${reason}'`);
@@ -40,7 +46,7 @@ export default async function handler(req, res) {
         });
         console.log('[GOOGLE SCRIPT DISPATCHED] Contact inquiry delivered');
       } catch (gErr) {
-        console.log('Notice: Google Script trigger error:', gErr);
+        console.warn('Notice: Google Script trigger error:', gErr);
       }
     }
 

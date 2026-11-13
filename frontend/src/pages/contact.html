@@ -1350,6 +1350,12 @@ body {
             <span>I consent to receive conversational and informational SMS messages from Akron Generics regarding my orders and account. Reply STOP to opt-out; Reply HELP for help; Message &amp; data rates may apply; Messaging frequency may vary. View our Privacy Policy at <a href="index.html#privacy" target="_blank" rel="noopener noreferrer">akrongenerics.com/privacy-policy/</a>.</span>
           </label>
 
+          <!-- Anti-Bot Honeypot (Hidden from humans, traps bots) -->
+          <div style="display:none !important; position:absolute !important; left:-9999px !important;" aria-hidden="true">
+            <label for="cpWebsiteHoneypot">Leave this field blank</label>
+            <input type="text" id="cpWebsiteHoneypot" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
           <!-- RECAPTCHA V2 WIDGET -->
           <div class="recaptcha-widget-container" id="recaptchaContainer">
             <div class="recaptcha-box" id="recaptchaBox" onclick="toggleRecaptcha()">
@@ -1531,10 +1537,13 @@ function handleContactPageSubmit(e) {
   var message = (document.getElementById('cpMessage') && document.getElementById('cpMessage').value.trim()) || '';
   var smsConsent = document.getElementById('cpSmsConsent') ? document.getElementById('cpSmsConsent').checked : false;
 
+  var website = (document.getElementById('cpWebsiteHoneypot') && document.getElementById('cpWebsiteHoneypot').value.trim()) || '';
+
   var now = new Date();
   var payload = {
     id: 'CNT-' + Date.now(),
     formType: 'contact',
+    website: website,
     firstName: firstName,
     lastName: lastName,
     fullName: (firstName + ' ' + lastName).trim(),
@@ -1561,13 +1570,12 @@ function handleContactPageSubmit(e) {
   } catch(e) {}
 
   // 2. Dispatch to In-House Backend (Direct SMTP or Google Apps Script Webhook)
-  var endpoints = ['/api/contact', 'http://localhost:3000/api/contact', 'http://127.0.0.1:3000/api/contact'];
-  endpoints.forEach(function(ep) {
-    fetch(ep, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(function() {});
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function(err) {
+    console.warn('[Contact Dispatch Notice]', err);
   });
 
   // UI Success Transition

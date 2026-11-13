@@ -304,18 +304,13 @@
       localStorage.setItem('akron_pricing_requests', JSON.stringify(stored.slice(0, 100)));
     } catch (e) {}
 
-    // 2. Dispatch ONLY to Akron Generics private backend (Zero 3rd-party data leaks)
-    var backendEndpoints = [
-      '/api/request-pricing',
-      'http://localhost:3000/api/request-pricing',
-      'http://127.0.0.1:3000/api/request-pricing'
-    ];
-    backendEndpoints.forEach(function(ep) {
-      fetch(ep, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(function() {});
+    // 2. Dispatch to Akron Generics private backend endpoint (Zero 3rd-party data leaks)
+    fetch('/api/request-pricing', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function(err) {
+      console.warn('[Pricing Dispatch Notice]', err);
     });
 
     // Transition UI to Confirmation State

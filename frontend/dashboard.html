@@ -626,8 +626,8 @@ function loadApplications() {
     }
   } catch(e) {}
 
-  // Try fetching backend applications from both relative and absolute localhost URL
-  var apiUrls = ['/api/applications', 'http://localhost:3000/api/applications', 'http://127.0.0.1:3000/api/applications'];
+  // Try fetching backend applications from relative endpoint
+  var apiUrls = ['/api/applications'];
 
   function tryFetch(index) {
     if (index >= apiUrls.length) {
@@ -981,13 +981,23 @@ function exportAllJson() {
   downloadAnchor.remove();
 }
 
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 function loadPricingRequests() {
   var localList = [];
   try {
     localList = JSON.parse(localStorage.getItem('akron_pricing_requests') || '[]');
   } catch(e) {}
 
-  var apiUrls = ['/api/pricing-requests', 'http://localhost:3000/api/pricing-requests', 'http://127.0.0.1:3000/api/pricing-requests'];
+  var apiUrls = ['/api/pricing-requests'];
 
   function tryFetch(index) {
     if (index >= apiUrls.length) {
@@ -1043,32 +1053,40 @@ function renderPricingRequests(list) {
 
   var html = '';
   list.forEach(function(item) {
-    var email = item.email || '--';
-    var prodName = item.productName || 'Pharmaceutical Product';
-    var ndc = item.ndc || '--';
-    var pack = item.packaging || '--';
-    var brand = item.brand || '--';
-    var reqId = item.id || '--';
-    var timeStr = item.requestedAtFormatted || item.requestedAt || '--';
+    var rawEmail = item.email || '--';
+    var rawProdName = item.productName || 'Pharmaceutical Product';
+    var rawNdc = item.ndc || '--';
+    var rawPack = item.packaging || '--';
+    var rawBrand = item.brand || '--';
+    var rawReqId = item.id || '--';
+    var rawTimeStr = item.requestedAtFormatted || item.requestedAt || '--';
+
+    var safeEmail = escapeHtml(rawEmail);
+    var safeProdName = escapeHtml(rawProdName);
+    var safeNdc = escapeHtml(rawNdc);
+    var safePack = escapeHtml(rawPack);
+    var safeBrand = escapeHtml(rawBrand);
+    var safeReqId = escapeHtml(rawReqId);
+    var safeTimeStr = escapeHtml(rawTimeStr);
 
     html += `
       <tr>
-        <td><strong style="color:var(--color-navy);font-size:12px;">${reqId}</strong></td>
-        <td style="font-size:12px;color:var(--color-text-muted);">${timeStr}</td>
+        <td><strong style="color:var(--color-navy);font-size:12px;">${safeReqId}</strong></td>
+        <td style="font-size:12px;color:var(--color-text-muted);">${safeTimeStr}</td>
         <td>
-          <a href="mailto:${encodeURIComponent(email)}?subject=Akron%20Generics%20Wholesale%20Pricing%3A%20${encodeURIComponent(prodName)}" style="color:var(--color-navy);font-weight:600;text-decoration:none;">
-            ${email}
+          <a href="mailto:${encodeURIComponent(rawEmail)}?subject=Akron%20Generics%20Wholesale%20Pricing%3A%20${encodeURIComponent(rawProdName)}" style="color:var(--color-navy);font-weight:600;text-decoration:none;">
+            ${safeEmail}
           </a>
         </td>
-        <td><strong>${prodName}</strong></td>
-        <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:12px;">${ndc}</code></td>
-        <td style="font-size:12.5px;">${pack}</td>
-        <td style="font-size:12.5px;">${brand}</td>
+        <td><strong>${safeProdName}</strong></td>
+        <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:12px;">${safeNdc}</code></td>
+        <td style="font-size:12.5px;">${safePack}</td>
+        <td style="font-size:12.5px;">${safeBrand}</td>
         <td style="text-align:right;white-space:nowrap;">
-          <a href="mailto:${encodeURIComponent(email)}?subject=Akron%20Generics%20Wholesale%20Pricing%3A%20${encodeURIComponent(prodName)}&body=Hello,%0D%0A%0D%0AThank%20you%20for%20requesting%20wholesale%20pricing%20for%20${encodeURIComponent(prodName)}%20(NDC:%20${encodeURIComponent(ndc)}).%0D%0A%0D%0A" style="display:inline-block;padding:4px 10px;background:#16A34A;color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;margin-right:6px;">
+          <a href="mailto:${encodeURIComponent(rawEmail)}?subject=Akron%20Generics%20Wholesale%20Pricing%3A%20${encodeURIComponent(rawProdName)}&body=Hello,%0D%0A%0D%0AThank%20you%20for%20requesting%20wholesale%20pricing%20for%20${encodeURIComponent(rawProdName)}%20(NDC:%20${encodeURIComponent(rawNdc)}).%0D%0A%0D%0A" style="display:inline-block;padding:4px 10px;background:#16A34A;color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;margin-right:6px;">
             ✉ Email Customer
           </a>
-          <a href="become-a-customer.html?email=${encodeURIComponent(email)}" target="_blank" style="display:inline-block;padding:4px 10px;background:var(--color-navy);color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;">
+          <a href="become-a-customer.html?email=${encodeURIComponent(rawEmail)}" target="_blank" style="display:inline-block;padding:4px 10px;background:var(--color-navy);color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;">
             Account Form &rarr;
           </a>
         </td>
@@ -1084,7 +1102,7 @@ function loadContactInquiries() {
     localList = JSON.parse(localStorage.getItem('akron_contact_inquiries') || '[]');
   } catch(e) {}
 
-  var apiUrls = ['/api/contact-inquiries', 'http://localhost:3000/api/contact-inquiries', 'http://127.0.0.1:3000/api/contact-inquiries'];
+  var apiUrls = ['/api/contact-inquiries'];
 
   function tryFetch(index) {
     if (index >= apiUrls.length) {
@@ -1140,43 +1158,54 @@ function renderContactInquiries(list) {
 
   var html = '';
   list.forEach(function(item) {
-    var inqId = item.id || '--';
-    var timeStr = item.submittedAtFormatted || item.submittedAt || '--';
-    var name = item.fullName || ((item.firstName || '') + ' ' + (item.lastName || '')).trim() || 'Visitor';
-    var role = item.role || '--';
-    var pharmacy = item.pharmacyName || '--';
-    var state = item.state || '--';
-    var email = item.email || '--';
-    var phone = item.phone || '--';
-    var reason = item.reason || 'General';
-    var message = item.message || '';
+    var rawInqId = item.id || '--';
+    var rawTimeStr = item.submittedAtFormatted || item.submittedAt || '--';
+    var rawName = item.fullName || ((item.firstName || '') + ' ' + (item.lastName || '')).trim() || 'Visitor';
+    var rawRole = item.role || '--';
+    var rawPharmacy = item.pharmacyName || '--';
+    var rawState = item.state || '--';
+    var rawEmail = item.email || '--';
+    var rawPhone = item.phone || '--';
+    var rawReason = item.reason || 'General';
+    var rawMessage = item.message || '';
+
+    var safeInqId = escapeHtml(rawInqId);
+    var safeTimeStr = escapeHtml(rawTimeStr);
+    var safeName = escapeHtml(rawName);
+    var safeRole = escapeHtml(rawRole);
+    var safePharmacy = escapeHtml(rawPharmacy);
+    var safeState = escapeHtml(rawState);
+    var safeEmail = escapeHtml(rawEmail);
+    var safePhone = escapeHtml(rawPhone);
+    var safeReason = escapeHtml(rawReason);
+    var safeMessage = escapeHtml(rawMessage);
 
     html += `
       <tr>
-        <td><strong style="color:var(--color-crimson);font-size:12px;">${inqId}</strong></td>
-        <td style="font-size:12px;color:var(--color-text-muted);">${timeStr}</td>
+        <td><strong style="color:var(--color-crimson);font-size:12px;">${safeInqId}</strong></td>
+        <td style="font-size:12px;color:var(--color-text-muted);">${safeTimeStr}</td>
         <td>
-          <div style="font-weight:700;color:var(--color-text-main);font-size:13.5px;">${name}</div>
-          <div style="font-size:11.5px;color:var(--color-text-muted);">${role}</div>
+          <div style="font-weight:700;color:var(--color-text-main);font-size:13.5px;">${safeName}</div>
+          <div style="font-size:11.5px;color:var(--color-text-muted);">${safeRole}</div>
         </td>
         <td>
-          <div style="font-weight:600;font-size:13px;">${pharmacy}</div>
-          <div style="font-size:11.5px;color:var(--color-text-muted);">State: ${state}</div>
+          <div style="font-weight:600;font-size:13px;">${safePharmacy}</div>
+          <div style="font-size:11.5px;color:var(--color-text-muted);">State: ${safeState}</div>
         </td>
         <td>
-          <div><a href="mailto:${encodeURIComponent(email)}" style="color:var(--color-navy);font-weight:600;text-decoration:none;font-size:13px;">${email}</a></div>
-          <div style="font-size:11.5px;color:var(--color-text-muted);">${phone}</div>
+          <div><a href="mailto:${encodeURIComponent(rawEmail)}" style="color:var(--color-navy);font-weight:600;text-decoration:none;font-size:13px;">${safeEmail}</a></div>
+          <div style="font-size:11.5px;color:var(--color-text-muted);">${safePhone}</div>
         </td>
         <td>
           <span style="display:inline-block;padding:3px 8px;background:#FEF2F2;color:#991B1B;border-radius:4px;font-size:11.5px;font-weight:600;">
-            ${reason}
+            ${safeReason}
           </span>
         </td>
-        <td style="max-width:240px;font-size:12px;color:#334155;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${message.replace(/"/g, '&quot;')}">
-          ${message}
+        <td style="max-width:240px;font-size:12px;color:#334155;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${safeMessage}">
+          ${safeMessage}
         </td>
         <td style="text-align:right;white-space:nowrap;">
-          <a href="mailto:${encodeURIComponent(email)}?subject=Re:%20Akron%20Generics%20Inquiry%20-%20${encodeURIComponent(reason)}" style="display:inline-block;padding:4px 10px;background:#9E2235;color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;">
+          <a href="mailto:${encodeURIComponent(rawEmail)}?subject=Re:%20Akron%20Generics%20Inquiry%20-%20${encodeURIComponent(rawReason)}" style="display:inline-block;padding:4px 10px;background:#9E2235;color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;">
             ✉ Reply
           </a>
         </td>
