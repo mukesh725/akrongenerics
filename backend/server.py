@@ -55,6 +55,23 @@ os.makedirs(PRICING_REQUESTS_DIR, exist_ok=True)
 def sanitize_name(name):
     return re.sub(r'[^a-zA-Z0-9_\-]', '_', str(name).strip().lower())
 
+def clean_header_val(val):
+    """Strip carriage returns and newlines to prevent SMTP header injection."""
+    return re.sub(r'[\r\n\t]', ' ', str(val)).strip()
+
+RATE_LIMIT_STORE = {}
+
+def is_rate_limited(ip, limit=6, window=60):
+    """In-memory rate limiter to prevent bot spamming and brute-force denial of service."""
+    now = time.time()
+    ts_list = [ts for ts in RATE_LIMIT_STORE.get(ip, []) if now - ts < window]
+    if len(ts_list) >= limit:
+        RATE_LIMIT_STORE[ip] = ts_list
+        return True
+    ts_list.append(now)
+    RATE_LIMIT_STORE[ip] = ts_list
+    return False
+
 def send_secure_email_notification(payload):
     """
     Direct in-house email notification using corporate SMTP over encrypted TLS.
@@ -72,13 +89,13 @@ def send_secure_email_notification(payload):
 
     try:
         msg = MIMEMultipart('alternative')
-        prod = payload.get('productName', 'Pharmaceutical Product')
-        ndc = payload.get('ndc', 'N/A')
-        customer_email = payload.get('email', 'N/A')
+        prod = clean_header_val(payload.get('productName', 'Pharmaceutical Product'))
+        ndc = clean_header_val(payload.get('ndc', 'N/A'))
+        customer_email = clean_header_val(payload.get('email', 'N/A'))
 
         msg['Subject'] = f"Wholesale Pricing Request: {prod} (NDC: {ndc}) - {customer_email}"
-        msg['From'] = smtp_user
-        msg['To'] = recipient
+        msg['From'] = clean_header_val(smtp_user)
+        msg['To'] = clean_header_val(recipient)
 
         html_body = f"""
         <html>
@@ -381,17 +398,43 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
 
         # POST /api/request-pricing
         if path == '/api/request-pricing':
+            # Rate limiting check: max 6 requests per IP per minute
+            client_ip = self.client_address[0] if self.client_address else '127.0.0.1'
+            if is_rate_limited(client_ip, limit=6, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many requests. Please wait a moment."}).encode('utf-8'))
+                return
+
             content_length = int(self.headers.get('Content-Length', 0))
+            if content_length > 65536: # 64KB max payload security guard
+                self.send_response(413)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Payload exceeds allowed size."}).encode('utf-8'))
+                return
+
             post_data = self.rfile.read(content_length)
             
             try:
                 payload = json.loads(post_data.decode('utf-8'))
+                email = str(payload.get('email', '')).strip()
+
+                # Strict email syntax validation
+                if not re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
+                    self.send_response(400)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "error", "message": "Invalid email address format."}).encode('utf-8'))
+                    return
+
                 req_id = payload.get('id') or ('PR-' + str(int(time.time() * 1000)))
                 payload['id'] = req_id
                 payload['received_at'] = time.strftime('%Y-%m-%d %H:%M:%S')
 
-                prod = payload.get('productName', 'Pharmaceutical Product')
-                ndc = payload.get('ndc', 'N/A')
+                prod = clean_header_val(payload.get('productName', 'Pharmaceutical Product'))
+                ndc = clean_header_val(payload.get('ndc', 'N/A'))
                 email = payload.get('email', 'unknown@pharmacy')
 
                 print(f"[WHOLESALE PRICING REQUEST] Received for '{prod}' (NDC: {ndc}) from customer: '{email}'")
