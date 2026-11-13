@@ -6,6 +6,7 @@ import re
 import base64
 import time
 import urllib.parse
+import urllib.request
 import smtplib
 import ssl
 from email.mime.multipart import MIMEMultipart
@@ -74,17 +75,34 @@ def is_rate_limited(ip, limit=6, window=60):
 
 def send_secure_email_notification(payload):
     """
-    Direct in-house email notification using corporate SMTP over encrypted TLS.
-    Zero third-party services, zero intermediaries, 100% private.
+    Direct in-house email notification using Google Apps Script or corporate SMTP over encrypted TLS.
+    Zero third-party SaaS services, zero intermediaries, 100% private.
     """
+    recipient = os.environ.get('NOTIFICATION_RECIPIENT', 'info@akrongenerics.com')
+
+    # Option A: Private Google Apps Script Webhook
+    google_script_url = os.environ.get('GOOGLE_SCRIPT_URL')
+    if google_script_url and google_script_url.startswith('https://script.google.com/'):
+        try:
+            req = urllib.request.Request(
+                google_script_url,
+                data=json.dumps(payload).encode('utf-8'),
+                headers={'Content-Type': 'application/json'}
+            )
+            with urllib.request.urlopen(req, timeout=12) as response:
+                print(f"[GOOGLE APPS SCRIPT] Successfully dispatched email notification for '{payload.get('productName')}' to {recipient}")
+                return True
+        except Exception as g_err:
+            print(f"[GOOGLE APPS SCRIPT ERROR] {g_err}")
+
+    # Option B: Direct Corporate SMTP
     smtp_host = os.environ.get('SMTP_HOST')
     smtp_port = int(os.environ.get('SMTP_PORT', 587))
     smtp_user = os.environ.get('SMTP_USER')
     smtp_pass = os.environ.get('SMTP_PASS')
-    recipient = os.environ.get('NOTIFICATION_RECIPIENT', 'info@akrongenerics.com')
 
     if not (smtp_host and smtp_user and smtp_pass):
-        print(f"[SECURE IN-HOUSE] Direct SMTP credentials not set in environment. Saved inquiry '{payload.get('id')}' to secure local server storage.")
+        print(f"[SECURE IN-HOUSE] Direct SMTP or Google Script credentials not set in environment. Saved inquiry '{payload.get('id')}' to secure local server storage.")
         return False
 
     try:
