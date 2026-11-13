@@ -1878,106 +1878,105 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   transform: translateY(-2px);
 }
 
-/* ---------- Akron Generics Footer ---------- */
-.foot {
-  background: #091a30;
-  border-radius: var(--r-lg);
-  padding: 44px 48px 24px;
-  color: #fff;
+/* ---------- GLOBAL FOOTER ---------- */
+.c-footer {
+  background: #FFFFFF;
+  border-radius: var(--r-card, 20px);
+  padding: 44px 36px 28px;
+  box-shadow: 0 4px 24px rgba(22, 24, 15, 0.04);
+  border: 1px solid rgba(22, 24, 15, 0.06);
 }
-.foot-main {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 48px;
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto 34px;
+.c-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+  gap: 36px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(22, 24, 15, 0.08);
 }
-.foot-brand {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  flex-shrink: 0;
-}
-.foot-logo-link {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-}
-.foot-logo-img {
+.c-footer-brand-img {
   height: 28px;
   width: auto;
+  margin-bottom: 14px;
   display: block;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
 }
-.foot-brand-divider {
-  width: 1px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.22);
+.c-footer-desc {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  max-width: 34ch;
 }
-.foot-nav-cols {
+.c-footer-contact-items {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 52px;
-  flex: 1;
-  max-width: 800px;
+  flex-direction: column;
+  gap: 9px;
 }
-.foot-col h6 {
+.c-footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.c-footer-contact-item svg {
+  color: var(--color-navy, #0E335E);
+  flex-shrink: 0;
+}
+.c-footer-contact-item a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.c-footer-contact-item a:hover {
+  color: var(--color-navy, #0E335E);
+}
+.c-footer-links-col h6 {
   font-family: var(--sans);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 14px;
+  color: var(--ink);
+  margin-bottom: 16px;
 }
-.foot-col ul {
+.c-footer-links-col ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
 }
-.foot-col ul a {
-  color: rgba(255, 255, 255, 0.72);
-  text-decoration: none;
+.c-footer-links-col a {
   font-size: 13.5px;
-  font-weight: 400;
-  transition: color 0.18s ease;
-}
-.foot-col ul a:hover {
-  color: #fff;
-}
-.foot-bot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-  font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.6);
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-}
-.foot-bot .foot-legal {
-  display: flex;
-  gap: 28px;
-}
-.foot-bot .foot-legal a {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--ink-2);
   text-decoration: none;
-  font-size: 12.5px;
-  transition: color 0.18s ease;
+  transition: color 0.15s;
 }
-.foot-bot .foot-legal a:hover {
-  color: #fff;
+.c-footer-links-col a:hover {
+  color: var(--color-navy, #0E335E);
+}
+.c-footer-bot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.c-footer-legal {
+  display: flex;
+  gap: 20px;
+}
+.c-footer-legal a {
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.c-footer-legal a:hover {
+  color: var(--ink-2);
 }
 
 /* ---------- responsive ---------- */
@@ -2033,10 +2032,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   .next-step-intro{grid-column:1 / -1;padding-right:0;border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:6px}
   .next-step-col{border-left:1px solid var(--line);padding-left:24px}
   .next-step-col:nth-child(2){border-left:none;padding-left:0}
-  .foot-main{flex-direction:column;align-items:center;text-align:center;gap:28px}
-  .foot-brand{gap:0}
-  .foot-brand-divider{display:none}
-  .foot-nav-cols{max-width:100%;width:100%;justify-content:space-around;gap:28px}
+  .c-footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
 }
 @media(max-width:768px){
   body{padding:0}
@@ -2211,14 +2207,9 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   .closing p{font-size:15px}
   .closing-actions{flex-direction:column;width:100%;gap:10px}
   .closing-actions a{width:100%;text-align:center;justify-content:center}
-  .foot{padding:34px 20px 24px;border-radius:20px}
-  .foot-main{flex-direction:column;align-items:center;text-align:center;gap:24px}
-  .foot-brand{gap:0}
-  .foot-brand-divider{display:none}
-  .foot-nav-cols{flex-direction:column;align-items:center;gap:22px}
-  .foot-col{text-align:center}
-  .foot-bot{flex-direction:column;align-items:center;text-align:center;gap:14px}
-  .foot-bot .foot-legal{gap:18px;justify-content:center}
+  .c-footer { padding: 24px 14px 18px; }
+  .c-footer-grid { grid-template-columns: 1fr; gap: 20px; }
+  .c-footer-bot { flex-direction: column; align-items: flex-start; }
 }
 
 /* Mobile Nav Bar & Drawer */
@@ -2958,57 +2949,74 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
     </div>
   </section>
 
-  <!-- GLOBAL FOOTER (AKRON GENERICS) -->
-  <footer class="foot">
-    <div class="foot-main">
-      <div class="foot-brand">
-        <a href="index.html" class="foot-logo-link" aria-label="Akron Generics Home">
-          <img src="src/assets/akron-generics-logo-white.png" alt="Akron Generics" class="foot-logo-img">
+  <!-- ================= GLOBAL FOOTER ================= -->
+  <footer class="c-footer">
+    <div class="c-footer-grid c-footer-main">
+      <div class="c-footer-brand-col c-footer-brand-block">
+        <a href="index.html" aria-label="Akron Generics Home">
+          <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" class="c-footer-brand-img c-footer-logo">
         </a>
-        <div class="foot-brand-divider" aria-hidden="true"></div>
+        <p class="c-footer-desc c-footer-tagline">
+          NABP-accredited wholesale partner delivering premium high-AWP generics, diabetic supplies, and diagnostic essentials with maximized Medicare reimbursement.
+        </p>
+        <div class="c-footer-contact-items">
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>47 Mall Drive, Unit 1 &amp; 2, Commack, NY 11725</span>
+          </div>
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <a href="tel:6312153009">(631) 215-3009</a>
+          </div>
+          <div class="c-footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <a href="mailto:info@akrongenerics.com">info@akrongenerics.com</a>
+          </div>
+        </div>
       </div>
 
-      <div class="foot-nav-cols">
-        <!-- EXPLORE -->
-        <div class="foot-col">
-          <h6>EXPLORE</h6>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about-us.html">About Us</a></li>
-            <li><a href="catalog.html">All Products</a></li>
-            <li><a href="products.html">Special Offers</a></li>
-            <li><a href="industry-resources.html">Industry Resources</a></li>
-            <li><a href="applications.html">Applications</a></li>
-          </ul>
-        </div>
+      <div class="c-footer-links-col">
+        <h6>EXPLORE</h6>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="catalog.html">All Products</a></li>
+          <li><a href="products.html">Special Offers</a></li>
+          <li><a href="industry-resources.html">Industry Resources</a></li>
+          <li><a href="applications.html">Applications</a></li>
+        </ul>
+      </div>
 
-        <!-- SUPPORT -->
-        <div class="foot-col">
-          <h6>SUPPORT</h6>
-          <ul>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="index.html#ordering">Ordering &amp; Shipping FAQ</a></li>
-            <li><a href="index.html#compliance">Quality &amp; Compliance</a></li>
-            <li><a href="contact.html">Product Inquiries</a></li>
-          </ul>
-        </div>
+      <div class="c-footer-links-col">
+        <h6>SUPPORT</h6>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="index.html#ordering">Ordering &amp; Shipping FAQ</a></li>
+          <li><a href="index.html#compliance">Quality &amp; Compliance</a></li>
+          <li><a href="contact.html">Product Inquiries</a></li>
+        </ul>
+      </div>
 
-        <!-- CUSTOMER PORTAL -->
-        <div class="foot-col">
-          <h6>CUSTOMER PORTAL</h6>
-          <ul>
-            <li><a href="become-a-customer.html">Become a Customer</a></li>
-            <li><a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a></li>
-            <li><a href="https://server.akrongenerics.com/login.php" target="_blank" rel="noopener noreferrer">Customer Login ↗</a></li>
-            <li><a href="dashboard.html">Representative Portal</a></li>
-          </ul>
+      <div class="c-footer-links-col">
+        <h6>CUSTOMER PORTAL</h6>
+        <ul>
+          <li><a href="become-a-customer.html">Become a Customer</a></li>
+          <li><a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a></li>
+          <li><a href="https://server.akrongenerics.com/login.php" target="_blank" rel="noopener noreferrer">Customer Login ↗</a></li>
+        </ul>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(22, 24, 15, 0.08);">
+          <p style="font-size:11px;font-weight:700;color:var(--ink);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;">Ordering Hours</p>
+          <p style="font-size:12.5px;color:var(--ink-2, #475569);line-height:1.5;margin:0;">
+            Mon – Fri: 10:00 am – 6:30 pm EST<br>
+            <span style="font-size:11.5px;color:var(--ink-3, #94A3B8);">Next-day delivery available</span>
+          </p>
         </div>
       </div>
     </div>
 
-    <div class="foot-bot">
-      <span>© Akron Generics. All rights reserved.</span>
-      <div class="foot-legal">
+    <div class="c-footer-bottom c-footer-bot">
+      <span>&copy; Akron Generics. All rights reserved.</span>
+      <div class="c-footer-legal-links c-footer-legal">
         <a href="index.html#privacy">Privacy Policy</a>
         <a href="index.html#terms">Terms of Sale</a>
         <a href="index.html#licensing">Licensing</a>
