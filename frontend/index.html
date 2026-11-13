@@ -319,6 +319,7 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
   isolation: isolate;
   background: #000000;
 }
+.hero-centered-layout .hero-bg-video,
 .hero-centered-layout .hero-bg-img {
   position: absolute;
   inset: 0;
@@ -2396,7 +2397,10 @@ h1,h2,h3,h4,.d{font-family:var(--sans);font-weight:300;letter-spacing:-.03em}
 
 <!-- HERO: YOUR PHARMACY. OUR PRIORITY. (Centered Layout with Black Overlay) -->
 <header class="hero-centered-layout" id="hero" style="display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; text-align: center !important; width: 100% !important; height: 100vh !important; height: 100dvh !important; min-height: 100vh !important; min-height: 100dvh !important; position: relative !important; background: #000000 !important; overflow: hidden !important;">
-  <img class="hero-bg-img" src="src/assets/hero-pharmaceutical-distribution-center.jpg" alt="Akron Generics Modern Pharmaceutical Distribution Warehouse" style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; filter: brightness(0.85) contrast(1.08) !important; z-index: 0 !important;">
+  <video class="hero-bg-video" autoplay muted loop playsinline poster="src/assets/vedio/hero-video-poster.jpg" style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center center !important; filter: brightness(0.85) contrast(1.08) !important; z-index: 0 !important; pointer-events: none !important;">
+    <source src="src/assets/vedio/hero-video.mp4" type="video/mp4">
+    <source src="src/assets/vedio/hero%20vedio.mp4" type="video/mp4">
+  </video>
   <div class="hero-scrim" aria-hidden="true" style="position: absolute !important; inset: 0 !important; z-index: 1 !important; pointer-events: none !important; background: radial-gradient(ellipse 900px 540px at 50% 50%, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.12) 75%, rgba(0, 0, 0, 0.30) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.08) 35%, rgba(0, 0, 0, 0.15) 70%, rgba(0, 0, 0, 0.55) 100%), rgba(0, 0, 0, 0.40) !important;"></div>
   
   <div class="hero-centered-container" style="position: relative !important; z-index: 2 !important; width: 100% !important; max-width: 980px !important; margin-left: auto !important; margin-right: auto !important; margin-top: 0 !important; margin-bottom: 0 !important; padding: 140px 24px 80px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important;">
