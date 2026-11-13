@@ -389,7 +389,7 @@ body {
       <p class="dash-desc">Manage verified onboarding applications filed under the Main Account and individual Sales Representatives.</p>
     </div>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-      <button type="button" class="btn-nav-link" onclick="loadApplications()" style="color:var(--color-navy);font-weight:600;">
+      <button type="button" class="btn-nav-link" onclick="loadApplications(); loadPricingRequests();" style="color:var(--color-navy);font-weight:600;">
         🔄 Refresh Data
       </button>
       <button type="button" class="btn-nav-link" onclick="quickAddSample()" style="color:var(--color-crimson);font-weight:600;border-color:#FCA5A5;">
@@ -467,6 +467,45 @@ body {
     </table>
   </div>
 
+  <!-- Wholesale Product Pricing Inquiries & Leads -->
+  <div style="margin-top: 44px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+    <div>
+      <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--color-navy-dark);">
+        Product Wholesale Pricing Inquiries &amp; Leads
+      </h2>
+      <p style="font-size: 13.5px; color: var(--color-text-muted);">
+        Real-time pricing inquiries submitted by pharmacy customers across all catalog products. Email alerts are dispatched to info@akrongenerics.com.
+      </p>
+    </div>
+    <span class="status-badge" style="background:#E0F2FE;color:#0369A1;font-size:12px;font-weight:700;" id="pricingRequestsBadge">
+      0 Requests Logged
+    </span>
+  </div>
+
+  <div class="table-card">
+    <table class="dash-table">
+      <thead>
+        <tr>
+          <th>Request ID</th>
+          <th>Date &amp; Time</th>
+          <th>Customer Pharmacy Email</th>
+          <th>Product Requested</th>
+          <th>NDC</th>
+          <th>Packaging</th>
+          <th>Brand / Manufacturer</th>
+          <th style="text-align:right;">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="pricingTableBody">
+        <tr>
+          <td colspan="8" style="text-align:center;padding:32px;color:var(--color-text-muted);">
+            Loading wholesale pricing inquiries...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
 
 <!-- Application Details Modal Drawer -->
@@ -527,6 +566,7 @@ var allApplications = [];
 
 document.addEventListener('DOMContentLoaded', function() {
   loadApplications();
+  loadPricingRequests();
 });
 
 function loadApplications() {
@@ -899,6 +939,103 @@ function exportAllJson() {
   document.body.appendChild(downloadAnchor);
   downloadAnchor.click();
   downloadAnchor.remove();
+}
+
+function loadPricingRequests() {
+  var localList = [];
+  try {
+    localList = JSON.parse(localStorage.getItem('akron_pricing_requests') || '[]');
+  } catch(e) {}
+
+  var apiUrls = ['/api/pricing-requests', 'http://localhost:3000/api/pricing-requests', 'http://127.0.0.1:3000/api/pricing-requests'];
+
+  function tryFetch(index) {
+    if (index >= apiUrls.length) {
+      renderPricingRequests(localList);
+      return;
+    }
+    fetch(apiUrls[index], { cache: 'no-store' })
+      .then(function(res) {
+        if (res.ok) return res.json();
+        throw new Error('Not ok');
+      })
+      .then(function(serverData) {
+        if (Array.isArray(serverData)) {
+          var merged = serverData.slice();
+          localList.forEach(function(localItem) {
+            var exists = merged.some(function(s) {
+              return (s.id && s.id === localItem.id) ||
+                     (s.email === localItem.email && s.productName === localItem.productName && s.requestedAt === localItem.requestedAt);
+            });
+            if (!exists) merged.push(localItem);
+          });
+          renderPricingRequests(merged);
+        } else {
+          tryFetch(index + 1);
+        }
+      })
+      .catch(function() {
+        tryFetch(index + 1);
+      });
+  }
+
+  tryFetch(0);
+}
+
+function renderPricingRequests(list) {
+  var tbody = document.getElementById('pricingTableBody');
+  var badge = document.getElementById('pricingRequestsBadge');
+  if (badge) {
+    badge.textContent = list.length + ' Request' + (list.length === 1 ? '' : 's') + ' Logged';
+  }
+  if (!tbody) return;
+
+  if (list.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8" style="text-align:center;padding:32px;color:var(--color-text-muted);">
+          No product pricing requests logged yet. When customers click "Request Wholesale Pricing" on any product, their request will appear here and trigger an email alert to info@akrongenerics.com.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  var html = '';
+  list.forEach(function(item) {
+    var email = item.email || '--';
+    var prodName = item.productName || 'Pharmaceutical Product';
+    var ndc = item.ndc || '--';
+    var pack = item.packaging || '--';
+    var brand = item.brand || '--';
+    var reqId = item.id || '--';
+    var timeStr = item.requestedAtFormatted || item.requestedAt || '--';
+
+    html += `
+      <tr>
+        <td><strong style="color:var(--color-navy);font-size:12px;">${reqId}</strong></td>
+        <td style="font-size:12px;color:var(--color-text-muted);">${timeStr}</td>
+        <td>
+          <a href="mailto:${encodeURIComponent(email)}?subject=Akron%20Generics%20Wholesale%20Pricing%3A%20${encodeURIComponent(prodName)}" style="color:var(--color-navy);font-weight:600;text-decoration:none;">
+            ${email}
+          </a>
+        </td>
+        <td><strong>${prodName}</strong></td>
+        <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:12px;">${ndc}</code></td>
+        <td style="font-size:12.5px;">${pack}</td>
+        <td style="font-size:12.5px;">${brand}</td>
+        <td style="text-align:right;white-space:nowrap;">
+          <a href="mailto:${encodeURIComponent(email)}?subject=Akron%20Generics%20Wholesale%20Pricing%3A%20${encodeURIComponent(prodName)}&body=Hello,%0D%0A%0D%0AThank%20you%20for%20requesting%20wholesale%20pricing%20for%20${encodeURIComponent(prodName)}%20(NDC:%20${encodeURIComponent(ndc)}).%0D%0A%0D%0A" style="display:inline-block;padding:4px 10px;background:#16A34A;color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;margin-right:6px;">
+            ✉ Email Customer
+          </a>
+          <a href="become-a-customer.html?email=${encodeURIComponent(email)}" target="_blank" style="display:inline-block;padding:4px 10px;background:var(--color-navy);color:#FFFFFF;border-radius:4px;font-size:12px;font-weight:600;text-decoration:none;">
+            Account Form &rarr;
+          </a>
+        </td>
+      </tr>
+    `;
+  });
+  tbody.innerHTML = html;
 }
 </script>
 

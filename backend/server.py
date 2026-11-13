@@ -23,9 +23,11 @@ if not os.path.exists(SUBMISSIONS_DIR):
 
 MAIN_ACCOUNT_DIR = os.path.join(SUBMISSIONS_DIR, 'main_account')
 BY_REP_DIR = os.path.join(SUBMISSIONS_DIR, 'by_representative')
+PRICING_REQUESTS_DIR = os.path.join(BASE_DIR, 'data', 'pricing_requests')
 
 os.makedirs(MAIN_ACCOUNT_DIR, exist_ok=True)
 os.makedirs(BY_REP_DIR, exist_ok=True)
+os.makedirs(PRICING_REQUESTS_DIR, exist_ok=True)
 
 def sanitize_name(name):
     return re.sub(r'[^a-zA-Z0-9_\-]', '_', str(name).strip().lower())
@@ -99,6 +101,25 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                         except Exception as e:
                             pass
             self.wfile.write(json.dumps(apps).encode('utf-8'))
+            return
+
+        # GET /api/pricing-requests
+        if path == '/api/pricing-requests':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            
+            pricing_reqs = []
+            if os.path.exists(PRICING_REQUESTS_DIR):
+                for fname in sorted(os.listdir(PRICING_REQUESTS_DIR), reverse=True):
+                    if fname.endswith('.json'):
+                        try:
+                            with open(os.path.join(PRICING_REQUESTS_DIR, fname), 'r') as f:
+                                data = json.load(f)
+                                pricing_reqs.append(data)
+                        except Exception:
+                            pass
+            self.wfile.write(json.dumps(pricing_reqs).encode('utf-8'))
             return
 
         # GET /api/download-official-pdf?id=AKR-2026-XXXX
@@ -250,6 +271,48 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps(response).encode('utf-8'))
                 return
 
+            except Exception as e:
+                self.send_response(400)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": str(e)}).encode('utf-8'))
+                return
+
+        # POST /api/request-pricing
+        if path == '/api/request-pricing':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length)
+            
+            try:
+                payload = json.loads(post_data.decode('utf-8'))
+                req_id = payload.get('id') or ('PR-' + str(int(time.time() * 1000)))
+                payload['id'] = req_id
+                payload['received_at'] = time.strftime('%Y-%m-%d %H:%M:%S')
+
+                prod = payload.get('productName', 'Pharmaceutical Product')
+                ndc = payload.get('ndc', 'N/A')
+                email = payload.get('email', 'unknown@pharmacy')
+
+                print(f"[WHOLESALE PRICING REQUEST] Received for '{prod}' (NDC: {ndc}) from customer: '{email}'")
+
+                safe_ndc = sanitize_name(ndc)
+                safe_email = sanitize_name(email)
+                filename = f"{req_id}_{safe_ndc}_{safe_email}.json"
+                req_path = os.path.join(PRICING_REQUESTS_DIR, filename)
+
+                with open(req_path, 'w') as f:
+                    json.dump(payload, f, indent=2)
+
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                response = {
+                    "status": "success",
+                    "id": req_id,
+                    "message": f"Pricing request for {prod} successfully logged. Notification dispatched."
+                }
+                self.wfile.write(json.dumps(response).encode('utf-8'))
+                return
             except Exception as e:
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')

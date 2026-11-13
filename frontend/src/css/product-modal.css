@@ -367,6 +367,38 @@
   margin-top: 4px !important;
 }
 
+/* Spinner for Loading State */
+@keyframes seedSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.seed-spin {
+  animation: seedSpin 0.8s linear infinite !important;
+  display: inline-block !important;
+}
+
+/* Error helper */
+.seed-input-error {
+  color: #DC2626 !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  margin-top: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+/* Success Card */
+@keyframes seedFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.seed-request-success {
+  animation: seedFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
 .seed-footnote {
   font-size: 10.5px !important;
   line-height: 1.45 !important;
