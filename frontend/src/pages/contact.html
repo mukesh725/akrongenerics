@@ -404,6 +404,52 @@
       text-decoration: underline;
     }
 
+    /* Audit Submissions Callout (Consistent with Akron Generics Theme) */
+    .contact-audit-box {
+      margin-top: 36px;
+      padding: 16px 20px;
+      background: #E8E7E2;
+      border: 1px solid rgba(22, 24, 15, 0.08);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 440px;
+    }
+
+    .contact-audit-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(22, 24, 15, 0.05);
+    }
+
+    .contact-audit-text {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .contact-audit-link {
+      color: var(--color-navy, #0D498F);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      word-break: break-all;
+      transition: color 0.15s ease;
+    }
+
+    .contact-audit-link:hover {
+      color: #183B2B;
+    }
+
     /* Right Column: Clean Modern Form Card (Matching Reference Theme) */
     .contact-form-card {
       background: #FFFFFF;
@@ -1189,11 +1235,11 @@
               stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
             </svg>
-            <span>Get in Touch</span>
+            <span>GET IN TOUCH</span>
           </div>
 
-          <h1 class="contact-title">Contact Us</h1>
-          <p class="contact-subtitle">We're here to help support your pharmacy purchasing and supply needs.</p>
+          <h1 class="contact-title">We'd Love to Hear From You</h1>
+          <p class="contact-subtitle">Questions or concerns? Reach our team directly, or send us a message and we'll get right back to you.</p>
 
           <div class="contact-info-list">
             <!-- Office Location -->
@@ -1241,6 +1287,20 @@
                 <a href="mailto:info@akrongenerics.com"
                   class="contact-info-val contact-info-link">info@akrongenerics.com</a>
               </div>
+            </div>
+          </div>
+
+          <!-- Audit Submissions Notice (Matching Image 1 Content) -->
+          <div class="contact-audit-box">
+            <div class="contact-audit-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <path d="M9 15l2 2 4-4"></path>
+              </svg>
+            </div>
+            <div class="contact-audit-text">
+              Submitting an audit? Send it to <a href="mailto:audits@realvalueproducts.com" class="contact-audit-link">audits@realvalueproducts.com</a>.
             </div>
           </div>
         </div>
@@ -1389,6 +1449,7 @@
                   <option value="Order Tracking & Delivery Logistics">Order Tracking &amp; Delivery Logistics</option>
                   <option value="T3 & DSCSA Traceability Support">T3 &amp; DSCSA Traceability Support</option>
                   <option value="Pricing & Contract Tier Inquiries">Pricing &amp; Contract Tier Inquiries</option>
+                  <option value="Audit Submission">Audit Submission</option>
                   <option value="General Inquiries">General Inquiries</option>
                 </select>
                 <div class="c-select-arrow">
