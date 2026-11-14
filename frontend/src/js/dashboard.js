@@ -11,7 +11,7 @@
  * ==============================================================================
  */
 
-(function() {
+(function () {
   'use strict';
 
   let currentCatalog = { categories: [], products: [] };
@@ -72,7 +72,7 @@
   // ----------------------------------------------------------------------------
   // TAB NAVIGATION (Products, Pricing, Contact - No Applications)
   // ----------------------------------------------------------------------------
-  window.switchTab = function(tabId) {
+  window.switchTab = function (tabId) {
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
     document.querySelectorAll('.metric-card').forEach(card => card.classList.remove('active-metric'));
@@ -86,6 +86,8 @@
 
     const cards = document.querySelectorAll('.metric-card');
     if (tabId === 'tab-products' && cards[0]) cards[0].classList.add('active-metric');
+    if (tabId === 'tab-pricing' && cards[1]) cards[1].classList.add('active-metric');
+    if (tabId === 'tab-contact' && cards[2]) cards[2].classList.add('active-metric');
     if (tabId === 'tab-specials' && cards[1]) cards[1].classList.add('active-metric');
     if (tabId === 'tab-pricing' && cards[2]) cards[2].classList.add('active-metric');
     if (tabId === 'tab-contact' && cards[3]) cards[3].classList.add('active-metric');
@@ -98,7 +100,7 @@
   // ----------------------------------------------------------------------------
   // VIEW MODE TOGGLE (Grid Cards vs Compact Table)
   // ----------------------------------------------------------------------------
-  window.setViewMode = function(mode) {
+  window.setViewMode = function (mode) {
     currentViewMode = mode;
     document.querySelectorAll('.view-toggle-btn').forEach(b => {
       if (b.dataset.mode === mode) b.classList.add('active');
@@ -150,7 +152,7 @@
     const pillsBar = document.getElementById('categoryPillsBar');
     if (!pillsBar) return;
 
-    pillsBar.addEventListener('click', function(e) {
+    pillsBar.addEventListener('click', function (e) {
       const chip = e.target.closest('.cat-chip');
       if (!chip) return;
       activeCategory = chip.dataset.category || 'all';
@@ -191,40 +193,40 @@
   // ----------------------------------------------------------------------------
   // CATALOG & PRODUCTS MANAGEMENT
   // ----------------------------------------------------------------------------
-  window.loadCatalogProducts = function() {
+  window.loadCatalogProducts = function () {
     fetch('/api/admin/products', { headers: getAuthHeader() })
-    .then(res => {
-      if (!res.ok) throw new Error('API status: ' + res.status);
-      return res.json();
-    })
-    .then(data => {
-      if (data && data.products) {
-        currentCatalog = data;
-      } else if (window.AKRON_CATALOG && window.AKRON_CATALOG.products) {
-        currentCatalog = window.AKRON_CATALOG;
-      }
-      renderCategoryPills();
-      filterProducts();
-      renderSpecialOffersTab();
-      updateKpis();
-    })
-    .catch(err => {
-      console.warn('Using local window.AKRON_CATALOG fallback:', err);
-      if (window.AKRON_CATALOG && window.AKRON_CATALOG.products) {
-        currentCatalog = window.AKRON_CATALOG;
+      .then(res => {
+        if (!res.ok) throw new Error('API status: ' + res.status);
+        return res.json();
+      })
+      .then(data => {
+        if (data && data.products) {
+          currentCatalog = data;
+        } else if (window.AKRON_CATALOG && window.AKRON_CATALOG.products) {
+          currentCatalog = window.AKRON_CATALOG;
+        }
         renderCategoryPills();
         filterProducts();
         renderSpecialOffersTab();
         updateKpis();
-      }
-    });
+      })
+      .catch(err => {
+        console.warn('Using local window.AKRON_CATALOG fallback:', err);
+        if (window.AKRON_CATALOG && window.AKRON_CATALOG.products) {
+          currentCatalog = window.AKRON_CATALOG;
+          renderCategoryPills();
+          filterProducts();
+          renderSpecialOffersTab();
+          updateKpis();
+        }
+      });
   };
 
   function updateKpis() {
     const prodCount = (currentCatalog.products || []).length;
     const catCount = (currentCatalog.categories || []).length || 8;
     const specialsCount = ((currentCatalog.specialOffers && currentCatalog.specialOffers.items) || []).length;
-    
+
     const kpiP = document.getElementById('kpiProductCount');
     const kpiC = document.getElementById('kpiCategoryCount');
     const badgeP = document.getElementById('badgeProducts');
@@ -240,7 +242,7 @@
     if (badgeS) badgeS.textContent = specialsCount;
   }
 
-  window.filterProducts = function() {
+  window.filterProducts = function () {
     const q = (document.getElementById('prodSearchInput').value || '').trim().toLowerCase();
 
     let list = currentCatalog.products || [];
@@ -248,7 +250,7 @@
       list = list.filter(p => p.category === activeCategory);
     }
     if (q) {
-      list = list.filter(p => 
+      list = list.filter(p =>
         (p.name && p.name.toLowerCase().includes(q)) ||
         (p.ndc && p.ndc.toLowerCase().includes(q)) ||
         (p.brand && p.brand.toLowerCase().includes(q)) ||
@@ -344,7 +346,7 @@
     const escSpecs = escapeHtml(p.specs || '--');
     const escImg = escapeHtml(p.image || 'src/assets/logo.png');
 
-    const badgesHtml = (p.badges || []).map(b => 
+    const badgesHtml = (p.badges || []).map(b =>
       `<span class="badge-tag">${escapeHtml(b)}</span>`
     ).join('');
 
@@ -424,7 +426,7 @@
       const escNdc = escapeHtml(p.ndc || '--');
       const escSpecs = escapeHtml(p.specs || '--');
       const escImg = escapeHtml(p.image || 'src/assets/logo.png');
-      const badgesHtml = (p.badges || []).map(b => 
+      const badgesHtml = (p.badges || []).map(b =>
         `<span class="badge-tag">${escapeHtml(b)}</span>`
       ).join('');
 
@@ -456,7 +458,7 @@
 
   // Delegated event listener for Products (Cards and Table)
   function initProductsEventDelegation() {
-    const handleProductAction = function(e) {
+    const handleProductAction = function (e) {
       // 1. Edit product
       const editBtn = e.target.closest('.btn-edit-prod');
       if (editBtn) {
@@ -500,13 +502,13 @@
   // ----------------------------------------------------------------------------
   let quickUploadTargetId = null;
 
-  window.triggerQuickImageChange = function(productId) {
+  window.triggerQuickImageChange = function (productId) {
     quickUploadTargetId = productId;
     const fileInput = document.getElementById('quickImgFileInput');
     if (fileInput) fileInput.click();
   };
 
-  window.handleQuickImageSelected = function(input) {
+  window.handleQuickImageSelected = function (input) {
     const file = input.files && input.files[0];
     if (!file || !quickUploadTargetId) return;
 
@@ -521,7 +523,7 @@
     showToast(`Uploading image for "${targetProduct.name}"...`);
 
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       const dataUrl = e.target.result;
 
       fetch('/api/admin/upload-image', {
@@ -532,32 +534,32 @@
         },
         body: JSON.stringify({ fileName: file.name, dataUrl: dataUrl })
       })
-      .then(res => res.json())
-      .then(resData => {
-        if (resData.status === 'success' && resData.imagePath) {
-          targetProduct.image = resData.imagePath;
+        .then(res => res.json())
+        .then(resData => {
+          if (resData.status === 'success' && resData.imagePath) {
+            targetProduct.image = resData.imagePath;
 
-          // Save catalog back
-          fetch('/api/admin/products/save', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              ...getAuthHeader()
-            },
-            body: JSON.stringify(currentCatalog)
-          })
-          .then(saveRes => saveRes.json())
-          .then(() => {
-            showToast(`Product image updated for "${targetProduct.name}"!`);
-            filterProducts();
-          });
-        } else {
-          alert('Upload failed: ' + (resData.message || 'Unknown error'));
-        }
-      })
-      .catch(err => {
-        alert('Network upload error: ' + err);
-      });
+            // Save catalog back
+            fetch('/api/admin/products/save', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                ...getAuthHeader()
+              },
+              body: JSON.stringify(currentCatalog)
+            })
+              .then(saveRes => saveRes.json())
+              .then(() => {
+                showToast(`Product image updated for "${targetProduct.name}"!`);
+                filterProducts();
+              });
+          } else {
+            alert('Upload failed: ' + (resData.message || 'Unknown error'));
+          }
+        })
+        .catch(err => {
+          alert('Network upload error: ' + err);
+        });
     };
     reader.readAsDataURL(file);
     input.value = '';
@@ -566,11 +568,11 @@
   // ----------------------------------------------------------------------------
   // ADD & EDIT PRODUCT MODALS
   // ----------------------------------------------------------------------------
-  window.openAddProductModal = function() {
+  window.openAddProductModal = function () {
     window.openAddProductModalForCategory(activeCategory === 'all' ? 'pen-needles' : activeCategory);
   };
 
-  window.openAddProductModalForCategory = function(catId) {
+  window.openAddProductModalForCategory = function (catId) {
     document.getElementById('modalProductTitle').textContent = 'Add New Product to Catalog';
     document.getElementById('editProdId').value = '';
     document.getElementById('editProdName').value = '';
@@ -587,7 +589,7 @@
     document.getElementById('productEditModal').classList.add('open');
   };
 
-  window.openEditProductModal = function(id) {
+  window.openEditProductModal = function (id) {
     const p = (currentCatalog.products || []).find(x => String(x.id) === String(id) || String(x.itemNo) === String(id));
     if (!p) {
       alert('Product not found.');
@@ -610,16 +612,16 @@
     document.getElementById('productEditModal').classList.add('open');
   };
 
-  window.closeProductModal = function() {
+  window.closeProductModal = function () {
     document.getElementById('productEditModal').classList.remove('open');
   };
 
-  window.updateImagePreviewFromInput = function(url) {
+  window.updateImagePreviewFromInput = function (url) {
     const img = document.getElementById('editProdImgPreview');
     if (img) img.src = url || 'src/assets/logo.png';
   };
 
-  window.handleImageFileSelected = function(input) {
+  window.handleImageFileSelected = function (input) {
     const file = input.files && input.files[0];
     if (!file) return;
 
@@ -629,7 +631,7 @@
     }
 
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       const dataUrl = e.target.result;
       document.getElementById('editProdImgPreview').src = dataUrl;
 
@@ -646,25 +648,25 @@
         },
         body: JSON.stringify(uploadPayload)
       })
-      .then(res => res.json())
-      .then(resData => {
-        if (resData.status === 'success' && resData.imagePath) {
-          document.getElementById('editProdImgPath').value = resData.imagePath;
-          showToast(`Image uploaded successfully: ${resData.imagePath}`);
-        } else {
-          alert('Image upload failed: ' + (resData.message || 'Unknown error'));
-        }
-      })
-      .catch(err => {
-        console.error('Upload error:', err);
-        document.getElementById('editProdImgPath').value = dataUrl;
-        showToast('Image preview loaded locally.');
-      });
+        .then(res => res.json())
+        .then(resData => {
+          if (resData.status === 'success' && resData.imagePath) {
+            document.getElementById('editProdImgPath').value = resData.imagePath;
+            showToast(`Image uploaded successfully: ${resData.imagePath}`);
+          } else {
+            alert('Image upload failed: ' + (resData.message || 'Unknown error'));
+          }
+        })
+        .catch(err => {
+          console.error('Upload error:', err);
+          document.getElementById('editProdImgPath').value = dataUrl;
+          showToast('Image preview loaded locally.');
+        });
     };
     reader.readAsDataURL(file);
   };
 
-  window.saveCurrentProduct = function() {
+  window.saveCurrentProduct = function () {
     const id = document.getElementById('editProdId').value;
     const name = document.getElementById('editProdName').value.trim();
     const category = document.getElementById('editProdCategory').value;
@@ -736,37 +738,37 @@
       },
       body: JSON.stringify(currentCatalog)
     })
-    .then(res => res.json())
-    .then(resData => {
-      if (saveBtn) {
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Changes';
-      }
-      if (resData.status === 'success') {
-        showToast('Catalog updated and published to website!');
+      .then(res => res.json())
+      .then(resData => {
+        if (saveBtn) {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save Changes';
+        }
+        if (resData.status === 'success') {
+          showToast('Catalog updated and published to website!');
+          window.closeProductModal();
+          renderCategoryPills();
+          filterProducts();
+          updateKpis();
+        } else {
+          alert('Save failed: ' + (resData.message || 'Error occurred'));
+        }
+      })
+      .catch(err => {
+        if (saveBtn) {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save Changes';
+        }
+        console.warn('Save API error, updated locally in memory:', err);
         window.closeProductModal();
         renderCategoryPills();
         filterProducts();
         updateKpis();
-      } else {
-        alert('Save failed: ' + (resData.message || 'Error occurred'));
-      }
-    })
-    .catch(err => {
-      if (saveBtn) {
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Changes';
-      }
-      console.warn('Save API error, updated locally in memory:', err);
-      window.closeProductModal();
-      renderCategoryPills();
-      filterProducts();
-      updateKpis();
-      showToast('Updated locally (offline mode).');
-    });
+        showToast('Updated locally (offline mode).');
+      });
   };
 
-  window.confirmDeleteProduct = function(id, name) {
+  window.confirmDeleteProduct = function (id, name) {
     if (!confirm(`Are you sure you want to delete "${name}" from the catalog? This will remove it from all storefront pages.`)) {
       return;
     }
@@ -781,29 +783,29 @@
       },
       body: JSON.stringify({ id })
     })
-    .then(res => res.json())
-    .then(resData => {
-      if (resData.status === 'success') {
-        showToast(`Product "${name}" deleted.`);
+      .then(res => res.json())
+      .then(resData => {
+        if (resData.status === 'success') {
+          showToast(`Product "${name}" deleted.`);
+          renderCategoryPills();
+          filterProducts();
+          updateKpis();
+        } else {
+          alert('Delete failed: ' + (resData.message || 'Unknown error'));
+        }
+      })
+      .catch(() => {
+        showToast(`Deleted "${name}" locally.`);
         renderCategoryPills();
         filterProducts();
         updateKpis();
-      } else {
-        alert('Delete failed: ' + (resData.message || 'Unknown error'));
-      }
-    })
-    .catch(() => {
-      showToast(`Deleted "${name}" locally.`);
-      renderCategoryPills();
-      filterProducts();
-      updateKpis();
-    });
+      });
   };
 
   // ----------------------------------------------------------------------------
   // WHOLESALE PRICING REQUESTS
   // ----------------------------------------------------------------------------
-  window.loadPricingRequests = function() {
+  window.loadPricingRequests = function () {
     fetch('/api/pricing-requests', { headers: getAuthHeader() })
       .then(res => res.ok ? res.json() : [])
       .then(list => {
@@ -819,11 +821,11 @@
       });
   };
 
-  window.filterPricingRequests = function() {
+  window.filterPricingRequests = function () {
     const q = (document.getElementById('pricingSearchInput').value || '').trim().toLowerCase();
     let list = allPricingRequests;
     if (q) {
-      list = list.filter(p => 
+      list = list.filter(p =>
         (p.email && p.email.toLowerCase().includes(q)) ||
         (p.productName && p.productName.toLowerCase().includes(q)) ||
         (p.ndc && p.ndc.toLowerCase().includes(q))
@@ -866,7 +868,7 @@
   // ----------------------------------------------------------------------------
   // CONTACT INQUIRIES
   // ----------------------------------------------------------------------------
-  window.loadContactInquiries = function() {
+  window.loadContactInquiries = function () {
     fetch('/api/contact-inquiries', { headers: getAuthHeader() })
       .then(res => res.ok ? res.json() : [])
       .then(list => {
@@ -882,11 +884,11 @@
       });
   };
 
-  window.filterContactInquiries = function() {
+  window.filterContactInquiries = function () {
     const q = (document.getElementById('contactSearchInput').value || '').trim().toLowerCase();
     let list = allContactInquiries;
     if (q) {
-      list = list.filter(c => 
+      list = list.filter(c =>
         (c.fullName && c.fullName.toLowerCase().includes(q)) ||
         (c.email && c.email.toLowerCase().includes(q)) ||
         (c.pharmacyName && c.pharmacyName.toLowerCase().includes(q)) ||
@@ -936,7 +938,7 @@
     const tbody = document.getElementById('contactTableBody');
     if (!tbody) return;
 
-    tbody.addEventListener('click', function(e) {
+    tbody.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn-view-contact');
       if (btn) {
         window.viewContactDetails(btn.dataset.id);
@@ -944,7 +946,7 @@
     });
   }
 
-  window.viewContactDetails = function(id) {
+  window.viewContactDetails = function (id) {
     const item = allContactInquiries.find(x => x.id === id);
     if (!item) return;
 
@@ -975,7 +977,7 @@
     drawer.classList.add('open');
   };
 
-  window.closeDrawer = function() {
+  window.closeDrawer = function () {
     document.getElementById('drawerPanel').classList.remove('open');
     document.getElementById('drawerOverlay').classList.remove('open');
   };
@@ -983,16 +985,16 @@
   // ----------------------------------------------------------------------------
   // ADMIN API KEY MODAL
   // ----------------------------------------------------------------------------
-  window.openApiKeyModal = function() {
+  window.openApiKeyModal = function () {
     document.getElementById('adminKeyInput').value = localStorage.getItem('akron_admin_key') || '';
     document.getElementById('apiKeyModal').classList.add('open');
   };
 
-  window.closeApiKeyModal = function() {
+  window.closeApiKeyModal = function () {
     document.getElementById('apiKeyModal').classList.remove('open');
   };
 
-  window.saveApiKey = function() {
+  window.saveApiKey = function () {
     const key = document.getElementById('adminKeyInput').value.trim();
     if (key) {
       localStorage.setItem('akron_admin_key', key);
@@ -1012,7 +1014,7 @@
   // ----------------------------------------------------------------------------
   let quickSpecialTargetId = null;
 
-  window.renderSpecialOffersTab = function() {
+  window.renderSpecialOffersTab = function () {
     const specialsData = currentCatalog.specialOffers || {
       eyebrow: 'AKRON GENERICS · SPECIAL OFFERS',
       title: 'A new month. More opportunity.',
@@ -1122,7 +1124,7 @@
       }).join('');
   }
 
-  window.onCatalogProductSelectedForSpecial = function(prodId) {
+  window.onCatalogProductSelectedForSpecial = function (prodId) {
     if (!prodId) return;
     const prod = (currentCatalog.products || []).find(p => String(p.id) === String(prodId));
     if (!prod) return;
@@ -1145,7 +1147,7 @@
     if (imgPreview) imgPreview.src = prod.image || 'src/assets/products/quick-touch-safety-packaging.png';
   };
 
-  window.openAddSpecialModal = function() {
+  window.openAddSpecialModal = function () {
     document.getElementById('modalSpecialTitle').textContent = 'Add Product to Special Offers';
     document.getElementById('editSpecialId').value = '';
     document.getElementById('editSpecialName').value = '';
@@ -1161,7 +1163,7 @@
     document.getElementById('specialOfferModal').classList.add('open');
   };
 
-  window.openEditSpecialModal = function(specialId) {
+  window.openEditSpecialModal = function (specialId) {
     const specials = (currentCatalog.specialOffers && currentCatalog.specialOffers.items) || [];
     const item = specials.find(s => String(s.id) === String(specialId));
     if (!item) {
@@ -1189,16 +1191,16 @@
     document.getElementById('specialOfferModal').classList.add('open');
   };
 
-  window.closeSpecialOfferModal = function() {
+  window.closeSpecialOfferModal = function () {
     document.getElementById('specialOfferModal').classList.remove('open');
   };
 
-  window.updateSpecialImagePreviewFromInput = function(val) {
+  window.updateSpecialImagePreviewFromInput = function (val) {
     const preview = document.getElementById('editSpecialImgPreview');
     if (preview && val) preview.src = val.trim();
   };
 
-  window.handleSpecialImageFileSelected = function(input) {
+  window.handleSpecialImageFileSelected = function (input) {
     const file = input.files && input.files[0];
     if (!file) return;
 
@@ -1209,30 +1211,30 @@
 
     showToast('Uploading special offer image...');
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       const dataUrl = e.target.result;
       fetch('/api/admin/upload-image', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
         body: JSON.stringify({ fileName: file.name, dataUrl: dataUrl })
       })
-      .then(res => res.json())
-      .then(resData => {
-        if (resData.status === 'success' && resData.imagePath) {
-          document.getElementById('editSpecialImgPath').value = resData.imagePath;
-          document.getElementById('editSpecialImgPreview').src = resData.imagePath;
-          showToast('Image uploaded successfully!');
-        } else {
-          alert('Upload failed: ' + (resData.message || 'Unknown error'));
-        }
-      })
-      .catch(err => alert('Upload error: ' + err));
+        .then(res => res.json())
+        .then(resData => {
+          if (resData.status === 'success' && resData.imagePath) {
+            document.getElementById('editSpecialImgPath').value = resData.imagePath;
+            document.getElementById('editSpecialImgPreview').src = resData.imagePath;
+            showToast('Image uploaded successfully!');
+          } else {
+            alert('Upload failed: ' + (resData.message || 'Unknown error'));
+          }
+        })
+        .catch(err => alert('Upload error: ' + err));
     };
     reader.readAsDataURL(file);
     input.value = '';
   };
 
-  window.saveSpecialOfferForm = function() {
+  window.saveSpecialOfferForm = function () {
     const id = document.getElementById('editSpecialId').value;
     const title = (document.getElementById('editSpecialName').value || '').trim();
     const badge = (document.getElementById('editSpecialBadge').value || '').trim() || 'SPECIAL PRICE';
@@ -1305,25 +1307,25 @@
       headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
       body: JSON.stringify({ specialOffers: currentCatalog.specialOffers })
     })
-    .then(res => res.json())
-    .then(resData => {
-      if (btn) btn.disabled = false;
-      if (resData.status === 'success') {
-        if (resData.specialOffers) currentCatalog.specialOffers = resData.specialOffers;
-        renderSpecialOffersTab();
-        closeSpecialOfferModal();
-        showToast(id ? 'Special offer updated successfully!' : 'New product added to special offers!');
-      } else {
-        alert('Save failed: ' + (resData.message || 'Unknown error'));
-      }
-    })
-    .catch(err => {
-      if (btn) btn.disabled = false;
-      alert('Network error saving special offers: ' + err);
-    });
+      .then(res => res.json())
+      .then(resData => {
+        if (btn) btn.disabled = false;
+        if (resData.status === 'success') {
+          if (resData.specialOffers) currentCatalog.specialOffers = resData.specialOffers;
+          renderSpecialOffersTab();
+          closeSpecialOfferModal();
+          showToast(id ? 'Special offer updated successfully!' : 'New product added to special offers!');
+        } else {
+          alert('Save failed: ' + (resData.message || 'Unknown error'));
+        }
+      })
+      .catch(err => {
+        if (btn) btn.disabled = false;
+        alert('Network error saving special offers: ' + err);
+      });
   };
 
-  window.removeSpecialOffer = function(specialId) {
+  window.removeSpecialOffer = function (specialId) {
     if (!confirm('Are you sure you want to remove this product from the monthly special offers?')) {
       return;
     }
@@ -1338,27 +1340,27 @@
       headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
       body: JSON.stringify({ specialOffers: currentCatalog.specialOffers })
     })
-    .then(res => res.json())
-    .then(resData => {
-      if (resData.status === 'success') {
-        if (resData.specialOffers) currentCatalog.specialOffers = resData.specialOffers;
-        renderSpecialOffersTab();
-        showToast('Special offer removed successfully.');
-      } else {
-        alert('Remove failed: ' + (resData.message || 'Unknown error'));
-      }
-    })
-    .catch(err => alert('Network error: ' + err));
+      .then(res => res.json())
+      .then(resData => {
+        if (resData.status === 'success') {
+          if (resData.specialOffers) currentCatalog.specialOffers = resData.specialOffers;
+          renderSpecialOffersTab();
+          showToast('Special offer removed successfully.');
+        } else {
+          alert('Remove failed: ' + (resData.message || 'Unknown error'));
+        }
+      })
+      .catch(err => alert('Network error: ' + err));
   };
 
   // Quick 1-click image upload on special offer cards
-  window.triggerQuickSpecialImgUpload = function(specialId) {
+  window.triggerQuickSpecialImgUpload = function (specialId) {
     quickSpecialTargetId = specialId;
     const fileInput = document.getElementById('quickSpecialImgFileInput');
     if (fileInput) fileInput.click();
   };
 
-  window.handleQuickSpecialImageSelected = function(input) {
+  window.handleQuickSpecialImageSelected = function (input) {
     const file = input.files && input.files[0];
     if (!file || !quickSpecialTargetId) return;
 
@@ -1374,46 +1376,46 @@
     showToast(`Uploading new image for "${targetItem.title}"...`);
 
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       const dataUrl = e.target.result;
       fetch('/api/admin/upload-image', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
         body: JSON.stringify({ fileName: file.name, dataUrl: dataUrl })
       })
-      .then(res => res.json())
-      .then(resData => {
-        if (resData.status === 'success' && resData.imagePath) {
-          targetItem.image = resData.imagePath;
+        .then(res => res.json())
+        .then(resData => {
+          if (resData.status === 'success' && resData.imagePath) {
+            targetItem.image = resData.imagePath;
 
-          fetch('/api/admin/specials/save', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
-            body: JSON.stringify({ specialOffers: currentCatalog.specialOffers })
-          })
-          .then(res => res.json())
-          .then(saveRes => {
-            if (saveRes.status === 'success') {
-              if (saveRes.specialOffers) currentCatalog.specialOffers = saveRes.specialOffers;
-              showToast(`Image updated for "${targetItem.title}"!`);
-              renderSpecialOffersTab();
-            } else {
-              alert('Failed to save special offer after image upload: ' + (saveRes.message || 'Unknown error'));
-            }
-          })
-          .catch(saveErr => alert('Network error saving special offers: ' + saveErr));
-        } else {
-          alert('Upload failed: ' + (resData.message || 'Unknown error'));
-        }
-      })
-      .catch(err => alert('Upload error: ' + err));
+            fetch('/api/admin/specials/save', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+              body: JSON.stringify({ specialOffers: currentCatalog.specialOffers })
+            })
+              .then(res => res.json())
+              .then(saveRes => {
+                if (saveRes.status === 'success') {
+                  if (saveRes.specialOffers) currentCatalog.specialOffers = saveRes.specialOffers;
+                  showToast(`Image updated for "${targetItem.title}"!`);
+                  renderSpecialOffersTab();
+                } else {
+                  alert('Failed to save special offer after image upload: ' + (saveRes.message || 'Unknown error'));
+                }
+              })
+              .catch(saveErr => alert('Network error saving special offers: ' + saveErr));
+          } else {
+            alert('Upload failed: ' + (resData.message || 'Unknown error'));
+          }
+        })
+        .catch(err => alert('Upload error: ' + err));
     };
     reader.readAsDataURL(file);
     input.value = '';
   };
 
   // Section Details Modal
-  window.openSpecialsSectionModal = function() {
+  window.openSpecialsSectionModal = function () {
     const data = currentCatalog.specialOffers || {};
     document.getElementById('secEyebrow').value = data.eyebrow || 'AKRON GENERICS · SPECIAL OFFERS';
     document.getElementById('secTitle').value = data.title || 'A new month. More opportunity.';
@@ -1425,11 +1427,11 @@
     document.getElementById('specialsSectionModal').classList.add('open');
   };
 
-  window.closeSpecialsSectionModal = function() {
+  window.closeSpecialsSectionModal = function () {
     document.getElementById('specialsSectionModal').classList.remove('open');
   };
 
-  window.saveSpecialsSectionDetails = function() {
+  window.saveSpecialsSectionDetails = function () {
     if (!currentCatalog.specialOffers) {
       currentCatalog.specialOffers = { items: [] };
     }
@@ -1446,24 +1448,24 @@
       headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
       body: JSON.stringify({ specialOffers: currentCatalog.specialOffers })
     })
-    .then(res => res.json())
-    .then(resData => {
-      if (resData.status === 'success') {
-        if (resData.specialOffers) currentCatalog.specialOffers = resData.specialOffers;
-        renderSpecialOffersTab();
-        closeSpecialsSectionModal();
-        showToast('Specials section details updated successfully!');
-      } else {
-        alert('Failed: ' + (resData.message || 'Unknown error'));
-      }
-    })
-    .catch(err => alert('Network error: ' + err));
+      .then(res => res.json())
+      .then(resData => {
+        if (resData.status === 'success') {
+          if (resData.specialOffers) currentCatalog.specialOffers = resData.specialOffers;
+          renderSpecialOffersTab();
+          closeSpecialsSectionModal();
+          showToast('Specials section details updated successfully!');
+        } else {
+          alert('Failed: ' + (resData.message || 'Unknown error'));
+        }
+      })
+      .catch(err => alert('Network error: ' + err));
   };
 
   // ----------------------------------------------------------------------------
   // INITIALIZATION
   // ----------------------------------------------------------------------------
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     initCategoryPillsDelegation();
     initProductsEventDelegation();
     initContactTableDelegation();
