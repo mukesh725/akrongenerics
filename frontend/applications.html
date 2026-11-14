@@ -895,7 +895,7 @@ body {
       <a href="my-t3.html" class="header-nav-link">My T3</a>
       <span class="header-nav-divider" aria-hidden="true"></span>
       <a href="https://server.akrongenerics.com/login.php" class="header-nav-link" target="_blank" rel="noopener noreferrer">Login</a>
-      <a href="become-a-customer.html" class="header-cta-red">Create a Pharmacy Account</a>
+      <a href="#credit-application" class="header-cta-red">Create a Pharmacy Account</a>
     </div>
   </div>
 </header>
@@ -906,7 +906,7 @@ body {
     <img src="src/assets/akron-generics-logo.png" alt="Akron Generics" style="height:22px;">
   </a>
   <div class="mobile-nav-actions">
-    <a href="become-a-customer.html" class="header-cta-red" style="font-size:12px;padding:6px 14px;">Create a Pharmacy Account</a>
+    <a href="#credit-application" class="header-cta-red" style="font-size:12px;padding:6px 14px;">Create a Pharmacy Account</a>
     <button type="button" class="mobile-hamburger-btn" id="mobileMenuBtn" onclick="toggleMobileNav(true)" aria-label="Open Navigation Menu">
       <span></span>
       <span></span>
@@ -936,7 +936,7 @@ body {
       <a href="my-t3.html" class="mobile-drawer-link">My T3 (DSCSA)</a>
       <a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a>
       <a href="https://server.akrongenerics.com/login.php" class="mobile-drawer-link" target="_blank" rel="noopener noreferrer">Customer Login ↗</a>
-      <a href="become-a-customer.html" class="mobile-drawer-cta">Create a Pharmacy Account</a>
+      <a href="#credit-application" class="mobile-drawer-cta" onclick="toggleMobileNav(false)">Create a Pharmacy Account</a>
     </div>
   </div>
 </div>
@@ -949,7 +949,7 @@ body {
     <div class="app-eyebrow">DOCUMENTATION &amp; APPLICATIONS</div>
     <h1 class="app-title">Applications</h1>
     <p class="app-subtitle">
-      Essential account onboarding and return documentation for independent pharmacies. Complete online in minutes or download printable documents below.
+      Essential account onboarding and return documentation for independent pharmacies. Download printable application documents below (online submission coming soon).
     </p>
   </section>
 
@@ -957,7 +957,7 @@ body {
   <section class="applications-grid">
 
     <!-- 1. CREDIT APPLICATION -->
-    <div class="bento-app-card">
+    <div class="bento-app-card" id="credit-application">
       <div>
         <div class="card-cat-label">Account Setup</div>
         <h2 class="card-doc-title">Pharmacy Credit Application</h2>
@@ -974,9 +974,9 @@ body {
 
       <div>
         <div class="card-action-row">
-          <a href="become-a-customer.html" class="btn-apple-crimson">
-            Fill Online ↗
-          </a>
+          <button type="button" class="btn-apple-crimson" disabled style="background:#64748B; cursor:not-allowed; opacity:0.8; pointer-events:none; border:none;">
+            Fill Online — Coming Soon
+          </button>
           <a href="docs/Akron-Generics-Credit-Application.pdf" download="Akron-Generics-Credit-Application.pdf" class="btn-apple-outline" target="_blank" rel="noopener noreferrer">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             Download PDF
@@ -1158,7 +1158,7 @@ body {
       <div class="c-footer-links-col">
         <h6>CUSTOMER PORTAL</h6>
         <ul>
-          <li><a href="become-a-customer.html">Become a Customer</a></li>
+          <li><a href="applications.html">Become a Customer</a></li>
           <li><a href="https://server.akrongenerics.com/login.php?f=anM3R2tDWEJSZERxS2lDVjJRelJKZz09" target="_blank" rel="noopener noreferrer">MY T3 Portal ↗</a></li>
           <li><a href="https://server.akrongenerics.com/login.php" target="_blank" rel="noopener noreferrer">Customer Login ↗</a></li>
         </ul>

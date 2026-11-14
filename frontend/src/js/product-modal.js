@@ -85,7 +85,7 @@
                 <sup>&dagger;</sup> Wholesale distribution exclusively to verified US pharmacies, healthcare networks, and licensed practitioners. Zero retail sales.
               </p>
               <p class="seed-footnote">
-                <sup>*</sup> 100% serialized under DSCSA Title II. Direct orders: <a href="tel:18667606565">1-866-760-6565</a> or <a href="become-a-customer.html">Apply for Wholesale Account</a>.
+                <sup>*</sup> 100% serialized under DSCSA Title II. Direct orders: <a href="tel:6312153009">(631) 215-3009</a> or <span style="color: #64748B; cursor: not-allowed;" title="Online application coming soon">Apply for Wholesale Account</span>.
               </p>
             </div>
           </div>
