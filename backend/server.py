@@ -364,6 +364,13 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
         path = parsed.path
         query = urllib.parse.parse_qs(parsed.query)
 
+        # Reroute /become-a-customer to server.akrongenerics.com
+        if path in ('/become-a-customer.html', '/become-a-customer', '/become-a-customer/', '/src/pages/become-a-customer.html', '/src/pages/become-a-customer'):
+            self.send_response(302)
+            self.send_header('Location', 'https://server.akrongenerics.com/become_a_customer.php')
+            self.end_headers()
+            return
+
         # GET /api/admin/products (Protected administrative endpoint)
         if path == '/api/admin/products':
             if not is_admin_authorized(self):
