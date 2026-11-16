@@ -371,6 +371,13 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             return
 
+        # Reroute /login to server.akrongenerics.com
+        if path in ('/login.html', '/login', '/login/', '/src/pages/login.html', '/src/pages/login'):
+            self.send_response(302)
+            self.send_header('Location', 'https://server.akrongenerics.com/login.php')
+            self.end_headers()
+            return
+
         # GET /api/admin/products (Protected administrative endpoint)
         if path == '/api/admin/products':
             if not is_admin_authorized(self):

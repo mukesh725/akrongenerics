@@ -146,14 +146,17 @@ body {
   margin-top: 4px;
 }
 
-/* Metric Cards (3 Clean Cards) */
+/* Metric Cards (4 Clean Cards) */
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-bottom: 24px;
 }
-@media (max-width: 800px) {
+@media (max-width: 1024px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
   .metrics-grid { grid-template-columns: 1fr; }
 }
 .metric-card {
@@ -767,6 +770,197 @@ body {
   color: var(--color-text-muted);
   margin-bottom: 2px;
 }
+
+/* ---------- MONTHLY SPECIALS MANAGEMENT (HERO PREVIEW STYLE) ---------- */
+.dash-specials-preview-card {
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 34px 34px 28px;
+  border: 1px solid rgba(22, 24, 15, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  margin-bottom: 24px;
+}
+.specials-card-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.specials-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0D498F;
+  margin-bottom: 6px;
+}
+.specials-main-title {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.025em;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.specials-subtitle {
+  font-size: 14px;
+  color: #64748B;
+  font-weight: 400;
+}
+
+/* Specials 4-Col Grid */
+.dash-specials-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+@media (max-width: 1100px) {
+  .dash-specials-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .dash-specials-grid { grid-template-columns: 1fr; }
+}
+
+/* Same Style Product Card (25px corner hero style matching products.html) */
+.special-p-card {
+  min-width: 0;
+  background: #FFFFFF;
+  border: 1px solid #ECEEF0;
+  border-radius: 28px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: 12px 12px 18px;
+  box-sizing: border-box;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.special-p-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.07);
+}
+.special-p-card-image-box {
+  width: 100%;
+  height: 220px;
+  border-radius: 22px;
+  background: #ECEEF1;
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+.special-p-card-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.special-p-card:hover .special-p-card-image-box img {
+  transform: scale(1.05);
+}
+.special-p-card-pill {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  background: #FFFFFF;
+  border-radius: 9999px;
+  padding: 5px 13px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1F2937;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  white-space: nowrap;
+}
+.special-p-card-info {
+  padding: 16px 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+}
+.special-p-card-title {
+  font-family: var(--font-heading);
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #111827;
+  margin: 0 0 6px 0;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.special-p-card-desc {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  color: #64748B;
+  line-height: 1.45;
+  margin: 0 0 10px 0;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.special-p-card-ndc {
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-top: auto;
+  text-align: center;
+}
+.special-card-admin-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #F1F5F9;
+  width: 100%;
+}
+.specials-bottom-row-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid #E2E8F0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.specials-notice-text {
+  font-size: 13px;
+  color: #64748B;
+  flex: 1;
+  min-width: 260px;
+}
+.specials-explore-btn-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-crimson, #9E2235);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  text-decoration: none;
+}
 </style>
 </head>
 
@@ -774,6 +968,8 @@ body {
 
 <!-- Quick file input for direct 1-click image change on product cards -->
 <input type="file" id="quickImgFileInput" accept="image/png,image/jpeg,image/webp,image/jpg" style="display:none;" onchange="handleQuickImageSelected(this)">
+<!-- Quick file input for direct 1-click image change on special offer cards -->
+<input type="file" id="quickSpecialImgFileInput" accept="image/png,image/jpeg,image/webp,image/jpg" style="display:none;" onchange="handleQuickSpecialImageSelected(this)">
 
 <!-- Header -->
 <header class="dash-header">
@@ -814,12 +1010,17 @@ body {
     </div>
   </div>
 
-  <!-- Metric Summary Cards (3 Focused Cards) -->
+  <!-- Metric Summary Cards (4 Focused Cards) -->
   <div class="metrics-grid">
     <div class="metric-card active-metric" onclick="switchTab('tab-products')">
       <div class="metric-label">Products in Catalog</div>
       <div class="metric-value" id="kpiProductCount">33</div>
       <div class="metric-sub" id="kpiCategoryCount">8 Active Categories</div>
+    </div>
+    <div class="metric-card" onclick="switchTab('tab-specials')">
+      <div class="metric-label">Monthly Special Offers</div>
+      <div class="metric-value" id="kpiSpecialsCount">4</div>
+      <div class="metric-sub">Featured Hero Specials</div>
     </div>
     <div class="metric-card" onclick="switchTab('tab-pricing')">
       <div class="metric-label">Wholesale Pricing Requests</div>
@@ -833,11 +1034,15 @@ body {
     </div>
   </div>
 
-  <!-- Navigation Tabs (Only Products, Pricing, and Contact) -->
+  <!-- Navigation Tabs (Products, Monthly Specials, Pricing, and Contact) -->
   <div class="tabs-bar">
     <button type="button" class="tab-btn active" id="tabBtn-products" onclick="switchTab('tab-products')">
       <span>Products &amp; Images</span>
       <span class="tab-badge" id="badgeProducts">33</span>
+    </button>
+    <button type="button" class="tab-btn" id="tabBtn-specials" onclick="switchTab('tab-specials')">
+      <span>Monthly Specials</span>
+      <span class="tab-badge" id="badgeSpecials">4</span>
     </button>
     <button type="button" class="tab-btn" id="tabBtn-pricing" onclick="switchTab('tab-pricing')">
       <span>Pricing Requests</span>
@@ -914,6 +1119,64 @@ body {
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TAB: MONTHLY SPECIAL OFFERS HERO MANAGER                              -->
+  <!-- ===================================================================== -->
+  <div class="tab-panel" id="tab-specials">
+    
+    <!-- Active Category Banner & Controls -->
+    <div class="cat-header-banner">
+      <div class="cat-header-info">
+        <h2 class="cat-header-title">Monthly Special Offers</h2>
+        <p class="cat-header-desc">Manage the featured promotional products displayed in the hero section on the Products page. Update products, images, NDC, descriptions, and promotional badges.</p>
+      </div>
+
+      <div class="cat-header-actions">
+        <button type="button" class="btn-primary-action" onclick="openAddSpecialModal()">
+          <span>+ Add Product to Specials</span>
+        </button>
+        <button type="button" class="btn-action" onclick="openSpecialsSectionModal()">
+          <span>✎ Edit Section Details</span>
+        </button>
+        <button type="button" class="btn-action" onclick="loadCatalogProducts()" title="Refresh offers">
+          <span>&#x21bb; Refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Preview Card in Exact Storefront Hero Style -->
+    <div class="dash-specials-preview-card">
+      <div class="specials-card-header-row">
+        <div>
+          <div class="specials-eyebrow" id="dashSpecialsEyebrow">AKRON GENERICS · SPECIAL OFFERS</div>
+          <h2 class="specials-main-title" id="dashSpecialsTitle">A new month. More opportunity.</h2>
+          <p class="specials-subtitle" id="dashSpecialsSubtitle">Featured prices from our November specials.</p>
+        </div>
+        <div>
+          <button type="button" class="btn-action" onclick="openSpecialsSectionModal()">
+            <span>✎ Edit Heading &amp; Notice</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live 4-Card Specials Grid -->
+      <div class="dash-specials-grid" id="dashSpecialsGrid">
+        <!-- Rendered dynamically with exact .special-p-card style -->
+      </div>
+
+      <!-- Bottom Row: Notice & Explore Catalog Link -->
+      <div class="specials-bottom-row-preview">
+        <div class="specials-notice-text" id="dashSpecialsNotice">
+          Promotional allocation. Offer valid till November 30, 2026. Confirm availability before ordering.
+        </div>
+        <div>
+          <span class="specials-explore-btn-preview" id="dashSpecialsBtnText">Explore the Catalog ↗</span>
+        </div>
       </div>
     </div>
 
@@ -1089,6 +1352,140 @@ body {
           <button type="button" class="btn-action" onclick="closeProductModal()">Cancel</button>
           <button type="submit" class="btn-action btn-action-primary" id="btnSaveProduct">
             <span>Save Changes</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- MODAL: ADD / EDIT SPECIAL OFFER PRODUCT                               -->
+<!-- ===================================================================== -->
+<div class="modal-overlay" id="specialOfferModal" onclick="if(event.target===this)closeSpecialOfferModal()">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalSpecialTitle">Add Product to Specials</h2>
+      <button type="button" class="modal-close-btn" onclick="closeSpecialOfferModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="specialOfferForm" onsubmit="event.preventDefault(); saveSpecialOfferForm();">
+        <input type="hidden" id="editSpecialId">
+        
+        <!-- Pre-fill from Existing Catalog Dropdown -->
+        <div class="form-group" style="background:#F1F5F9;padding:12px 14px;border-radius:8px;margin-bottom:18px;">
+          <label class="form-label" for="specialProductPicker" style="color:#0B2240;font-weight:700;">
+            Auto-fill from Catalog Product (Optional):
+          </label>
+          <select id="specialProductPicker" class="form-control" onchange="onCatalogProductSelectedForSpecial(this.value)">
+            <option value="">-- Choose an existing product to copy information --</option>
+          </select>
+          <div style="font-size:11px;color:#64748B;margin-top:4px;">Selecting a catalog product will pre-fill Title, NDC, Image, and Description below.</div>
+        </div>
+
+        <div class="prod-form-grid">
+          <!-- Left: Image Preview & Upload -->
+          <div>
+            <div class="form-label">Special Offer Image</div>
+            <div class="img-preview-box" id="specialImgPreviewBox">
+              <img id="editSpecialImgPreview" src="src/assets/products/quick-touch-safety-packaging.png" alt="Preview" onerror="this.src='src/assets/logo.png'">
+            </div>
+            
+            <input type="file" id="specialImgFileInput" accept="image/png,image/jpeg,image/webp,image/jpg" style="display:none;" onchange="handleSpecialImageFileSelected(this)">
+            <button type="button" class="btn-upload-file" onclick="document.getElementById('specialImgFileInput').click()">
+              <span>Upload New Image</span>
+            </button>
+            <div style="font-size:11px;color:#94A3B8;text-align:center;margin-top:6px;">PNG, JPG, or WEBP up to 15MB</div>
+            
+            <div class="form-group" style="margin-top:12px;">
+              <label class="form-label" for="editSpecialImgPath">Image Path / URL</label>
+              <input type="text" id="editSpecialImgPath" class="form-control" placeholder="src/assets/products/..." oninput="updateSpecialImagePreviewFromInput(this.value)">
+            </div>
+          </div>
+
+          <!-- Right: Details -->
+          <div>
+            <div class="form-group">
+              <label class="form-label" for="editSpecialName">Product Title &amp; Spec <span style="color:#DC2626;">*</span></label>
+              <input type="text" id="editSpecialName" class="form-control" required placeholder="e.g. Quick Touch Safety Pen Needles | 100 CT">
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="editSpecialBadge">Promotional Badge Text</label>
+                <input type="text" id="editSpecialBadge" class="form-control" placeholder="e.g. SPECIAL PRICE or AUTHORIZED DEALER">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editSpecialNdc">National Drug Code (NDC) <span style="color:#DC2626;">*</span></label>
+                <input type="text" id="editSpecialNdc" class="form-control" required placeholder="e.g. 73317-6816-04">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editSpecialDesc">Highlight Description</label>
+              <textarea id="editSpecialDesc" class="form-control" rows="3" placeholder="Key selling point or clinical dispensing summary..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editSpecialProdId">Linked Catalog Product ID (Optional)</label>
+              <input type="text" id="editSpecialProdId" class="form-control" placeholder="e.g. 18366 or CONTOUR-100 (for quick view modal)">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer" style="margin:24px -24px -24px -24px;">
+          <button type="button" class="btn-action" onclick="closeSpecialOfferModal()">Cancel</button>
+          <button type="submit" class="btn-action btn-action-primary" id="btnSaveSpecial">
+            <span>Save Special Offer</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- MODAL: EDIT SPECIALS SECTION DETAILS                                  -->
+<!-- ===================================================================== -->
+<div class="modal-overlay" id="specialsSectionModal" onclick="if(event.target===this)closeSpecialsSectionModal()">
+  <div class="modal-card" style="max-width:620px;">
+    <div class="modal-header">
+      <h2 class="modal-title">Edit Specials Section Details</h2>
+      <button type="button" class="modal-close-btn" onclick="closeSpecialsSectionModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="specialsSectionForm" onsubmit="event.preventDefault(); saveSpecialsSectionDetails();">
+        <div class="form-group">
+          <label class="form-label" for="secEyebrow">Section Eyebrow</label>
+          <input type="text" id="secEyebrow" class="form-control" value="AKRON GENERICS · SPECIAL OFFERS">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="secTitle">Main Heading Title <span style="color:#DC2626;">*</span></label>
+          <input type="text" id="secTitle" class="form-control" required value="A new month. More opportunity.">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="secSubtitle">Subtitle Description</label>
+          <input type="text" id="secSubtitle" class="form-control" value="Featured prices from our November specials.">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="secNotice">Bottom Promotional Disclaimer Notice</label>
+          <textarea id="secNotice" class="form-control" rows="2">Promotional allocation. Offer valid till November 30, 2026. Confirm availability before ordering.</textarea>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="secCatalogUrl">Catalog PDF / Link</label>
+            <input type="text" id="secCatalogUrl" class="form-control" value="src/november-specials.pdf">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="secBtnText">Button Label</label>
+            <input type="text" id="secBtnText" class="form-control" value="Explore the Catalog ↗">
+          </div>
+        </div>
+
+        <div class="modal-footer" style="margin:24px -24px -24px -24px;">
+          <button type="button" class="btn-action" onclick="closeSpecialsSectionModal()">Cancel</button>
+          <button type="submit" class="btn-action btn-action-primary">
+            <span>Save Section Details</span>
           </button>
         </div>
       </form>
