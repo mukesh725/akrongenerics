@@ -545,129 +545,152 @@ body {
   color: #38BDF8;
 }
 
-/* ================= FACILITY PHOTO SLIDESHOW (ONLY PHOTOS) ================= */
-.facility-slideshow {
+/* ================= FACILITY PHOTO CAROUSEL (SMOOTH SCROLL & ROUND EDGES) ================= */
+.facility-carousel-section {
   position: relative;
   width: 100%;
-  height: clamp(340px, 44vw, 520px);
-  border-radius: 24px;
-  overflow: hidden;
-  background: #0F172A;
+  margin: 4px 0 28px;
+  background: #F8FAFC;
   border: 1px solid rgba(22, 24, 15, 0.08);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  border-radius: 28px;
+  padding: 22px 0 26px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
 }
 
-.facility-slideshow-track {
+.facility-carousel-topbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 28px 14px;
+}
+
+.facility-counter-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  padding: 6px 15px;
+  border-radius: 9999px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.facility-counter-badge .curr-num {
+  color: #0F172A;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.facility-carousel-viewport {
   position: relative;
   width: 100%;
-  height: 100%;
+  overflow: hidden;
+  padding: 14px 0 18px;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.facility-slide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+.facility-carousel-viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.facility-carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  width: max-content;
+  will-change: transform;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.facility-carousel-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(320px, 58vw, 760px);
+  height: clamp(260px, 38vw, 470px);
+  border-radius: 22px;
+  overflow: hidden;
+  background: #E2E8F0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  opacity: 0.55;
+  transform: scale(0.92);
+  filter: brightness(0.88);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.65s ease, filter 0.65s ease, box-shadow 0.65s ease;
   cursor: pointer;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
-.facility-slide.active {
+.facility-carousel-card.active {
   opacity: 1;
-  visibility: visible;
-  z-index: 1;
+  transform: scale(1);
+  filter: brightness(1);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.14);
+  cursor: zoom-in;
+  z-index: 2;
 }
 
-.facility-slide img {
+.facility-carousel-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.facility-slideshow:hover .facility-slide.active img {
-  transform: scale(1.02);
+.facility-carousel-card.active:hover img {
+  transform: scale(1.025);
 }
 
-/* Arrows */
-.slideshow-nav-btn {
+/* Navigation Arrows */
+.carousel-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.94);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   color: #0F172A;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
-  opacity: 0.85;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.slideshow-nav-btn:hover {
-  opacity: 1;
+.carousel-nav-btn:hover {
   background: #FFFFFF;
-  transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  color: var(--c-primary, #006837);
 }
 
-.slideshow-nav-btn.prev {
-  left: 18px;
+.carousel-nav-btn:active {
+  transform: translateY(-50%) scale(0.96);
 }
 
-.slideshow-nav-btn.next {
-  right: 18px;
+.carousel-nav-btn.prev {
+  left: 20px;
 }
 
-/* Dots */
-.slideshow-dots-wrap {
-  position: absolute;
-  bottom: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(15, 23, 42, 0.55);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  padding: 6px 12px;
-  border-radius: var(--r-pill);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.slideshow-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.45);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.slideshow-dot:hover {
-  background: rgba(255, 255, 255, 0.75);
-}
-
-.slideshow-dot.active {
-  width: 22px;
-  border-radius: var(--r-pill);
-  background: #FFFFFF;
+.carousel-nav-btn.next {
+  right: 20px;
 }
 
 /* Lightbox Modal */
@@ -694,44 +717,101 @@ body {
 
 .facility-lightbox-content {
   position: relative;
-  max-width: 1100px;
+  max-width: 1120px;
   width: 100%;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .facility-lightbox-img {
   max-width: 100%;
-  max-height: 86vh;
+  max-height: 84vh;
   object-fit: contain;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 18px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.15);
+  display: block;
 }
 
 .facility-lightbox-close {
   position: absolute;
-  top: -46px;
+  top: -48px;
   right: 0;
   background: rgba(255, 255, 255, 0.2);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .facility-lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.38);
+  transform: scale(1.08);
+}
+
+.facility-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.facility-lightbox-arrow:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.facility-lightbox-arrow.prev {
+  left: 18px;
+}
+
+.facility-lightbox-arrow.next {
+  right: 18px;
+}
+
+@media (min-width: 1280px) {
+  .facility-lightbox-arrow.prev {
+    left: -64px;
+  }
+  .facility-lightbox-arrow.next {
+    right: -64px;
+  }
+}
+
+.facility-lightbox-counter {
+  position: absolute;
+  bottom: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* ================= PARTNER CTA CARD ================= */
@@ -913,10 +993,15 @@ body {
   .wrap { margin-top: 72px; }
   .about-hero-card { grid-template-columns: 1fr; gap: 32px; }
   .about-image-wrap { min-height: 360px; }
-  .facility-slideshow { height: clamp(280px, 40vw, 420px); border-radius: 20px; }
-  .slideshow-nav-btn { width: 38px; height: 38px; }
-  .slideshow-nav-btn.prev { left: 12px; }
-  .slideshow-nav-btn.next { right: 12px; }
+  .facility-carousel-section { border-radius: 22px; padding: 18px 0 22px; }
+  .facility-carousel-topbar { padding: 0 20px 12px; }
+  .facility-carousel-card { width: clamp(280px, 72vw, 620px); height: clamp(240px, 42vw, 380px); border-radius: 18px; }
+  .carousel-nav-btn { width: 42px; height: 42px; }
+  .carousel-nav-btn.prev { left: 12px; }
+  .carousel-nav-btn.next { right: 12px; }
+  .facility-lightbox-arrow { width: 42px; height: 42px; }
+  .facility-lightbox-arrow.prev { left: 12px; }
+  .facility-lightbox-arrow.next { right: 12px; }
   .about-cta-card { flex-direction: column; align-items: flex-start; }
   .about-cta-actions { width: 100%; flex-wrap: wrap; }
   .c-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -926,11 +1011,17 @@ body {
   body { padding: 8px 6px; }
   .wrap { margin-top: 68px; gap: 12px; }
   .about-hero-card { padding: 22px 14px; border-radius: 18px; }
-  .facility-slideshow { height: 240px; border-radius: 16px; }
-  .slideshow-nav-btn { width: 34px; height: 34px; }
-  .slideshow-nav-btn.prev { left: 8px; }
-  .slideshow-nav-btn.next { right: 8px; }
-  .slideshow-dots-wrap { bottom: 12px; padding: 4px 10px; }
+  .facility-carousel-section { border-radius: 18px; padding: 14px 0 18px; }
+  .facility-carousel-topbar { padding: 0 16px 10px; }
+  .facility-counter-badge { font-size: 13px; padding: 4px 12px; }
+  .facility-counter-badge .curr-num { font-size: 14px; }
+  .facility-carousel-card { width: 84vw; height: 250px; border-radius: 16px; }
+  .carousel-nav-btn { width: 34px; height: 34px; }
+  .carousel-nav-btn.prev { left: 8px; }
+  .carousel-nav-btn.next { right: 8px; }
+  .facility-lightbox-arrow { width: 36px; height: 36px; }
+  .facility-lightbox-arrow.prev { left: 8px; }
+  .facility-lightbox-arrow.next { right: 8px; }
   .about-pill { font-size: 10.5px; padding: 4px 12px; margin-bottom: 12px; }
   .about-title { font-size: clamp(24px, 6.5vw, 32px); line-height: 1.2; margin-bottom: 14px; }
   .about-p { font-size: 14px; line-height: 1.55; }
@@ -1110,33 +1201,62 @@ body {
     </div>
   </section>
 
-  <!-- ================= FACILITY PHOTO SLIDESHOW (ONLY PHOTOS) ================= -->
-  <section class="facility-slideshow apple-fade-in delay-1" id="facilitySlideshow" aria-label="Facility Photo Slideshow">
-    <div class="facility-slideshow-track" id="facilitySlideTrack">
-      <div class="facility-slide active" role="button" tabindex="0" aria-label="Enlarge photo: Warehouse Storage Aisles and NDC Bins" onclick="openFacilityLightbox('src/assets/facility-warehouse-aisle.jpg')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFacilityLightbox('src/assets/facility-warehouse-aisle.jpg');}">
-        <img src="src/assets/facility-warehouse-aisle.jpg" alt="Akron Generics Warehouse Storage Aisles and NDC Bins">
-      </div>
-      <div class="facility-slide" role="button" tabindex="0" aria-label="Enlarge photo: High-Bay Inventory Racks and Order Staging" onclick="openFacilityLightbox('src/assets/facility-inventory-racks.jpg')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFacilityLightbox('src/assets/facility-inventory-racks.jpg');}">
-        <img src="src/assets/facility-inventory-racks.jpg" alt="Akron Generics High-Bay Inventory Racks and Order Staging" loading="lazy">
-      </div>
-      <div class="facility-slide" role="button" tabindex="0" aria-label="Enlarge photo: Akron Generics Facility Exterior" onclick="openFacilityLightbox('src/assets/akron-facility.jpg')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFacilityLightbox('src/assets/akron-facility.jpg');}">
-        <img src="src/assets/akron-facility.jpg" alt="Akron Generics Facility Exterior at 47 Mall Drive, Commack, NY" loading="lazy">
+  <!-- ================= FACILITY PHOTO CAROUSEL (SMOOTH SCROLL & ROUND EDGES) ================= -->
+  <section class="facility-carousel-section apple-fade-in delay-1" id="facilityCarouselSection" aria-label="Facility Photo Gallery">
+    <!-- Minimal Top-Right Counter -->
+    <div class="facility-carousel-topbar">
+      <div class="facility-counter-badge" aria-live="polite">
+        <span class="curr-num" id="facilityCounterCurrent">1</span>
+        <span>/</span>
+        <span>11</span>
       </div>
     </div>
 
-    <!-- Arrow Controls -->
-    <button type="button" class="slideshow-nav-btn prev" onclick="changeFacilitySlide(-1)" aria-label="Previous Slide">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </button>
-    <button type="button" class="slideshow-nav-btn next" onclick="changeFacilitySlide(1)" aria-label="Next Slide">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </button>
+    <!-- Viewport & Track -->
+    <div class="facility-carousel-viewport" id="facilityViewport">
+      <div class="facility-carousel-track" id="facilityTrack">
+        <div class="facility-carousel-card active" data-index="0" role="button" tabindex="0" aria-label="Enlarge photo 1: Akron Generics Main Entrance and Signage">
+          <img src="src/assets/facility-gallery/facility-01.jpg" alt="Akron Generics Main Entrance and Facility Signage at 47 Mall Drive, Commack, NY" draggable="false">
+        </div>
+        <div class="facility-carousel-card" data-index="1" role="button" tabindex="0" aria-label="Enlarge photo 2: Commack Corporate Headquarters Exterior">
+          <img src="src/assets/facility-gallery/facility-02.jpg" alt="Akron Generics Corporate Headquarters Exterior at Commack, NY" loading="lazy" draggable="false">
+        </div>
+        <div class="facility-carousel-card" data-index="2" role="button" tabindex="0" aria-label="Enlarge photo 3: 47 Mall Drive Corporate Directory and Monument Sign">
+          <img src="src/assets/facility-gallery/facility-03.jpg" alt="47 Mall Drive Corporate Directory and Monument Sign" loading="lazy" draggable="false">
+        </div>
+        <div class="facility-carousel-card" data-index="3" role="button" tabindex="0" aria-label="Enlarge photo 4: Facility Headquarters Exterior Perspective">
+          <img src="src/assets/facility-gallery/facility-04.jpg" alt="Akron Generics Facility Exterior Perspective" loading="lazy" draggable="false">
+        </div>
+        <div class="facility-carousel-card" data-index="4" role="button" tabindex="0" aria-label="Enlarge photo 5: Corporate Architecture and Grounds">
+          <img src="src/assets/facility-gallery/facility-05.jpg" alt="Akron Generics Corporate Architecture and Facility Grounds" loading="lazy" draggable="false">
+        </div>
+        <div class="facility-carousel-card" data-index="5" role="button" tabindex="0" aria-label="Enlarge photo 6: Distribution and Logistics Wing">
+          <img src="src/assets/facility-gallery/facility-06.jpg" alt="Akron Generics Distribution and Loading Logistics Wing" loading="lazy" draggable="false">
+        </div>
+        <div class="facility-carousel-card" data-index="6" role="button" tabindex="0" aria-label="Enlarge photo 7: Climate-Controlled Pharmaceutical Storage Aisles">
+          <img src="src/assets/facility-gallery/facility-07.jpg" alt="Climate-Controlled Warehouse Storage Aisles and NDC Inventory" loading="lazy" draggable="false">
+        </div>
+        <div class="facility-carousel-card" data-index="7" role="button" tabindex="0" aria-label="Enlarge photo 8: Order Verification, Packaging and Fulfillment Operations">
+          <img src="src/assets/facility-gallery/facility-08.jpg" alt="Order Verification, Packaging and Fulfillment Operations" loading="lazy" draggable="false">
+        </div>
+        <div class="facility-carousel-card" data-index="8" role="button" tabindex="0" aria-label="Enlarge photo 9: High-Density NDC Inventory Bins and Fulfillment">
+          <img src="src/assets/facility-gallery/facility-09.jpg" alt="Pharmaceutical Inventory Bins and Fulfillment Stations" loading="lazy" draggable="false">
+        </div>
+        <div class="facility-carousel-card" data-index="9" role="button" tabindex="0" aria-label="Enlarge photo 10: High-Bay Inventory Staging and Quality Verification">
+          <img src="src/assets/facility-gallery/facility-10.jpg" alt="High-Bay Inventory Racks and Order Verification Staging" loading="lazy" draggable="false">
+        </div>
+        <div class="facility-carousel-card" data-index="10" role="button" tabindex="0" aria-label="Enlarge photo 11: Secure Warehouse Distribution Storage">
+          <img src="src/assets/facility-gallery/facility-11.jpg" alt="Secure Warehouse Storage Racks and Logistics Floor" loading="lazy" draggable="false">
+        </div>
+      </div>
 
-    <!-- Indicator Dots -->
-    <div class="slideshow-dots-wrap" role="tablist" aria-label="Slideshow Indicators">
-      <button type="button" class="slideshow-dot active" role="tab" aria-selected="true" aria-label="Slide 1" onclick="goToFacilitySlide(0)"></button>
-      <button type="button" class="slideshow-dot" role="tab" aria-selected="false" aria-label="Slide 2" onclick="goToFacilitySlide(1)"></button>
-      <button type="button" class="slideshow-dot" role="tab" aria-selected="false" aria-label="Slide 3" onclick="goToFacilitySlide(2)"></button>
+      <!-- Arrow Controls -->
+      <button type="button" class="carousel-nav-btn prev" id="facilityPrevBtn" aria-label="Previous Slide">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button type="button" class="carousel-nav-btn next" id="facilityNextBtn" aria-label="Next Slide">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
   </section>
 
@@ -1144,7 +1264,14 @@ body {
   <div class="facility-lightbox-overlay" id="facilityLightbox" role="dialog" aria-modal="true" aria-label="Facility Photo Viewer" onclick="if(event.target===this)closeFacilityLightbox()">
     <div class="facility-lightbox-content">
       <button type="button" class="facility-lightbox-close" onclick="closeFacilityLightbox()" aria-label="Close Lightbox">&times;</button>
+      <button type="button" class="facility-lightbox-arrow prev" onclick="lightboxNav(-1)" aria-label="Previous Photo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
       <img src="" alt="Enlarged Facility View" class="facility-lightbox-img" id="facilityLightboxImg">
+      <button type="button" class="facility-lightbox-arrow next" onclick="lightboxNav(1)" aria-label="Next Photo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <div class="facility-lightbox-counter" id="facilityLightboxCounter">1 / 11</div>
     </div>
   </div>
 
@@ -1291,105 +1418,280 @@ function handleDrawerClick(e) {
   }
 }
 
-// Facility Photo Slideshow
+// ================= FACILITY PHOTO CAROUSEL (CENTER-MODE & SMOOTH SCROLL) =================
+var facilityImages = [
+  'src/assets/facility-gallery/facility-01.jpg',
+  'src/assets/facility-gallery/facility-02.jpg',
+  'src/assets/facility-gallery/facility-03.jpg',
+  'src/assets/facility-gallery/facility-04.jpg',
+  'src/assets/facility-gallery/facility-05.jpg',
+  'src/assets/facility-gallery/facility-06.jpg',
+  'src/assets/facility-gallery/facility-07.jpg',
+  'src/assets/facility-gallery/facility-08.jpg',
+  'src/assets/facility-gallery/facility-09.jpg',
+  'src/assets/facility-gallery/facility-10.jpg',
+  'src/assets/facility-gallery/facility-11.jpg'
+];
+
 var currentFacilitySlide = 0;
-var facilitySlideTimer = null;
+var facilityCarouselData = null;
 
-function showFacilitySlide(index) {
-  var slides = document.querySelectorAll('#facilitySlideTrack .facility-slide');
-  var dots = document.querySelectorAll('.slideshow-dots-wrap .slideshow-dot');
-  if (!slides.length) return;
-  if (index >= slides.length) index = 0;
-  if (index < 0) index = slides.length - 1;
-  currentFacilitySlide = index;
+(function initFacilityCarousel() {
+  var viewport = document.getElementById('facilityViewport');
+  var track = document.getElementById('facilityTrack');
+  var prevBtn = document.getElementById('facilityPrevBtn');
+  var nextBtn = document.getElementById('facilityNextBtn');
+  var counterEl = document.getElementById('facilityCounterCurrent');
+  if (!viewport || !track) return;
 
-  slides.forEach(function(s, i) {
-    if (i === currentFacilitySlide) {
-      s.classList.add('active');
+  var cards = track.querySelectorAll('.facility-carousel-card');
+  var totalSlides = cards.length;
+  if (!totalSlides) return;
+
+  var autoPlayTimer = null;
+  var isPointerDown = false;
+  var startPointerX = 0;
+  var currentPointerX = 0;
+
+  function updateCarousel(smooth) {
+    if (currentFacilitySlide < 0) currentFacilitySlide = totalSlides - 1;
+    if (currentFacilitySlide >= totalSlides) currentFacilitySlide = 0;
+
+    var activeCard = cards[currentFacilitySlide];
+    var viewportWidth = viewport.offsetWidth;
+    var cardLeft = activeCard.offsetLeft;
+    var cardWidth = activeCard.offsetWidth;
+
+    // Center active card in viewport
+    var targetTranslate = (viewportWidth / 2) - (cardLeft + (cardWidth / 2));
+
+    if (smooth) {
+      track.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
     } else {
-      s.classList.remove('active');
+      track.style.transition = 'none';
     }
-  });
+    track.style.transform = 'translate3d(' + targetTranslate + 'px, 0, 0)';
 
-  dots.forEach(function(d, i) {
-    if (i === currentFacilitySlide) {
-      d.classList.add('active');
-      d.setAttribute('aria-selected', 'true');
-    } else {
-      d.classList.remove('active');
-      d.setAttribute('aria-selected', 'false');
-    }
-  });
-}
-
-function changeFacilitySlide(delta) {
-  showFacilitySlide(currentFacilitySlide + delta);
-  resetFacilitySlideTimer();
-}
-
-function goToFacilitySlide(index) {
-  showFacilitySlide(index);
-  resetFacilitySlideTimer();
-}
-
-function startFacilitySlideTimer() {
-  stopFacilitySlideTimer();
-  facilitySlideTimer = setInterval(function() {
-    changeFacilitySlide(1);
-  }, 4500);
-}
-
-function stopFacilitySlideTimer() {
-  if (facilitySlideTimer) {
-    clearInterval(facilitySlideTimer);
-    facilitySlideTimer = null;
-  }
-}
-
-function resetFacilitySlideTimer() {
-  startFacilitySlideTimer();
-}
-
-// Pause on hover & touch swipe
-(function initSlideshowEvents() {
-  var slideshowEl = document.getElementById('facilitySlideshow');
-  if (!slideshowEl) return;
-
-  slideshowEl.addEventListener('mouseenter', stopFacilitySlideTimer);
-  slideshowEl.addEventListener('mouseleave', startFacilitySlideTimer);
-
-  var touchStartX = 0;
-  slideshowEl.addEventListener('touchstart', function(e) {
-    if (e.changedTouches && e.changedTouches[0]) {
-      touchStartX = e.changedTouches[0].screenX;
-      stopFacilitySlideTimer();
-    }
-  }, { passive: true });
-
-  slideshowEl.addEventListener('touchend', function(e) {
-    if (e.changedTouches && e.changedTouches[0]) {
-      var touchEndX = e.changedTouches[0].screenX;
-      var diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 40) {
-        if (diff > 0) changeFacilitySlide(1);
-        else changeFacilitySlide(-1);
+    cards.forEach(function(card, idx) {
+      if (idx === currentFacilitySlide) {
+        card.classList.add('active');
+        card.setAttribute('aria-current', 'true');
+      } else {
+        card.classList.remove('active');
+        card.removeAttribute('aria-current');
       }
-      startFacilitySlideTimer();
+    });
+
+    if (counterEl) {
+      counterEl.textContent = currentFacilitySlide + 1;
+    }
+  }
+
+  function nextSlide() {
+    currentFacilitySlide = (currentFacilitySlide + 1) % totalSlides;
+    updateCarousel(true);
+  }
+
+  function prevSlide() {
+    currentFacilitySlide = (currentFacilitySlide - 1 + totalSlides) % totalSlides;
+    updateCarousel(true);
+  }
+
+  function goToSlide(idx) {
+    currentFacilitySlide = (idx + totalSlides) % totalSlides;
+    updateCarousel(true);
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoPlayTimer = setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoPlay() {
+    if (autoPlayTimer) {
+      clearInterval(autoPlayTimer);
+      autoPlayTimer = null;
+    }
+  }
+
+  function resetAutoPlay() {
+    stopAutoPlay();
+    startAutoPlay();
+  }
+
+  // Prev / Next button clicks
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      prevSlide();
+      resetAutoPlay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      nextSlide();
+      resetAutoPlay();
+    });
+  }
+
+  // Card clicks: if active, open lightbox; if adjacent, center it
+  cards.forEach(function(card, idx) {
+    card.addEventListener('click', function(e) {
+      var dragDistance = Math.abs(startPointerX - currentPointerX);
+      if (dragDistance > 15) return;
+
+      if (idx === currentFacilitySlide) {
+        openFacilityLightbox(idx);
+      } else {
+        goToSlide(idx);
+        resetAutoPlay();
+      }
+    });
+
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (idx === currentFacilitySlide) {
+          openFacilityLightbox(idx);
+        } else {
+          goToSlide(idx);
+          resetAutoPlay();
+        }
+      }
+    });
+  });
+
+  // Touch Swipe
+  viewport.addEventListener('touchstart', function(e) {
+    if (e.touches && e.touches[0]) {
+      isPointerDown = true;
+      startPointerX = e.touches[0].clientX;
+      currentPointerX = startPointerX;
+      stopAutoPlay();
     }
   }, { passive: true });
+
+  viewport.addEventListener('touchmove', function(e) {
+    if (!isPointerDown || !e.touches || !e.touches[0]) return;
+    currentPointerX = e.touches[0].clientX;
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', function() {
+    if (!isPointerDown) return;
+    isPointerDown = false;
+    var delta = startPointerX - currentPointerX;
+    if (Math.abs(delta) > 40) {
+      if (delta > 0) nextSlide();
+      else prevSlide();
+    }
+    startAutoPlay();
+  });
+
+  // Mouse Drag
+  viewport.addEventListener('mousedown', function(e) {
+    if (e.button !== 0) return;
+    isPointerDown = true;
+    startPointerX = e.clientX;
+    currentPointerX = startPointerX;
+    viewport.classList.add('is-dragging');
+    stopAutoPlay();
+  });
+
+  window.addEventListener('mousemove', function(e) {
+    if (!isPointerDown) return;
+    currentPointerX = e.clientX;
+  });
+
+  window.addEventListener('mouseup', function() {
+    if (!isPointerDown) return;
+    isPointerDown = false;
+    viewport.classList.remove('is-dragging');
+    var delta = startPointerX - currentPointerX;
+    if (Math.abs(delta) > 50) {
+      if (delta > 0) nextSlide();
+      else prevSlide();
+    }
+    startAutoPlay();
+  });
+
+  // Pause on hover
+  viewport.addEventListener('mouseenter', stopAutoPlay);
+  viewport.addEventListener('mouseleave', startAutoPlay);
+
+  // Keyboard navigation
+  window.addEventListener('keydown', function(e) {
+    var lightbox = document.getElementById('facilityLightbox');
+    if (lightbox && lightbox.classList.contains('active')) return;
+
+    var rect = viewport.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      if (e.key === 'ArrowLeft') {
+        prevSlide();
+        resetAutoPlay();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+        resetAutoPlay();
+      }
+    }
+  });
+
+  // Window resize handler (re-center active slide instantly)
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      updateCarousel(false);
+    }, 80);
+  });
+
+  // Initial layout calculation
+  requestAnimationFrame(function() {
+    updateCarousel(false);
+  });
+  window.addEventListener('load', function() {
+    updateCarousel(false);
+  });
+
+  startAutoPlay();
+
+  facilityCarouselData = {
+    goToSlide: goToSlide,
+    stopAutoPlay: stopAutoPlay,
+    startAutoPlay: startAutoPlay
+  };
 })();
 
-startFacilitySlideTimer();
+// ================= FACILITY LIGHTBOX VIEWER =================
+var facilityLightboxIdx = 0;
+var facilityLightboxPreviousFocus = null;
 
-// Facility Image Lightbox
-function openFacilityLightbox(src) {
+function openFacilityLightbox(index) {
   var overlay = document.getElementById('facilityLightbox');
   var img = document.getElementById('facilityLightboxImg');
-  if (overlay && img) {
-    img.src = src;
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    stopFacilitySlideTimer();
+  var counter = document.getElementById('facilityLightboxCounter');
+  var closeBtn = overlay ? overlay.querySelector('.facility-lightbox-close') : null;
+  if (!overlay || !img) return;
+
+  facilityLightboxPreviousFocus = document.activeElement;
+
+  if (typeof index === 'number') {
+    facilityLightboxIdx = index;
+  } else if (typeof index === 'string') {
+    var foundIdx = facilityImages.indexOf(index);
+    facilityLightboxIdx = foundIdx >= 0 ? foundIdx : 0;
+  }
+
+  img.src = facilityImages[facilityLightboxIdx];
+  if (counter) counter.textContent = (facilityLightboxIdx + 1) + ' / ' + facilityImages.length;
+
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  if (facilityCarouselData) facilityCarouselData.stopAutoPlay();
+
+  if (closeBtn) {
+    setTimeout(function() { closeBtn.focus(); }, 50);
   }
 }
 
@@ -1398,12 +1700,58 @@ function closeFacilityLightbox() {
   if (overlay) {
     overlay.classList.remove('active');
     document.body.style.overflow = '';
-    startFacilitySlideTimer();
+    if (facilityCarouselData) facilityCarouselData.startAutoPlay();
+    if (facilityLightboxPreviousFocus && typeof facilityLightboxPreviousFocus.focus === 'function') {
+      facilityLightboxPreviousFocus.focus();
+    }
   }
 }
 
+function lightboxNav(delta) {
+  facilityLightboxIdx = (facilityLightboxIdx + delta + facilityImages.length) % facilityImages.length;
+  var img = document.getElementById('facilityLightboxImg');
+  var counter = document.getElementById('facilityLightboxCounter');
+  if (img) img.src = facilityImages[facilityLightboxIdx];
+  if (counter) counter.textContent = (facilityLightboxIdx + 1) + ' / ' + facilityImages.length;
+  if (facilityCarouselData) facilityCarouselData.goToSlide(facilityLightboxIdx);
+}
+
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeFacilityLightbox();
+  var overlay = document.getElementById('facilityLightbox');
+  if (!overlay || !overlay.classList.contains('active')) return;
+
+  if (e.key === 'Escape') {
+    closeFacilityLightbox();
+    return;
+  }
+  if (e.key === 'ArrowLeft') {
+    lightboxNav(-1);
+    return;
+  }
+  if (e.key === 'ArrowRight') {
+    lightboxNav(1);
+    return;
+  }
+
+  // Focus trap for Tab / Shift+Tab inside lightbox dialog
+  if (e.key === 'Tab') {
+    var focusable = overlay.querySelectorAll('button:not([disabled])');
+    if (!focusable.length) return;
+    var firstEl = focusable[0];
+    var lastEl = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+      if (document.activeElement === firstEl) {
+        e.preventDefault();
+        lastEl.focus();
+      }
+    } else {
+      if (document.activeElement === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
+      }
+    }
+  }
 });
 </script>
 
