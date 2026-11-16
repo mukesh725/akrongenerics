@@ -609,7 +609,12 @@ body {
   gap: 22px;
   width: max-content;
   will-change: transform;
-  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.facility-carousel-track.no-transition,
+.facility-carousel-track.no-transition .facility-carousel-card {
+  transition: none !important;
 }
 
 .facility-carousel-card {
@@ -1418,7 +1423,7 @@ function handleDrawerClick(e) {
   }
 }
 
-// ================= FACILITY PHOTO CAROUSEL (CENTER-MODE & SMOOTH SCROLL) =================
+// ================= FACILITY PHOTO CAROUSEL (SEAMLESS INFINITE LOOP & 2s AUTO-SLIDE) =================
 var facilityImages = [
   'src/assets/facility-gallery/facility-01.jpg',
   'src/assets/facility-gallery/facility-02.jpg',
@@ -1433,7 +1438,6 @@ var facilityImages = [
   'src/assets/facility-gallery/facility-11.jpg'
 ];
 
-var currentFacilitySlide = 0;
 var facilityCarouselData = null;
 
 (function initFacilityCarousel() {
@@ -1444,20 +1448,54 @@ var facilityCarouselData = null;
   var counterEl = document.getElementById('facilityCounterCurrent');
   if (!viewport || !track) return;
 
-  var cards = track.querySelectorAll('.facility-carousel-card');
-  var totalSlides = cards.length;
-  if (!totalSlides) return;
+  var originalCards = Array.prototype.slice.call(track.querySelectorAll('.facility-carousel-card'));
+  var numOriginals = originalCards.length;
+  if (!numOriginals) return;
 
+  // Mark original cards with their real index
+  originalCards.forEach(function(card, idx) {
+    card.setAttribute('data-real-index', idx);
+  });
+
+  // Prepend clones (Set A) and append clones (Set C) for seamless infinite looping
+  // WCAG: Clones receive tabindex="-1" to prevent invisible tab stops in the focus sequence
+  var beforeFrag = document.createDocumentFragment();
+  originalCards.forEach(function(card, idx) {
+    var clone = card.cloneNode(true);
+    clone.setAttribute('data-clone', 'before');
+    clone.setAttribute('data-real-index', idx);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.setAttribute('tabindex', '-1');
+    clone.classList.remove('active');
+    beforeFrag.appendChild(clone);
+  });
+
+  var afterFrag = document.createDocumentFragment();
+  originalCards.forEach(function(card, idx) {
+    var clone = card.cloneNode(true);
+    clone.setAttribute('data-clone', 'after');
+    clone.setAttribute('data-real-index', idx);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.setAttribute('tabindex', '-1');
+    clone.classList.remove('active');
+    afterFrag.appendChild(clone);
+  });
+
+  track.insertBefore(beforeFrag, track.firstChild);
+  track.appendChild(afterFrag);
+
+  var allCards = track.querySelectorAll('.facility-carousel-card');
+  var trackIndex = numOriginals; // Start at original slide 0 (DOM index 11)
   var autoPlayTimer = null;
+  var normalizeTimer = null;
   var isPointerDown = false;
   var startPointerX = 0;
   var currentPointerX = 0;
 
   function updateCarousel(smooth) {
-    if (currentFacilitySlide < 0) currentFacilitySlide = totalSlides - 1;
-    if (currentFacilitySlide >= totalSlides) currentFacilitySlide = 0;
+    var activeCard = allCards[trackIndex];
+    if (!activeCard) return;
 
-    var activeCard = cards[currentFacilitySlide];
     var viewportWidth = viewport.offsetWidth;
     var cardLeft = activeCard.offsetLeft;
     var cardWidth = activeCard.offsetWidth;
@@ -1466,14 +1504,16 @@ var facilityCarouselData = null;
     var targetTranslate = (viewportWidth / 2) - (cardLeft + (cardWidth / 2));
 
     if (smooth) {
-      track.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+      track.style.transition = 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)';
     } else {
       track.style.transition = 'none';
     }
     track.style.transform = 'translate3d(' + targetTranslate + 'px, 0, 0)';
 
-    cards.forEach(function(card, idx) {
-      if (idx === currentFacilitySlide) {
+    var realIdx = ((trackIndex % numOriginals) + numOriginals) % numOriginals;
+
+    allCards.forEach(function(card, idx) {
+      if (idx === trackIndex) {
         card.classList.add('active');
         card.setAttribute('aria-current', 'true');
       } else {
@@ -1483,28 +1523,89 @@ var facilityCarouselData = null;
     });
 
     if (counterEl) {
-      counterEl.textContent = currentFacilitySlide + 1;
+      counterEl.textContent = realIdx + 1;
+    }
+
+    if (smooth) {
+      clearTimeout(normalizeTimer);
+      normalizeTimer = setTimeout(normalizePosition, 560);
     }
   }
 
+  function normalizePosition() {
+    clearTimeout(normalizeTimer);
+    var needsNormalization = (trackIndex >= numOriginals * 2 || trackIndex < numOriginals);
+    if (needsNormalization) {
+      if (trackIndex >= numOriginals * 2) {
+        trackIndex -= numOriginals;
+      } else {
+        trackIndex += numOriginals;
+      }
+      track.classList.add('no-transition');
+      updateCarousel(false);
+      void track.offsetWidth;
+      track.classList.remove('no-transition');
+    }
+  }
+
+  track.addEventListener('transitionend', function(e) {
+    if (e.target !== track || e.propertyName !== 'transform') return;
+    normalizePosition();
+  });
+
   function nextSlide() {
-    currentFacilitySlide = (currentFacilitySlide + 1) % totalSlides;
+    if (trackIndex >= numOriginals * 2) {
+      trackIndex -= numOriginals;
+      track.classList.add('no-transition');
+      updateCarousel(false);
+      void track.offsetWidth;
+      track.classList.remove('no-transition');
+    }
+    trackIndex++;
     updateCarousel(true);
   }
 
   function prevSlide() {
-    currentFacilitySlide = (currentFacilitySlide - 1 + totalSlides) % totalSlides;
+    if (trackIndex < numOriginals) {
+      trackIndex += numOriginals;
+      track.classList.add('no-transition');
+      updateCarousel(false);
+      void track.offsetWidth;
+      track.classList.remove('no-transition');
+    }
+    trackIndex--;
     updateCarousel(true);
   }
 
-  function goToSlide(idx) {
-    currentFacilitySlide = (idx + totalSlides) % totalSlides;
+  function goToSlide(targetRealIdx) {
+    if (trackIndex >= numOriginals * 2) {
+      trackIndex -= numOriginals;
+      track.classList.add('no-transition');
+      updateCarousel(false);
+      void track.offsetWidth;
+      track.classList.remove('no-transition');
+    } else if (trackIndex < numOriginals) {
+      trackIndex += numOriginals;
+      track.classList.add('no-transition');
+      updateCarousel(false);
+      void track.offsetWidth;
+      track.classList.remove('no-transition');
+    }
+
+    var currentRealIdx = ((trackIndex % numOriginals) + numOriginals) % numOriginals;
+    var delta = targetRealIdx - currentRealIdx;
+    if (delta > Math.floor(numOriginals / 2)) {
+      delta -= numOriginals;
+    } else if (delta < -Math.floor(numOriginals / 2)) {
+      delta += numOriginals;
+    }
+    trackIndex += delta;
     updateCarousel(true);
   }
 
   function startAutoPlay() {
     stopAutoPlay();
-    autoPlayTimer = setInterval(nextSlide, 5000);
+    autoPlayTimer = setInterval(nextSlide, 2000); // Advances every 2 seconds
   }
 
   function stopAutoPlay() {
@@ -1536,16 +1637,19 @@ var facilityCarouselData = null;
     });
   }
 
-  // Card clicks: if active, open lightbox; if adjacent, center it
-  cards.forEach(function(card, idx) {
+  // Card clicks: active card opens Lightbox; adjacent card glides to center
+  allCards.forEach(function(card, domIdx) {
     card.addEventListener('click', function(e) {
       var dragDistance = Math.abs(startPointerX - currentPointerX);
       if (dragDistance > 15) return;
 
-      if (idx === currentFacilitySlide) {
-        openFacilityLightbox(idx);
+      var realIdx = parseInt(card.getAttribute('data-real-index') || (domIdx % numOriginals), 10);
+
+      if (domIdx === trackIndex) {
+        openFacilityLightbox(realIdx);
       } else {
-        goToSlide(idx);
+        trackIndex = domIdx;
+        updateCarousel(true);
         resetAutoPlay();
       }
     });
@@ -1553,10 +1657,12 @@ var facilityCarouselData = null;
     card.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        if (idx === currentFacilitySlide) {
-          openFacilityLightbox(idx);
+        var realIdx = parseInt(card.getAttribute('data-real-index') || (domIdx % numOriginals), 10);
+        if (domIdx === trackIndex) {
+          openFacilityLightbox(realIdx);
         } else {
-          goToSlide(idx);
+          trackIndex = domIdx;
+          updateCarousel(true);
           resetAutoPlay();
         }
       }
@@ -1619,6 +1725,23 @@ var facilityCarouselData = null;
   // Pause on hover
   viewport.addEventListener('mouseenter', stopAutoPlay);
   viewport.addEventListener('mouseleave', startAutoPlay);
+
+  // Pause on keyboard focus (WCAG 2.2.2 Pause, Stop, Hide compliance)
+  viewport.addEventListener('focusin', stopAutoPlay);
+  viewport.addEventListener('focusout', function(e) {
+    if (!viewport.contains(e.relatedTarget)) {
+      startAutoPlay();
+    }
+  });
+
+  // Pause autoplay when browser tab is inactive / hidden
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      stopAutoPlay();
+    } else {
+      startAutoPlay();
+    }
+  });
 
   // Keyboard navigation
   window.addEventListener('keydown', function(e) {
