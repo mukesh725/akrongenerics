@@ -545,231 +545,129 @@ body {
   color: #38BDF8;
 }
 
-/* ================= FACILITY SHOWCASE SECTION (APPLE STYLE) ================= */
-.about-facility-showcase {
-  background: var(--card);
-  border-radius: 24px;
-  padding: clamp(36px, 4vw, 56px);
-  border: 1px solid rgba(22, 24, 15, 0.06);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-}
-
-.facility-showcase-header {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 860px;
-}
-
-.facility-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  align-self: flex-start;
-  padding: 5px 14px;
-  background: rgba(14, 51, 94, 0.06);
-  border: 1px solid rgba(14, 51, 94, 0.12);
-  border-radius: var(--r-pill);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-navy);
-}
-
-.facility-title {
-  font-family: var(--display);
-  font-size: clamp(26px, 3.2vw, 36px);
-  font-weight: 800;
-  color: var(--ink);
-  letter-spacing: -0.025em;
-  line-height: 1.2;
-}
-
-.facility-subtitle {
-  font-size: 15.5px;
-  line-height: 1.65;
-  color: var(--ink-2);
-}
-
-/* 3-Column Photo Grid */
-.facility-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
-
-.facility-card {
-  background: var(--surface);
-  border: 1px solid var(--border-light);
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
-}
-
-.facility-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
-  border-color: rgba(14, 51, 94, 0.22);
-}
-
-.facility-card-media {
+/* ================= FACILITY PHOTO SLIDESHOW (ONLY PHOTOS) ================= */
+.facility-slideshow {
   position: relative;
   width: 100%;
-  height: 250px;
-  background: #E2E8F0;
+  height: clamp(340px, 44vw, 520px);
+  border-radius: 24px;
   overflow: hidden;
+  background: #0F172A;
+  border: 1px solid rgba(22, 24, 15, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.facility-slideshow-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.facility-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
-.facility-card-media img {
+.facility-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.facility-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.facility-card:hover .facility-card-media img {
-  transform: scale(1.04);
+.facility-slideshow:hover .facility-slide.active img {
+  transform: scale(1.02);
 }
 
-.facility-card-tag {
+/* Arrows */
+.slideshow-nav-btn {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  z-index: 2;
-  background: rgba(15, 23, 42, 0.84);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  color: #FFFFFF;
-  padding: 5px 12px;
-  border-radius: var(--r-pill);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.facility-zoom-hint {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.9);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  color: var(--ink);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #0F172A;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transform: scale(0.85);
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  opacity: 0.85;
 }
 
-.facility-card:hover .facility-zoom-hint {
+.slideshow-nav-btn:hover {
   opacity: 1;
-  transform: scale(1);
-}
-
-.facility-card-body {
-  padding: 22px 20px 24px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 10px;
-}
-
-.facility-card-title {
-  font-family: var(--display);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.3;
-}
-
-.facility-card-desc {
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--ink-2);
-}
-
-.facility-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid rgba(22, 24, 15, 0.06);
-}
-
-.facility-spec-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 10px;
   background: #FFFFFF;
-  border: 1px solid var(--border-light);
-  border-radius: var(--r-pill);
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #334155;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
 }
 
-.facility-spec-tag svg {
-  color: var(--color-crimson);
-  flex-shrink: 0;
+.slideshow-nav-btn.prev {
+  left: 18px;
 }
 
-/* 4-Specs Security & Standards Strip */
-.facility-specs-banner {
-  background: var(--surface);
-  border: 1px solid var(--border-light);
-  border-radius: 18px;
-  padding: 24px clamp(20px, 3vw, 36px);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+.slideshow-nav-btn.next {
+  right: 18px;
 }
 
-.facility-spec-block {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.facility-spec-header {
+/* Dots */
+.slideshow-dots-wrap {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
   display: flex;
   align-items: center;
-  gap: 9px;
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--ink);
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.55);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.facility-spec-header svg {
-  color: var(--color-navy);
-  flex-shrink: 0;
+.slideshow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.facility-spec-text {
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: #64748B;
+.slideshow-dot:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.slideshow-dot.active {
+  width: 22px;
+  border-radius: var(--r-pill);
+  background: #FFFFFF;
 }
 
 /* Lightbox Modal */
@@ -777,7 +675,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(15, 23, 42, 0.94);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   display: flex;
@@ -796,7 +694,7 @@ body {
 
 .facility-lightbox-content {
   position: relative;
-  max-width: 1040px;
+  max-width: 1100px;
   width: 100%;
   max-height: 90vh;
   display: flex;
@@ -806,19 +704,11 @@ body {
 
 .facility-lightbox-img {
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 86vh;
   object-fit: contain;
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.facility-lightbox-caption {
-  margin-top: 14px;
-  color: #FFFFFF;
-  font-size: 14.5px;
-  font-weight: 600;
-  text-align: center;
 }
 
 .facility-lightbox-close {
@@ -843,8 +733,6 @@ body {
 .facility-lightbox-close:hover {
   background: rgba(255, 255, 255, 0.35);
 }
-
-
 
 /* ================= PARTNER CTA CARD ================= */
 .about-cta-card {
@@ -1025,8 +913,10 @@ body {
   .wrap { margin-top: 72px; }
   .about-hero-card { grid-template-columns: 1fr; gap: 32px; }
   .about-image-wrap { min-height: 360px; }
-  .facility-grid { grid-template-columns: repeat(2, 1fr); }
-  .facility-specs-banner { grid-template-columns: repeat(2, 1fr); }
+  .facility-slideshow { height: clamp(280px, 40vw, 420px); border-radius: 20px; }
+  .slideshow-nav-btn { width: 38px; height: 38px; }
+  .slideshow-nav-btn.prev { left: 12px; }
+  .slideshow-nav-btn.next { right: 12px; }
   .about-cta-card { flex-direction: column; align-items: flex-start; }
   .about-cta-actions { width: 100%; flex-wrap: wrap; }
   .c-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -1036,10 +926,11 @@ body {
   body { padding: 8px 6px; }
   .wrap { margin-top: 68px; gap: 12px; }
   .about-hero-card { padding: 22px 14px; border-radius: 18px; }
-  .about-facility-showcase { padding: 22px 14px; border-radius: 18px; }
-  .facility-grid { grid-template-columns: 1fr; gap: 16px; }
-  .facility-specs-banner { grid-template-columns: 1fr; gap: 16px; padding: 18px 14px; }
-  .facility-card-media { height: 210px; }
+  .facility-slideshow { height: 240px; border-radius: 16px; }
+  .slideshow-nav-btn { width: 34px; height: 34px; }
+  .slideshow-nav-btn.prev { left: 8px; }
+  .slideshow-nav-btn.next { right: 8px; }
+  .slideshow-dots-wrap { bottom: 12px; padding: 4px 10px; }
   .about-pill { font-size: 10.5px; padding: 4px 12px; margin-bottom: 12px; }
   .about-title { font-size: clamp(24px, 6.5vw, 32px); line-height: 1.2; margin-bottom: 14px; }
   .about-p { font-size: 14px; line-height: 1.55; }
@@ -1204,7 +1095,7 @@ body {
         </div>
 
         <div class="about-footnote">
-          Explore our full range of products on our <a href="catalog.html" class="about-footnote-link">Products</a> page or <a href="#commack-facility" class="about-footnote-link">view our facility tour</a> below.
+          Explore our full range of products on our <a href="catalog.html" class="about-footnote-link">Products</a> page
         </div>
       </div>
     </div>
@@ -1219,144 +1110,33 @@ body {
     </div>
   </section>
 
-  <!-- ================= FACILITY SHOWCASE (COMMACK, NY DISTRIBUTION CENTER) ================= -->
-  <section class="about-facility-showcase apple-fade-in delay-1" id="commack-facility">
-    <div class="facility-showcase-header">
-      <div class="facility-pill">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-        <span>PHYSICAL INFRASTRUCTURE &amp; SECURITY</span>
+  <!-- ================= FACILITY PHOTO SLIDESHOW (ONLY PHOTOS) ================= -->
+  <section class="facility-slideshow apple-fade-in delay-1" id="facilitySlideshow" aria-label="Facility Photo Slideshow">
+    <div class="facility-slideshow-track" id="facilitySlideTrack">
+      <div class="facility-slide active" role="button" tabindex="0" aria-label="Enlarge photo: Warehouse Storage Aisles and NDC Bins" onclick="openFacilityLightbox('src/assets/facility-warehouse-aisle.jpg')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFacilityLightbox('src/assets/facility-warehouse-aisle.jpg');}">
+        <img src="src/assets/facility-warehouse-aisle.jpg" alt="Akron Generics Warehouse Storage Aisles and NDC Bins">
       </div>
-      <h2 class="facility-title">Inside Our Commack, NY Distribution Center</h2>
-      <p class="facility-subtitle">
-        Akron Generics operates a fully licensed, 15,000 sq. ft. pharmaceutical distribution hub in Commack, NY. Built to meet stringent cGMP, USP &lt;659&gt;, and NABP accreditation standards, our facility guarantees physical chain-of-custody, 24/7 security monitoring, and serialized inventory integrity.
-      </p>
+      <div class="facility-slide" role="button" tabindex="0" aria-label="Enlarge photo: High-Bay Inventory Racks and Order Staging" onclick="openFacilityLightbox('src/assets/facility-inventory-racks.jpg')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFacilityLightbox('src/assets/facility-inventory-racks.jpg');}">
+        <img src="src/assets/facility-inventory-racks.jpg" alt="Akron Generics High-Bay Inventory Racks and Order Staging" loading="lazy">
+      </div>
+      <div class="facility-slide" role="button" tabindex="0" aria-label="Enlarge photo: Akron Generics Facility Exterior" onclick="openFacilityLightbox('src/assets/akron-facility.jpg')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFacilityLightbox('src/assets/akron-facility.jpg');}">
+        <img src="src/assets/akron-facility.jpg" alt="Akron Generics Facility Exterior at 47 Mall Drive, Commack, NY" loading="lazy">
+      </div>
     </div>
 
-    <!-- 3-Photo Showcase Cards -->
-    <div class="facility-grid">
-      <!-- Card 1: Facility Exterior -->
-      <article class="facility-card">
-        <div class="facility-card-media" role="button" tabindex="0" aria-label="Enlarge photo: Akron Generics Commack Facility Exterior" onclick="openFacilityLightbox('src/assets/akron-facility.jpg', 'Akron Generics Distribution Facility &amp; Administrative Offices — 47 Mall Drive, Commack, NY 11725')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFacilityLightbox('src/assets/akron-facility.jpg', 'Akron Generics Distribution Facility &amp; Administrative Offices — 47 Mall Drive, Commack, NY 11725');}">
-          <img src="src/assets/akron-facility.jpg" alt="Akron Generics 15,000 Sq. Ft. Facility Exterior in Commack, NY" loading="lazy">
-          <span class="facility-card-tag">Commack, NY HQ</span>
-          <div class="facility-zoom-hint" title="Click to enlarge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-          </div>
-        </div>
-        <div class="facility-card-body">
-          <h3 class="facility-card-title">Distribution Center &amp; Offices</h3>
-          <p class="facility-card-desc">
-            Conveniently situated at 47 Mall Drive in Commack's pharmaceutical corridor. Features dedicated carrier shipping bays, secure visitor screening, and executive logistics suites.
-          </p>
-          <div class="facility-card-tags">
-            <span class="facility-spec-tag">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              15,000 Sq. Ft. Footprint
-            </span>
-            <span class="facility-spec-tag">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Commercial Carrier Docks
-            </span>
-          </div>
-        </div>
-      </article>
+    <!-- Arrow Controls -->
+    <button type="button" class="slideshow-nav-btn prev" onclick="changeFacilitySlide(-1)" aria-label="Previous Slide">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button type="button" class="slideshow-nav-btn next" onclick="changeFacilitySlide(1)" aria-label="Next Slide">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
 
-      <!-- Card 2: Warehouse Shelving & NDC Bin Locations -->
-      <article class="facility-card">
-        <div class="facility-card-media" role="button" tabindex="0" aria-label="Enlarge photo: Organized Pharmaceutical Storage Aisles" onclick="openFacilityLightbox('src/assets/facility-warehouse-aisle.jpg', 'Organized Pharmaceutical Storage Aisles with Itemized NDC Bin Locations — Akron Generics Commack Facility')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFacilityLightbox('src/assets/facility-warehouse-aisle.jpg', 'Organized Pharmaceutical Storage Aisles with Itemized NDC Bin Locations — Akron Generics Commack Facility');}">
-          <img src="src/assets/facility-warehouse-aisle.jpg" alt="Organized Pharmaceutical Storage Aisles with Itemized NDC Bin Locations at Akron Generics" loading="lazy">
-          <span class="facility-card-tag">USP &lt;659&gt; Storage</span>
-          <div class="facility-zoom-hint" title="Click to enlarge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-          </div>
-        </div>
-        <div class="facility-card-body">
-          <h3 class="facility-card-title">Itemized NDC Inventory Aisles</h3>
-          <p class="facility-card-desc">
-            Organized high-density shelving with barcode-indexed NDC locations for Rx oral solids, topicals, and diabetic diagnostics. Climate-logged to preserve chemical potency.
-          </p>
-          <div class="facility-card-tags">
-            <span class="facility-spec-tag">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Barcode-Indexed Locations
-            </span>
-            <span class="facility-spec-tag">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Ambient Climate Logging
-            </span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 3: Packaging & Serialization Logistics -->
-      <article class="facility-card">
-        <div class="facility-card-media" role="button" tabindex="0" aria-label="Enlarge photo: High-Bay Staging & Serialized Order Fulfillment" onclick="openFacilityLightbox('src/assets/facility-inventory-racks.jpg', 'High-Bay Staging & Serialized Order Fulfillment — Akron Generics Commack Facility')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFacilityLightbox('src/assets/facility-inventory-racks.jpg', 'High-Bay Staging & Serialized Order Fulfillment — Akron Generics Commack Facility');}">
-          <img src="src/assets/facility-inventory-racks.jpg" alt="High-Bay Staging & Serialized Order Fulfillment at Akron Generics" loading="lazy">
-          <span class="facility-card-tag">DSCSA Serialized</span>
-          <div class="facility-zoom-hint" title="Click to enlarge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-          </div>
-        </div>
-        <div class="facility-card-body">
-          <h3 class="facility-card-title">Order Verification &amp; Dispatch</h3>
-          <p class="facility-card-desc">
-            High-speed pick, pack, and verification stations where every outgoing item is scanned for 2D barcode serialization under federal DSCSA Title II before same-day delivery dispatch.
-          </p>
-          <div class="facility-card-tags">
-            <span class="facility-spec-tag">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              DSCSA Title II Scanning
-            </span>
-            <span class="facility-spec-tag">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              Same-Day Order Cutoff
-            </span>
-          </div>
-        </div>
-      </article>
-    </div>
-
-    <!-- 4-Pillar Security & Specifications Banner -->
-    <div class="facility-specs-banner">
-      <div class="facility-spec-block">
-        <div class="facility-spec-header">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          <span>Physical Security</span>
-        </div>
-        <p class="facility-spec-text">
-          24/7 high-definition CCTV monitoring, biometric &amp; keypad electronic access control, and motion-sensing perimeter alarms.
-        </p>
-      </div>
-
-      <div class="facility-spec-block">
-        <div class="facility-spec-header">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg>
-          <span>USP &lt;659&gt; Climate Control</span>
-        </div>
-        <p class="facility-spec-text">
-          Controlled room temperature (20°C–25°C / 68°F–77°F) with calibrated digital data loggers and backup power generators.
-        </p>
-      </div>
-
-      <div class="facility-spec-block">
-        <div class="facility-spec-header">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-          <span>Rapid Fulfillment</span>
-        </div>
-        <p class="facility-spec-text">
-          Central Long Island shipping nexus enabling next-day wholesale dispatch to independent community pharmacies nationwide.
-        </p>
-      </div>
-
-      <div class="facility-spec-block">
-        <div class="facility-spec-header">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <span>DSCSA Serialization</span>
-        </div>
-        <p class="facility-spec-text">
-          NABP-accredited electronic T3 documentation and 2D data-matrix verification verifying serialized chain of custody.
-        </p>
-      </div>
+    <!-- Indicator Dots -->
+    <div class="slideshow-dots-wrap" role="tablist" aria-label="Slideshow Indicators">
+      <button type="button" class="slideshow-dot active" role="tab" aria-selected="true" aria-label="Slide 1" onclick="goToFacilitySlide(0)"></button>
+      <button type="button" class="slideshow-dot" role="tab" aria-selected="false" aria-label="Slide 2" onclick="goToFacilitySlide(1)"></button>
+      <button type="button" class="slideshow-dot" role="tab" aria-selected="false" aria-label="Slide 3" onclick="goToFacilitySlide(2)"></button>
     </div>
   </section>
 
@@ -1365,7 +1145,6 @@ body {
     <div class="facility-lightbox-content">
       <button type="button" class="facility-lightbox-close" onclick="closeFacilityLightbox()" aria-label="Close Lightbox">&times;</button>
       <img src="" alt="Enlarged Facility View" class="facility-lightbox-img" id="facilityLightboxImg">
-      <div class="facility-lightbox-caption" id="facilityLightboxCaption"></div>
     </div>
   </div>
 
@@ -1512,17 +1291,105 @@ function handleDrawerClick(e) {
   }
 }
 
+// Facility Photo Slideshow
+var currentFacilitySlide = 0;
+var facilitySlideTimer = null;
+
+function showFacilitySlide(index) {
+  var slides = document.querySelectorAll('#facilitySlideTrack .facility-slide');
+  var dots = document.querySelectorAll('.slideshow-dots-wrap .slideshow-dot');
+  if (!slides.length) return;
+  if (index >= slides.length) index = 0;
+  if (index < 0) index = slides.length - 1;
+  currentFacilitySlide = index;
+
+  slides.forEach(function(s, i) {
+    if (i === currentFacilitySlide) {
+      s.classList.add('active');
+    } else {
+      s.classList.remove('active');
+    }
+  });
+
+  dots.forEach(function(d, i) {
+    if (i === currentFacilitySlide) {
+      d.classList.add('active');
+      d.setAttribute('aria-selected', 'true');
+    } else {
+      d.classList.remove('active');
+      d.setAttribute('aria-selected', 'false');
+    }
+  });
+}
+
+function changeFacilitySlide(delta) {
+  showFacilitySlide(currentFacilitySlide + delta);
+  resetFacilitySlideTimer();
+}
+
+function goToFacilitySlide(index) {
+  showFacilitySlide(index);
+  resetFacilitySlideTimer();
+}
+
+function startFacilitySlideTimer() {
+  stopFacilitySlideTimer();
+  facilitySlideTimer = setInterval(function() {
+    changeFacilitySlide(1);
+  }, 4500);
+}
+
+function stopFacilitySlideTimer() {
+  if (facilitySlideTimer) {
+    clearInterval(facilitySlideTimer);
+    facilitySlideTimer = null;
+  }
+}
+
+function resetFacilitySlideTimer() {
+  startFacilitySlideTimer();
+}
+
+// Pause on hover & touch swipe
+(function initSlideshowEvents() {
+  var slideshowEl = document.getElementById('facilitySlideshow');
+  if (!slideshowEl) return;
+
+  slideshowEl.addEventListener('mouseenter', stopFacilitySlideTimer);
+  slideshowEl.addEventListener('mouseleave', startFacilitySlideTimer);
+
+  var touchStartX = 0;
+  slideshowEl.addEventListener('touchstart', function(e) {
+    if (e.changedTouches && e.changedTouches[0]) {
+      touchStartX = e.changedTouches[0].screenX;
+      stopFacilitySlideTimer();
+    }
+  }, { passive: true });
+
+  slideshowEl.addEventListener('touchend', function(e) {
+    if (e.changedTouches && e.changedTouches[0]) {
+      var touchEndX = e.changedTouches[0].screenX;
+      var diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) changeFacilitySlide(1);
+        else changeFacilitySlide(-1);
+      }
+      startFacilitySlideTimer();
+    }
+  }, { passive: true });
+})();
+
+startFacilitySlideTimer();
+
 // Facility Image Lightbox
-function openFacilityLightbox(src, caption) {
+function openFacilityLightbox(src) {
   var overlay = document.getElementById('facilityLightbox');
   var img = document.getElementById('facilityLightboxImg');
-  var cap = document.getElementById('facilityLightboxCaption');
   if (overlay && img) {
     img.src = src;
-    img.alt = caption || 'Facility View';
-    if (cap) cap.textContent = caption || '';
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    stopFacilitySlideTimer();
   }
 }
 
@@ -1531,6 +1398,7 @@ function closeFacilityLightbox() {
   if (overlay) {
     overlay.classList.remove('active');
     document.body.style.overflow = '';
+    startFacilitySlideTimer();
   }
 }
 
