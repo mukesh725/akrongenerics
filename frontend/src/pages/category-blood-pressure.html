@@ -1799,6 +1799,16 @@ function handleSearch(val) {
   renderProducts();
 }
 
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function renderProducts() {
   const grid = document.getElementById('productGrid');
   const countLabel = document.getElementById('catalogCount');
@@ -1842,19 +1852,27 @@ function renderProducts() {
       const parts = p.specs.split('·').map(s => s.trim());
       packSpec = parts[parts.length - 1];
     }
-    const displayTitle = packSpec ? `${p.name} | ${packSpec}` : p.name;
+    const rawDisplayTitle = packSpec ? `${p.name} | ${packSpec}` : (p.name || '');
+    const displayTitle = escapeHtml(rawDisplayTitle);
 
     // Badge for top-left floating pill
-    const badgeText = (p.badges && p.badges.length) ? p.badges[0].toUpperCase() : (p.categoryName || 'AKRON GENERICS').toUpperCase();
+    const rawBadge = (p.badges && p.badges.length) ? p.badges[0].toUpperCase() : (p.categoryName || 'AKRON GENERICS').toUpperCase();
+    const badgeText = escapeHtml(rawBadge);
 
     // Bottom NDC or Pedigree (in place of price)
-    const ndcDisplay = p.ndc ? `NDC: ${p.ndc}` : (p.specs ? p.specs.split('·')[0].trim() : 'DSCSA Verified');
+    const rawNdc = p.ndc ? `NDC: ${p.ndc}` : (p.specs ? p.specs.split('·')[0].trim() : 'DSCSA Verified');
+    const ndcDisplay = escapeHtml(rawNdc);
+
+    const safeId = escapeHtml(p.id);
+    const safeName = escapeHtml(p.name);
+    const safeImage = escapeHtml(p.image || 'src/assets/logo.png');
+    const safeDesc = escapeHtml(p.description || 'NABP-accredited pharmaceutical supply with verified pedigree and DSCSA compliance.');
 
     html += `
-      <article class="p-card" onclick="openProductPreview('${p.id}')" role="button" tabindex="0" aria-label="View details for ${p.name}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProductPreview('${p.id}');}">
+      <article class="p-card" onclick="openProductPreview('${safeId}')" role="button" tabindex="0" aria-label="View details for ${safeName}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProductPreview('${safeId}');}">
         <div class="p-card-image-box">
           <span class="p-card-pill">${badgeText}</span>
-          <img src="${p.image}" alt="${p.name}" loading="lazy">
+          <img src="${safeImage}" alt="${safeName}" loading="lazy">
           <div class="p-card-quick-view">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -1865,7 +1883,7 @@ function renderProducts() {
         </div>
         <div class="p-card-info">
           <h3 class="p-card-title">${displayTitle}</h3>
-          <p class="p-card-desc">${p.description || 'NABP-accredited pharmaceutical supply with verified pedigree and DSCSA compliance.'}</p>
+          <p class="p-card-desc">${safeDesc}</p>
           <div class="p-card-ndc-val">${ndcDisplay}</div>
         </div>
       </article>

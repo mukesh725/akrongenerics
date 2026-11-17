@@ -3,10 +3,24 @@
  * Handles Contact Us page submissions and forwards notifications to info@akrongenerics.com & mukesh@akrongenerics.com
  */
 
+const ALLOWED_ORIGIN_PATTERNS = [
+  /^https?:\/\/([a-zA-Z0-9-]+\.)?akrongenerics\.com(:\d+)?$/,
+  /^https?:\/\/localhost(:\d+)?$/,
+  /^https?:\/\/127\.0\.0\.1(:\d+)?$/
+];
+
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const origin = req.headers.origin || '';
+  const isAllowed = ALLOWED_ORIGIN_PATTERNS.some(pat => pat.test(origin));
+  
+  res.setHeader('Access-Control-Allow-Origin', isAllowed ? origin : 'https://akrongenerics.com');
+  res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -17,6 +31,11 @@ export default async function handler(req, res) {
   }
 
   try {
+    const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body || {});
+    if (rawBody.length > 64 * 1024) {
+      return res.status(413).json({ error: 'Payload exceeds maximum limit of 64KB.' });
+    }
+
     const payload = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
     const { email, firstName, lastName, phone, role, pharmacyName, state, reason, message } = payload;
 
@@ -25,15 +44,21 @@ export default async function handler(req, res) {
       return res.status(200).json({ status: 'success', id: 'CNT-BOT', message: 'Inquiry received.' });
     }
 
-    if (!email || !email.includes('@')) {
+    if (!email || typeof email !== 'string' || !EMAIL_REGEX.test(email.trim()) || email.length > 254) {
       return res.status(400).json({ error: 'Valid customer email is required' });
     }
 
+    const cleanEmail = email.trim();
+    const cleanFirstName = String(firstName || '').slice(0, 100).replace(/[\r\n]/g, ' ').trim();
+    const cleanLastName = String(lastName || '').slice(0, 100).replace(/[\r\n]/g, ' ').trim();
+    const cleanReason = String(reason || 'General Inquiry').slice(0, 150).replace(/[\r\n]/g, ' ').trim();
+
     const reqId = payload.id || ('CNT-' + Date.now());
     payload.id = reqId;
+    payload.email = cleanEmail;
     payload.formType = 'contact';
 
-    console.log(`[CONTACT INQUIRY] Received from '${firstName} ${lastName}' (${email}) for '${reason}'`);
+    console.log(`[CONTACT INQUIRY] Received from '${cleanFirstName} ${cleanLastName}' (${cleanEmail}) for '${cleanReason}'`);
 
     // If Google Apps Script URL is configured in environment, dispatch to it (with active default)
     const DEFAULT_GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaQ9hXd_jnFuA35yqS_hVIGoVd8VAFEQ6NBUNj7cwsbdsVg_8eiJSfbYUFrmWrX_fc/exec';

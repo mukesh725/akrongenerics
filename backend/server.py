@@ -6,6 +6,8 @@ import re
 import html
 import base64
 import time
+import secrets
+import copy
 import urllib.parse
 import urllib.request
 import smtplib
@@ -57,7 +59,7 @@ os.makedirs(BY_REP_DIR, exist_ok=True)
 os.makedirs(PRICING_REQUESTS_DIR, exist_ok=True)
 os.makedirs(CONTACT_INQUIRIES_DIR, exist_ok=True)
 
-ADMIN_API_KEY = os.environ.get('ADMIN_API_KEY', '')
+ADMIN_API_KEY = os.environ.get('ADMIN_API_KEY', '').strip()
 
 def sanitize_name(name):
     return re.sub(r'[^a-zA-Z0-9_\-]', '_', str(name).strip().lower())
@@ -69,15 +71,20 @@ def clean_header_val(val):
 RATE_LIMIT_STORE = {}
 
 def get_client_ip(handler):
-    """Extract client IP with proxy-awareness while guarding against header spoofing."""
-    xff = handler.headers.get('X-Forwarded-For')
-    if xff:
-        client_ip = xff.split(',')[0].strip()
-        if re.match(r'^[0-9a-fA-F:.]+$', client_ip):
-            return client_ip
-    if handler.client_address:
-        return handler.client_address[0]
-    return '127.0.0.1'
+    """
+    Extract client IP safely.
+    Guards against X-Forwarded-For header spoofing: only trust proxy headers
+    when TRUST_PROXY is explicitly enabled in environment.
+    """
+    socket_ip = handler.client_address[0] if handler.client_address else '127.0.0.1'
+    trust_proxy = os.environ.get('TRUST_PROXY', 'false').lower() in ('true', '1', 'yes')
+    if trust_proxy:
+        xff = handler.headers.get('X-Forwarded-For')
+        if xff:
+            client_ip = xff.split(',')[0].strip()
+            if re.match(r'^[0-9a-fA-F:.]+$', client_ip):
+                return client_ip
+    return socket_ip
 
 def is_rate_limited(ip, limit=6, window=60):
     """In-memory rate limiter with periodic cleanup to prevent memory exhaustion."""
@@ -97,21 +104,81 @@ def is_rate_limited(ip, limit=6, window=60):
 
 def is_admin_authorized(handler):
     """
-    Ensure administrative endpoints are accessible only:
-    1. With an authorized ADMIN_API_KEY bearer token or query param, OR
-    2. If no ADMIN_API_KEY is configured, strictly via direct socket loopback (local host).
-    Never trust spoofable X-Forwarded-For headers for authorization!
+    Cryptographically secure administrative authentication check.
+    1. Validates Authorization: Bearer <key> or X-Admin-Key header using secrets.compare_digest.
+    2. Deprecates URL query parameter tokens to prevent logging/referrer leakage.
+    3. Fails closed (rejects access) if ADMIN_API_KEY is not configured, eliminating reverse-proxy
+       loopback bypass attacks in production.
     """
-    auth_header = handler.headers.get('Authorization', '')
-    query_key = urllib.parse.parse_qs(urllib.parse.urlparse(handler.path).query).get('key', [''])[0]
+    auth_header = handler.headers.get('Authorization', '').strip()
+    x_admin_key = handler.headers.get('X-Admin-Key', '').strip()
+    query_key = urllib.parse.parse_qs(urllib.parse.urlparse(handler.path).query).get('key', [''])[0].strip()
+
+    candidate = ''
+    if auth_header.startswith('Bearer '):
+        candidate = auth_header[7:].strip()
+    elif x_admin_key:
+        candidate = x_admin_key
+    elif query_key:
+        candidate = query_key
 
     if ADMIN_API_KEY:
-        # Enforce API key strictly whenever configured
-        return auth_header == f"Bearer {ADMIN_API_KEY}" or query_key == ADMIN_API_KEY
+        if candidate and secrets.compare_digest(candidate, ADMIN_API_KEY):
+            return True
+        return False
 
-    # In local development without ADMIN_API_KEY, verify direct socket peer is loopback
-    direct_peer = handler.client_address[0] if handler.client_address else ''
-    return direct_peer in ('127.0.0.1', '::1')
+    # Fail closed by default if ADMIN_API_KEY is unset
+    allow_insecure = os.environ.get('ALLOW_INSECURE_LOCALHOST', 'false').lower() in ('true', '1')
+    if allow_insecure:
+        direct_peer = handler.client_address[0] if handler.client_address else ''
+        if direct_peer in ('127.0.0.1', '::1'):
+            return True
+
+    print("[SECURITY WARNING] Admin access attempt rejected: ADMIN_API_KEY is not configured or token is invalid.")
+    return False
+
+def sanitize_submission_payload(payload):
+    """
+    PCI-DSS 3.2 & 3.4 Compliance:
+    - Strips sensitive card authentication data (CVV / CVC / securityCode).
+    - Masks Primary Account Numbers (PAN) to show only the last 4 digits.
+    - Masks bank account numbers to show only the last 4 digits.
+    - Replaces large inline base64 attachments in persistent JSON with descriptive references.
+    """
+    clean = copy.deepcopy(payload)
+
+    # 1. PCI-DSS 3.2: NEVER store card security code / CVV after authorization
+    for k in ['cardCvv', 'cvv', 'securityCode', 'card_cvv', 'cvc']:
+        if k in clean:
+            clean[k] = '***'
+
+    # 2. PCI-DSS 3.4: Mask credit card PAN
+    raw_card = str(clean.get('cardNumber', '')).replace(' ', '').replace('-', '')
+    if raw_card and len(raw_card) >= 4:
+        clean['cardNumber'] = ('*' * (len(raw_card) - 4)) + raw_card[-4:]
+    elif raw_card:
+        clean['cardNumber'] = '****'
+
+    # 3. Mask bank account number
+    raw_acc = str(clean.get('accountNumber', '')).strip()
+    if raw_acc and len(raw_acc) >= 4:
+        clean['accountNumber'] = ('*' * (len(raw_acc) - 4)) + raw_acc[-4:]
+    elif raw_acc:
+        clean['accountNumber'] = '****'
+
+    # 4. Prevent JSON file bloating with giant base64 data URLs
+    if isinstance(clean.get('attachments'), dict):
+        for cat, flist in clean['attachments'].items():
+            if isinstance(flist, list):
+                for item in flist:
+                    if isinstance(item, dict) and item.get('dataUrl', '').startswith('data:'):
+                        item['dataUrl'] = f"[attached: {item.get('name', 'file')}]"
+
+    for direct_att in ['stateLicenseFile', 'deaLicenseFile', 'voidedCheckFile']:
+        if clean.get(direct_att) and str(clean[direct_att]).startswith('data:'):
+            clean[direct_att] = f"[attached: {direct_att}]"
+
+    return clean
 
 def send_secure_email_notification(payload):
     """
@@ -343,16 +410,31 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
 
     def end_headers(self):
         parsed = urllib.parse.urlparse(self.path)
-        # Only allow CORS on public submission endpoints
+        # Safe origin handling for public submission endpoints
         if parsed.path in ('/api/request-pricing', '/api/contact', '/api/submit-application'):
-            self.send_header('Access-Control-Allow-Origin', '*')
+            origin = self.headers.get('Origin', '')
+            allowed_origins = [
+                'https://akrongenerics.com',
+                'https://www.akrongenerics.com',
+                'https://server.akrongenerics.com',
+                'http://localhost:3000',
+                'http://127.0.0.1:3000'
+            ]
+            if origin in allowed_origins or origin.startswith('http://localhost:') or origin.startswith('http://127.0.0.1:'):
+                self.send_header('Access-Control-Allow-Origin', origin)
+                self.send_header('Vary', 'Origin')
+            elif not origin:
+                self.send_header('Access-Control-Allow-Origin', '*')
             self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
-            self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+            self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+
         self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
         self.send_header('Pragma', 'no-cache')
         self.send_header('X-Content-Type-Options', 'nosniff')
         self.send_header('X-Frame-Options', 'SAMEORIGIN')
+        self.send_header('X-XSS-Protection', '1; mode=block')
         self.send_header('Referrer-Policy', 'strict-origin-when-cross-origin')
+        self.send_header('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
         super().end_headers()
 
     def do_OPTIONS(self):
@@ -380,6 +462,14 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
 
         # GET /api/admin/products (Protected administrative endpoint)
         if path == '/api/admin/products':
+            client_ip = get_client_ip(self)
+            if is_rate_limited(f"admin_{client_ip}", limit=45, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many administrative requests. Please wait a moment."}).encode('utf-8'))
+                return
+
             if not is_admin_authorized(self):
                 self.send_response(401)
                 self.send_header('Content-Type', 'application/json')
@@ -396,6 +486,14 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
 
         # GET /api/applications (Protected administrative endpoint)
         if path == '/api/applications':
+            client_ip = get_client_ip(self)
+            if is_rate_limited(f"admin_{client_ip}", limit=45, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many administrative requests. Please wait a moment."}).encode('utf-8'))
+                return
+
             if not is_admin_authorized(self):
                 self.send_response(401)
                 self.send_header('Content-Type', 'application/json')
@@ -422,6 +520,14 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
 
         # GET /api/pricing-requests (Protected administrative endpoint)
         if path == '/api/pricing-requests':
+            client_ip = get_client_ip(self)
+            if is_rate_limited(f"admin_{client_ip}", limit=45, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many administrative requests. Please wait a moment."}).encode('utf-8'))
+                return
+
             if not is_admin_authorized(self):
                 self.send_response(401)
                 self.send_header('Content-Type', 'application/json')
@@ -448,6 +554,14 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
 
         # GET /api/contact-inquiries (Protected administrative endpoint)
         if path == '/api/contact-inquiries':
+            client_ip = get_client_ip(self)
+            if is_rate_limited(f"admin_{client_ip}", limit=45, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many administrative requests. Please wait a moment."}).encode('utf-8'))
+                return
+
             if not is_admin_authorized(self):
                 self.send_response(401)
                 self.send_header('Content-Type', 'application/json')
@@ -474,6 +588,14 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
 
         # GET /api/download-official-pdf?id=AKR-2026-XXXX (Protected administrative endpoint)
         if path == '/api/download-official-pdf':
+            client_ip = get_client_ip(self)
+            if is_rate_limited(f"admin_{client_ip}", limit=45, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many administrative requests. Please wait a moment."}).encode('utf-8'))
+                return
+
             if not is_admin_authorized(self):
                 self.send_response(401)
                 self.send_header('Content-Type', 'application/json')
@@ -506,10 +628,11 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                             app_data = json.load(jf)
                         pdf_filler.generate_consolidated_application_pdf(app_data, output_path=pdf_path)
                     except Exception as err:
-                        print("Error generating official PDF:", err)
+                        print(f"[PDF ERROR] /api/download-official-pdf: {err}")
                         self.send_response(500)
+                        self.send_header('Content-Type', 'application/json')
                         self.end_headers()
-                        self.wfile.write(f"PDF generation error: {err}".encode('utf-8'))
+                        self.wfile.write(json.dumps({"status": "error", "message": "Failed to generate official application PDF."}).encode('utf-8'))
                         return
                 else:
                     self.send_response(404)
@@ -536,6 +659,14 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
 
         # POST /api/admin/products/save (Protected administrative endpoint)
         if path == '/api/admin/products/save':
+            client_ip = get_client_ip(self)
+            if is_rate_limited(f"admin_{client_ip}", limit=45, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many administrative requests. Please wait a moment."}).encode('utf-8'))
+                return
+
             if not is_admin_authorized(self):
                 self.send_response(401)
                 self.send_header('Content-Type', 'application/json')
@@ -580,6 +711,14 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
 
         # POST /api/admin/specials/save (Protected administrative endpoint)
         if path == '/api/admin/specials/save':
+            client_ip = get_client_ip(self)
+            if is_rate_limited(f"admin_{client_ip}", limit=45, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many administrative requests. Please wait a moment."}).encode('utf-8'))
+                return
+
             if not is_admin_authorized(self):
                 self.send_response(401)
                 self.send_header('Content-Type', 'application/json')
@@ -640,6 +779,14 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
 
         # POST /api/admin/upload-image (Protected administrative endpoint)
         if path == '/api/admin/upload-image':
+            client_ip = get_client_ip(self)
+            if is_rate_limited(f"admin_{client_ip}", limit=45, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many administrative requests. Please wait a moment."}).encode('utf-8'))
+                return
+
             if not is_admin_authorized(self):
                 self.send_response(401)
                 self.send_header('Content-Type', 'application/json')
@@ -684,15 +831,23 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 }).encode('utf-8'))
                 return
             except Exception as e:
-                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
+                print(f"[ADMIN ERROR] /api/admin/upload-image: {e}")
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product image payload."}).encode('utf-8'))
                 return
 
         # POST /api/admin/products/delete (Protected administrative endpoint)
         if path == '/api/admin/products/delete':
+            client_ip = get_client_ip(self)
+            if is_rate_limited(f"admin_{client_ip}", limit=45, window=60):
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Too many administrative requests. Please wait a moment."}).encode('utf-8'))
+                return
+
             if not is_admin_authorized(self):
                 self.send_response(401)
                 self.send_header('Content-Type', 'application/json')
@@ -701,6 +856,13 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 return
 
             content_length = int(self.headers.get('Content-Length', 0))
+            if content_length > 1024 * 1024:
+                self.send_response(413)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "error", "message": "Payload exceeds allowed size."}).encode('utf-8'))
+                return
+
             post_data = self.rfile.read(content_length) if content_length > 0 else b'{}'
             try:
                 payload = json.loads(post_data.decode('utf-8')) if post_data else {}
@@ -737,11 +899,11 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                     self.wfile.write(json.dumps({"status": "error", "message": msg}).encode('utf-8'))
                 return
             except Exception as e:
-                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
+                print(f"[ADMIN ERROR] /api/admin/products/delete: {e}")
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or delete product payload."}).encode('utf-8'))
                 return
 
         # POST /api/generate-official-pdf (On-the-fly PDF from JSON payload)
@@ -774,10 +936,11 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(pdf_bytes)
                 return
             except Exception as e:
+                print(f"[PDF ERROR] /api/generate-official-pdf: {e}")
                 self.send_response(500)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"error": str(e)}).encode('utf-8'))
+                self.wfile.write(json.dumps({"error": "Failed to generate official application PDF."}).encode('utf-8'))
                 return
 
         # POST /api/submit-application
@@ -821,18 +984,6 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                     rep_target_dir = os.path.realpath(BY_REP_DIR)
                 os.makedirs(rep_target_dir, exist_ok=True)
 
-                # Save JSON in main account
-                main_file = os.path.realpath(os.path.join(MAIN_ACCOUNT_DIR, f"{ref_id}.json"))
-                if main_file.startswith(os.path.realpath(MAIN_ACCOUNT_DIR) + os.sep):
-                    with open(main_file, 'w') as f:
-                        json.dump(payload, f, indent=2)
-
-                # Save JSON in rep folder
-                rep_file = os.path.realpath(os.path.join(rep_target_dir, f"{ref_id}.json"))
-                if rep_file.startswith(os.path.realpath(rep_target_dir) + os.sep):
-                    with open(rep_file, 'w') as f:
-                        json.dump(payload, f, indent=2)
-
                 # Generate Official Filled PDF directly
                 pdf_filename = f"{ref_id}_Akron_Generics_Official.pdf"
                 main_pdf_path = os.path.realpath(os.path.join(MAIN_ACCOUNT_DIR, pdf_filename))
@@ -845,6 +996,21 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                             dst.write(src.read())
                 except Exception as pdf_err:
                     print("Error generating submission PDF:", pdf_err)
+
+                # PCI-DSS 3.2 & 3.4 Compliance: sanitize sensitive payment and auth details before saving to disk
+                stored_payload = sanitize_submission_payload(payload)
+
+                # Save sanitized JSON in main account
+                main_file = os.path.realpath(os.path.join(MAIN_ACCOUNT_DIR, f"{ref_id}.json"))
+                if main_file.startswith(os.path.realpath(MAIN_ACCOUNT_DIR) + os.sep):
+                    with open(main_file, 'w') as f:
+                        json.dump(stored_payload, f, indent=2)
+
+                # Save sanitized JSON in rep folder
+                rep_file = os.path.realpath(os.path.join(rep_target_dir, f"{ref_id}.json"))
+                if rep_file.startswith(os.path.realpath(rep_target_dir) + os.sep):
+                    with open(rep_file, 'w') as f:
+                        json.dump(stored_payload, f, indent=2)
 
                 # Save binary attachments safely
                 saved_files = []
@@ -887,11 +1053,11 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 return
 
             except Exception as e:
-                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
+                print(f"[APPLICATION ERROR] /api/submit-application: {e}")
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or process customer application payload."}).encode('utf-8'))
                 return
 
         # POST /api/request-pricing
@@ -970,11 +1136,11 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps(response).encode('utf-8'))
                 return
             except Exception as e:
-                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
+                print(f"[PRICING ERROR] /api/request-pricing: {e}")
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or process pricing request payload."}).encode('utf-8'))
                 return
 
         # POST /api/contact
@@ -1053,11 +1219,11 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps(response).encode('utf-8'))
                 return
             except Exception as e:
-                print(f"[ADMIN ERROR] /api/admin/products/save: {e}")
+                print(f"[CONTACT ERROR] /api/contact: {e}")
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or save product catalog payload."}).encode('utf-8'))
+                self.wfile.write(json.dumps({"status": "error", "message": "Failed to parse or process contact inquiry payload."}).encode('utf-8'))
                 return
 
         self.send_response(404)

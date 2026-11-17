@@ -6,6 +6,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from PIL import Image
 
+# Anti-DoS: Prevent decompression bomb attacks from oversized images
+Image.MAX_IMAGE_PIXELS = 10_000_000
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 if not os.path.exists(TEMPLATES_DIR):
@@ -95,6 +98,10 @@ def image_to_pdf_page(data_url, title="Attached Document"):
             _, b64 = data_url.split(",", 1)
             img_bytes = base64.b64decode(b64)
             img = Image.open(io.BytesIO(img_bytes))
+
+            # Dimension safety: if image dimensions exceed 4000px, downsample safely
+            if img.size[0] > 4000 or img.size[1] > 4000:
+                img.thumbnail((4000, 4000))
             
             # Max width 510, max height 650
             max_w, max_h = 510, 650
@@ -354,7 +361,13 @@ def generate_consolidated_application_pdf(data, output_path=None):
                 if isinstance(item, dict) and item.get("dataUrl"):
                     attached_items.append((item.get("name") or f"Attachment ({cat})", item["dataUrl"]))
                     
+    MAX_ATTACHMENT_PAGES = 30
+    total_attached_pages = 0
+
     for title, file_data in attached_items:
+        if total_attached_pages >= MAX_ATTACHMENT_PAGES:
+            print(f"Notice: Maximum attachment pages limit ({MAX_ATTACHMENT_PAGES}) reached.")
+            break
         if not file_data:
             continue
         if "data:application/pdf;base64," in file_data:
@@ -363,13 +376,20 @@ def generate_consolidated_application_pdf(data, output_path=None):
                 pdf_bytes = base64.b64decode(b64)
                 sub_reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
                 for page in sub_reader.pages:
+                    if total_attached_pages >= MAX_ATTACHMENT_PAGES:
+                        break
                     writer.add_page(page)
+                    total_attached_pages += 1
             except Exception as e:
                 print(f"Notice: Appending PDF attachment {title}:", e)
         elif "data:image/" in file_data:
-            page = image_to_pdf_page(file_data, title)
-            if page:
-                writer.add_page(page)
+            try:
+                page = image_to_pdf_page(file_data, title)
+                if page:
+                    writer.add_page(page)
+                    total_attached_pages += 1
+            except Exception as e:
+                print(f"Notice: Appending image attachment {title}:", e)
 
     # Enable NeedAppearances so all standard PDF viewers render form field text cleanly
     try:

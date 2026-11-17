@@ -1812,7 +1812,8 @@ function saveDraftLocally() {
   var appData = collectFormData();
   appData.status = 'DRAFT';
   appData.businessName = appData.businessName || 'Draft Pharmacy Application';
-  localStorage.setItem('akron_app_draft', JSON.stringify(appData));
+  // PCI-DSS: Ensure draft in localStorage never stores CVV or unmasked payment data
+  localStorage.setItem('akron_app_draft', JSON.stringify(sanitizeForLocalStorage(appData)));
   saveSubmissionRecord(appData);
   showToast('Application draft saved and synced to Admin Portal!');
 }
@@ -1909,14 +1910,50 @@ function collectFormData() {
   return data;
 }
 
+function sanitizeForLocalStorage(data) {
+  if (!data || typeof data !== 'object') return {};
+  var clean = JSON.parse(JSON.stringify(data));
+  // PCI-DSS Requirement 3.2: NEVER store sensitive card authentication data (CVV/CVC)
+  delete clean.cardCvv;
+  delete clean.cvv;
+  delete clean.securityCode;
+  
+  // PCI-DSS Requirement 3.4: Mask PAN to show only last 4 digits
+  if (clean.cardNumber) {
+    var rawCard = String(clean.cardNumber).replace(/[\s-]/g, '');
+    clean.cardNumber = rawCard.length >= 4 
+      ? '•••• •••• •••• ' + rawCard.slice(-4) 
+      : '•••• •••• •••• ••••';
+  }
+  // Mask Bank Account Number
+  if (clean.accountNumber) {
+    var rawAcc = String(clean.accountNumber).trim();
+    clean.accountNumber = rawAcc.length >= 4
+      ? '••••' + rawAcc.slice(-4)
+      : '••••••••';
+  }
+  // Remove heavy base64 data URLs to prevent quota exhaustion and DOM data leakage
+  clean.attachments = { licenses: [], checks: [] };
+  delete clean.stateLicenseFile;
+  delete clean.deaLicenseFile;
+  delete clean.voidedCheckFile;
+  delete clean.signatureDataUrl;
+
+  return clean;
+}
+
 function saveSubmissionRecord(appData) {
   try {
+    var safeRecord = sanitizeForLocalStorage(appData);
     var stored = JSON.parse(localStorage.getItem('akron_submitted_applications') || '[]');
-    var existingIdx = stored.findIndex(function(x) { return x.ref_id === appData.ref_id; });
+    // Sanitize any existing legacy records in browser storage
+    stored = stored.map(function(item) { return sanitizeForLocalStorage(item); });
+
+    var existingIdx = stored.findIndex(function(x) { return x.ref_id === safeRecord.ref_id; });
     if (existingIdx >= 0) {
-      stored[existingIdx] = appData;
+      stored[existingIdx] = safeRecord;
     } else {
-      stored.unshift(appData);
+      stored.unshift(safeRecord);
     }
     localStorage.setItem('akron_submitted_applications', JSON.stringify(stored));
   } catch(e) {}
