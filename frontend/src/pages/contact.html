@@ -1462,10 +1462,14 @@
               <textarea id="cpMessage" name="message" rows="5" placeholder="Tell us more about your request..."></textarea>
             </div>
 
-            <!-- Anti-Bot Honeypot (Hidden from humans, traps automated spam) -->
+            <!-- Anti-Bot Honeypot Protection (Multiple invisible traps) -->
             <div style="display:none !important; position:absolute !important; left:-9999px !important;" aria-hidden="true">
               <label for="cpWebsiteHoneypot">Leave this field blank</label>
               <input type="text" id="cpWebsiteHoneypot" name="website" tabindex="-1" autocomplete="off">
+            </div>
+            <div style="position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0,0,0,0) !important; border:0 !important;" aria-hidden="true">
+              <label for="cpCompanyFaxHoneypot">Company Fax Number</label>
+              <input type="text" id="cpCompanyFaxHoneypot" name="company_fax" tabindex="-1" autocomplete="off">
             </div>
 
             <!-- SUBMIT BUTTON: Solid Black Pill Matching Reference Theme -->
@@ -1586,6 +1590,26 @@
   </div>
 
   <script>
+    var formLoadTimestamp = Date.now();
+    var userInteracted = false;
+    ['mousemove', 'keydown', 'touchstart', 'scroll'].forEach(function (evt) {
+      window.addEventListener(evt, function () { userInteracted = true; }, { once: true, passive: true });
+    });
+
+    function transitionContactSuccess(btn, alertEl) {
+      if (btn) {
+        btn.textContent = 'Message Submitted ✓';
+        btn.style.background = '#16180F';
+        btn.disabled = false;
+      }
+      if (alertEl) {
+        alertEl.style.display = 'block';
+        alertEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      var form = document.getElementById('contactPageForm');
+      if (form) form.reset();
+    }
+
     function handleContactPageSubmit(e) {
       if (e) e.preventDefault();
 
@@ -1604,11 +1628,55 @@
       var smsCheckbox = document.getElementById('cpSmsConsent');
       var smsConsent = smsCheckbox ? smsCheckbox.checked : false;
 
-      // Anti-Bot Honeypot: trap automated bots silently
+      // 1. Dual-Honeypot Trap: catches automated field population
       var website = (document.getElementById('cpWebsiteHoneypot') && document.getElementById('cpWebsiteHoneypot').value.trim()) || '';
-      if (website) {
-        console.warn('[Anti-bot Honeypot]: spam submission caught');
-        if (btn) btn.disabled = true;
+      var companyFax = (document.getElementById('cpCompanyFaxHoneypot') && document.getElementById('cpCompanyFaxHoneypot').value.trim()) || '';
+      if (website || companyFax) {
+        console.warn('[Anti-Bot Honeypot]: Spam trap caught. Silently dropping submission.');
+        transitionContactSuccess(btn, alertEl);
+        return false;
+      }
+
+      // 2. Velocity Check: Real humans take at least 3 seconds to complete this form
+      var elapsedSec = (Date.now() - formLoadTimestamp) / 1000;
+      if (elapsedSec < 3.0) {
+        console.warn('[Anti-Bot Velocity]: Form filled in ' + elapsedSec.toFixed(1) + 's (too fast for human). Silently dropping.');
+        transitionContactSuccess(btn, alertEl);
+        return false;
+      }
+
+      // 3. User Interaction Check: requires authentic device input
+      if (!userInteracted) {
+        console.warn('[Anti-Bot Interaction]: No user interaction detected. Silently dropping.');
+        transitionContactSuccess(btn, alertEl);
+        return false;
+      }
+
+      // 4. Dot-Stuffed Gmail Heuristic (e.g. bo.le.m.o.m.ex.12.1@gmail.com)
+      var emailLower = email.toLowerCase();
+      if (emailLower.endsWith('@gmail.com') || emailLower.endsWith('@googlemail.com')) {
+        var userPart = emailLower.split('@')[0];
+        var dotCount = (userPart.match(/\./g) || []).length;
+        if (dotCount >= 3) {
+          console.warn('[Anti-Bot Pattern]: Dot-stuffed Gmail spam trap triggered (' + dotCount + ' dots). Silently dropping.');
+          transitionContactSuccess(btn, alertEl);
+          return false;
+        }
+      }
+
+      // 5. Pure Numeric Dummy Message Check (e.g. "7481402532")
+      var cleanMsgDigits = message.replace(/[\s\-_]/g, '');
+      if (cleanMsgDigits.length >= 6 && /^\d+$/.test(cleanMsgDigits)) {
+        console.warn('[Anti-Bot Pattern]: Dummy numeric-only message caught. Silently dropping.');
+        transitionContactSuccess(btn, alertEl);
+        return false;
+      }
+
+      // 6. Gibberish Name / Practice Filter (Consonant clusters with zero vowels)
+      var cleanPractice = pharmacyName.trim();
+      if (cleanPractice.length >= 5 && !/[aeiouy]/i.test(cleanPractice)) {
+        console.warn('[Anti-Bot Pattern]: Consonant-only gibberish practice caught. Silently dropping.');
+        transitionContactSuccess(btn, alertEl);
         return false;
       }
 
@@ -1622,6 +1690,7 @@
         id: 'CNT-' + Date.now(),
         formType: 'contact',
         website: website,
+        company_fax: companyFax,
         firstName: firstName,
         lastName: lastName,
         fullName: (firstName + ' ' + lastName).trim(),
@@ -1665,17 +1734,7 @@
 
       // UI Success Transition
       setTimeout(function () {
-        if (btn) {
-          btn.textContent = 'Message Submitted ✓';
-          btn.style.background = '#16180F';
-          btn.disabled = false;
-        }
-        if (alertEl) {
-          alertEl.style.display = 'block';
-          alertEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        var form = document.getElementById('contactPageForm');
-        if (form) form.reset();
+        transitionContactSuccess(btn, alertEl);
       }, 600);
 
       return false;

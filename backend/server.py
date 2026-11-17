@@ -1165,8 +1165,8 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
             try:
                 payload = json.loads(post_data.decode('utf-8'))
 
-                # Bot honeypot trap
-                if payload.get('website') or payload.get('honeypot'):
+                # 1. Multi-Honeypot Trap
+                if payload.get('website') or payload.get('honeypot') or payload.get('company_fax'):
                     print("[BOT TRAPPED] Automated contact inquiry dropped via honeypot")
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json')
@@ -1180,6 +1180,38 @@ class AkronHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_header('Content-Type', 'application/json')
                     self.end_headers()
                     self.wfile.write(json.dumps({"status": "error", "message": "Invalid email address format."}).encode('utf-8'))
+                    return
+
+                # 2. Dot-Stuffed Gmail Spambot Check (e.g. bo.le.m.o.m.ex.12.1@gmail.com)
+                email_lower = email.lower()
+                if email_lower.endswith('@gmail.com') or email_lower.endswith('@googlemail.com'):
+                    user_part = email_lower.split('@')[0]
+                    if user_part.count('.') >= 3:
+                        print(f"[BOT BLOCKED] Dropping dot-stuffed Gmail spam: {email}")
+                        self.send_response(200)
+                        self.send_header('Content-Type', 'application/json')
+                        self.end_headers()
+                        self.wfile.write(json.dumps({"status": "success", "id": "CNT-BOT-GMAIL", "message": "Inquiry received."}).encode('utf-8'))
+                        return
+
+                # 3. Pure Numeric Dummy Message Check (e.g. "7481402532")
+                raw_msg_digits = re.sub(r'[\s\-_]', '', str(payload.get('message', '')))
+                if len(raw_msg_digits) >= 6 and raw_msg_digits.isdigit():
+                    print(f"[BOT BLOCKED] Dropping dummy numeric-only message: {raw_msg_digits}")
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "success", "id": "CNT-BOT-NUM", "message": "Inquiry received."}).encode('utf-8'))
+                    return
+
+                # 4. Gibberish Name / Practice Filter (Consonant clusters with zero vowels)
+                clean_practice = str(payload.get('pharmacyName', '')).strip()
+                if len(clean_practice) >= 5 and not re.search(r'[aeiouy]', clean_practice, re.I):
+                    print(f"[BOT BLOCKED] Dropping consonant-only gibberish practice: {clean_practice}")
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(json.dumps({"status": "success", "id": "CNT-BOT-GIBBERISH", "message": "Inquiry received."}).encode('utf-8'))
                     return
 
                 raw_id = str(payload.get('id', '')).strip()

@@ -39,8 +39,8 @@ export default async function handler(req, res) {
     const payload = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
     const { email, firstName, lastName, phone, role, pharmacyName, state, reason, message } = payload;
 
-    // Bot honeypot protection
-    if (payload.website || payload.honeypot) {
+    // 1. Bot Honeypot Protection: catches automated script population
+    if (payload.website || payload.honeypot || payload.company_fax) {
       return res.status(200).json({ status: 'success', id: 'CNT-BOT', message: 'Inquiry received.' });
     }
 
@@ -51,7 +51,32 @@ export default async function handler(req, res) {
     const cleanEmail = email.trim();
     const cleanFirstName = String(firstName || '').slice(0, 100).replace(/[\r\n]/g, ' ').trim();
     const cleanLastName = String(lastName || '').slice(0, 100).replace(/[\r\n]/g, ' ').trim();
+    const cleanPharmacy = String(pharmacyName || '').slice(0, 150).replace(/[\r\n]/g, ' ').trim();
     const cleanReason = String(reason || 'General Inquiry').slice(0, 150).replace(/[\r\n]/g, ' ').trim();
+
+    // 2. Dot-Stuffed Gmail Spambot Check (e.g. bo.le.m.o.m.ex.12.1@gmail.com)
+    const emailLower = cleanEmail.toLowerCase();
+    if (emailLower.endsWith('@gmail.com') || emailLower.endsWith('@googlemail.com')) {
+      const userPart = emailLower.split('@')[0];
+      const dotCount = (userPart.match(/\./g) || []).length;
+      if (dotCount >= 3) {
+        console.warn(`[BOT BLOCKED] Dropping dot-stuffed Gmail spam: ${cleanEmail}`);
+        return res.status(200).json({ status: 'success', id: 'CNT-BOT-GMAIL', message: 'Inquiry received.' });
+      }
+    }
+
+    // 3. Pure Numeric Dummy Message Check (e.g. "7481402532")
+    const cleanMsgDigits = String(message || '').replace(/[\s\-_]/g, '');
+    if (cleanMsgDigits.length >= 6 && /^\d+$/.test(cleanMsgDigits)) {
+      console.warn(`[BOT BLOCKED] Dropping dummy numeric-only message: ${cleanMsgDigits}`);
+      return res.status(200).json({ status: 'success', id: 'CNT-BOT-NUM', message: 'Inquiry received.' });
+    }
+
+    // 4. Gibberish Name / Practice Filter (Consonant clusters with zero vowels)
+    if (cleanPharmacy.length >= 5 && !/[aeiouy]/i.test(cleanPharmacy)) {
+      console.warn(`[BOT BLOCKED] Dropping consonant-only gibberish practice: ${cleanPharmacy}`);
+      return res.status(200).json({ status: 'success', id: 'CNT-BOT-GIBBERISH', message: 'Inquiry received.' });
+    }
 
     const reqId = payload.id || ('CNT-' + Date.now());
     payload.id = reqId;

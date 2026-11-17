@@ -40,8 +40,8 @@ export default async function handler(req, res) {
     const payload = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
     const { email, productName, ndc, packaging, brand, category, specs } = payload;
 
-    // Bot honeypot protection
-    if (payload.website || payload.honeypot) {
+    // 1. Bot Honeypot Protection: catches automated script population
+    if (payload.website || payload.honeypot || payload.company_fax) {
       return res.status(200).json({ status: 'success', id: 'PR-BOT', message: 'Inquiry received.' });
     }
 
@@ -50,6 +50,17 @@ export default async function handler(req, res) {
     }
 
     const cleanEmail = email.trim();
+
+    // 2. Dot-Stuffed Gmail Spambot Check (e.g. bo.le.m.o.m.ex.12.1@gmail.com)
+    const emailLower = cleanEmail.toLowerCase();
+    if (emailLower.endsWith('@gmail.com') || emailLower.endsWith('@googlemail.com')) {
+      const userPart = emailLower.split('@')[0];
+      const dotCount = (userPart.match(/\./g) || []).length;
+      if (dotCount >= 3) {
+        console.warn(`[BOT BLOCKED] Dropping dot-stuffed Gmail spam: ${cleanEmail}`);
+        return res.status(200).json({ status: 'success', id: 'PR-BOT-GMAIL', message: 'Inquiry received.' });
+      }
+    }
     const cleanProduct = String(productName || 'General Product').slice(0, 150).replace(/[\r\n]/g, ' ').trim();
     const cleanNdc = String(ndc || '').slice(0, 50).replace(/[\r\n]/g, ' ').trim();
 

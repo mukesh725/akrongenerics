@@ -45,8 +45,43 @@ function doPost(e) {
       data = e.parameter;
     }
 
-    // Bot honeypot check: If hidden field is filled, silently discard
-    if (data.website || data.honeypot) {
+    // 1. Bot Honeypot Traps: website, honeypot, company_fax
+    if (data.website || data.honeypot || data.company_fax) {
+      return ContentService.createTextOutput(JSON.stringify({
+        status: 'success',
+        message: 'Inquiry processed.'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // 2. Dot-Stuffed Gmail Spambot Trap (e.g. bo.le.m.o.m.ex.12.1@gmail.com)
+    var testEmail = String(data.email || '').trim().toLowerCase();
+    if (testEmail.indexOf('@gmail.com') !== -1 || testEmail.indexOf('@googlemail.com') !== -1) {
+      var userPart = testEmail.split('@')[0];
+      var dotMatches = userPart.match(/\./g);
+      if (dotMatches && dotMatches.length >= 3) {
+        return ContentService.createTextOutput(JSON.stringify({
+          status: 'success',
+          message: 'Inquiry processed.'
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+
+    // 3. Pure Numeric Dummy Message Body (e.g. "7481402532")
+    var testMsg = String(data.message || '').replace(/[\s\-_]/g, '');
+    if (testMsg.length >= 6 && /^\d+$/.test(testMsg)) {
+      return ContentService.createTextOutput(JSON.stringify({
+        status: 'success',
+        message: 'Inquiry processed.'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // 4. Gibberish Name / Practice Filter (Consonant clusters with zero vowels)
+    var testPractice = String(data.pharmacyName || '').trim();
+    var testFirstName = String(data.firstName || '').trim();
+    var testLastName = String(data.lastName || '').trim();
+    if ((testPractice.length >= 5 && !/[aeiouy]/i.test(testPractice)) ||
+        (testFirstName.length >= 6 && !/[aeiouy]/i.test(testFirstName)) ||
+        (testLastName.length >= 6 && !/[aeiouy]/i.test(testLastName))) {
       return ContentService.createTextOutput(JSON.stringify({
         status: 'success',
         message: 'Inquiry processed.'
