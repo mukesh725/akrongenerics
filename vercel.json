@@ -2,6 +2,12 @@
   "version": 2,
   "outputDirectory": "frontend",
   "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/google69671ac97c100bcf.html",
+      "destination": "/google69671ac97c100bcf.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
