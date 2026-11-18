@@ -3,11 +3,13 @@
  * Handles Contact Us page submissions and forwards notifications to info@akrongenerics.com & mukesh@akrongenerics.com
  */
 
-const ALLOWED_ORIGIN_PATTERNS = [
-  /^https?:\/\/([a-zA-Z0-9-]+\.)?akrongenerics\.com(:\d+)?$/,
-  /^https?:\/\/localhost(:\d+)?$/,
-  /^https?:\/\/127\.0\.0\.1(:\d+)?$/
-];
+const ALLOWED_ORIGIN_PATTERNS = process.env.NODE_ENV === 'production'
+  ? [/^https:\/\/([a-zA-Z0-9-]+\.)?akrongenerics\.com$/]
+  : [
+      /^https:\/\/([a-zA-Z0-9-]+\.)?akrongenerics\.com$/,
+      /^https?:\/\/localhost(:\d+)?$/,
+      /^https?:\/\/127\.0\.0\.1(:\d+)?$/
+    ];
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -15,7 +17,7 @@ export default async function handler(req, res) {
   const origin = req.headers.origin || '';
   const isAllowed = ALLOWED_ORIGIN_PATTERNS.some(pat => pat.test(origin));
   
-  res.setHeader('Access-Control-Allow-Origin', isAllowed ? origin : 'https://akrongenerics.com');
+  res.setHeader('Access-Control-Allow-Origin', isAllowed ? origin : 'https://www.akrongenerics.com');
   res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');

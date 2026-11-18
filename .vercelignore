@@ -1,0 +1,13 @@
+.DS_Store
+.git
+.gitignore
+backend/
+*.py
+scratch/
+test/
+*.md
+!SECURITY.md
+frontend/src/redux/
+frontend/src/context/
+frontend/src/hooks/
+frontend/package.json

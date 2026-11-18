@@ -1958,15 +1958,12 @@ function saveSubmissionRecord(appData) {
     localStorage.setItem('akron_submitted_applications', JSON.stringify(stored));
   } catch(e) {}
 
-  // Also post to local backend server (try relative & absolute localhost)
-  var endpoints = ['/api/submit-application', 'http://localhost:3000/api/submit-application', 'http://127.0.0.1:3000/api/submit-application'];
-  endpoints.forEach(function(ep) {
-    fetch(ep, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(appData)
-    }).catch(function() {});
-  });
+  // Post to backend server
+  fetch('/api/submit-application', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(appData)
+  }).catch(function() {});
 }
 
 function submitApplication(e) {

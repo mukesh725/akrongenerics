@@ -1,9 +1,14 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /admin.html
 Disallow: /dashboard
+Disallow: /dashboard.html
 Disallow: /print-dossier
+Disallow: /print-dossier.html
+Disallow: /src/pages/
+Disallow: /src/
+Disallow: /api
 Disallow: /api/
 
-Sitemap: https://akrongenerics.com/sitemap.xml
-
+Sitemap: https://www.akrongenerics.com/sitemap.xml

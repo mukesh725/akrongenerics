@@ -2,6 +2,13 @@
   "version": 2,
   "outputDirectory": "frontend",
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/become-a-customer",
+      "destination": "https://server.akrongenerics.com/become_a_customer.php",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/google69671ac97c100bcf.html",
@@ -21,10 +28,6 @@
           "value": "SAMEORIGIN"
         },
         {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
         },
@@ -35,6 +38,15 @@
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
+    },
+    {
+      "source": "/(admin|dashboard|print-dossier|src/pages/.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
         }
       ]
     }
