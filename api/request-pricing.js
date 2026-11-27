@@ -14,6 +14,30 @@ const ALLOWED_ORIGIN_PATTERNS = process.env.NODE_ENV === 'production'
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+// In-Memory Sliding Window Rate Limiter
+const RATE_LIMIT_MAP = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 60 seconds
+const MAX_REQUESTS_PER_WINDOW = 5;      // 5 requests per minute per IP
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  if (RATE_LIMIT_MAP.size > 1000) {
+    for (const [key, timestamps] of RATE_LIMIT_MAP.entries()) {
+      if (!timestamps || timestamps.length === 0 || now - timestamps[timestamps.length - 1] > RATE_LIMIT_WINDOW_MS) {
+        RATE_LIMIT_MAP.delete(key);
+      }
+    }
+  }
+
+  const timestamps = (RATE_LIMIT_MAP.get(ip) || []).filter(ts => now - ts < RATE_LIMIT_WINDOW_MS);
+  if (timestamps.length >= MAX_REQUESTS_PER_WINDOW) {
+    return true;
+  }
+  timestamps.push(now);
+  RATE_LIMIT_MAP.set(ip, timestamps);
+  return false;
+}
+
 export default async function handler(req, res) {
   const origin = req.headers.origin || '';
   const isAllowed = ALLOWED_ORIGIN_PATTERNS.some(pat => pat.test(origin));
@@ -31,6 +55,18 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+
+  // Rate Limiting Check
+  const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() ||
+                   req.headers['x-real-ip'] ||
+                   req.socket?.remoteAddress ||
+                   '127.0.0.1';
+
+  if (isRateLimited(clientIp)) {
+    console.warn(`[RATE LIMIT EXCEEDED] Pricing request blocked for IP: ${clientIp}`);
+    res.setHeader('Retry-After', '60');
+    return res.status(429).json({ error: 'Too many requests. Please wait 60 seconds before submitting again.' });
   }
 
   try {

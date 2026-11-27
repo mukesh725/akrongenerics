@@ -53,6 +53,23 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
+    // Rate Limiting Velocity Gate: max 5 submissions per 60 seconds per email
+    var cleanRateEmail = String(data.email || '').trim().toLowerCase();
+    if (cleanRateEmail) {
+      try {
+        var scriptCache = CacheService.getScriptCache();
+        var rateKey = 'rl_' + cleanRateEmail.replace(/[^a-z0-9]/g, '_').slice(0, 50);
+        var rateCount = parseInt(scriptCache.get(rateKey) || '0', 10);
+        if (rateCount >= 5) {
+          return ContentService.createTextOutput(JSON.stringify({
+            status: 'error',
+            message: 'Rate limit exceeded. Please wait 60 seconds before submitting again.'
+          })).setMimeType(ContentService.MimeType.JSON);
+        }
+        scriptCache.put(rateKey, String(rateCount + 1), 60);
+      } catch (cacheErr) {}
+    }
+
     // 2. Dot-Stuffed Gmail Spambot Trap (e.g. bo.le.m.o.m.ex.12.1@gmail.com)
     var testEmail = String(data.email || '').trim().toLowerCase();
     if (testEmail.indexOf('@gmail.com') !== -1 || testEmail.indexOf('@googlemail.com') !== -1) {
